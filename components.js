@@ -8,7 +8,7 @@
 
   /* ── Logo SVG ── */
   function logoSVG(height) {
-    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="28 40 365 72" height="${height}" aria-label="Apex Systematic" role="img">
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="30 42 380 70" height="${height}" aria-label="Apex Systematic" role="img">
       <title>Apex Systematic</title>
       <line x1="54" y1="48" x2="34" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"/>
       <line x1="54" y1="48" x2="74" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"/>
@@ -69,7 +69,14 @@
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
           </nav>
-          <p class="footer-copy">&copy; ${year} Apex Systematic</p>
+          <div class="footer-bottom">
+            <p class="footer-copy">&copy; ${year} Apex Systematic</p>
+            <nav class="footer-legal" aria-label="Legal">
+              <a href="terms.html">Terms</a>
+              <a href="privacy.html">Privacy</a>
+              <a href="cookies.html">Cookies</a>
+            </nav>
+          </div>
         </div>
       </div>
     `;
