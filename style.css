@@ -185,7 +185,7 @@ section:last-of-type {
 .header-wrap {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 150;
   background: var(--bg);
   border-bottom: 1px solid var(--border);
 }
@@ -239,9 +239,12 @@ section:last-of-type {
 .mobile-nav {
   display: none;
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: var(--bg);
-  z-index: 200;
+  z-index: 99;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -264,7 +267,7 @@ section:last-of-type {
   cursor: pointer;
   padding: 4px;
   position: relative;
-  z-index: 300;
+  z-index: 200;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
 }
