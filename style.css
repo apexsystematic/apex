@@ -238,17 +238,37 @@ section:last-of-type {
   flex-shrink: 0;
 }
 
+.mobile-nav {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 200;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+.mobile-nav.is-open {
+  display: flex;
+}
+
 .menu-toggle {
   display: none;
   flex-direction: column;
   justify-content: center;
   gap: 5px;
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
   background: none;
   border: none;
   cursor: pointer;
   padding: 4px;
+  position: relative;
+  z-index: 300;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .menu-toggle span {
@@ -262,24 +282,6 @@ section:last-of-type {
 .menu-toggle.is-open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
 .menu-toggle.is-open span:nth-child(2) { opacity: 0; }
 .menu-toggle.is-open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-
-
-/* ── 8. Mobile Nav ── */
-.mobile-nav {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: var(--bg);
-  z-index: 99;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 40px;
-}
-
-.mobile-nav.is-open {
-  display: flex;
-}
 
 .mobile-nav a {
   font-family: var(--font-display);
