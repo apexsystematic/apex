@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Terms and Conditions — Apex Systematic">
   <meta name="robots" content="noindex, follow">
-  <title>Terms &amp; Conditions — Apex Systematic</title>
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <title>Terms &amp; Conditions &mdash; Apex Systematic</title>
+  <meta name="description" content="Terms and Conditions for Apex Systematic AI automation services.">
 </head>
 <body>
 
   <div class="header-wrap" id="header-wrap">
     <div class="header container">
-      <a href="index.html" class="header-logo" aria-label="Apex Systematic — Home">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="30 42 380 70" height="52" role="img" aria-label="Apex Systematic">
+      <a href="index.html" class="header-logo" aria-label="Apex Systematic">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="30 42 380 70" height="52" role="img">
           <title>Apex Systematic</title>
           <line x1="54" y1="48" x2="34" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"/>
           <line x1="54" y1="48" x2="74" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"/>
@@ -34,19 +34,20 @@
       </nav>
       <div class="header-right">
         <a href="index.html#contact" class="btn btn-primary header-cta">Free Audit</a>
-        <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav" onclick="(function(){var n=document.getElementById('mobile-nav');var t=document.getElementById('menu-toggle');var o=n.classList.toggle('is-open');t.classList.toggle('is-open',o);t.setAttribute('aria-expanded',String(o));document.body.style.overflow=o?'hidden':''})()">
+        <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu" onclick="toggleMenu()">
           <span></span><span></span><span></span>
         </button>
       </div>
     </div>
   </div>
+
   <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
-    <button class="mobile-nav-close" aria-label="Close menu" onclick="document.getElementById('mobile-nav').classList.remove('is-open');document.getElementById('menu-toggle').classList.remove('is-open');document.getElementById('menu-toggle').setAttribute('aria-expanded','false');document.body.style.overflow=''">&#10005;</button>
-    <a href="index.html#services"     onclick="document.getElementById('mobile-nav').classList.remove('is-open');document.getElementById('menu-toggle').classList.remove('is-open');document.body.style.overflow=''">Services</a>
-    <a href="index.html#how-it-works" onclick="document.getElementById('mobile-nav').classList.remove('is-open');document.getElementById('menu-toggle').classList.remove('is-open');document.body.style.overflow=''">How it works</a>
-    <a href="index.html#pricing"      onclick="document.getElementById('mobile-nav').classList.remove('is-open');document.getElementById('menu-toggle').classList.remove('is-open');document.body.style.overflow=''">Pricing</a>
-    <a href="index.html#about"        onclick="document.getElementById('mobile-nav').classList.remove('is-open');document.getElementById('menu-toggle').classList.remove('is-open');document.body.style.overflow=''">About</a>
-    <a href="index.html#contact"      onclick="document.getElementById('mobile-nav').classList.remove('is-open');document.getElementById('menu-toggle').classList.remove('is-open');document.body.style.overflow=''" class="btn btn-primary">Free Audit</a>
+    <button class="mobile-nav-close" aria-label="Close menu" onclick="closeMenu()">&#10005;</button>
+    <a href="index.html#services" onclick="closeMenu()">Services</a>
+    <a href="index.html#how-it-works" onclick="closeMenu()">How it works</a>
+    <a href="index.html#pricing" onclick="closeMenu()">Pricing</a>
+    <a href="index.html#about" onclick="closeMenu()">About</a>
+    <a href="index.html#contact" onclick="closeMenu()" class="btn btn-primary">Free Audit</a>
   </nav>
 
   <main>
@@ -96,15 +97,14 @@
 
         <h2>10. Contact</h2>
         <p>If you have any questions about these terms, please <a href="index.html#contact">contact us</a>.</p>
-
       </div>
     </div>
   </main>
 
   <footer class="footer-wrap">
     <div class="footer container">
-      <a href="index.html" class="footer-logo" aria-label="Apex Systematic — Home">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="30 42 380 70" height="44" role="img" aria-label="Apex Systematic">
+      <a href="index.html" class="footer-logo" aria-label="Apex Systematic">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="30 42 380 70" height="44" role="img">
           <line x1="54" y1="48" x2="34" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"/>
           <line x1="54" y1="48" x2="74" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"/>
           <line x1="34" y1="82" x2="74" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"/>
@@ -131,7 +131,20 @@
     </div>
   </footer>
 
-  <script src="js/components.js"></script>
+  <script>
+    function toggleMenu() {
+      var nav = document.getElementById('mobile-nav');
+      var btn = document.getElementById('menu-toggle');
+      var open = nav.classList.toggle('is-open');
+      btn.classList.toggle('is-open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+    function closeMenu() {
+      document.getElementById('mobile-nav').classList.remove('is-open');
+      document.getElementById('menu-toggle').classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+  </script>
 
 </body>
 </html>

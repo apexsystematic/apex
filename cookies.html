@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Cookie Policy — Apex Systematic">
   <meta name="robots" content="noindex, follow">
-  <title>Cookie Policy — Apex Systematic</title>
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <title>Cookie Policy &mdash; Apex Systematic</title>
+  <meta name="description" content="Cookie Policy for Apex Systematic AI automation services.">
 </head>
 <body>
 
   <div class="header-wrap" id="header-wrap">
     <div class="header container">
-      <a href="index.html" class="header-logo" aria-label="Apex Systematic — Home">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="30 42 380 70" height="52" role="img" aria-label="Apex Systematic">
+      <a href="index.html" class="header-logo" aria-label="Apex Systematic">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="30 42 380 70" height="52" role="img">
           <title>Apex Systematic</title>
           <line x1="54" y1="48" x2="34" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"/>
           <line x1="54" y1="48" x2="74" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"/>
@@ -34,19 +34,20 @@
       </nav>
       <div class="header-right">
         <a href="index.html#contact" class="btn btn-primary header-cta">Free Audit</a>
-        <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav" onclick="(function(){var n=document.getElementById('mobile-nav');var t=document.getElementById('menu-toggle');var o=n.classList.toggle('is-open');t.classList.toggle('is-open',o);t.setAttribute('aria-expanded',String(o));document.body.style.overflow=o?'hidden':''})()">
+        <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu" onclick="toggleMenu()">
           <span></span><span></span><span></span>
         </button>
       </div>
     </div>
   </div>
+
   <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
-    <button class="mobile-nav-close" aria-label="Close menu" onclick="document.getElementById('mobile-nav').classList.remove('is-open');document.getElementById('menu-toggle').classList.remove('is-open');document.getElementById('menu-toggle').setAttribute('aria-expanded','false');document.body.style.overflow=''">&#10005;</button>
-    <a href="index.html#services"     onclick="document.getElementById('mobile-nav').classList.remove('is-open');document.getElementById('menu-toggle').classList.remove('is-open');document.body.style.overflow=''">Services</a>
-    <a href="index.html#how-it-works" onclick="document.getElementById('mobile-nav').classList.remove('is-open');document.getElementById('menu-toggle').classList.remove('is-open');document.body.style.overflow=''">How it works</a>
-    <a href="index.html#pricing"      onclick="document.getElementById('mobile-nav').classList.remove('is-open');document.getElementById('menu-toggle').classList.remove('is-open');document.body.style.overflow=''">Pricing</a>
-    <a href="index.html#about"        onclick="document.getElementById('mobile-nav').classList.remove('is-open');document.getElementById('menu-toggle').classList.remove('is-open');document.body.style.overflow=''">About</a>
-    <a href="index.html#contact"      onclick="document.getElementById('mobile-nav').classList.remove('is-open');document.getElementById('menu-toggle').classList.remove('is-open');document.body.style.overflow=''" class="btn btn-primary">Free Audit</a>
+    <button class="mobile-nav-close" aria-label="Close menu" onclick="closeMenu()">&#10005;</button>
+    <a href="index.html#services" onclick="closeMenu()">Services</a>
+    <a href="index.html#how-it-works" onclick="closeMenu()">How it works</a>
+    <a href="index.html#pricing" onclick="closeMenu()">Pricing</a>
+    <a href="index.html#about" onclick="closeMenu()">About</a>
+    <a href="index.html#contact" onclick="closeMenu()" class="btn btn-primary">Free Audit</a>
   </nav>
 
   <main>
@@ -56,36 +57,32 @@
         <h1>Cookie Policy</h1>
         <p class="legal-meta">Last updated: January 2025</p>
 
-        <p>This Cookie Policy explains how Apex Systematic uses cookies and similar technologies on this website. By continuing to use our website, you consent to our use of cookies as described below.</p>
+        <p>This Cookie Policy explains how Apex Systematic uses cookies and similar technologies. By continuing to use our website, you consent to our use of cookies as described below.</p>
 
         <h2>1. What Are Cookies</h2>
-        <p>Cookies are small text files placed on your device when you visit a website. They are widely used to make websites work efficiently and to provide information to site owners. Cookies do not give us access to your device or any information beyond what you share with us.</p>
+        <p>Cookies are small text files placed on your device when you visit a website. They are widely used to make websites work efficiently and to provide information to site owners.</p>
 
-        <h2>2. Cookies We Use</h2>
-        <p>We use a minimal set of cookies to operate this website effectively:</p>
-
-        <h2>Strictly Necessary</h2>
-        <p>These cookies are essential for the website to function and cannot be switched off. They do not store any personally identifiable information.</p>
+        <h2>2. Strictly Necessary</h2>
+        <p>These cookies are essential for the website to function and cannot be switched off.</p>
         <ul>
-          <li><strong style="color:var(--white)">Session cookies</strong> — temporary cookies that expire when you close your browser, used to maintain basic site functionality</li>
+          <li>Session cookies &mdash; temporary cookies that expire when you close your browser, used to maintain basic site functionality</li>
         </ul>
 
-        <h2>Analytics</h2>
-        <p>We may use privacy-focused analytics tools to understand how visitors interact with our website. These tools may set cookies to track page views and navigation patterns on an anonymised basis.</p>
+        <h2>3. Analytics</h2>
+        <p>We may use privacy-focused analytics tools to understand how visitors interact with our website on an anonymised basis.</p>
         <ul>
-          <li><strong style="color:var(--white)">Analytics cookies</strong> — used to collect anonymised data about site usage to help us improve the experience. No personally identifiable information is stored.</li>
+          <li>Analytics cookies &mdash; collect anonymised data about site usage. No personally identifiable information is stored.</li>
         </ul>
 
-        <h2>Third-Party Cookies</h2>
-        <p>Some pages may embed content or tools from third parties (such as Google Fonts or embedded forms) that may set their own cookies. We do not control these cookies and recommend reviewing the relevant third-party privacy policies:</p>
+        <h2>4. Third-Party Cookies</h2>
+        <p>Some pages embed content from third parties that may set their own cookies. We recommend reviewing their privacy policies:</p>
         <ul>
           <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Privacy Policy</a></li>
           <li><a href="https://stripe.com/privacy" target="_blank" rel="noopener noreferrer">Stripe Privacy Policy</a></li>
         </ul>
 
-        <h2>3. Managing Cookies</h2>
-        <p>You can control and manage cookies in your browser settings. Most browsers allow you to refuse cookies, delete existing cookies, or be notified when a new cookie is set. Please note that disabling certain cookies may affect the functionality of this website.</p>
-        <p>Guidance for managing cookies in major browsers:</p>
+        <h2>5. Managing Cookies</h2>
+        <p>You can control cookies in your browser settings. Guidance for major browsers:</p>
         <ul>
           <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener noreferrer">Google Chrome</a></li>
           <li><a href="https://support.mozilla.org/en-US/kb/enable-and-disable-cookies-website-preferences" target="_blank" rel="noopener noreferrer">Mozilla Firefox</a></li>
@@ -93,20 +90,19 @@
           <li><a href="https://support.microsoft.com/en-us/microsoft-edge/delete-cookies-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener noreferrer">Microsoft Edge</a></li>
         </ul>
 
-        <h2>4. Changes to This Policy</h2>
-        <p>We may update this Cookie Policy from time to time. Any changes will be reflected on this page with an updated date.</p>
+        <h2>6. Changes</h2>
+        <p>We may update this Cookie Policy from time to time. Any changes will be reflected on this page.</p>
 
-        <h2>5. Contact</h2>
-        <p>If you have any questions about our use of cookies, please <a href="index.html#contact">contact us</a>.</p>
-
+        <h2>7. Contact</h2>
+        <p>If you have any questions, please <a href="index.html#contact">contact us</a>.</p>
       </div>
     </div>
   </main>
 
   <footer class="footer-wrap">
     <div class="footer container">
-      <a href="index.html" class="footer-logo" aria-label="Apex Systematic — Home">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="30 42 380 70" height="44" role="img" aria-label="Apex Systematic">
+      <a href="index.html" class="footer-logo" aria-label="Apex Systematic">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="30 42 380 70" height="44" role="img">
           <line x1="54" y1="48" x2="34" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"/>
           <line x1="54" y1="48" x2="74" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"/>
           <line x1="34" y1="82" x2="74" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"/>
@@ -133,7 +129,20 @@
     </div>
   </footer>
 
-  <script src="js/components.js"></script>
+  <script>
+    function toggleMenu() {
+      var nav = document.getElementById('mobile-nav');
+      var btn = document.getElementById('menu-toggle');
+      var open = nav.classList.toggle('is-open');
+      btn.classList.toggle('is-open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+    function closeMenu() {
+      document.getElementById('mobile-nav').classList.remove('is-open');
+      document.getElementById('menu-toggle').classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+  </script>
 
 </body>
 </html>
