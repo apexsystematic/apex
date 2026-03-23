@@ -1,12 +1,10 @@
 /* ═══════════════════════════════════════════
    APEX SYSTEMATIC — js/components.js
-   Reusable header & footer injection.
-   Include at the bottom of <body> on every page.
+   Loaded with defer — runs after DOM is parsed.
    ═══════════════════════════════════════════ */
 
 (function () {
 
-  /* ── Logo SVG ── */
   function logoSVG(height) {
     return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="30 42 380 70" height="' + height + '" role="img" aria-label="Apex Systematic">'
       + '<title>Apex Systematic</title>'
@@ -19,11 +17,10 @@
       + '</svg>';
   }
 
-  /* ── Header HTML ── */
   function headerHTML() {
     return '<div class="header-wrap" id="header-wrap">'
       + '<div class="header container">'
-      + '<a href="index.html" class="header-logo" aria-label="Apex Systematic — Home">' + logoSVG(34) + '</a>'
+      + '<a href="index.html" class="header-logo" aria-label="Apex Systematic">' + logoSVG(34) + '</a>'
       + '<nav class="header-nav" aria-label="Main navigation">'
       + '<a href="#services">Services</a>'
       + '<a href="#how-it-works">How it works</a>'
@@ -38,7 +35,7 @@
       + '</div>'
       + '</div>'
       + '</div>'
-      + '<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden>'
+      + '<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">'
       + '<a href="#services">Services</a>'
       + '<a href="#how-it-works">How it works</a>'
       + '<a href="#pricing">Pricing</a>'
@@ -47,12 +44,11 @@
       + '</nav>';
   }
 
-  /* ── Footer HTML ── */
   function footerHTML() {
     var year = new Date().getFullYear();
     return '<div class="footer-wrap">'
       + '<div class="footer container">'
-      + '<a href="index.html" class="footer-logo" aria-label="Apex Systematic — Home">' + logoSVG(28) + '</a>'
+      + '<a href="index.html" class="footer-logo" aria-label="Apex Systematic">' + logoSVG(28) + '</a>'
       + '<nav class="footer-nav" aria-label="Footer navigation">'
       + '<a href="#services">Services</a>'
       + '<a href="#how-it-works">How it works</a>'
@@ -72,20 +68,6 @@
       + '</div>';
   }
 
-  /* ── Inject ── */
-  /* Scripts loaded at end of <body> — DOM is already ready, no DOMContentLoaded needed */
-  var headerEl = document.getElementById('site-header');
-  if (headerEl) {
-    headerEl.innerHTML = headerHTML();
-    initHeader();
-  }
-
-  var footerEl = document.getElementById('site-footer');
-  if (footerEl) {
-    footerEl.innerHTML = footerHTML();
-  }
-
-  /* ── Header behaviour ── */
   function initHeader() {
     var headerWrap = document.getElementById('header-wrap');
     var menuToggle = document.getElementById('menu-toggle');
@@ -104,7 +86,6 @@
         var isOpen = mobileNav.classList.toggle('is-open');
         menuToggle.classList.toggle('is-open', isOpen);
         menuToggle.setAttribute('aria-expanded', String(isOpen));
-        mobileNav.hidden = !isOpen;
         document.body.style.overflow = isOpen ? 'hidden' : '';
       });
 
@@ -113,11 +94,30 @@
           mobileNav.classList.remove('is-open');
           menuToggle.classList.remove('is-open');
           menuToggle.setAttribute('aria-expanded', 'false');
-          mobileNav.hidden = true;
           document.body.style.overflow = '';
         });
       });
     }
+  }
+
+  function init() {
+    var headerEl = document.getElementById('site-header');
+    if (headerEl) {
+      headerEl.innerHTML = headerHTML();
+      initHeader();
+    }
+
+    var footerEl = document.getElementById('site-footer');
+    if (footerEl) {
+      footerEl.innerHTML = footerHTML();
+    }
+  }
+
+  /* defer guarantees DOM is ready — but guard for edge cases */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
   }
 
 })();
