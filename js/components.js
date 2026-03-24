@@ -37,6 +37,7 @@
       +       '<a href="index.html#services">Services</a>'
       +       '<a href="index.html#how-it-works">How it works</a>'
       +       '<a href="index.html#pricing">Pricing</a>'
+      +       '<a href="roi-calculator.html">ROI Calculator</a>'
       +       '<a href="index.html#about">About</a>'
       +     '</nav>'
       +     '<div class="header-right">'
@@ -52,6 +53,7 @@
       +   '<a href="index.html#services">Services</a>'
       +   '<a href="index.html#how-it-works">How it works</a>'
       +   '<a href="index.html#pricing">Pricing</a>'
+      +   '<a href="roi-calculator.html">ROI Calculator</a>'
       +   '<a href="index.html#about">About</a>'
       +   '<a href="index.html#contact" class="btn btn-primary">Free Audit</a>'
       + '</nav>';
@@ -69,6 +71,7 @@
       +       '<a href="index.html#services">Services</a>'
       +       '<a href="index.html#how-it-works">How it works</a>'
       +       '<a href="index.html#pricing">Pricing</a>'
+      +       '<a href="roi-calculator.html">ROI Calculator</a>'
       +       '<a href="index.html#about">About</a>'
       +       '<a href="index.html#contact">Contact</a>'
       +     '</nav>'
