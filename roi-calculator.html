@@ -18,18 +18,16 @@
   <style>
     /* ── ROI Calculator page styles ── */
 
-    .roi-hero {
-      padding-top: var(--section-y);
-      padding-bottom: 64px;
-      border-bottom: 1px solid var(--border);
+    .roi-page-header {
+      padding-bottom: 48px;
     }
 
-    .roi-hero h1 {
-      max-width: 640px;
-      margin-bottom: 1.25rem;
+    .roi-page-header h2 {
+      max-width: 600px;
+      margin-bottom: 0.75rem;
     }
 
-    .roi-hero .section-sub {
+    .roi-page-header .section-sub {
       max-width: 480px;
     }
 
@@ -328,18 +326,14 @@
 
   <main id="main-content">
 
-    <!-- ── HERO ── -->
-    <section class="roi-hero">
-      <div class="container">
-        <span class="section-tag">ROI Calculator</span>
-        <h1>How much is manual work<br><em>actually</em> costing you?</h1>
-        <p class="section-sub">Move the sliders to your situation. See the real dollar value of the time your practice loses to repetitive manual work every week.</p>
-      </div>
-    </section>
-
     <!-- ── CALCULATOR ── -->
     <section class="roi-section">
       <div class="container">
+        <div class="roi-page-header">
+          <span class="section-tag">ROI Calculator</span>
+          <h2>How much is manual work<br><em>actually</em> costing you?</h2>
+          <p class="section-sub">Move the sliders to your situation. See the real dollar value of the time your practice loses every week.</p>
+        </div>
         <div class="roi-layout">
 
           <!-- Inputs -->
