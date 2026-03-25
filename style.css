@@ -868,8 +868,28 @@ section:last-of-type {
 .hero .hero-sub     { animation: fadeInUp 0.6s ease 0.35s both; }
 .hero .hero-actions { animation: fadeInUp 0.6s ease 0.5s both; }
 
+/* ── 19. ROI CTA ── */
+.roi-cta-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+}
 
-/* ── 18. Media Queries ── */
+.roi-cta-text h2 {
+  margin-top: 0;
+}
+
+@media (max-width: 768px) {
+  .roi-cta-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+  }
+}
+
+
+/* ── 20. Media Queries ── */
 
 /* Large tablet */
 @media (max-width: 1024px) {
