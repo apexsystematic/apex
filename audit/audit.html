@@ -744,9 +744,7 @@
             };
 
             const webhookUrl = 'https://hook.eu1.make.com/rna4imuuifv58un9m0us47g2g2rd6xjo';
-            if (webhookUrl !== 'https://hook.eu1.make.com/rna4imuuifv58un9m0us47g2g2rd6xjo') {
-                fetch(webhookUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).catch(err => console.error('Error:', err));
-            }
+            fetch(webhookUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).catch(err => console.error('Error:', err));
             alert('Thanks ' + name + '! We\'ll send recommendations to ' + email);
             reset();
         }
