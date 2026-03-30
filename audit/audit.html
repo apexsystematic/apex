@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Process Audit - Apex Systematic</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(to bottom right, #0f172a, #1e293b, #0f172a);
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+
+        .nav {
+            border-bottom: 1px solid #475569;
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: white;
+        }
+
+        .nav-reset {
+            color: #94a3b8;
+            font-size: 0.875rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .nav-reset:hover {
+            color: white;
+        }
+
+        .container {
+            max-width: 56rem;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .heading {
+            margin-bottom: 2rem;
+        }
+
+        .heading h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.75rem;
+        }
+
+        .heading h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.75rem;
+        }
+
+        .heading p {
+            font-size: 1.125rem;
+            color: #cbd5e1;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            padding: 1.5rem;
+            border: 2px solid #475569;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .card:hover {
+            border-color: #60a5fa;
+            background: #1e293b;
+        }
+
+        .card.hidden {
+            display: none;
+        }
+
+        .card-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #60a5fa;
+            text-transform: uppercase;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            margin-top: 0.5rem;
+        }
+
+        .card-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            color: #64748b;
+            margin-top: 1rem;
+            transition: color 0.2s;
+        }
+
+        .card:hover .card-icon {
+            color: #60a5fa;
+        }
+
+        .process-group {
+            border: 1px solid #475569;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            background: rgba(30, 41, 59, 0.5);
+            transition: all 0.2s;
+        }
+
+        .process-group:hover {
+            background: rgba(30, 41, 59, 0.8);
+        }
+
+        .process-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .process-category {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #60a5fa;
+            text-transform: uppercase;
+        }
+
+        .process-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: white;
+            margin-top: 0.5rem;
+        }
+
+        .process-badge {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            background: rgba(34, 197, 94, 0.4);
+            color: #86efac;
+        }
+
+        .questions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .question {
+            margin-bottom: 0;
+        }
+
+        .question-label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #cbd5e1;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        select {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            background: #334155;
+            border: 1px solid #475569;
+            border-radius: 0.375rem;
+            color: white;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #60a5fa;
+            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+        }
+
+        .results-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.4), #1e293b);
+            border: 1px solid rgba(96, 165, 250, 0.4);
+            margin-bottom: 2rem;
+        }
+
+        .summary-item {
+            text-align: left;
+        }
+
+        .summary-label {
+            color: #cbd5e1;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-value {
+            color: white;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .summary-value.green {
+            color: #4ade80;
+        }
+
+        .result-item {
+            border: 1px solid #475569;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.2s;
+        }
+
+        .result-item.high {
+            border-color: rgba(34, 197, 94, 0.5);
+            background: rgba(20, 83, 45, 0.2);
+        }
+
+        .result-item.medium {
+            border-color: rgba(202, 138, 4, 0.5);
+            background: rgba(78, 22, 6, 0.2);
+        }
+
+        .result-item.low {
+            border-color: #475569;
+            background: rgba(30, 41, 59, 0.5);
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .result-priority {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+
+        .result-priority.high {
+            background: #22c55e;
+            color: white;
+        }
+
+        .result-priority.medium {
+            background: #ca8a04;
+            color: white;
+        }
+
+        .result-priority.low {
+            background: #64748b;
+            color: white;
+        }
+
+        .result-score {
+            text-align: right;
+        }
+
+        .result-score-number {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .result-score-label {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-top: 0.25rem;
+        }
+
+        .result-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #475569;
+            margin-top: 1rem;
+            font-size: 0.875rem;
+        }
+
+        .metric {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .metric-icon {
+            width: 1rem;
+            height: 1rem;
+            flex-shrink: 0;
+            color: #94a3b8;
+            margin-top: 2px;
+        }
+
+        .metric-content div:first-child {
+            color: #94a3b8;
+            font-size: 0.75rem;
+        }
+
+        .metric-content div:last-child {
+            color: white;
+            font-weight: 600;
+        }
+
+        .metric.value .metric-content div:last-child {
+            color: #4ade80;
+        }
+
+        .alert {
+            display: flex;
+            gap: 1rem;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            background: rgba(30, 58, 138, 0.3);
+            border: 1px solid rgba(96, 165, 250, 0.4);
+            margin-bottom: 2rem;
+        }
+
+        .alert-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            flex-shrink: 0;
+            color: #60a5fa;
+            margin-top: 0.25rem;
+        }
+
+        .alert-content h3 {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .alert-content p {
+            color: #cbd5e1;
+            font-size: 0.875rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid #475569;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        input[type="text"],
+        input[type="email"] {
+            width: 100%;
+            padding: 0.5rem 1rem;
+            background: #334155;
+            border: 1px solid #475569;
+            border-radius: 0.375rem;
+            color: white;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus {
+            outline: none;
+            border-color: #60a5fa;
+            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+        }
+
+        button {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 1rem;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-success {
+            background: #16a34a;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #15803d;
+        }
+
+        .btn-success:disabled {
+            background: #64748b;
+            cursor: not-allowed;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .mt-4 {
+            margin-top: 1rem;
+        }
+
+        .text-xs {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            text-align: center;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <div class="nav-brand">Process Audit</div>
+        <button class="nav-reset hidden" onclick="reset()">Start Over</button>
+    </div>
+
+    <div class="container">
+        <!-- INTRO STAGE -->
+        <div id="intro-stage">
+            <div class="heading">
+                <h1>Find Your Automation Opportunities</h1>
+                <p>Discover which business processes could save you the most time and money.</p>
+            </div>
+
+            <div class="grid">
+                <div class="card" onclick="selectBusinessType('solo')">
+                    <div class="card-label">For You</div>
+                    <div class="card-title">Solo Freelancer / Consultant</div>
+                    <div style="color: #94a3b8; font-size: 0.875rem; margin-top: 0.5rem;">You handle everything yourself</div>
+                    <div class="card-icon">→</div>
+                </div>
+                <div class="card" onclick="selectBusinessType('small_business')">
+                    <div class="card-label">For Teams</div>
+                    <div class="card-title">Small Business (2-10 people)</div>
+                    <div style="color: #94a3b8; font-size: 0.875rem; margin-top: 0.5rem;">Team of 2-10 managing operations</div>
+                    <div class="card-icon">→</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- QUESTIONS STAGE -->
+        <div id="questions-stage" class="hidden">
+            <div class="heading">
+                <h2>Process Assessment</h2>
+                <p>Answer questions about each process. Leave blank any that don't apply to you.</p>
+            </div>
+
+            <div id="processes-container"></div>
+
+            <button class="btn-primary" onclick="calculateResults()">See My Results</button>
+        </div>
+
+        <!-- RESULTS STAGE -->
+        <div id="results-stage" class="hidden">
+            <div class="heading">
+                <h2>Automation Opportunities</h2>
+            </div>
+
+            <div class="results-summary">
+                <div class="summary-item">
+                    <div class="summary-label">Annual Time Savings</div>
+                    <div class="summary-value" id="time-savings">0 hrs</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Potential Annual Value</div>
+                    <div class="summary-value green" id="annual-value">$0</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">High-Priority Processes</div>
+                    <div class="summary-value" id="high-priority-count">0</div>
+                </div>
+            </div>
+
+            <div id="results-container"></div>
+
+            <div class="alert">
+                <div class="alert-icon">ℹ️</div>
+                <div class="alert-content">
+                    <h3>Ready to Implement?</h3>
+                    <p>We help professionals automate these processes. Share your contact info to get personalized recommendations.</p>
+                </div>
+            </div>
+
+            <button class="btn-primary" onclick="goToContact()">Get Recommendations</button>
+        </div>
+
+        <!-- CONTACT STAGE -->
+        <div id="contact-stage" class="hidden">
+            <div class="heading">
+                <h2>Your Automation Plan</h2>
+                <p>Share a bit about yourself and we'll send tailored recommendations.</p>
+            </div>
+
+            <div class="form-group">
+                <label>Your Name</label>
+                <input type="text" id="name" placeholder="John Smith">
+            </div>
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" id="email" placeholder="john@example.com">
+            </div>
+            <div class="form-group">
+                <label>Company / Business Name</label>
+                <input type="text" id="company" placeholder="Your Company">
+            </div>
+
+            <button class="btn-success" onclick="submitContact()" id="submit-btn">Send Me Recommendations</button>
+            <p class="text-xs">We'll reach out with personalized next steps based on your top automation opportunities.</p>
+        </div>
+    </div>
+
+    <script>
+        let state = {
+            stage: 'intro',
+            businessType: null,
+            processes: {},
+            results: null
+        };
+
+        const processCategories = {
+            solo: [
+                { id: 'invoicing', label: 'Client invoicing & payment reminders', category: 'Admin' },
+                { id: 'scheduling', label: 'Scheduling & calendar management', category: 'Admin' },
+                { id: 'email', label: 'Email filtering & client responses', category: 'Communications' },
+                { id: 'proposals', label: 'Creating proposals from templates', category: 'Sales' },
+                { id: 'leads', label: 'Lead data entry & CRM updates', category: 'Sales' },
+                { id: 'reporting', label: 'Monthly reports or client summaries', category: 'Reporting' },
+                { id: 'bookkeeping', label: 'Expense tracking & bookkeeping', category: 'Finance' },
+                { id: 'contracts', label: 'Contract generation & signing', category: 'Legal' }
+            ],
+            small_business: [
+                { id: 'invoicing', label: 'Invoice generation & payment tracking', category: 'Admin' },
+                { id: 'hr', label: 'Employee onboarding & HR paperwork', category: 'HR' },
+                { id: 'email', label: 'Email management & customer responses', category: 'Communications' },
+                { id: 'scheduling', label: 'Appointment scheduling & reminders', category: 'Operations' },
+                { id: 'leads', label: 'Lead qualification & CRM entry', category: 'Sales' },
+                { id: 'reporting', label: 'Sales reports & analytics', category: 'Reporting' },
+                { id: 'inventory', label: 'Inventory tracking & reordering', category: 'Operations' },
+                { id: 'data', label: 'Data entry from forms or spreadsheets', category: 'Admin' }
+            ]
+        };
+
+        const questions = [
+            { id: 'frequency', label: 'How often?', options: ['Daily', 'Several times/week', 'Weekly', 'Monthly', 'Rarely'] },
+            { id: 'timePerMonth', label: 'Hours per month?', options: ['<2 hours', '2-5 hours', '5-10 hours', '10-20 hours', '20+ hours'] },
+            { id: 'manual', label: 'How manual?', options: ['Fully manual', 'Mostly manual', 'Some automation', 'Mostly automated'] },
+            { id: 'errors', label: 'Errors?', options: ['Never', 'Rarely', 'Sometimes', 'Often', 'Very often'] },
+            { id: 'impact', label: 'Error impact?', options: ['None', 'Minor', 'Moderate', 'Significant', 'Critical'] }
+        ];
+
+        function selectBusinessType(type) {
+            state.businessType = type;
+            renderQuestions();
+            setStage('questions');
+        }
+
+        function renderQuestions() {
+            const processes = processCategories[state.businessType];
+            let html = '';
+
+            processes.forEach(proc => {
+                html += `
+                    <div class="process-group">
+                        <div class="process-header">
+                            <div>
+                                <div class="process-category">${proc.category}</div>
+                                <div class="process-title">${proc.label}</div>
+                            </div>
+                            <div class="process-badge" id="badge-${proc.id}" style="display: none;">Complete</div>
+                        </div>
+                        <div class="questions-grid">
+                `;
+
+                questions.forEach(q => {
+                    html += `
+                        <div class="question">
+                            <label class="question-label">${q.label}</label>
+                            <select onchange="updateProcess('${proc.id}', '${q.id}', this.value)" data-process="${proc.id}" data-question="${q.id}">
+                                <option value="">Select...</option>
+                                ${q.options.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
+                            </select>
+                        </div>
+                    `;
+                });
+
+                html += `
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('processes-container').innerHTML = html;
+        }
+
+        function updateProcess(processId, questionId, value) {
+            if (!state.processes[processId]) {
+                state.processes[processId] = {};
+            }
+            state.processes[processId][questionId] = value;
+
+            // Check if complete
+            const processes = processCategories[state.businessType];
+            const proc = processes.find(p => p.id === processId);
+            const isComplete = questions.every(q => state.processes[processId][q.id]);
+            
+            const badge = document.getElementById(`badge-${processId}`);
+            if (isComplete) {
+                badge.style.display = 'inline-block';
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+
+        function scoreProcess(processData) {
+            const weights = {
+                frequency: { 'Daily': 5, 'Several times/week': 4, 'Weekly': 3, 'Monthly': 2, 'Rarely': 1 },
+                timePerMonth: { '<2 hours': 1, '2-5 hours': 2, '5-10 hours': 3, '10-20 hours': 4, '20+ hours': 5 },
+                manual: { 'Fully manual': 5, 'Mostly manual': 4, 'Some automation': 2, 'Mostly automated': 1 },
+                errors: { 'Never': 0, 'Rarely': 1, 'Sometimes': 2, 'Often': 3, 'Very often': 4 },
+                impact: { 'None': 0, 'Minor': 1, 'Moderate': 2, 'Significant': 3, 'Critical': 4 }
+            };
+
+            let score = 0;
+            score += weights.frequency[processData.frequency] || 0;
+            score += weights.timePerMonth[processData.timePerMonth] || 0;
+            score += weights.manual[processData.manual] || 0;
+            score += (weights.errors[processData.errors] || 0) * 1.5;
+            score += (weights.impact[processData.impact] || 0) * 2;
+
+            return Math.round(score);
+        }
+
+        function calculateROI(processData) {
+            const timeValue = { '<2 hours': 1, '2-5 hours': 3.5, '5-10 hours': 7.5, '10-20 hours': 15, '20+ hours': 25 };
+            const monthlyHours = timeValue[processData.timePerMonth] || 0;
+            const hourlyRate = 50;
+            const monthlyValue = monthlyHours * hourlyRate;
+            const annualValue = monthlyValue * 12;
+
+            return { monthlyValue, annualValue };
+        }
+
+        function calculateResults() {
+            const processes = processCategories[state.businessType];
+            
+            const scored = processes
+                .map(proc => {
+                    const processData = state.processes[proc.id] || {};
+                    const isComplete = questions.every(q => processData[q.id]);
+                    
+                    if (!isComplete) return null;
+
+                    const score = scoreProcess(processData);
+                    const roi = calculateROI(processData);
+                    
+                    return {
+                        ...proc,
+                        data: processData,
+                        score,
+                        roi,
+                        automation: score > 20 ? 'high' : score > 12 ? 'medium' : 'low'
+                    };
+                })
+                .filter(Boolean)
+                .sort((a, b) => b.score - a.score);
+
+            const highPriority = scored.filter(p => p.automation === 'high');
+            const totalAnnualValue = scored.reduce((sum, p) => sum + p.roi.annualValue, 0);
+
+            state.results = {
+                processes: scored,
+                highPriority,
+                totalAnnualValue,
+                completedCount: scored.length
+            };
+
+            renderResults();
+            setStage('results');
+        }
+
+        function renderResults() {
+            const { processes, highPriority, totalAnnualValue } = state.results;
+
+            document.getElementById('time-savings').textContent = Math.round(totalAnnualValue / 50) + ' hrs';
+            document.getElementById('annual-value').textContent = '$' + totalAnnualValue.toLocaleString();
+            document.getElementById('high-priority-count').textContent = highPriority.length;
+
+            let html = '';
+            processes.forEach(proc => {
+                const automationClass = proc.automation;
+                html += `
+                    <div class="result-item ${automationClass}">
+                        <div class="result-header">
+                            <div>
+                                <span class="result-priority ${automationClass}">${proc.automation.toUpperCase()} PRIORITY</span>
+                                <span style="color: #94a3b8; font-size: 0.875rem;">${proc.category}</span>
+                            </div>
+                            <div class="result-score">
+                                <div class="result-score-number">${proc.score}</div>
+                                <div class="result-score-label">automation score</div>
+                            </div>
+                        </div>
+                        <h3 style="color: white; margin-bottom: 1rem;">${proc.label}</h3>
+                        <div class="result-metrics">
+                            <div class="metric">
+                                <div class="metric-icon">⏱</div>
+                                <div class="metric-content">
+                                    <div>Monthly Time</div>
+                                    <div>${Math.round(proc.roi.monthlyValue / 50)} hrs</div>
+                                </div>
+                            </div>
+                            <div class="metric value">
+                                <div class="metric-icon">$</div>
+                                <div class="metric-content">
+                                    <div>Annual Value</div>
+                                    <div>$${proc.roi.annualValue.toLocaleString()}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('results-container').innerHTML = html;
+        }
+
+        function goToContact() {
+            setStage('contact');
+        }
+
+        function submitContact() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const company = document.getElementById('company').value;
+
+            if (!name || !email) {
+                alert('Please fill in your name and email');
+                return;
+            }
+
+            // Prepare payload for Make.com webhook
+            const payload = {
+                name,
+                email,
+                company,
+                businessType: state.businessType,
+                results: state.results.processes.map(p => ({
+                    process: p.label,
+                    score: p.score,
+                    automation: p.automation,
+                    annualValue: p.roi.annualValue
+                })),
+                totalAnnualValue: state.results.totalAnnualValue
+            };
+
+            // Replace with your Make.com webhook URL
+            const webhookUrl = 'https://hook.eu1.make.com/rna4imuuifv58un9m0us47g2g2rd6xjo';
+            
+            if (webhookUrl !== 'https://hook.eu1.make.com/rna4imuuifv58un9m0us47g2g2rd6xjo') {
+                fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }).catch(err => console.error('Webhook error:', err));
+            }
+
+            // Show confirmation
+            alert('Thanks ' + name + '! We\'ll send recommendations to ' + email);
+            reset();
+        }
+
+        function setStage(stage) {
+            state.stage = stage;
+            document.getElementById('intro-stage').classList.toggle('hidden', stage !== 'intro');
+            document.getElementById('questions-stage').classList.toggle('hidden', stage !== 'questions');
+            document.getElementById('results-stage').classList.toggle('hidden', stage !== 'results');
+            document.getElementById('contact-stage').classList.toggle('hidden', stage !== 'contact');
+            document.querySelector('.nav-reset').classList.toggle('hidden', stage === 'intro');
+        }
+
+        function reset() {
+            state = {
+                stage: 'intro',
+                businessType: null,
+                processes: {},
+                results: null
+            };
+            setStage('intro');
+        }
+    </script>
+</body>
+</html>
