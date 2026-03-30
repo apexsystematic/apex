@@ -3,153 +3,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Process Audit Tool - Discover your automation opportunities">
     <title>Process Audit - Apex Systematic</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg:               #0E1117;
+            --surface:          #131820;
+            --surface-2:        #182030;
+            --border:           #1E2838;
+            --border-light:     #263040;
+            --text:             #D8DCE4;
+            --text-muted:       #5C6578;
+            --text-dim:         #333D50;
+            --white:            #FFFFFF;
+            --gold:             #C9A84C;
+            --gold-light:       #DDB95A;
+            --font-display:     'Playfair Display', Georgia, serif;
+            --font-body:        'DM Sans', 'Helvetica Neue', sans-serif;
+            --max-width:        1200px;
+            --gutter:           28px;
+            --ease:             0.2s ease;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html { scroll-behavior: smooth; font-size: 16px; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(to bottom right, #0f172a, #1e293b, #0f172a);
-            color: #e2e8f0;
-            min-height: 100vh;
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-body);
+            font-weight: 400;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        .nav {
-            border-bottom: 1px solid #475569;
-            background: rgba(15, 23, 42, 0.5);
-            backdrop-filter: blur(10px);
-            padding: 1rem 1.5rem;
+        a { color: inherit; text-decoration: none; }
+        button { font-family: inherit; font-size: inherit; cursor: pointer; }
+
+        .header-wrap {
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            padding: 22px var(--gutter);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .nav-brand {
-            font-weight: 700;
-            font-size: 1.125rem;
-            color: white;
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: var(--white);
         }
 
         .nav-reset {
-            color: #94a3b8;
-            font-size: 0.875rem;
+            font-size: 0.68rem;
+            font-weight: 400;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--text-muted);
             border: none;
             background: none;
-            cursor: pointer;
-            transition: color 0.2s;
+            transition: color var(--ease);
         }
 
-        .nav-reset:hover {
-            color: white;
-        }
+        .nav-reset:hover { color: var(--white); }
+        .nav-reset.hidden { display: none; }
 
         .container {
-            max-width: 56rem;
-            margin: 3rem auto;
-            padding: 0 1.5rem;
-            animation: fadeIn 0.4s ease-out;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 110px var(--gutter);
+            animation: fadeIn 0.6s ease 0.1s both;
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .heading {
-            margin-bottom: 2rem;
+        .section-header { margin-bottom: 56px; }
+
+        .section-tag {
+            display: inline-block;
+            font-size: 0.68rem;
+            font-weight: 400;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1.25rem;
         }
 
-        .heading h1 {
-            font-size: 2.25rem;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 0.75rem;
+        h1, h2 {
+            font-family: var(--font-display);
+            font-weight: 400;
+            line-height: 1.15;
+            color: var(--white);
+            letter-spacing: -0.01em;
         }
 
-        .heading h2 {
-            font-size: 1.875rem;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 0.75rem;
+        h1 { font-size: clamp(2.8rem, 5.5vw, 5rem); }
+        h2 { font-size: clamp(2rem, 3.5vw, 3rem); }
+
+        h3 {
+            font-family: var(--font-body);
+            font-weight: 500;
+            line-height: 1.3;
+            color: var(--white);
+            font-size: 1.1rem;
         }
 
-        .heading p {
-            font-size: 1.125rem;
-            color: #cbd5e1;
+        p { color: var(--text-muted); line-height: 1.8; }
+
+        .section-sub {
+            max-width: 520px;
+            font-size: 1.05rem;
+            margin-top: 0.875rem;
+            line-height: 1.75;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--gutter);
             margin-top: 2rem;
         }
 
         .card {
-            padding: 1.5rem;
-            border: 2px solid #475569;
-            border-radius: 0.5rem;
+            padding: 44px 36px;
+            border: 1px solid var(--border);
             cursor: pointer;
-            transition: all 0.2s;
+            transition: background var(--ease);
         }
 
-        .card:hover {
-            border-color: #60a5fa;
-            background: #1e293b;
+        .card::before {
+            content: '';
+            display: block;
+            width: 36px;
+            height: 1px;
+            background: var(--gold);
+            margin-bottom: 28px;
+            transition: width var(--ease);
         }
 
-        .card.hidden {
-            display: none;
-        }
+        .card:hover::before { width: 56px; }
+        .card:hover { background: var(--surface); }
 
         .card-label {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #60a5fa;
+            font-size: 0.68rem;
+            font-weight: 400;
+            letter-spacing: 0.22em;
             text-transform: uppercase;
+            color: var(--gold);
         }
 
         .card-title {
-            font-size: 1rem;
-            font-weight: 600;
-            color: white;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--white);
             margin-top: 0.5rem;
         }
 
-        .card-icon {
-            width: 1.25rem;
-            height: 1.25rem;
-            color: #64748b;
-            margin-top: 1rem;
-            transition: color 0.2s;
-        }
-
-        .card:hover .card-icon {
-            color: #60a5fa;
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.75;
+            margin-top: 0.875rem;
         }
 
         .process-group {
-            border: 1px solid #475569;
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            background: rgba(30, 41, 59, 0.5);
-            transition: all 0.2s;
+            border: 1px solid var(--border);
+            padding: 44px 36px;
+            transition: background var(--ease);
         }
 
-        .process-group:hover {
-            background: rgba(30, 41, 59, 0.8);
-        }
+        .process-group:not(:last-child) { border-bottom: none; }
+        .process-group:hover { background: var(--surface); }
 
         .process-header {
             display: flex;
@@ -159,117 +196,104 @@
         }
 
         .process-category {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #60a5fa;
+            font-size: 0.68rem;
+            font-weight: 400;
+            letter-spacing: 0.22em;
             text-transform: uppercase;
+            color: var(--gold);
         }
 
         .process-title {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: white;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--white);
             margin-top: 0.5rem;
         }
 
         .process-badge {
-            font-size: 0.75rem;
-            padding: 0.25rem 0.5rem;
-            border-radius: 0.25rem;
-            background: rgba(34, 197, 94, 0.4);
-            color: #86efac;
+            font-size: 0.68rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 7px 14px;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            background: transparent;
+            display: none;
+        }
+
+        .process-badge.show {
+            display: inline-block;
+            border-color: var(--gold);
+            color: var(--gold);
         }
 
         .questions-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: var(--gutter);
         }
 
-        .question {
-            margin-bottom: 0;
-        }
-
-        .question-label {
+        .question label {
             display: block;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #cbd5e1;
+            font-size: 0.68rem;
+            font-weight: 400;
+            letter-spacing: 0.14em;
             text-transform: uppercase;
-            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+            margin-bottom: 9px;
         }
 
         select {
             width: 100%;
-            padding: 0.5rem 0.75rem;
-            background: #334155;
-            border: 1px solid #475569;
-            border-radius: 0.375rem;
-            color: white;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--white);
+            padding: 14px 16px;
+            border-radius: 2px;
+            outline: none;
+            transition: border-color var(--ease);
             font-size: 0.875rem;
-            transition: all 0.2s;
+            line-height: 1.5;
         }
 
-        select:focus {
-            outline: none;
-            border-color: #60a5fa;
-            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
-        }
+        select:focus { border-color: var(--gold); }
 
         .results-summary {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1.5rem;
-            padding: 2rem;
-            border-radius: 0.5rem;
-            background: linear-gradient(135deg, rgba(30, 58, 138, 0.4), #1e293b);
-            border: 1px solid rgba(96, 165, 250, 0.4);
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--gutter);
+            padding: 52px 44px;
+            border: 1px solid var(--border);
             margin-bottom: 2rem;
         }
 
-        .summary-item {
-            text-align: left;
-        }
+        .summary-item { display: flex; flex-direction: column; gap: 0.5rem; }
 
         .summary-label {
-            color: #cbd5e1;
-            font-size: 0.875rem;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
+            font-size: 0.68rem;
+            font-weight: 400;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--text-muted);
         }
 
         .summary-value {
-            color: white;
             font-size: 2rem;
             font-weight: 700;
+            color: var(--white);
         }
 
-        .summary-value.green {
-            color: #4ade80;
-        }
+        .summary-value.gold { color: var(--gold); }
 
         .result-item {
-            border: 1px solid #475569;
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            transition: all 0.2s;
+            border: 1px solid var(--border);
+            padding: 44px 36px;
+            transition: all var(--ease);
         }
 
-        .result-item.high {
-            border-color: rgba(34, 197, 94, 0.5);
-            background: rgba(20, 83, 45, 0.2);
-        }
-
-        .result-item.medium {
-            border-color: rgba(202, 138, 4, 0.5);
-            background: rgba(78, 22, 6, 0.2);
-        }
-
-        .result-item.low {
-            border-color: #475569;
-            background: rgba(30, 41, 59, 0.5);
-        }
+        .result-item:not(:last-child) { border-bottom: none; }
+        .result-item.high { background: var(--surface); }
 
         .result-header {
             display: flex;
@@ -279,245 +303,233 @@
         }
 
         .result-priority {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 0.25rem;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-right: 0.5rem;
+            font-size: 0.68rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 7px 14px;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            background: transparent;
+            margin-bottom: 0.75rem;
+            margin-right: 0.75rem;
         }
 
         .result-priority.high {
-            background: #22c55e;
-            color: white;
+            border-color: var(--gold);
+            color: var(--gold);
         }
 
-        .result-priority.medium {
-            background: #ca8a04;
-            color: white;
-        }
-
-        .result-priority.low {
-            background: #64748b;
-            color: white;
-        }
-
-        .result-score {
-            text-align: right;
-        }
+        .result-score { text-align: right; }
 
         .result-score-number {
-            font-size: 1.875rem;
+            font-size: 2rem;
             font-weight: 700;
-            color: white;
+            color: var(--gold);
         }
 
         .result-score-label {
-            font-size: 0.75rem;
-            color: #94a3b8;
+            font-size: 0.68rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-dim);
             margin-top: 0.25rem;
+        }
+
+        .result-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--white);
+            margin-bottom: 1rem;
         }
 
         .result-metrics {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid #475569;
-            margin-top: 1rem;
+            gap: var(--gutter);
+            padding-top: var(--gutter);
+            border-top: 1px solid var(--border);
+            margin-top: var(--gutter);
             font-size: 0.875rem;
         }
 
-        .metric {
-            display: flex;
-            gap: 0.5rem;
+        .metric { display: flex; flex-direction: column; gap: 0.5rem; }
+
+        .metric-label {
+            font-size: 0.68rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-dim);
         }
 
-        .metric-icon {
-            width: 1rem;
-            height: 1rem;
-            flex-shrink: 0;
-            color: #94a3b8;
-            margin-top: 2px;
+        .metric-value {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--white);
         }
 
-        .metric-content div:first-child {
-            color: #94a3b8;
-            font-size: 0.75rem;
-        }
+        .metric-value.gold { color: var(--gold); }
 
-        .metric-content div:last-child {
-            color: white;
-            font-weight: 600;
-        }
-
-        .metric.value .metric-content div:last-child {
-            color: #4ade80;
-        }
-
-        .alert {
-            display: flex;
-            gap: 1rem;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            background: rgba(30, 58, 138, 0.3);
-            border: 1px solid rgba(96, 165, 250, 0.4);
-            margin-bottom: 2rem;
-        }
-
-        .alert-icon {
-            width: 1.5rem;
-            height: 1.5rem;
-            flex-shrink: 0;
-            color: #60a5fa;
-            margin-top: 0.25rem;
-        }
-
-        .alert-content h3 {
-            color: white;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .alert-content p {
-            color: #cbd5e1;
-            font-size: 0.875rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            background: rgba(30, 41, 59, 0.5);
-            border: 1px solid #475569;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: white;
-            margin-bottom: 0.5rem;
-        }
-
-        input[type="text"],
-        input[type="email"] {
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            padding: 15px 30px;
+            border: 1px solid transparent;
+            border-radius: 2px;
+            transition: background var(--ease), color var(--ease), border-color var(--ease);
+            white-space: nowrap;
             width: 100%;
-            padding: 0.5rem 1rem;
-            background: #334155;
-            border: 1px solid #475569;
-            border-radius: 0.375rem;
-            color: white;
-            font-size: 0.875rem;
-            transition: all 0.2s;
-        }
-
-        input[type="text"]:focus,
-        input[type="email"]:focus {
-            outline: none;
-            border-color: #60a5fa;
-            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
-        }
-
-        button {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: none;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-top: 1rem;
         }
 
         .btn-primary {
-            background: #2563eb;
-            color: white;
+            background: var(--gold);
+            color: var(--bg);
+            border-color: var(--gold);
         }
 
         .btn-primary:hover {
-            background: #1d4ed8;
+            background: var(--gold-light);
+            border-color: var(--gold-light);
         }
 
-        .btn-success {
-            background: #16a34a;
-            color: white;
-        }
-
-        .btn-success:hover {
-            background: #15803d;
-        }
-
-        .btn-success:disabled {
-            background: #64748b;
+        .btn-primary:disabled {
+            background: var(--text-dim);
+            border-color: var(--text-dim);
             cursor: not-allowed;
         }
 
-        .hidden {
-            display: none !important;
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+            margin-bottom: 22px;
         }
 
-        .mt-4 {
-            margin-top: 1rem;
+        .form-group label {
+            font-size: 0.68rem;
+            font-weight: 400;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--text-muted);
         }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--white);
+            padding: 14px 16px;
+            border-radius: 2px;
+            outline: none;
+            transition: border-color var(--ease);
+            line-height: 1.5;
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+        }
+
+        input[type="text"]::placeholder,
+        input[type="email"]::placeholder,
+        textarea::placeholder { color: var(--text-dim); }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus { border-color: var(--gold); }
+
+        textarea { resize: vertical; min-height: 120px; }
+
+        .alert {
+            border: 1px solid var(--border);
+            padding: 44px 36px;
+            margin-bottom: 2rem;
+            background: var(--surface);
+        }
+
+        .alert h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .alert p {
+            font-size: 0.9rem;
+            line-height: 1.75;
+        }
+
+        .hidden { display: none !important; }
+
+        .text-center { text-align: center; }
 
         .text-xs {
-            font-size: 0.75rem;
-            color: #94a3b8;
-            text-align: center;
+            font-size: 0.68rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-dim);
             margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 64px var(--gutter); }
+            .grid { grid-template-columns: 1fr; }
+            .results-summary { grid-template-columns: 1fr; }
+            .result-metrics { grid-template-columns: 1fr; }
+            .questions-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <div class="nav">
+    <div class="header-wrap">
         <div class="nav-brand">Process Audit</div>
         <button class="nav-reset hidden" onclick="reset()">Start Over</button>
     </div>
 
     <div class="container">
-        <!-- INTRO STAGE -->
+        <!-- INTRO -->
         <div id="intro-stage">
-            <div class="heading">
-                <h1>Find Your Automation Opportunities</h1>
-                <p>Discover which business processes could save you the most time and money.</p>
+            <div class="section-header">
+                <span class="section-tag">Discover Your Automation</span>
+                <h1>Find Your Time-Saving Opportunities</h1>
+                <p class="section-sub">Answer a few questions about your current processes. We'll show you exactly where automation could save you the most time and money.</p>
             </div>
-
             <div class="grid">
                 <div class="card" onclick="selectBusinessType('solo')">
+                    <div style="width: 36px; height: 1px; background: var(--gold); margin-bottom: 28px;"></div>
                     <div class="card-label">For You</div>
                     <div class="card-title">Solo Freelancer / Consultant</div>
-                    <div style="color: #94a3b8; font-size: 0.875rem; margin-top: 0.5rem;">You handle everything yourself</div>
-                    <div class="card-icon">→</div>
+                    <p class="card-desc">You handle everything yourself</p>
                 </div>
                 <div class="card" onclick="selectBusinessType('small_business')">
+                    <div style="width: 36px; height: 1px; background: var(--gold); margin-bottom: 28px;"></div>
                     <div class="card-label">For Teams</div>
                     <div class="card-title">Small Business (2-10 people)</div>
-                    <div style="color: #94a3b8; font-size: 0.875rem; margin-top: 0.5rem;">Team of 2-10 managing operations</div>
-                    <div class="card-icon">→</div>
+                    <p class="card-desc">Team of 2-10 managing operations</p>
                 </div>
             </div>
         </div>
 
-        <!-- QUESTIONS STAGE -->
+        <!-- QUESTIONS -->
         <div id="questions-stage" class="hidden">
-            <div class="heading">
+            <div class="section-header">
                 <h2>Process Assessment</h2>
-                <p>Answer questions about each process. Leave blank any that don't apply to you.</p>
+                <p class="section-sub">Answer questions about each process. Leave blank any that don't apply to you.</p>
             </div>
-
-            <div id="processes-container"></div>
-
-            <button class="btn-primary" onclick="calculateResults()">See My Results</button>
+            <div id="processes-container" style="border: 1px solid var(--border);"></div>
+            <button class="btn btn-primary" onclick="calculateResults()" style="margin-top: 2rem;">See My Results</button>
         </div>
 
-        <!-- RESULTS STAGE -->
+        <!-- RESULTS -->
         <div id="results-stage" class="hidden">
-            <div class="heading">
-                <h2>Automation Opportunities</h2>
+            <div class="section-header">
+                <h2>Your Automation Opportunities</h2>
             </div>
-
             <div class="results-summary">
                 <div class="summary-item">
                     <div class="summary-label">Annual Time Savings</div>
@@ -525,59 +537,48 @@
                 </div>
                 <div class="summary-item">
                     <div class="summary-label">Potential Annual Value</div>
-                    <div class="summary-value green" id="annual-value">$0</div>
+                    <div class="summary-value gold" id="annual-value">$0</div>
                 </div>
                 <div class="summary-item">
                     <div class="summary-label">High-Priority Processes</div>
                     <div class="summary-value" id="high-priority-count">0</div>
                 </div>
             </div>
-
-            <div id="results-container"></div>
-
-            <div class="alert">
-                <div class="alert-icon">ℹ️</div>
-                <div class="alert-content">
-                    <h3>Ready to Implement?</h3>
-                    <p>We help professionals automate these processes. Share your contact info to get personalized recommendations.</p>
-                </div>
+            <div id="results-container" style="border: 1px solid var(--border);"></div>
+            <div class="alert" style="margin-top: 2rem;">
+                <h3>Ready to Implement?</h3>
+                <p>We help professionals automate these processes. Share your contact info to get personalized recommendations.</p>
             </div>
-
-            <button class="btn-primary" onclick="goToContact()">Get Recommendations</button>
+            <button class="btn btn-primary" onclick="goToContact()" style="margin-top: 2rem;">Get Recommendations</button>
         </div>
 
-        <!-- CONTACT STAGE -->
+        <!-- CONTACT -->
         <div id="contact-stage" class="hidden">
-            <div class="heading">
+            <div class="section-header">
                 <h2>Your Automation Plan</h2>
-                <p>Share a bit about yourself and we'll send tailored recommendations.</p>
+                <p class="section-sub">Share a bit about yourself and we'll send tailored recommendations.</p>
             </div>
-
-            <div class="form-group">
-                <label>Your Name</label>
-                <input type="text" id="name" placeholder="John Smith">
+            <div style="max-width: 660px;">
+                <div class="form-group">
+                    <label>Your Name</label>
+                    <input type="text" id="name" placeholder="John Smith">
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="email" placeholder="john@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Company / Business Name</label>
+                    <input type="text" id="company" placeholder="Your Company">
+                </div>
+                <button class="btn btn-primary" onclick="submitContact()" id="submit-btn">Send Me Recommendations</button>
+                <p class="text-xs text-center">We'll reach out with personalized next steps based on your top automation opportunities.</p>
             </div>
-            <div class="form-group">
-                <label>Email Address</label>
-                <input type="email" id="email" placeholder="john@example.com">
-            </div>
-            <div class="form-group">
-                <label>Company / Business Name</label>
-                <input type="text" id="company" placeholder="Your Company">
-            </div>
-
-            <button class="btn-success" onclick="submitContact()" id="submit-btn">Send Me Recommendations</button>
-            <p class="text-xs">We'll reach out with personalized next steps based on your top automation opportunities.</p>
         </div>
     </div>
 
     <script>
-        let state = {
-            stage: 'intro',
-            businessType: null,
-            processes: {},
-            results: null
-        };
+        let state = { stage: 'intro', businessType: null, processes: {}, results: null };
 
         const processCategories = {
             solo: [
@@ -619,58 +620,35 @@
         function renderQuestions() {
             const processes = processCategories[state.businessType];
             let html = '';
-
             processes.forEach(proc => {
-                html += `
-                    <div class="process-group">
-                        <div class="process-header">
-                            <div>
-                                <div class="process-category">${proc.category}</div>
-                                <div class="process-title">${proc.label}</div>
-                            </div>
-                            <div class="process-badge" id="badge-${proc.id}" style="display: none;">Complete</div>
+                html += `<div class="process-group">
+                    <div class="process-header">
+                        <div>
+                            <div class="process-category">${proc.category}</div>
+                            <div class="process-title">${proc.label}</div>
                         </div>
-                        <div class="questions-grid">
-                `;
-
-                questions.forEach(q => {
-                    html += `
-                        <div class="question">
-                            <label class="question-label">${q.label}</label>
-                            <select onchange="updateProcess('${proc.id}', '${q.id}', this.value)" data-process="${proc.id}" data-question="${q.id}">
-                                <option value="">Select...</option>
-                                ${q.options.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
-                            </select>
-                        </div>
-                    `;
-                });
-
-                html += `
-                        </div>
+                        <div class="process-badge" id="badge-${proc.id}">Complete</div>
                     </div>
-                `;
+                    <div class="questions-grid">`;
+                questions.forEach(q => {
+                    html += `<div class="question">
+                        <label>${q.label}</label>
+                        <select onchange="updateProcess('${proc.id}', '${q.id}', this.value)">
+                            <option value="">Select...</option>
+                            ${q.options.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
+                        </select>
+                    </div>`;
+                });
+                html += `</div></div>`;
             });
-
             document.getElementById('processes-container').innerHTML = html;
         }
 
         function updateProcess(processId, questionId, value) {
-            if (!state.processes[processId]) {
-                state.processes[processId] = {};
-            }
+            if (!state.processes[processId]) state.processes[processId] = {};
             state.processes[processId][questionId] = value;
-
-            // Check if complete
-            const processes = processCategories[state.businessType];
-            const proc = processes.find(p => p.id === processId);
             const isComplete = questions.every(q => state.processes[processId][q.id]);
-            
-            const badge = document.getElementById(`badge-${processId}`);
-            if (isComplete) {
-                badge.style.display = 'inline-block';
-            } else {
-                badge.style.display = 'none';
-            }
+            document.getElementById(`badge-${processId}`).classList.toggle('show', isComplete);
         }
 
         function scoreProcess(processData) {
@@ -681,152 +659,94 @@
                 errors: { 'Never': 0, 'Rarely': 1, 'Sometimes': 2, 'Often': 3, 'Very often': 4 },
                 impact: { 'None': 0, 'Minor': 1, 'Moderate': 2, 'Significant': 3, 'Critical': 4 }
             };
-
             let score = 0;
             score += weights.frequency[processData.frequency] || 0;
             score += weights.timePerMonth[processData.timePerMonth] || 0;
             score += weights.manual[processData.manual] || 0;
             score += (weights.errors[processData.errors] || 0) * 1.5;
             score += (weights.impact[processData.impact] || 0) * 2;
-
             return Math.round(score);
         }
 
         function calculateROI(processData) {
             const timeValue = { '<2 hours': 1, '2-5 hours': 3.5, '5-10 hours': 7.5, '10-20 hours': 15, '20+ hours': 25 };
             const monthlyHours = timeValue[processData.timePerMonth] || 0;
-            const hourlyRate = 50;
-            const monthlyValue = monthlyHours * hourlyRate;
+            const monthlyValue = monthlyHours * 50;
             const annualValue = monthlyValue * 12;
-
             return { monthlyValue, annualValue };
         }
 
         function calculateResults() {
             const processes = processCategories[state.businessType];
-            
-            const scored = processes
-                .map(proc => {
-                    const processData = state.processes[proc.id] || {};
-                    const isComplete = questions.every(q => processData[q.id]);
-                    
-                    if (!isComplete) return null;
-
-                    const score = scoreProcess(processData);
-                    const roi = calculateROI(processData);
-                    
-                    return {
-                        ...proc,
-                        data: processData,
-                        score,
-                        roi,
-                        automation: score > 20 ? 'high' : score > 12 ? 'medium' : 'low'
-                    };
-                })
-                .filter(Boolean)
-                .sort((a, b) => b.score - a.score);
+            const scored = processes.map(proc => {
+                const processData = state.processes[proc.id] || {};
+                const isComplete = questions.every(q => processData[q.id]);
+                if (!isComplete) return null;
+                const score = scoreProcess(processData);
+                const roi = calculateROI(processData);
+                return { ...proc, data: processData, score, roi, automation: score > 20 ? 'high' : score > 12 ? 'medium' : 'low' };
+            }).filter(Boolean).sort((a, b) => b.score - a.score);
 
             const highPriority = scored.filter(p => p.automation === 'high');
             const totalAnnualValue = scored.reduce((sum, p) => sum + p.roi.annualValue, 0);
-
-            state.results = {
-                processes: scored,
-                highPriority,
-                totalAnnualValue,
-                completedCount: scored.length
-            };
-
+            state.results = { processes: scored, highPriority, totalAnnualValue };
             renderResults();
             setStage('results');
         }
 
         function renderResults() {
             const { processes, highPriority, totalAnnualValue } = state.results;
-
             document.getElementById('time-savings').textContent = Math.round(totalAnnualValue / 50) + ' hrs';
             document.getElementById('annual-value').textContent = '$' + totalAnnualValue.toLocaleString();
             document.getElementById('high-priority-count').textContent = highPriority.length;
 
             let html = '';
             processes.forEach(proc => {
-                const automationClass = proc.automation;
-                html += `
-                    <div class="result-item ${automationClass}">
-                        <div class="result-header">
-                            <div>
-                                <span class="result-priority ${automationClass}">${proc.automation.toUpperCase()} PRIORITY</span>
-                                <span style="color: #94a3b8; font-size: 0.875rem;">${proc.category}</span>
-                            </div>
-                            <div class="result-score">
-                                <div class="result-score-number">${proc.score}</div>
-                                <div class="result-score-label">automation score</div>
-                            </div>
+                html += `<div class="result-item ${proc.automation}">
+                    <div class="result-header">
+                        <div>
+                            <span class="result-priority ${proc.automation}">${proc.automation.toUpperCase()} PRIORITY</span>
+                            <span style="color: var(--text-dim); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;">${proc.category}</span>
                         </div>
-                        <h3 style="color: white; margin-bottom: 1rem;">${proc.label}</h3>
-                        <div class="result-metrics">
-                            <div class="metric">
-                                <div class="metric-icon">⏱</div>
-                                <div class="metric-content">
-                                    <div>Monthly Time</div>
-                                    <div>${Math.round(proc.roi.monthlyValue / 50)} hrs</div>
-                                </div>
-                            </div>
-                            <div class="metric value">
-                                <div class="metric-icon">$</div>
-                                <div class="metric-content">
-                                    <div>Annual Value</div>
-                                    <div>$${proc.roi.annualValue.toLocaleString()}</div>
-                                </div>
-                            </div>
+                        <div class="result-score">
+                            <div class="result-score-number">${proc.score}</div>
+                            <div class="result-score-label">Score</div>
                         </div>
                     </div>
-                `;
+                    <div class="result-title">${proc.label}</div>
+                    <div class="result-metrics">
+                        <div class="metric">
+                            <div class="metric-label">Monthly Time</div>
+                            <div class="metric-value">${Math.round(proc.roi.monthlyValue / 50)} hrs</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Annual Value</div>
+                            <div class="metric-value gold">$${proc.roi.annualValue.toLocaleString()}</div>
+                        </div>
+                    </div>
+                </div>`;
             });
-
             document.getElementById('results-container').innerHTML = html;
         }
 
-        function goToContact() {
-            setStage('contact');
-        }
+        function goToContact() { setStage('contact'); }
 
         function submitContact() {
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const company = document.getElementById('company').value;
+            if (!name || !email) { alert('Please fill in your name and email'); return; }
 
-            if (!name || !email) {
-                alert('Please fill in your name and email');
-                return;
-            }
-
-            // Prepare payload for Make.com webhook
             const payload = {
-                name,
-                email,
-                company,
-                businessType: state.businessType,
-                results: state.results.processes.map(p => ({
-                    process: p.label,
-                    score: p.score,
-                    automation: p.automation,
-                    annualValue: p.roi.annualValue
-                })),
+                name, email, company, businessType: state.businessType,
+                results: state.results.processes.map(p => ({ process: p.label, score: p.score, automation: p.automation, annualValue: p.roi.annualValue })),
                 totalAnnualValue: state.results.totalAnnualValue
             };
 
-            // Replace with your Make.com webhook URL
             const webhookUrl = 'https://hook.eu1.make.com/rna4imuuifv58un9m0us47g2g2rd6xjo';
-            
             if (webhookUrl !== 'https://hook.eu1.make.com/rna4imuuifv58un9m0us47g2g2rd6xjo') {
-                fetch(webhookUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                }).catch(err => console.error('Webhook error:', err));
+                fetch(webhookUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).catch(err => console.error('Error:', err));
             }
-
-            // Show confirmation
             alert('Thanks ' + name + '! We\'ll send recommendations to ' + email);
             reset();
         }
@@ -841,12 +761,7 @@
         }
 
         function reset() {
-            state = {
-                stage: 'intro',
-                businessType: null,
-                processes: {},
-                results: null
-            };
+            state = { stage: 'intro', businessType: null, processes: {}, results: null };
             setStage('intro');
         }
     </script>
