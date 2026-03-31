@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fiverr Profile & Strategy — Apex Systematic</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+  :root {
+    --gold: #B7770D;
+    --gold-light: #D4940F;
+    --gold-muted: #7a500a;
+    --navy: #0D1B2A;
+    --navy-mid: #162436;
+    --navy-light: #1e3350;
+    --white: #F5F1EB;
+    --gray: #8a9ab0;
+    --gray-light: #c5cfd8;
+    --green-bg: #0d2e1c;
+    --amber-bg: #2a1f00;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    padding: 48px 24px;
+  }
+
+  .page { max-width: 860px; margin: 0 auto; }
+
+  .header {
+    border-left: 4px solid var(--gold);
+    padding: 0 0 0 24px;
+    margin-bottom: 56px;
+  }
+  .header-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+  .header-sub { color: var(--gray); font-size: 14px; }
+
+  .section { margin-bottom: 52px; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--navy-light);
+  }
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    min-width: 28px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .copy-block {
+    background: var(--navy-mid);
+    border: 1px solid var(--navy-light);
+    border-left: 3px solid var(--gold);
+    border-radius: 4px;
+    padding: 24px 28px;
+    margin-bottom: 16px;
+  }
+  .copy-block .copy-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-muted);
+    margin-bottom: 12px;
+  }
+  .copy-block .copy-text {
+    color: var(--white);
+    font-size: 15px;
+    line-height: 1.75;
+    white-space: pre-wrap;
+  }
+
+  .note {
+    background: var(--amber-bg);
+    border: 1px solid var(--gold-muted);
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin-top: 16px;
+    font-size: 13.5px;
+    color: #e8c97a;
+    line-height: 1.65;
+  }
+  .note strong { color: var(--gold-light); font-weight: 600; }
+
+  .callout-green {
+    background: var(--green-bg);
+    border: 1px solid #1e7e4a;
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin-top: 16px;
+    font-size: 13.5px;
+    color: #7ee8a2;
+    line-height: 1.65;
+  }
+  .callout-green strong { color: #a8f0c0; }
+
+  .callout-red {
+    background: #2a0d0d;
+    border: 1px solid #7a2020;
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin-top: 16px;
+    font-size: 13.5px;
+    color: #f0a0a0;
+    line-height: 1.65;
+  }
+  .callout-red strong { color: #f5c0c0; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin: 16px 0;
+  }
+  th {
+    text-align: left;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-muted);
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--navy-light);
+  }
+  td {
+    padding: 11px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    color: var(--gray-light);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  td:first-child { color: var(--white); font-weight: 500; }
+
+  .tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .tag-yes { background: var(--green-bg); color: #7ee8a2; border: 1px solid #1e7e4a; }
+  .tag-no  { background: #2a0d0d; color: #f0a0a0; border: 1px solid #7a2020; }
+  .tag-maybe { background: var(--amber-bg); color: #e8c97a; border: 1px solid var(--gold-muted); }
+
+  .steps { margin: 16px 0; }
+  .step {
+    display: flex;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--gold);
+    min-width: 24px;
+    padding-top: 2px;
+  }
+  .step-body strong {
+    display: block;
+    color: var(--white);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .step-body span { color: var(--gray-light); font-size: 13.5px; }
+
+  .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+  .pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    padding: 4px 12px;
+    border-radius: 2px;
+    background: var(--navy-light);
+    color: var(--gray-light);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .pill-gold {
+    background: rgba(183,119,13,0.15);
+    color: var(--gold-light);
+    border-color: var(--gold-muted);
+  }
+
+  /* Gig card */
+  .gig-card {
+    background: var(--navy-mid);
+    border: 1px solid var(--navy-light);
+    border-radius: 6px;
+    margin-bottom: 32px;
+    overflow: hidden;
+  }
+  .gig-header {
+    background: rgba(183,119,13,0.1);
+    border-bottom: 1px solid var(--navy-light);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .gig-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--gold-muted);
+    text-transform: uppercase;
+  }
+  .gig-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--white);
+  }
+  .gig-body { padding: 24px; }
+
+  /* Tier table inside gig */
+  .tier-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .tier {
+    background: var(--navy);
+    border: 1px solid var(--navy-light);
+    border-radius: 4px;
+    padding: 16px;
+  }
+  .tier-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-muted);
+    margin-bottom: 6px;
+  }
+  .tier-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--gold-light);
+    margin-bottom: 4px;
+  }
+  .tier-delivery {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--gray);
+    margin-bottom: 10px;
+  }
+  .tier-includes {
+    font-size: 12.5px;
+    color: var(--gray-light);
+    line-height: 1.7;
+  }
+  .tier-includes li { list-style: none; padding: 2px 0; }
+  .tier-includes li::before { content: "✓ "; color: var(--gold-muted); }
+
+  hr.divider {
+    border: none;
+    border-top: 1px solid var(--navy-light);
+    margin: 48px 0;
+  }
+
+  p { margin-bottom: 12px; color: var(--gray-light); }
+  p:last-child { margin-bottom: 0; }
+  strong { color: var(--white); }
+
+  .inline-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-muted);
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 16px 0;
+  }
+  @media (max-width: 600px) {
+    .two-col { grid-template-columns: 1fr; }
+    .tier-grid { grid-template-columns: 1fr; }
+  }
+
+  .mini-card {
+    background: var(--navy-mid);
+    border: 1px solid var(--navy-light);
+    border-radius: 4px;
+    padding: 16px 18px;
+  }
+  .mini-card .mc-title {
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 6px;
+    font-size: 14px;
+  }
+  .mini-card .mc-body {
+    color: var(--gray);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .diff-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 16px 0; }
+  .diff-table th {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-muted);
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--navy-light);
+    text-align: left;
+  }
+  .diff-table td { padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--gray-light); vertical-align: top; }
+  .diff-table td:first-child { color: var(--white); font-weight: 500; width: 120px; }
+  .diff-table tr:last-child td { border-bottom: none; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="header-label">Apex Systematic · Fiverr Launch Kit</div>
+    <h1>Fiverr Profile &<br>Gig Strategy</h1>
+    <div class="header-sub">Jorge R. · AI Workflow Automation · Professional Services</div>
+  </div>
+
+  <!-- SECTION 1: PLATFORM DIFFERENCES -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <span class="section-title">How Fiverr Differs from Upwork</span>
+    </div>
+
+    <p>The fundamentals of your positioning carry over. Everything else is different. Read this before touching any copy.</p>
+
+    <table class="diff-table">
+      <thead>
+        <tr><th>Factor</th><th>Upwork</th><th>Fiverr</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Client intent</td><td>Has a problem, posts a job, reads proposals</td><td>Knows what they want, searches Gigs, buys directly</td></tr>
+        <tr><td>Your job</td><td>Win a competitive proposal process</td><td>Show up in search and convert on the Gig page</td></tr>
+        <tr><td>Scope</td><td>Custom, negotiated per project</td><td>Productised — fixed deliverable, fixed price, fixed timeline</td></tr>
+        <tr><td>Pricing</td><td>Hourly or fixed, openly negotiated</td><td>Three tiers (Basic/Standard/Premium) — non-negotiable in public</td></tr>
+        <tr><td>Copy tone</td><td>Consultative, professional</td><td>Punchy, benefit-led, outcome-first</td></tr>
+        <tr><td>Reviews</td><td>Job Success Score builds over time</td><td>Review count and rating visible immediately — critical to early sales</td></tr>
+        <tr><td>Search ranking</td><td>Based on profile strength + proposal activity</td><td>Based on Gig SEO, conversion rate, and response time</td></tr>
+        <tr><td>Client quality</td><td>Generally higher budget, more sophisticated</td><td>Mixed — but professional services buyers do exist at $300–800+</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      <strong>The key mindset shift:</strong> On Upwork you chase jobs. On Fiverr, jobs come to you — but only if your Gig titles and descriptions are built around how buyers search, not how you describe your service. A buyer doesn't search "Make.com automation specialist." They search "automate my client intake" or "law firm workflow automation." Write for the search, not the CV.
+    </div>
+  </div>
+
+  <!-- SECTION 2: PROFILE -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <span class="section-title">Seller Profile</span>
+    </div>
+
+    <div class="copy-block">
+      <div class="copy-label">Display Name</div>
+      <div class="copy-text">Jorge R. | Apex Systematic</div>
+    </div>
+
+    <div class="copy-block">
+      <div class="copy-label">Tagline (160 characters max — this appears under your name in search)</div>
+      <div class="copy-text">I build AI workflow automations for law firms & professional services. Fixed price. You own everything. No retainers.</div>
+    </div>
+
+    <div class="copy-block">
+      <div class="copy-label">Profile Description (full bio)</div>
+      <div class="copy-text">I automate the repetitive work that's eating your billable hours.
+
+If you're a lawyer, financial advisor, or consultant spending time on client intake, onboarding, document chasing, or weekly reporting — those are automation problems. And they're solvable in days.
+
+Here's what working with me looks like:
+
+You tell me what's slow and manual. I scope it, build it in Make.com, test it end-to-end, and hand it over with full documentation and a video walkthrough. You own the system outright — all accounts stay in your name, all credentials are yours. No monthly fees. No dependency on me to keep it running.
+
+What I build:
+→ Client intake & onboarding flows
+→ AI-assisted document drafting (Claude / GPT integrated)
+→ CRM automation (Airtable, Notion, HubSpot)
+→ Scheduled reporting (Sheets, Gmail)
+→ Lead capture and follow-up sequences
+
+Tools: Make.com · n8n · Zapier · Airtable · Notion · Google Workspace · Tally · Calendly · Stripe · Brevo · Claude API
+
+Before you order: message me first. I want to make sure I understand your setup and that I can deliver exactly what you need. Every build is scoped before it starts — no surprises.</div>
+    </div>
+
+    <div class="note">
+      <strong>The last paragraph matters.</strong> "Message me before ordering" does two things: it filters out buyers who aren't serious, and it gives you a conversation before any money moves — which is where you qualify scope, catch red flags, and set expectations. On Fiverr, a bad order is harder to escape than a bad proposal. Front-load the qualification.
+    </div>
+  </div>
+
+  <!-- SECTION 3: GIG STRUCTURE DECISION -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <span class="section-title">Gig Structure — What to Launch With</span>
+    </div>
+
+    <p>Three Gigs. Each targets a distinct search intent and buyer type. Launching more than three at zero reviews dilutes your effort — Fiverr's algorithm rewards Gigs that convert quickly, so it's better to send all your early traffic to fewer pages than to spread thinly across six.</p>
+
+    <table>
+      <thead>
+        <tr><th>Gig</th><th>Target Buyer</th><th>Search Intent</th><th>Priority</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Gig 1 — Client Intake Automation</td><td>Lawyers, IFAs, consultants</td><td>"automate client intake" / "law firm automation"</td><td><span class="tag tag-yes">Launch first</span></td></tr>
+        <tr><td>Gig 2 — Make.com Workflow Build</td><td>SMB owners, ops managers</td><td>"Make.com automation" / "workflow automation"</td><td><span class="tag tag-yes">Launch with Gig 1</span></td></tr>
+        <tr><td>Gig 3 — AI Document Automation</td><td>Lawyers, consultants</td><td>"AI document automation" / "automate document generation"</td><td><span class="tag tag-maybe">Launch week 2</span></td></tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      <strong>Why this split:</strong> Gig 1 targets your niche directly. Gig 2 casts a wider net using tool-specific search terms — buyers who already know they want Make.com. Gig 3 captures a high-value sub-niche (document generation is a common pain for lawyers and consultants) without duplicating Gig 1. Each Gig can rank for different keywords, multiplying your search surface.
+    </div>
+  </div>
+
+  <!-- GIG 1 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <span class="section-title">Gig 1 — Client Intake & Onboarding Automation</span>
+    </div>
+
+    <div class="gig-card">
+      <div class="gig-header">
+        <span class="gig-num">Gig 01</span>
+        <span class="gig-name">Client Intake & Onboarding Automation</span>
+      </div>
+      <div class="gig-body">
+
+        <div class="copy-block">
+          <div class="copy-label">Gig Title (75 char max — keyword-first)</div>
+          <div class="copy-text">I will automate your client intake and onboarding with Make.com</div>
+        </div>
+
+        <div class="copy-block">
+          <div class="copy-label">Gig Description</div>
+          <div class="copy-text">Stop spending 30–60 minutes on every new client. Let the system do it.
+
+I build automated client intake and onboarding flows for law firms, financial advisors, and consultants — so the moment a new client submits your form, everything happens automatically. No chasing. No manual data entry. No dropped balls.
+
+WHAT GETS BUILT:
+
+→ Intake form connected to your CRM (Airtable, Notion, HubSpot, or Google Sheets)
+→ Automatic confirmation email sent to the client
+→ Calendly booking link triggered on submission
+→ Client folder created in Google Drive (if needed)
+→ Internal task or notification created for your team
+
+You get a fully tested Make.com scenario, written documentation explaining how it works, and a Loom video walkthrough. All accounts stay in your name. You own everything outright.
+
+BEFORE YOU ORDER:
+
+Send me a message first. Tell me what tools you're using and what you want automated. I'll confirm I can build it and we'll agree on the exact scope before any money moves. No surprises.
+
+WHAT I NEED FROM YOU:
+
+· Access to your existing tools (I'll send an account setup guide)
+· Your intake form (or I can advise on the best free option)
+· 20 minutes for a scoping call or voice note exchange
+
+This is a fixed-price build. Once we agree scope, the price doesn't change.</div>
+        </div>
+
+        <div class="inline-label" style="margin: 20px 0 12px;">Pricing Tiers</div>
+        <div class="tier-grid">
+          <div class="tier">
+            <div class="tier-label">Basic</div>
+            <div class="tier-price">$149</div>
+            <div class="tier-delivery">Delivered in 4 days</div>
+            <ul class="tier-includes">
+              <li>Single Make.com scenario</li>
+              <li>Up to 3 connected apps</li>
+              <li>Form → CRM → Email</li>
+              <li>Written documentation</li>
+              <li>1 revision round</li>
+            </ul>
+          </div>
+          <div class="tier">
+            <div class="tier-label">Standard</div>
+            <div class="tier-price">$299</div>
+            <div class="tier-delivery">Delivered in 5 days</div>
+            <ul class="tier-includes">
+              <li>Full intake + onboarding flow</li>
+              <li>Up to 5 connected apps</li>
+              <li>Includes Drive folder + Calendly</li>
+              <li>Loom video walkthrough</li>
+              <li>2 revision rounds</li>
+              <li>30-day check-in call</li>
+            </ul>
+          </div>
+          <div class="tier">
+            <div class="tier-label">Premium</div>
+            <div class="tier-price">$499</div>
+            <div class="tier-delivery">Delivered in 7 days</div>
+            <ul class="tier-includes">
+              <li>Full intake + onboarding + follow-up</li>
+              <li>Up to 8 connected apps</li>
+              <li>AI-personalised email drafts</li>
+              <li>Error handling + fallback alerts</li>
+              <li>Full documentation package</li>
+              <li>3 revision rounds</li>
+              <li>30-day check-in call</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="copy-block" style="margin-top: 20px;">
+          <div class="copy-label">FAQ Section (add these to your Gig)</div>
+          <div class="copy-text">Q: Do I need a Make.com account?
+A: Yes — you'll need a free or Core plan account in your name. I'll send you a setup guide before we start. This is intentional: you own the system, not me.
+
+Q: What if I use Zapier instead of Make.com?
+A: I can build in Zapier. Message me first and we'll confirm the scope and any price adjustment.
+
+Q: Will this work with my existing CRM?
+A: Message me with the name of your CRM before ordering. I work with Airtable, Notion, HubSpot, Pipedrive, and Google Sheets natively. Others may be possible.
+
+Q: What happens if something breaks after delivery?
+A: The build comes with documentation so you can troubleshoot basic issues. If a break is caused by a tool update or API change, I offer a maintenance plan — ask me about it at delivery.
+
+Q: Can you build something more custom than what's listed?
+A: Yes. Message me and describe what you need. I'll quote it as a custom offer.</div>
+        </div>
+
+        <div class="inline-label" style="margin: 20px 0 8px;">Search Tags (Fiverr allows 5)</div>
+        <div class="pill-row">
+          <span class="pill pill-gold">make.com automation</span>
+          <span class="pill pill-gold">client intake automation</span>
+          <span class="pill pill-gold">law firm automation</span>
+          <span class="pill pill-gold">onboarding automation</span>
+          <span class="pill pill-gold">workflow automation</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- GIG 2 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <span class="section-title">Gig 2 — Make.com Workflow Automation Build</span>
+    </div>
+
+    <div class="gig-card">
+      <div class="gig-header">
+        <span class="gig-num">Gig 02</span>
+        <span class="gig-name">Make.com Workflow Automation Build</span>
+      </div>
+      <div class="gig-body">
+
+        <div class="copy-block">
+          <div class="copy-label">Gig Title</div>
+          <div class="copy-text">I will build your Make.com automation and connect your apps</div>
+        </div>
+
+        <div class="copy-block">
+          <div class="copy-label">Gig Description</div>
+          <div class="copy-text">If you're copying data between apps, sending the same email manually, or doing anything that happens the same way every time — I can automate it in Make.com.
+
+I build custom Make.com scenarios that connect your tools and eliminate manual steps. No templates, no shortcuts. Built properly, tested end-to-end, and handed over with documentation so you can maintain it yourself.
+
+COMMON BUILDS:
+
+→ CRM updates triggered by form submissions
+→ Automated email sequences based on data changes
+→ Slack or Gmail notifications from spreadsheet events
+→ Data sync between two or more tools
+→ Scheduled reports pulled from Airtable or Sheets
+→ Lead capture → follow-up → task creation pipelines
+
+WHAT YOU GET:
+
+· Working Make.com scenario in your account
+· Written explanation of how it works and how to adjust it
+· Loom walkthrough video (Standard and Premium)
+· Up to 2–3 rounds of revisions depending on tier
+
+MESSAGE ME BEFORE ORDERING.
+
+Tell me what you want to automate, what tools you use, and roughly how often it runs. I'll confirm feasibility and scope it properly before we start.</div>
+        </div>
+
+        <div class="inline-label" style="margin: 20px 0 12px;">Pricing Tiers</div>
+        <div class="tier-grid">
+          <div class="tier">
+            <div class="tier-label">Basic</div>
+            <div class="tier-price">$99</div>
+            <div class="tier-delivery">Delivered in 3 days</div>
+            <ul class="tier-includes">
+              <li>1 Make.com scenario</li>
+              <li>Up to 3 app connections</li>
+              <li>Written documentation</li>
+              <li>1 revision round</li>
+            </ul>
+          </div>
+          <div class="tier">
+            <div class="tier-label">Standard</div>
+            <div class="tier-price">$249</div>
+            <div class="tier-delivery">Delivered in 5 days</div>
+            <ul class="tier-includes">
+              <li>Up to 2 scenarios</li>
+              <li>Up to 5 app connections</li>
+              <li>Error handling included</li>
+              <li>Loom walkthrough</li>
+              <li>2 revision rounds</li>
+            </ul>
+          </div>
+          <div class="tier">
+            <div class="tier-label">Premium</div>
+            <div class="tier-price">$449</div>
+            <div class="tier-delivery">Delivered in 7 days</div>
+            <ul class="tier-includes">
+              <li>Up to 4 scenarios</li>
+              <li>Up to 8 app connections</li>
+              <li>Full error handling + alerts</li>
+              <li>Full documentation package</li>
+              <li>3 revision rounds</li>
+              <li>30-day check-in call</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="copy-block" style="margin-top: 20px;">
+          <div class="copy-label">FAQ Section</div>
+          <div class="copy-text">Q: Do you work with Zapier or n8n too?
+A: Yes. Message me first and I'll confirm the build is possible in your preferred tool.
+
+Q: My automation is more complex than what's listed — can you handle it?
+A: Probably. Message me with the details and I'll send a custom offer with a fixed price.
+
+Q: Will you build in my Make.com account?
+A: Yes. You invite me as a collaborator, I build the scenario, and you remain the account owner throughout.
+
+Q: What if I don't know exactly what I need?
+A: That's fine. Describe the manual process you want to eliminate and I'll translate it into a proper automation scope.
+
+Q: Do you offer ongoing support after delivery?
+A: I offer an optional monthly maintenance plan. Ask me about it when we wrap up.</div>
+        </div>
+
+        <div class="inline-label" style="margin: 20px 0 8px;">Search Tags</div>
+        <div class="pill-row">
+          <span class="pill pill-gold">make.com automation</span>
+          <span class="pill pill-gold">workflow automation</span>
+          <span class="pill pill-gold">integromat automation</span>
+          <span class="pill pill-gold">app integration</span>
+          <span class="pill pill-gold">business automation</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- GIG 3 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <span class="section-title">Gig 3 — AI Document Automation</span>
+    </div>
+
+    <div class="gig-card">
+      <div class="gig-header">
+        <span class="gig-num">Gig 03</span>
+        <span class="gig-name">AI Document Automation</span>
+      </div>
+      <div class="gig-body">
+
+        <div class="copy-block">
+          <div class="copy-label">Gig Title</div>
+          <div class="copy-text">I will automate your document generation with AI and Make.com</div>
+        </div>
+
+        <div class="copy-block">
+          <div class="copy-label">Gig Description</div>
+          <div class="copy-text">Stop drafting the same documents from scratch every time.
+
+I build AI-powered document automation systems that generate first drafts, populate templates, and deliver documents automatically — triggered by a form submission, a CRM update, or a scheduled event.
+
+Built for lawyers, consultants, and advisors who produce high volumes of similar documents: engagement letters, client reports, intake summaries, proposals, meeting notes.
+
+HOW IT WORKS:
+
+1. Client submits a form or data is added to your CRM
+2. Make.com triggers the automation
+3. Claude AI (or GPT-4) generates a tailored first draft using your template and the client's data
+4. The document is saved to Google Drive and emailed to you (or the client) automatically
+
+WHAT YOU GET:
+
+→ Make.com scenario connecting your data source to AI to your output
+→ Prompt template designed for your document type
+→ Google Drive delivery or email attachment
+→ Written documentation and Loom walkthrough
+→ The AI uses your voice and your template — not a generic output
+
+IMPORTANT:
+
+This Gig builds the automation infrastructure. It does not write your document templates from scratch — you provide the template or we discuss the structure together. Message me first so I can confirm your setup is compatible.</div>
+        </div>
+
+        <div class="inline-label" style="margin: 20px 0 12px;">Pricing Tiers</div>
+        <div class="tier-grid">
+          <div class="tier">
+            <div class="tier-label">Basic</div>
+            <div class="tier-price">$199</div>
+            <div class="tier-delivery">Delivered in 5 days</div>
+            <ul class="tier-includes">
+              <li>1 document type automated</li>
+              <li>1 AI prompt template</li>
+              <li>Google Drive delivery</li>
+              <li>Written documentation</li>
+              <li>1 revision round</li>
+            </ul>
+          </div>
+          <div class="tier">
+            <div class="tier-label">Standard</div>
+            <div class="tier-price">$399</div>
+            <div class="tier-delivery">Delivered in 6 days</div>
+            <ul class="tier-includes">
+              <li>Up to 2 document types</li>
+              <li>2 AI prompt templates</li>
+              <li>Drive + email delivery</li>
+              <li>Loom walkthrough</li>
+              <li>2 revision rounds</li>
+              <li>30-day check-in</li>
+            </ul>
+          </div>
+          <div class="tier">
+            <div class="tier-label">Premium</div>
+            <div class="tier-price">$699</div>
+            <div class="tier-delivery">Delivered in 8 days</div>
+            <ul class="tier-includes">
+              <li>Up to 4 document types</li>
+              <li>Full prompt library</li>
+              <li>Human review step included</li>
+              <li>CRM integration</li>
+              <li>Full documentation package</li>
+              <li>3 revision rounds</li>
+              <li>30-day check-in</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="copy-block" style="margin-top: 20px;">
+          <div class="copy-label">FAQ Section</div>
+          <div class="copy-text">Q: Which AI model do you use?
+A: Claude (Anthropic) by default — it handles structured professional writing well and has a large context window for longer documents. GPT-4 is available on request.
+
+Q: Do I need an AI API account?
+A: Yes — you'll need an Anthropic or OpenAI API key in your own account. I'll walk you through setup. Typical API cost for document generation is under $5/month for most use cases.
+
+Q: Can the AI match my writing style?
+A: Yes, within reason. I build the prompt using examples of your existing documents. The output will need human review for tone — this is a first-draft tool, not a finished-product tool.
+
+Q: What document types work best?
+A: Engagement letters, client reports, intake summaries, meeting notes, proposals, and NDAs. Anything with a consistent structure and variable client data is a strong candidate.
+
+Q: Can you also build the intake form that feeds the system?
+A: Yes — included in Standard and Premium, or add it to Basic as a custom extra. Message me.</div>
+        </div>
+
+        <div class="inline-label" style="margin: 20px 0 8px;">Search Tags</div>
+        <div class="pill-row">
+          <span class="pill pill-gold">document automation</span>
+          <span class="pill pill-gold">AI document generation</span>
+          <span class="pill pill-gold">make.com automation</span>
+          <span class="pill pill-gold">legal document automation</span>
+          <span class="pill pill-gold">AI workflow automation</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7: PRICING STRATEGY -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <span class="section-title">Pricing Strategy & Progression</span>
+    </div>
+
+    <p>The prices above are launch prices — set to win early reviews fast while staying above the race-to-the-bottom tier. Here's the full progression:</p>
+
+    <table>
+      <thead>
+        <tr><th>Phase</th><th>Gig 1 Standard</th><th>Gig 2 Standard</th><th>Gig 3 Standard</th><th>Goal</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>0 reviews</td><td>$299</td><td>$249</td><td>$399</td><td>Win first orders at any reasonable rate</td></tr>
+        <tr><td>3–5 reviews</td><td>$349</td><td>$299</td><td>$499</td><td>Raise 15–20% — reviews justify the bump</td></tr>
+        <tr><td>10+ reviews</td><td>$449</td><td>$399</td><td>$649</td><td>Approaching direct-client rate territory</td></tr>
+        <tr><td>Level 1 seller</td><td>$549+</td><td>$499+</td><td>$799+</td><td>Badge does the trust-building for you</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout-green">
+      <strong>Fiverr Level 1 Seller</strong> requires 10 completed orders, 60 days active, 4.7+ rating, and 90%+ response rate. It's the most impactful milestone on the platform — the badge alone increases conversion meaningfully. Everything in the first 2 months should be oriented around hitting it.
+    </div>
+
+    <div class="note">
+      <strong>On the Basic tier pricing:</strong> The Basic tiers ($99–$199) are intentionally accessible. Some buyers will order Basic to test you before commissioning a full build. Deliver Basic orders at Standard quality and many will come back for the bigger project. The Basic tier is a lead-gen tool as much as a revenue source.
+    </div>
+  </div>
+
+  <!-- SECTION 8: SEARCH & ALGORITHM STRATEGY -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">08</span>
+      <span class="section-title">Search & Algorithm Strategy</span>
+    </div>
+
+    <p>Fiverr's algorithm ranks Gigs based on four things: keyword match, conversion rate, response time, and order completion rate. You control all four.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-body">
+          <strong>Keywords in the right places</strong>
+          <span>Your primary keyword must appear in the Gig title, the first line of your description, and your tags. For Gig 1 that's "client intake automation." For Gig 2 it's "Make.com automation." Don't stuff — use it naturally 3–4 times in the description. Fiverr reads the full text.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-body">
+          <strong>Response time under 1 hour (during working hours)</strong>
+          <span>Fiverr shows your average response time on your profile. Under 1 hour is the target. Set up mobile notifications. Respond to every message even if it's just "Thanks — I'll review this and get back to you within a few hours." Speed signals professionalism and boosts your ranking.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-body">
+          <strong>Conversion rate — get buyers to click, then close</strong>
+          <span>Fiverr tracks how many people view your Gig vs. how many order or message you. Your Gig thumbnail is the primary driver of clicks. Your description is the primary driver of messages. Treat them separately. A bad thumbnail tanks your click rate even if the copy is excellent.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-body">
+          <strong>Never cancel an order</strong>
+          <span>Cancellations damage your ranking more than a 4-star review. If an order arrives that's poorly scoped or outside your capabilities, communicate immediately and request a mutual cancellation explaining the reason. Better still — the "message me first" instruction in your description prevents most of these.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">05</div>
+        <div class="step-body">
+          <strong>Gig thumbnail — treat it like an ad</strong>
+          <span>Your thumbnail appears at roughly 280×180px in search results. It needs to communicate your service and niche in under 2 seconds. Use a dark background (consistent with Apex Systematic's visual identity), a short punchy headline ("Automate Your Client Intake"), and the Make.com logo or a simple flow diagram. No stock photos. No generic robot imagery.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 9: EARLY REVIEW STRATEGY -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">09</span>
+      <span class="section-title">Getting Your First Reviews</span>
+    </div>
+
+    <p>Zero reviews on Fiverr is a harder starting point than zero reviews on Upwork — on Upwork your proposal can compensate. On Fiverr, buyers are making a purchase decision with no conversation. Here's how to break through.</p>
+
+    <div class="two-col">
+      <div class="mini-card">
+        <div class="mc-title">Tactic 1 — Share externally</div>
+        <div class="mc-body">Post your Gig links on LinkedIn, in relevant Facebook groups (legal tech, IFA communities, small business automation), and in your personal network. Fiverr allows you to fulfil orders from buyers you bring yourself — and those orders still count toward your review total and Level 1 status.</div>
+      </div>
+      <div class="mini-card">
+        <div class="mc-title">Tactic 2 — Offer a stripped-down first order</div>
+        <div class="mc-body">If someone in your network needs automation work, fulfil it via Fiverr at the Basic tier price — even if the build is worth more. You want the review on the platform, not just the cash. One review on Fiverr is worth more than three referrals from a client who doesn't leave one.</div>
+      </div>
+      <div class="mini-card">
+        <div class="mc-title">Tactic 3 — Ask explicitly at delivery</div>
+        <div class="mc-body">When you mark an order complete, include in your delivery message: "If you're happy with the build, a review on Fiverr makes a huge difference — it only takes a minute and I'd really appreciate it." Direct, not pushy. Fiverr buyers are used to being asked.</div>
+      </div>
+      <div class="mini-card">
+        <div class="mc-title">Tactic 4 — Buyer requests</div>
+        <div class="mc-body">Fiverr has a "Buyer Requests" section (now called "Brief & Match" on some accounts) where buyers post what they need. Check it daily in the first month and send custom offers. These leads are warm — they've already stated a need.</div>
+      </div>
+    </div>
+
+    <div class="callout-red">
+      <strong>Never do this:</strong> Don't ask friends or family to place fake orders or leave fabricated reviews. Fiverr's fraud detection is sophisticated and account bans are permanent. One real review from a real client is worth infinitely more than five fake ones and a banned account.
+    </div>
+  </div>
+
+  <!-- SECTION 10: UPWORK VS FIVERR -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">10</span>
+      <span class="section-title">Running Both Platforms Together</span>
+    </div>
+
+    <p>The platforms complement each other if you manage them correctly. They compete for your time if you don't.</p>
+
+    <table>
+      <thead>
+        <tr><th>Scenario</th><th>Platform</th><th>Reason</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Complex, custom multi-system build</td><td>Upwork</td><td>Needs scoping conversation, not a Gig purchase</td></tr>
+        <tr><td>Well-defined single automation</td><td>Fiverr</td><td>Productised scope, buyer knows what they want</td></tr>
+        <tr><td>Law firm or IFA prospect</td><td>Either</td><td>Send to whichever platform has more reviews at the time</td></tr>
+        <tr><td>First contact from a referral</td><td>Direct (not Upwork/Fiverr)</td><td>No platform fee, no algorithm friction</td></tr>
+        <tr><td>Repeat client from either platform</td><td>Direct after second project</td><td>Move off-platform once trust is established</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      <strong>Time allocation in month 1:</strong> Spend roughly 60% of your acquisition time on Upwork (active proposals, higher value) and 40% on Fiverr setup and initial promotion. Once both have reviews, Fiverr becomes more passive — it generates inbound while you focus Upwork effort on larger projects. Don't let Fiverr message response time slip below 1 hour during working hours or your ranking will drop.
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div style="padding: 0 0 48px; color: var(--gray); font-size: 13px; line-height: 1.8;">
+    <span style="font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-muted); display: block; margin-bottom: 8px;">Bottom line</span>
+    Three Gigs. Message-first policy on all of them. First 60 days is entirely about reviews and Level 1. Price goes up after that. Fiverr runs passively once it's ranked — build it properly now and don't neglect response time.
+  </div>
+
+</div>
+</body>
+</html>
