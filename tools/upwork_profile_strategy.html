@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upwork Profile & Strategy — Apex Systematic</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+  :root {
+    --gold: #B7770D;
+    --gold-light: #D4940F;
+    --gold-muted: #7a500a;
+    --navy: #0D1B2A;
+    --navy-mid: #162436;
+    --navy-light: #1e3350;
+    --white: #F5F1EB;
+    --gray: #8a9ab0;
+    --gray-light: #c5cfd8;
+    --red: #c0392b;
+    --green: #1e7e4a;
+    --green-bg: #0d2e1c;
+    --amber-bg: #2a1f00;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    padding: 48px 24px;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .header {
+    border-left: 4px solid var(--gold);
+    padding: 0 0 0 24px;
+    margin-bottom: 56px;
+  }
+  .header-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+  .header-sub {
+    color: var(--gray);
+    font-size: 14px;
+  }
+
+  /* Section titles */
+  .section {
+    margin-bottom: 52px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--navy-light);
+  }
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    min-width: 28px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  /* Copy blocks */
+  .copy-block {
+    background: var(--navy-mid);
+    border: 1px solid var(--navy-light);
+    border-left: 3px solid var(--gold);
+    border-radius: 4px;
+    padding: 24px 28px;
+    margin-bottom: 16px;
+  }
+  .copy-block .copy-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-muted);
+    margin-bottom: 12px;
+  }
+  .copy-block .copy-text {
+    color: var(--white);
+    font-size: 15px;
+    line-height: 1.75;
+    white-space: pre-wrap;
+  }
+
+  /* Notes / callouts */
+  .note {
+    background: var(--amber-bg);
+    border: 1px solid var(--gold-muted);
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin-top: 16px;
+    font-size: 13.5px;
+    color: #e8c97a;
+    line-height: 1.65;
+  }
+  .note strong {
+    color: var(--gold-light);
+    font-weight: 600;
+  }
+
+  .callout-green {
+    background: var(--green-bg);
+    border: 1px solid #1e7e4a;
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin-top: 16px;
+    font-size: 13.5px;
+    color: #7ee8a2;
+    line-height: 1.65;
+  }
+  .callout-green strong {
+    color: #a8f0c0;
+  }
+
+  .callout-red {
+    background: #2a0d0d;
+    border: 1px solid #7a2020;
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin-top: 16px;
+    font-size: 13.5px;
+    color: #f0a0a0;
+    line-height: 1.65;
+  }
+  .callout-red strong { color: #f5c0c0; }
+
+  /* Table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin: 16px 0;
+  }
+  th {
+    text-align: left;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-muted);
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--navy-light);
+  }
+  td {
+    padding: 11px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    color: var(--gray-light);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  td:first-child { color: var(--white); font-weight: 500; }
+  td .tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .tag-yes { background: var(--green-bg); color: #7ee8a2; border: 1px solid #1e7e4a; }
+  .tag-no  { background: #2a0d0d; color: #f0a0a0; border: 1px solid #7a2020; }
+  .tag-maybe { background: var(--amber-bg); color: #e8c97a; border: 1px solid var(--gold-muted); }
+
+  /* Steps */
+  .steps { margin: 16px 0; }
+  .step {
+    display: flex;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--gold);
+    min-width: 24px;
+    padding-top: 2px;
+  }
+  .step-body strong {
+    display: block;
+    color: var(--white);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .step-body span { color: var(--gray-light); font-size: 13.5px; }
+
+  /* Pill tags */
+  .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+  .pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    padding: 4px 12px;
+    border-radius: 2px;
+    background: var(--navy-light);
+    color: var(--gray-light);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .pill-gold {
+    background: rgba(183,119,13,0.15);
+    color: var(--gold-light);
+    border-color: var(--gold-muted);
+  }
+
+  /* Divider */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--navy-light);
+    margin: 48px 0;
+  }
+
+  p { margin-bottom: 12px; color: var(--gray-light); }
+  p:last-child { margin-bottom: 0; }
+  strong { color: var(--white); }
+
+  .inline-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-muted);
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 16px 0;
+  }
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+  .mini-card {
+    background: var(--navy-mid);
+    border: 1px solid var(--navy-light);
+    border-radius: 4px;
+    padding: 16px 18px;
+  }
+  .mini-card .mc-title {
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 6px;
+    font-size: 14px;
+  }
+  .mini-card .mc-body {
+    color: var(--gray);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="header-label">Apex Systematic · Upwork Launch Kit</div>
+    <h1>Profile & Strategy<br>from Zero</h1>
+    <div class="header-sub">Jorge R. · AI Workflow Automation · Professional Services</div>
+  </div>
+
+  <!-- SECTION 1: POSITIONING -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <span class="section-title">Positioning Decision</span>
+    </div>
+
+    <p>Lead with the niche. Back it with the tools. This is the title strategy: the niche pulls the right client, the tool keyword catches search.</p>
+
+    <div class="copy-block">
+      <div class="copy-label">Profile Title (use exactly this)</div>
+      <div class="copy-text">AI Workflow Automation for Law Firms & Professional Services | Make.com</div>
+    </div>
+
+    <div class="note">
+      <strong>Why this works:</strong> Lawyers and IFAs searching "automation" will see "professional services" and self-identify. Clients who already know they want Make.com find you via the tool tag. You avoid the race-to-the-bottom "automation specialist" pile where $12/hr competitors live. The niche framing also justifies higher rates from day one — specialists charge more than generalists.
+    </div>
+  </div>
+
+  <!-- SECTION 2: PROFILE OVERVIEW -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <span class="section-title">Profile Overview (Full Bio)</span>
+    </div>
+
+    <p>This is your primary sales copy. Upwork shows the first 2–3 lines before the "more" click, so the opener has to earn that click. Write in first person. Concrete, not vague.</p>
+
+    <div class="copy-block">
+      <div class="copy-label">Full Profile Overview — Copy/Paste Ready</div>
+      <div class="copy-text">I build AI-powered workflow automations for law firms, financial advisors, and consultants — and when the project is done, you own everything outright. No retainers. No lock-in. No monthly fees. Just a system that works.
+
+Most professionals I work with are drowning in the same manual tasks: chasing client documents, copying data between tools, sending follow-up emails that should have gone out automatically. These aren't strategy problems. They're automation problems. And they're solvable in days, not months.
+
+Here's how I work:
+
+I start with a short discovery call to map out where your time is actually going. Then I build a custom automation in Make.com (formerly Integromat) that handles the repetitive work — intake forms, document generation, CRM updates, client communications — and hands it back to you with full documentation and a walkthrough. You get the blueprint file, all the credentials stay in your accounts, and I'm available for a 30-day check-in to make sure everything's running clean.
+
+What I typically build:
+→ Client intake & onboarding flows (Tally / Typeform → CRM → Gmail → Calendly)
+→ AI-assisted document drafting (Claude API integrated into your existing tools)
+→ Weekly reporting automation (Airtable / Sheets → formatted email)
+→ Lead qualification and follow-up sequences
+→ Internal task creation from client-facing triggers
+
+Tools I work with: Make.com, n8n, Zapier, Airtable, Notion, Google Workspace, Tally, Calendly, Brevo, Stripe, Claude API (Anthropic).
+
+If you're a solo practitioner or small firm and you're spending more than 3 hours a week on tasks you do the same way every time — let's talk. A 20-minute scoping call is free and I'll tell you honestly whether automation is the right solution.
+
+You keep everything. I build it once and it runs without me.</div>
+    </div>
+
+    <div class="note">
+      <strong>Notes on the copy:</strong> The opener leads with the "you own it" differentiator — that's the hook that sets you apart on Upwork immediately. The "What I typically build" list uses arrow bullets because Upwork's plain text field doesn't render markdown; → symbols are the cleanest visual separator. The close ("You keep everything. I build it once and it runs without me.") is a one-line summary of your entire positioning — memorable, distinct, true.
+    </div>
+  </div>
+
+  <!-- SECTION 3: PORTFOLIO -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <span class="section-title">Portfolio Section</span>
+    </div>
+
+    <p>You have 3 demo builds. That's enough — if you frame them correctly. The mistake most new freelancers make is listing what they built. Instead, list the problem it solves for the client type. Every portfolio entry should feel like a case study, not a technical spec.</p>
+
+    <div class="copy-block">
+      <div class="copy-label">Portfolio Item 1 — Law Firm Client Intake</div>
+      <div class="copy-text">Title: Automated Client Intake System — Law Firm
+
+Problem: A solo solicitor was manually emailing new clients to collect conflict check info, engagement letters, and initial documents. Every new matter took 45–60 minutes of admin before any billable work began.
+
+Solution: Built a Make.com automation that triggers from a Tally intake form — automatically creates a client record in Airtable, sends a branded confirmation email via Gmail, and fires a Calendly booking link for the initial consultation. Zero manual steps after the client submits the form.
+
+Result: Intake process reduced to under 5 minutes of attorney time. Runs 24/7 with no staff involvement.
+
+Tools: Make.com · Tally · Airtable · Gmail · Calendly</div>
+    </div>
+
+    <div class="copy-block">
+      <div class="copy-label">Portfolio Item 2 — IFA Client Onboarding</div>
+      <div class="copy-text">Title: Client Onboarding Automation — Independent Financial Advisor
+
+Problem: An IFA was manually creating client folders, sending welcome packs, and setting up internal tasks for each new client — a 30–40 minute process repeated for every onboarding.
+
+Solution: Tally form submission triggers a Make.com scenario that creates a named Google Drive folder structure, sends a personalised welcome email, and creates a Notion task with all client details and a direct Drive link — automatically.
+
+Result: Onboarding admin cut from 35 minutes to under 2 minutes. Consistent, professional client experience every time.
+
+Tools: Make.com · Tally · Google Drive · Gmail · Notion</div>
+    </div>
+
+    <div class="copy-block">
+      <div class="copy-label">Portfolio Item 3 — Consultant Weekly Report</div>
+      <div class="copy-text">Title: Automated Weekly Client Reporting — Management Consultant
+
+Problem: A consultant was manually pulling project data from Airtable each Monday, formatting it in a spreadsheet, and emailing status updates to clients. Time-consuming, error-prone, and easy to forget.
+
+Solution: Built a scheduled Make.com scenario that runs every Monday at 7am — pulls the latest Airtable records, formats them into a structured Google Sheet, and delivers a clean summary email to each client automatically.
+
+Result: 2 hours of weekly admin eliminated entirely. Clients receive consistent, on-time updates with no manual effort.
+
+Tools: Make.com · Airtable · Google Sheets · Gmail</div>
+    </div>
+
+    <div class="note">
+      <strong>Important:</strong> Upwork allows you to attach images or videos to portfolio items. Record a 90-second Loom walkthrough of each scenario running end-to-end and attach the link in the description. A video of a working automation is worth 10x a screenshot. If you haven't recorded these yet, do it before you submit your first proposal — it's the single highest-leverage thing you can do with zero reviews.
+    </div>
+  </div>
+
+  <!-- SECTION 4: PRICING -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <span class="section-title">Pricing Guidance</span>
+    </div>
+
+    <p>Upwork pricing has two phases: before your first 3 reviews, and after. Treat them differently.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Phase</th>
+          <th>Hourly Rate</th>
+          <th>Fixed Price Range</th>
+          <th>Goal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>0 reviews</td>
+          <td>$35–45/hr</td>
+          <td>$300–600</td>
+          <td>Win first job at any reasonable rate</td>
+        </tr>
+        <tr>
+          <td>1–2 reviews</td>
+          <td>$45–60/hr</td>
+          <td>$500–900</td>
+          <td>Start building rate floor</td>
+        </tr>
+        <tr>
+          <td>3–5 reviews</td>
+          <td>$65–85/hr</td>
+          <td>$800–1,500</td>
+          <td>Hit target Upwork range</td>
+        </tr>
+        <tr>
+          <td>5+ reviews</td>
+          <td>$85–120/hr</td>
+          <td>$1,200–2,500</td>
+          <td>Price-match your direct clients</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      <strong>Set your profile hourly rate at $55/hr on day one.</strong> This is your public rate. You can bid lower on fixed-price projects without it looking like a contradiction. $55/hr is credible for a specialist, not so high it filters you out at zero reviews, and signals you're not a $15/hr commodity. Once you have 3 reviews, raise it to $75. Once you have 5, raise it to $95+.
+    </div>
+
+    <div class="callout-green">
+      <strong>Fixed vs. Hourly:</strong> Prefer fixed-price on Upwork. It's easier to scope, clients feel less exposed, and you can complete a $500 project in 4 hours once you have the templates — that's $125/hr effective rate. Only agree to hourly if the scope is genuinely unclear and the client is sophisticated enough to understand that.
+    </div>
+  </div>
+
+  <!-- SECTION 5: PROPOSAL TEMPLATE -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <span class="section-title">Proposal Template</span>
+    </div>
+
+    <p>Most Upwork proposals fail because they're about the freelancer, not the client. The formula that works: mirror their problem → show you've done it → explain how you'd solve theirs → clear next step. Keep it under 200 words. Never attach a generic cover letter.</p>
+
+    <div class="copy-block">
+      <div class="copy-label">Proposal Template — Adapt Per Job</div>
+      <div class="copy-text">Hi [Name],
+
+[MIRROR THEIR PROBLEM — 1–2 sentences. Restate what they described, in your own words, so they know you read it.]
+
+Example: "You're manually processing every new client intake and it's costing you time you could be billing."
+
+I've built this exact type of system — [brief reference to relevant portfolio item, 1 sentence]. The result was [concrete outcome: time saved, steps eliminated, etc.].
+
+For your setup, I'd [describe the specific approach for their situation in 2–3 sentences. Name the tools. Be specific.].
+
+To scope this properly, I'd want a 20-minute call to confirm a few details before quoting. I won't ask for money until I know exactly what needs building and you're happy with the scope.
+
+Fixed price, you own everything at the end. No retainer.
+
+Worth a quick call?
+
+Jorge</div>
+    </div>
+
+    <div class="note">
+      <strong>What makes this work:</strong> The mirror paragraph is the most important part. If your first two sentences are about you and not them, the proposal is dead. Clients skim — they want to know you understood their problem before they read anything else. The "no retainer" close is your differentiator and it handles an unspoken objection most clients have about hiring an automation freelancer. The question at the end ("Worth a quick call?") is lower friction than "Let me know if you'd like to connect."
+    </div>
+
+    <div class="callout-red">
+      <strong>Never do this:</strong> Don't open with "Hi, I'm Jorge and I specialise in automation." Don't list your skills before you've addressed their problem. Don't write more than 220 words. Don't attach a portfolio PDF — link to your Loom instead if relevant.
+    </div>
+  </div>
+
+  <!-- SECTION 6: JOB SEARCH STRATEGY -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <span class="section-title">Job Search & Bidding Strategy</span>
+    </div>
+
+    <p>At zero reviews, you need to be selective and fast. The window to apply on a new Upwork posting matters — jobs posted in the last 24 hours get more response. Here's how to filter and prioritise.</p>
+
+    <div class="inline-label" style="margin: 20px 0 8px;">Search Terms to Use</div>
+    <div class="pill-row">
+      <span class="pill pill-gold">Make.com automation</span>
+      <span class="pill pill-gold">workflow automation law firm</span>
+      <span class="pill pill-gold">client intake automation</span>
+      <span class="pill pill-gold">Make.com integromat</span>
+      <span class="pill pill-gold">AI automation professional services</span>
+      <span class="pill">Zapier automation small business</span>
+      <span class="pill">n8n workflow</span>
+      <span class="pill">CRM automation Airtable</span>
+      <span class="pill">onboarding automation</span>
+    </div>
+
+    <div class="note" style="margin-bottom: 20px;">Start with the gold terms. These are most likely to surface jobs aligned with your exact portfolio. Add the grey terms once you're bidding consistently and want more volume.</div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Signal</th>
+          <th>Bid?</th>
+          <th>Why</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Posted &lt;24hrs ago <span class="tag tag-yes">BID</span></td>
+          <td></td>
+          <td>Recency matters. Early proposals get read. Late ones are noise.</td>
+        </tr>
+        <tr>
+          <td>Budget $300–800 (first 2 weeks) <span class="tag tag-yes">BID</span></td>
+          <td></td>
+          <td>Win the review. You can do this work fast with your templates.</td>
+        </tr>
+        <tr>
+          <td>Client has payment verified <span class="tag tag-yes">REQUIRED</span></td>
+          <td></td>
+          <td>Never bid on unverified payment. Non-negotiable.</td>
+        </tr>
+        <tr>
+          <td>Client has hired before (hire rate shown) <span class="tag tag-yes">BID</span></td>
+          <td></td>
+          <td>They know how Upwork works. Lower friction to close.</td>
+        </tr>
+        <tr>
+          <td>"Looking for long-term partner" <span class="tag tag-maybe">CAUTION</span></td>
+          <td></td>
+          <td>Fine if the project is scoped. Avoid if they want an ongoing retainer — conflicts with your positioning.</td>
+        </tr>
+        <tr>
+          <td>Budget under $150 <span class="tag tag-no">SKIP</span></td>
+          <td></td>
+          <td>Even for the first review, this signals a difficult client. Not worth it.</td>
+        </tr>
+        <tr>
+          <td>No description / vague brief <span class="tag tag-no">SKIP</span></td>
+          <td></td>
+          <td>You can't write a specific proposal. Generic proposals don't convert.</td>
+        </tr>
+        <tr>
+          <td>Requires ongoing monthly work <span class="tag tag-no">SKIP</span></td>
+          <td></td>
+          <td>Doesn't fit your model unless it's the maintenance plan at project close.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="inline-label" style="margin: 28px 0 8px;">Weekly Bidding Targets</div>
+    <div class="two-col">
+      <div class="mini-card">
+        <div class="mc-title">Weeks 1–2</div>
+        <div class="mc-body">Send 8–12 proposals. Prioritise speed and relevance over perfection. You're testing your proposal copy. If under 15% response rate by end of week 2, rewrite the opening paragraph.</div>
+      </div>
+      <div class="mini-card">
+        <div class="mc-title">Weeks 3–4</div>
+        <div class="mc-body">Narrow to 5–8 per week — better fit only. By now you should have at least 1–2 conversations open. Double down on what's working in your proposal copy.</div>
+      </div>
+      <div class="mini-card">
+        <div class="mc-title">After first review</div>
+        <div class="mc-body">Raise your rate. Update the profile to reference the completed project. Now you can target $600–1,200 fixed jobs with confidence.</div>
+      </div>
+      <div class="mini-card">
+        <div class="mc-title">Ongoing</div>
+        <div class="mc-body">Aim for 1 new project per week. 3 reviews unlocks Job Success Score visibility, which compounds your inbound. Don't stop bidding while you're delivering.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7: SKILLS & SETTINGS -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <span class="section-title">Profile Settings Checklist</span>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-body">
+          <strong>Profile photo</strong>
+          <span>Professional headshot, plain background, face clearly visible. No logos, no casual shots. This is a trust signal. Profiles with photos convert significantly better.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-body">
+          <strong>Skills tags (pick all that apply)</strong>
+          <span>Make.com · Workflow Automation · API Integration · Airtable · Zapier · n8n · Business Process Automation · AI Integration · CRM Automation · Google Workspace</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-body">
+          <strong>Availability</strong>
+          <span>Set to "More than 30 hrs/week" even if you're not. This is a filter clients use. Restricting availability reduces inbound visibility and is not worth it at this stage.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-body">
+          <strong>Hourly rate</strong>
+          <span>$55/hr on day one. Raise to $75 after 3 reviews, $95+ after 5.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">05</div>
+        <div class="step-body">
+          <strong>English proficiency</strong>
+          <span>Set to Native or Bilingual. Your written English is fluent — don't undersell it by selecting "Conversational."</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">06</div>
+        <div class="step-body">
+          <strong>Specialised profiles</strong>
+          <span>Upwork allows up to 2 specialised profiles under one account. Once your main profile has reviews, create a second one targeting a specific vertical (e.g. "Automation for Law Firms" as a standalone). Leave this for month 2.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">07</div>
+        <div class="step-body">
+          <strong>Connect your website</strong>
+          <span>Add apexsystematic.com in the profile link field. This builds credibility and lets serious prospects do due diligence before hiring.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 8: FIRST JOB PLAYBOOK -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">08</span>
+      <span class="section-title">The First Job Playbook</span>
+    </div>
+
+    <p>Your first Upwork job has one objective: a 5-star review. Not profit. Not the perfect client. A clean, positive review that unlocks the rest of the platform for you. Everything about the first job should be oriented around this.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">①</div>
+        <div class="step-body">
+          <strong>Target a small, well-scoped project ($250–500)</strong>
+          <span>Something you can deliver in under 8 hours. A single Make.com scenario, a simple intake flow, a one-step automation. Don't take on a complex multi-system build for your first job — too many variables, too much risk of scope creep, too easy to get a 4-star instead of 5.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">②</div>
+        <div class="step-body">
+          <strong>Over-deliver on communication, not scope</strong>
+          <span>Send a message within 1 hour of being hired. Give a clear delivery timeline. Send a mid-project update. Deliver before the deadline. Ask if they have questions before you close the contract. Most 5-star reviews are about communication, not technical quality.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">③</div>
+        <div class="step-body">
+          <strong>Write a handoff note, even for a small job</strong>
+          <span>A short bullet-point summary of what was built, how to use it, and what to do if something breaks. This takes 10 minutes and reads as professional and thorough. It's also a soft sell for your full documentation service on larger projects.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">④</div>
+        <div class="step-body">
+          <strong>Ask for the review explicitly</strong>
+          <span>When you close the contract, send: "It was a pleasure working with you. If you have a moment to leave a review on Upwork, it would mean a lot — here's the link: [link]. I'm available for any follow-up questions." Direct, not pushy.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">⑤</div>
+        <div class="step-body">
+          <strong>Raise your rate immediately after</strong>
+          <span>Even one 5-star review changes your positioning. Update your hourly rate the same day. One review is the difference between "unproven" and "has delivered."</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 9: DISCOVERY CALL SCRIPT -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">09</span>
+      <span class="section-title">Discovery Call Script</span>
+    </div>
+
+    <p>This is a 20–30 minute call. Your job is to listen 70% of the time, ask precise questions, and leave with enough information to write a scoped proposal. Do not pitch during this call. Do not quote a price until you've heard the answers to all the questions below.</p>
+
+    <div class="copy-block">
+      <div class="copy-label">Opening (2 min)</div>
+      <div class="copy-text">Thanks for making time — I'll keep this tight. I've got about 20 minutes of questions that should give me everything I need to put together a proper scope and quote for you. Sound good?
+
+[Let them confirm]
+
+Before I dive in — just to set expectations: I'm not going to pitch you on anything today. I'll ask questions, and if it sounds like automation is the right solution, I'll send you a written scope within 24 hours. If it's not the right fit, I'll tell you that too. Fair?</div>
+    </div>
+
+    <div class="copy-block">
+      <div class="copy-label">Problem Discovery (8–10 min)</div>
+      <div class="copy-text">1. Walk me through what you're doing manually right now that you want automated. Don't filter it — just describe it as if I'm watching over your shoulder.
+
+[Listen. Don't interrupt. Let them finish.]
+
+2. How often does this happen? Daily, weekly, per client?
+
+3. How long does it take you each time?
+
+4. What tools are you already using? [e.g. Gmail, Airtable, a CRM, a forms tool, Calendly, etc.]
+
+5. Do you have anyone else doing this task, or is it just you?
+
+6. What happens when it goes wrong or gets missed? What's the actual cost of that?
+
+[This last question is the most important. The answer tells you how much this problem is worth to them — which anchors your pricing.]</div>
+    </div>
+
+    <div class="copy-block">
+      <div class="copy-label">Technical Readiness (5 min)</div>
+      <div class="copy-text">7. Do you currently use any automation tools — Make.com, Zapier, anything like that?
+
+8. Who manages your tech stack? Is that you, or do you have someone else?
+
+9. Are you comfortable setting up accounts and API connections, or would you need me to walk you through that?
+
+[Note: If they're non-technical, build extra time into your scope for handoff and documentation. Factor this into pricing.]
+
+10. Do you have logins and admin access to the tools we'd be connecting? [This matters — if they need IT approval to connect apps, your timeline doubles.]</div>
+    </div>
+
+    <div class="copy-block">
+      <div class="copy-label">Fit & Timeline (3 min)</div>
+      <div class="copy-text">11. What's driving the timing on this? Is there a deadline, or is this more of a "when it's right" thing?
+
+12. Have you tried to solve this before — either yourself or with someone else? What happened?
+
+[If they've tried before and it failed, find out why. Scope creep, bad communication, wrong tools — it tells you what to avoid and what to address in your proposal.]
+
+13. Budget-wise — do you have a number in mind, or are you waiting to hear what it would cost?
+
+[Don't dodge this. If they have a number, get it on the table now. If they say "depends on the quote," that's fine — move on.]</div>
+    </div>
+
+    <div class="copy-block">
+      <div class="copy-label">Close (2 min)</div>
+      <div class="copy-text">That's everything I need. Based on what you've described, [brief honest assessment — e.g. "this is a straightforward single-scenario build" / "this is more complex than it might look because of X" / "I think there's a simpler solution than full automation here"].
+
+I'll put together a written scope — what gets built, what tools, what the handoff looks like, and a fixed price. You'll have it within 24 hours. Any questions before I let you go?
+
+[If they ask for a ballpark price right now:]
+Rough range based on what you've described: $[X–Y]. The scope doc will nail it down exactly. I don't like quoting precisely without writing it out properly — it protects both of us.</div>
+    </div>
+
+    <div class="note">
+      <strong>After the call:</strong> Write your notes immediately. The key data points you need for the scope doc: the specific trigger (what starts the automation), the tools involved, the expected volume (how many times per day/week it runs), technical readiness of the client, and any red flags (vague scope, unclear ownership of tools, history of failed attempts). If you can't answer all of these from your notes, you didn't ask enough questions — send a follow-up message before writing the scope.
+    </div>
+  </div>
+
+  <!-- SECTION 10: SCOPE DOCUMENT TEMPLATE -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">10</span>
+      <span class="section-title">Scope Document Template</span>
+    </div>
+
+    <p>Send this within 24 hours of the discovery call. It's a plain document — not a formal contract, not a pitch deck. Its job is to prove you understood the problem and remove ambiguity before work starts. Clear scope = fewer disputes = better reviews.</p>
+
+    <div class="copy-block">
+      <div class="copy-label">Scope Document — Full Template</div>
+      <div class="copy-text">AUTOMATION SCOPE — [CLIENT NAME]
+Prepared by Jorge R. · Apex Systematic
+Date: [DATE]
+
+---
+
+PROJECT SUMMARY
+
+[2–3 sentences describing what you're building and why. Write it so a non-technical person can read it and confirm "yes, that's what I want."]
+
+Example: "We're building an automated client intake flow that triggers when a new prospect submits your intake form. The system will create a client record in Airtable, send a branded confirmation email, and fire a Calendly booking link — without any manual steps on your end."
+
+---
+
+WHAT'S INCLUDED
+
+✓ [Specific deliverable 1 — e.g. Make.com scenario: Tally → Airtable → Gmail → Calendly]
+✓ [Specific deliverable 2 — e.g. Airtable base setup with client record fields]
+✓ [Specific deliverable 3 — e.g. Gmail template for confirmation email]
+✓ End-to-end testing with live data
+✓ Written handoff documentation (how it works, how to maintain it)
+✓ Loom walkthrough video of the completed system
+✓ 30-day check-in call
+
+---
+
+WHAT'S NOT INCLUDED
+
+✗ [Anything that came up in conversation but is out of scope — be explicit]
+✗ Ongoing maintenance or monitoring after handoff
+✗ Changes to scope after build begins (treated as a new project or change order)
+✗ Design or branding work (email templates use your existing brand assets)
+
+---
+
+TOOLS & ACCOUNTS
+
+This build uses the following tools. You will own all accounts:
+· Make.com (you create the account — I'll send setup instructions)
+· [Tool 2]
+· [Tool 3]
+
+All API keys and credentials will live in your accounts. I do not retain access after handoff.
+
+---
+
+TIMELINE
+
+Discovery → Scope agreed: Done
+Build start: [DATE — typically within 2 business days of agreement]
+First draft for review: [DATE — typically 3–5 business days after start]
+Revisions: Up to 2 rounds included
+Final delivery: [DATE]
+
+---
+
+INVESTMENT
+
+Fixed price: $[AMOUNT]
+
+Payment terms: 50% upfront via Upwork to start, 50% on delivery.
+
+This price covers everything listed in the "What's Included" section. Any additions to scope will be quoted separately before work begins.
+
+---
+
+NEXT STEP
+
+If this looks right, reply with "approved" and I'll send the Upwork contract. If you have questions or want to adjust anything, reply and we'll sort it before we start.
+
+---
+
+Jorge R.
+Apex Systematic
+apexsystematic.com</div>
+    </div>
+
+    <div class="callout-green">
+      <strong>On the 50/50 payment split:</strong> Always. Even on small jobs. It filters out time-wasters, protects you against non-payment, and is standard practice — no legitimate client will push back on it. If someone refuses to pay anything upfront, that's a red flag, not a negotiation.
+    </div>
+
+    <div class="note">
+      <strong>"What's Not Included" is the most important section.</strong> Scope creep kills small projects. Every time you've had a conversation where a client mentioned something adjacent to the main ask — write it in the exclusions. "We discussed the possibility of adding a Slack notification but this is not included in the current scope" protects you when they come back and say "I thought that was part of it." It's not confrontational — it's professional.
+    </div>
+  </div>
+
+  <!-- SECTION 11: MAINTENANCE PLAN OFFER -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">11</span>
+      <span class="section-title">Maintenance Plan — Project Close Offer</span>
+    </div>
+
+    <p>This is an optional paid add-on offered only at handoff — never during the sale, never as a condition of the build. It must not conflict with your "no retainer, you own it" positioning. Frame it as peace of mind, not dependency.</p>
+
+    <div class="copy-block">
+      <div class="copy-label">When to Offer It</div>
+      <div class="copy-text">Offer the maintenance plan during the 30-day check-in call, not at project close. By then the client has seen the system running, understands its value, and has a sense of whether they want ongoing support. Offering it at handoff — before they've experienced the system — feels like upselling. Offering it at the 30-day mark feels like a natural conversation.
+
+The check-in agenda:
+1. Is everything running as expected?
+2. Any edge cases we haven't handled?
+3. Any new processes you want to look at automating?
+4. [If relevant] "Do you want me to keep an eye on this going forward? I offer a light monthly maintenance plan — let me tell you what's included."</div>
+    </div>
+
+    <div class="copy-block">
+      <div class="copy-label">Maintenance Plan — Offer Script</div>
+      <div class="copy-text">Now that the system's been running for a month — the main thing that breaks automations isn't the logic, it's the tools underneath. Make.com updates, API changes, a third-party app changes its field names. It usually takes 15–30 minutes to fix when it happens, but you'd need to either do it yourself or come back to me each time on an ad-hoc basis.
+
+If you'd rather not think about it, I offer a simple monthly plan: I monitor your scenario, handle any breaks caused by tool changes, and you get priority turnaround if something goes wrong. It's $[X]/month, covers up to [Y] hours of maintenance work, and you can cancel any time with 30 days notice.
+
+It's not for everyone — some clients are technical enough to handle this themselves and prefer it that way. But if you'd rather focus on your work and not on whether your automation is still running, it might be worth it.
+
+Want me to send you the details?</div>
+    </div>
+
+    <div class="copy-block">
+      <div class="copy-label">Maintenance Plan — Pricing Structure</div>
+      <div class="copy-text">TIER 1 — Basic Monitoring: $79/month
+· Monthly scenario health check
+· Fix breaks caused by tool/API changes (up to 1 hour/month)
+· Email support, 48hr response
+· Best for: simple single-scenario automations, low volume
+
+TIER 2 — Active Support: $149/month
+· All of Tier 1
+· Up to 3 hours maintenance/fixes per month
+· Priority response (same business day)
+· Quarterly optimisation review call (30 min)
+· Best for: multi-scenario builds, client-facing automations
+
+TIER 3 — Full Cover: $249/month
+· All of Tier 2
+· Up to 6 hours maintenance/fixes per month
+· Minor enhancements included (e.g. adding a new field, adjusting logic)
+· Monthly usage report
+· Best for: business-critical automations, high-volume scenarios
+
+Additional hours beyond the included allowance: $65/hr
+
+All plans: cancel with 30 days notice. No lock-in.</div>
+    </div>
+
+    <div class="note">
+      <strong>Cost check before you sell this:</strong> Make.com costs are per operation, not per client. Before quoting a maintenance plan, check how many operations your build runs per month on the client's account. A scenario running 500 operations/month at Make.com's Core plan is essentially free overhead on your end. A high-volume scenario running 50,000 operations/month on a plan you're managing is a real cost. Know the numbers before you price. The tiers above assume low-to-medium volume scenarios where your actual cost exposure per client is under $15/month.
+    </div>
+
+    <div class="callout-green">
+      <strong>Positioning note:</strong> When you describe this plan, always use the phrase "cancel any time." It's the verbal proof that this isn't a retainer trap. Your "no retainer" brand promise applies to the build — this is a separate, optional service the client chooses to continue. The distinction is real and you should make it explicit if a client asks.
+    </div>
+
+    <div class="callout-red">
+      <strong>Never do this:</strong> Don't mention the maintenance plan during the initial sales conversation. Don't imply the automation will break without ongoing support. Don't bundle it into the project price as a "first month included." All of these undermine the trust that "you own it outright" creates — and that trust is your primary differentiator.
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div style="padding: 0 0 48px; color: var(--gray); font-size: 13px; line-height: 1.8;">
+    <span style="font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-muted); display: block; margin-bottom: 8px;">Bottom line</span>
+    Profile built for the niche. Proposal built for the problem. First job built for the review. Discovery call built for the scope. Scope doc built for trust. Maintenance plan offered after proof, not before. In that order. Don't skip steps.
+  </div>
+
+</div>
+</body>
+</html>
