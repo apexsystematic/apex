@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apex Systematic — Client Automation Framework</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E8C97A;
+      --gold-dim: rgba(201,168,76,0.15);
+      --bg: #0E0E0C;
+      --bg-2: #141412;
+      --bg-3: #1A1A17;
+      --bg-4: #202020;
+      --border: rgba(255,255,255,0.07);
+      --border-hover: rgba(201,168,76,0.3);
+      --text-primary: #F0EDE6;
+      --text-secondary: #9A9789;
+      --text-muted: #5A5855;
+      --success: #4A8C6A;
+      --success-bg: rgba(74,140,106,0.1);
+      --success-border: rgba(74,140,106,0.3);
+      --info-bg: rgba(201,168,76,0.08);
+      --info-border: rgba(201,168,76,0.25);
+      --warning-bg: rgba(180,100,40,0.1);
+      --warning-border: rgba(180,100,40,0.3);
+      --warning-text: #D4895A;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── HEADER ──────────────────────────────────────────── */
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 2rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      z-index: 100;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .logo span { color: var(--gold); }
+
+    .header-meta {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ─── MAIN LAYOUT ─────────────────────────────────────── */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3rem 2rem 6rem;
+    }
+
+    /* ─── PAGE TITLE ──────────────────────────────────────── */
+    .page-title {
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-title h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+
+    .page-title h1 em {
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    .page-title p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      max-width: 540px;
+      line-height: 1.65;
+    }
+
+    /* ─── PROGRESS ────────────────────────────────────────── */
+    .progress-wrap {
+      margin-bottom: 2.5rem;
+      padding: 1.25rem 1.5rem;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+
+    .progress-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .progress-pct {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--gold);
+    }
+
+    .progress-bar {
+      height: 3px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--gold);
+      border-radius: 2px;
+      transition: width 0.4s ease;
+      width: 0%;
+    }
+
+    /* ─── PHASE NAV ───────────────────────────────────────── */
+    .phase-nav {
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+
+    .phase-btn {
+      flex: 1;
+      padding: 12px 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      background: var(--bg-2);
+      border: none;
+      border-right: 1px solid var(--border);
+      cursor: pointer;
+      color: var(--text-muted);
+      text-align: center;
+      line-height: 1.3;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .phase-btn:last-child { border-right: none; }
+    .phase-btn:hover { background: var(--bg-3); color: var(--text-secondary); }
+
+    .phase-btn.active {
+      background: var(--bg-4);
+      color: var(--gold);
+    }
+
+    .phase-btn .phase-num {
+      display: block;
+      font-size: 0.62rem;
+      color: var(--text-muted);
+      margin-bottom: 3px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .phase-btn.active .phase-num { color: var(--gold-light); opacity: 0.6; }
+
+    /* ─── PHASE STRIP ─────────────────────────────────────── */
+    .phase-strip {
+      height: 2px;
+      border-radius: 1px;
+      background: var(--border);
+      margin-bottom: 2rem;
+      transition: background 0.25s;
+    }
+
+    .strip-1 { background: #7F77DD; }
+    .strip-2 { background: #1D9E75; }
+    .strip-3 { background: var(--gold); }
+    .strip-4 { background: #D85A30; }
+    .strip-5 { background: #D4537E; }
+
+    /* ─── PHASE PANEL ─────────────────────────────────────── */
+    .phase-panel { display: none; }
+    .phase-panel.active { display: block; animation: fadeUp 0.2s ease; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .phase-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .phase-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+      background: var(--bg-3);
+    }
+
+    .phase-meta h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 5px;
+      line-height: 1.3;
+    }
+
+    .phase-meta p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 580px;
+    }
+
+    /* ─── SECTION LABEL ───────────────────────────────────── */
+    .section-label {
+      font-size: 0.65rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      margin-top: 1.5rem;
+    }
+
+    .section-label:first-of-type { margin-top: 0; }
+
+    /* ─── STEP CARDS ──────────────────────────────────────── */
+    .steps { display: flex; flex-direction: column; gap: 8px; }
+
+    .step-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      user-select: none;
+    }
+
+    .step-card:hover { border-color: var(--border-hover); background: var(--bg-3); }
+
+    .step-card.done {
+      border-color: var(--success-border);
+      background: var(--success-bg);
+    }
+
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .step-check {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1px solid var(--border-hover);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 11px;
+      color: transparent;
+      background: var(--bg-3);
+      transition: all 0.15s;
+    }
+
+    .step-card.done .step-check {
+      background: var(--success);
+      border-color: var(--success);
+      color: #fff;
+    }
+
+    .step-title {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      flex: 1;
+      line-height: 1.4;
+    }
+
+    .step-card.done .step-title { color: #6BAF88; }
+
+    .step-tag {
+      font-size: 0.68rem;
+      padding: 3px 10px;
+      border-radius: 99px;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      background: var(--bg-3);
+      white-space: nowrap;
+      letter-spacing: 0.02em;
+    }
+
+    .step-body {
+      display: none;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .step-card.open .step-body { display: block; }
+
+    .step-body p {
+      font-size: 0.83rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+
+    .step-body p:last-child { margin-bottom: 0; }
+
+    .sub-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .sub-list li {
+      font-size: 0.83rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .sub-list li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--text-muted);
+    }
+
+    /* ─── TOOL CHIPS ──────────────────────────────────────── */
+    .tools { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+
+    .tool-chip {
+      font-size: 0.68rem;
+      padding: 3px 10px;
+      border-radius: 99px;
+      border: 1px solid var(--border-hover);
+      color: var(--gold);
+      background: var(--gold-dim);
+      letter-spacing: 0.02em;
+    }
+
+    /* ─── DELIVERABLE ─────────────────────────────────────── */
+    .deliverable {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border: 1px solid var(--info-border);
+      border-radius: 8px;
+      background: var(--info-bg);
+    }
+
+    .deliverable .dlabel {
+      font-size: 0.65rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .deliverable ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+
+    .deliverable ul li {
+      font-size: 0.8rem;
+      color: var(--gold-light);
+      line-height: 1.5;
+      padding-left: 16px;
+      position: relative;
+      opacity: 0.85;
+    }
+
+    .deliverable ul li::before { content: '→'; position: absolute; left: 0; color: var(--gold); }
+
+    /* ─── CALLOUT ─────────────────────────────────────────── */
+    .callout {
+      margin-top: 12px;
+      padding: 10px 14px;
+      border: 1px solid var(--warning-border);
+      border-radius: 8px;
+      background: var(--warning-bg);
+      font-size: 0.8rem;
+      color: var(--warning-text);
+      line-height: 1.6;
+    }
+
+    /* ─── REFERENCE TABLE ─────────────────────────────────── */
+    .ref-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+      margin-top: 8px;
+    }
+
+    .ref-table th {
+      text-align: left;
+      font-size: 0.65rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--text-muted);
+      padding: 6px 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ref-table td {
+      padding: 8px 8px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+
+    .ref-table tr:last-child td { border-bottom: none; }
+
+    .ref-table td:first-child {
+      font-weight: 500;
+      color: var(--text-primary);
+      white-space: nowrap;
+      padding-right: 20px;
+    }
+
+    code {
+      font-family: 'Courier New', monospace;
+      font-size: 0.78rem;
+      background: rgba(255,255,255,0.06);
+      padding: 1px 6px;
+      border-radius: 4px;
+      color: var(--gold-light);
+    }
+
+    /* ─── FOOTER ──────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-text {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .footer-link {
+      font-size: 0.72rem;
+      color: var(--gold);
+      text-decoration: none;
+      opacity: 0.7;
+      transition: opacity 0.15s;
+    }
+
+    .footer-link:hover { opacity: 1; }
+
+    /* ─── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 600px) {
+      header { padding: 1.25rem 1.25rem; }
+      main { padding: 2rem 1.25rem 5rem; }
+      .page-title h1 { font-size: 1.65rem; }
+      .phase-btn { font-size: 0.62rem; padding: 10px 4px; }
+      footer { padding: 1.25rem; flex-direction: column; gap: 8px; text-align: center; }
+    }
+
+    /* ─── PASSWORD GATE ───────────────────────────────────── */
+    #gate {
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      padding: 2rem;
+    }
+
+    #gate.hidden { display: none; }
+
+    .gate-box {
+      width: 100%; max-width: 360px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--bg-2);
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+
+    .gate-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 0.4rem;
+    }
+
+    .gate-logo span { color: var(--gold); }
+
+    .gate-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    .gate-input {
+      width: 100%;
+      padding: 10px 14px;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.15s;
+      margin-bottom: 10px;
+      text-align: center;
+      letter-spacing: 0.05em;
+    }
+
+    .gate-input:focus { border-color: var(--border-hover); }
+
+    .gate-input.error { border-color: rgba(200,60,60,0.5); animation: shake 0.3s ease; }
+
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      75% { transform: translateX(6px); }
+    }
+
+    .gate-btn {
+      width: 100%;
+      padding: 10px 14px;
+      background: var(--gold-dim);
+      border: 1px solid var(--border-hover);
+      border-radius: 8px;
+      color: var(--gold);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .gate-btn:hover { background: rgba(201,168,76,0.22); }
+
+    .gate-error {
+      font-size: 0.75rem;
+      color: #C05050;
+      margin-top: 10px;
+      min-height: 18px;
+    }
+  </style>
+</head>
+<body>
+
+
+  <!-- PASSWORD GATE -->
+  <div id="gate">
+    <div class="gate-box">
+      <div class="gate-logo">Apex <span>Systematic</span></div>
+      <div class="gate-sub">Internal access only</div>
+      <input id="gate-input" class="gate-input" type="password" placeholder="Enter password" autocomplete="current-password" onkeydown="if(event.key==='Enter')checkPassword()" />
+      <button class="gate-btn" onclick="checkPassword()">Unlock</button>
+      <div class="gate-error" id="gate-error"></div>
+    </div>
+  </div>
+
+  <header>
+    <a class="logo" href="https://apexsystematic.com">Apex <span>Systematic</span></a>
+    <span class="header-meta">Client Automation Framework</span>
+  </header>
+
+  <main>
+
+    <div class="page-title">
+      <h1>Build framework — <em>start to finish</em></h1>
+      <p>A structured playbook for delivering client automations at Apex Systematic. Five phases, 20 steps. Work through each phase in sequence before moving to the next.</p>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-meta">
+        <span class="progress-label">Overall completion</span>
+        <span class="progress-pct" id="global-pct">0 / 20 steps</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="global-bar"></div>
+      </div>
+    </div>
+
+    <div class="phase-nav">
+      <button class="phase-btn active" onclick="showPhase(0)" id="btn-0"><span class="phase-num">Phase 1</span>Discovery</button>
+      <button class="phase-btn" onclick="showPhase(1)" id="btn-1"><span class="phase-num">Phase 2</span>Map</button>
+      <button class="phase-btn" onclick="showPhase(2)" id="btn-2"><span class="phase-num">Phase 3</span>Design</button>
+      <button class="phase-btn" onclick="showPhase(3)" id="btn-3"><span class="phase-num">Phase 4</span>Build</button>
+      <button class="phase-btn" onclick="showPhase(4)" id="btn-4"><span class="phase-num">Phase 5</span>Launch</button>
+    </div>
+
+    <div class="phase-strip strip-1" id="phase-strip"></div>
+
+    <!-- ── PHASE 1 ── -->
+    <div class="phase-panel active" id="panel-0">
+      <div class="phase-header">
+        <div class="phase-icon">🔍</div>
+        <div class="phase-meta">
+          <h2>Phase 1 — Discovery & qualification</h2>
+          <p>Understand the client's business ops before touching any tool. The goal is uncovering real pain, not just collecting a wishlist.</p>
+        </div>
+      </div>
+
+      <div class="section-label">Steps</div>
+      <div class="steps">
+
+        <div class="step-card" onclick="toggleStep(this)">
+          <div class="step-header">
+            <div class="step-check">✓</div>
+            <span class="step-title">Run intake call (DRI score context)</span>
+            <span class="step-tag">30 min</span>
+          </div>
+          <div class="step-body">
+            <p>Use the Apex Systematic DRI framework as your anchor — this isn't a generic discovery call, it's a structured ops audit. Ask about the three DRI dimensions upfront.</p>
+            <ul class="sub-list">
+              <li>What does a typical week look like across revenue, delivery, and ops admin?</li>
+              <li>Where do things fall through the cracks most often?</li>
+              <li>What's the most repetitive task that eats time but adds no thinking?</li>
+              <li>What tools are currently in use — and which ones actually get used?</li>
+            </ul>
+            <div class="deliverable">
+              <div class="dlabel">Deliverable</div>
+              <ul>
+                <li>Intake call notes with pain signals ranked</li>
+                <li>Rough DRI score estimate</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-card" onclick="toggleStep(this)">
+          <div class="step-header">
+            <div class="step-check">✓</div>
+            <span class="step-title">Identify the 3 highest-friction workflows</span>
+            <span class="step-tag">Analysis</span>
+          </div>
+          <div class="step-body">
+            <p>Don't automate everything at once. Lock in on three workflows that are: high-frequency, manual-heavy, and clearly defined. Vague workflows get automated wrong.</p>
+            <ul class="sub-list">
+              <li>How many times per week does this happen?</li>
+              <li>Who touches it and how many handoffs are involved?</li>
+              <li>Is there a clear trigger and a clear end state?</li>
+            </ul>
+            <div class="callout">Watch for scope creep bait — clients love to say "and also..." during discovery. Log it, don't commit to it.</div>
+          </div>
+        </div>
+
+        <div class="step-card" onclick="toggleStep(this)">
+          <div class="step-header">
+            <div class="step-check">✓</div>
+            <span class="step-title">Qualify the engagement</span>
+            <span class="step-tag">Go/no-go</span>
+          </div>
+          <div class="step-body">
+            <p>Not every client is worth taking. Run this quick checklist before quoting anything.</p>
+            <ul class="sub-list">
+              <li>Can they clearly describe the problem they want solved?</li>
+              <li>Do they have (or can they get) API access to their current tools?</li>
+              <li>Are they willing to change how they work, or do they want automation on top of chaos?</li>
+              <li>Is there a budget signal — or are they expecting magic for free?</li>
+            </ul>
+            <div class="callout">Red flag: client wants to automate something they haven't done manually yet. You can't automate a process that doesn't exist.</div>
+          </div>
+        </div>
+
+        <div class="step-card" onclick="toggleStep(this)">
+          <div class="step-header">
+            <div class="step-check">✓</div>
+            <span class="step-title">Define success criteria upfront</span>
+            <span class="step-tag">Alignment</span>
+          </div>
+          <div class="step-body">
+            <p>Get explicit agreement on what "done" looks like before the engagement starts. This protects you and anchors the client.</p>
+            <ul class="sub-list">
+              <li>What metric improves and by how much?</li>
+              <li>How many hours per week should this save?</li>
+              <li>What's the one workflow that, if automated, would make this worth the investment?</li>
+            </ul>
+            <div class="deliverable">
+              <div class="dlabel">Deliverable</div>
+              <ul>
+                <li>1-page brief: problem, workflows, success metric, agreed scope</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── PHASE 2 ── -->
+    <div class="phase-panel" id="panel-1">
+      <div class="phase-header">
+        <div class="phase-icon">🗺️</div>
+        <div class="phase-meta">
+          <h2>Phase 2 — Process mapping</h2>
+          <p>Before writing a single automation, document exactly how the work flows today. Most automation failures trace back to skipping this step.</p>
+        </div>
+      </div>
+
+      <div class="section-label">Steps</div>
+      <div class="steps">
+
+        <div class="step-card" onclick="toggleStep(this)">
+          <div class="step-header">
+            <div class="step-check">✓</div>
+            <span class="step-title">Shadow or walk through the current process</span>
+            <span class="step-tag">Async/sync</span>
+          </div>
+          <div class="step-body">
+            <p>Have the client walk you through the process live — screen share, Loom, or a detailed written walkthrough. You're looking for every step, every app, every decision point, and every place they go off-script.</p>
+            <ul class="sub-list">
+              <li>Ask them to do it as if you weren't watching — don't let them present their ideal version</li>
+              <li>Note every app they switch to (tab switching = integration opportunity)</li>
+              <li>Flag every decision that requires judgment — that's where AI can help</li>
+              <li>Capture edge cases they mention in passing</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="step-card" onclick="toggleStep(this)">
+          <div class="step-header">
+            <div class="step-check">✓</div>
+            <span class="step-title">Build the current-state process map</span>
+            <span class="step-tag">Documentation</span>
+          </div>
+          <div class="step-body">
+            <p>Document every step, trigger, tool, and decision in the existing workflow. Simple is fine — a numbered list with the tool per step works. No need for fancy flowchart software.</p>
+            <ul class="sub-list">
+              <li>Trigger: what starts this process?</li>
+              <li>Steps: what happens in sequence?</li>
+              <li>Tools: what app handles each step?</li>
+              <li>Decisions: what varies and why?</li>
+              <li>End state: what does done look like?</li>
+            </ul>
+            <div class="deliverable">
+              <div class="dlabel">Deliverable</div>
+              <ul>
+                <li>Current-state process map (per workflow)</li>
+                <li>Tool inventory with integration capability notes</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-card" onclick="toggleStep(this)">
+          <div class="step-header">
+            <div class="step-check">✓</div>
+            <span class="step-title">Identify integration touchpoints</span>
+            <span class="step-tag">Technical</span>
+          </div>
+          <div class="step-body">
+            <p>Map every tool in the current process against your stack. Determine what's native, what needs Make.com, and what needs a custom webhook or API call.</p>
+            <table class="ref-table">
+              <tr><th>Integration type</th><th>When to use</th></tr>
+              <tr><td>Native Make.com module</td><td>Tool has a direct Make connector — easiest path</td></tr>
+              <tr><td>HTTP / webhook module</td><td>Tool has an API but no Make module</td></tr>
+              <tr><td>Email parsing</td><td>Tool has no API — trigger off email output</td></tr>
+              <tr><td>Zapier bridge</td><td>Tool only works in Zapier ecosystem</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="step-card" onclick="toggleStep(this)">
+          <div class="step-header">
+            <div class="step-check">✓</div>
+            <span class="step-title">Design the future-state process</span>
+            <span class="step-tag">Design</span>
+          </div>
+          <div class="step-body">
+            <p>Now rebuild the process with automation applied. For each manual step, decide: eliminate, automate, or keep human. Not everything should be automated — some steps need judgment.</p>
+            <ul class="sub-list">
+              <li>Eliminate: steps that only existed to compensate for a missing tool</li>
+              <li>Automate: high-frequency, rule-based, low-stakes steps</li>
+              <li>AI-augment: steps requiring language, summarisation, or classification</li>
+              <li>Keep human: approvals, client-facing decisions, creative judgment</li>
+            </ul>
+            <div class="deliverable">
+              <div class="dlabel">Deliverable</div>
+              <ul>
+                <li>Future-state map with automation layer annotated</li>
+                <li>Client sign-off before build begins</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── PHASE 3 ── -->
+    <div class="phase-panel" id="panel-2">
+      <div class="phase-header">
+        <div class="phase-icon">⚙️</div>
+        <div class="phase-meta">
+          <h2>Phase 3 — Automation design</h2>
+          <p>Translate the future-state map into a concrete automation architecture. Decide tools, triggers, data flow, and AI prompts before building anything.</p>
+        </div>
+      </div>
+
+      <div class="section-label">Steps</div>
+      <div class="steps">
+
+        <div class="step-card" onclick="toggleStep(this)">
+          <div class="step-header">
+            <div class="step-check">✓</div>
+            <span class="step-title">Select the trigger mechanism</span>
+            <span class="step-tag">Architecture</span>
+          </div>
+          <div class="step-body">
+            <p>Every automation starts with a trigger. Getting this right is critical — a bad trigger means the automation fires at the wrong time or not at all.</p>
+            <table class="ref-table">
+              <tr><th>Trigger type</th><th>Best for</th></tr>
+              <tr><td>Tally form submit</td><td>Client intake, onboarding, requests</td></tr>
+              <tr><td>Calendly event created</td><td>Booking confirmations, prep sequences</td></tr>
+              <tr><td>Gmail label / new email</td><td>Inbound lead or support routing</td></tr>
+              <tr><td>Airtable record update</td><td>Status changes, stage progressions</td></tr>
+              <tr><td>Webhook (custom)</td><td>Any app that can POST a payload</td></tr>
+              <tr><td>Schedule (cron)</td><td>Recurring reports, digests, cleanups</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="step-card" onclick="toggleStep(this)">
+          <div class="step-header">
+            <div class="step-check">✓</div>
+            <span class="step-title">Design the data model</span>
+            <span class="step-tag">Data</span>
+          </div>
+          <div class="step-body">
+            <p>Map every piece of data that flows through the automation. What comes in via the trigger, what gets transformed, what gets created, and where it lives at the end.</p>
+            <ul class="sub-list">
+              <li>What fields arrive in the trigger payload?</li>
+              <li>What data needs to be looked up from another system?</li>
+              <li>What does Claude need to receive in its prompt, and what does it return?</li>
+              <li>Where does the final output live — Airtable, Google Drive, Gmail, Brevo?</li>
+            </ul>
+            <div class="callout">Name your variables clearly in Make.com. Bundle.field notation gets messy fast — use Set Variable modules to alias long paths before passing data downstream.</div>
+          </div>
+        </div>
+
+        <div class="step-card" onclick="toggleStep(this)">
+          <div class="step-header">
+            <div class="step-check">✓</div>
+            <span class="step-title">Write and test AI prompts</span>
+            <span class="step-tag">AI layer</span>
+          </div>
+          <div class="step-body">
+            <p>If Claude is in the workflow, design and test the prompt before wiring it into Make. Bad prompts cause silent failures — the automation runs, but the output is garbage.</p>
+            <ul class="sub-list">
+              <li>Prompt structure: role, context, task, output format, constraints</li>
+              <li>Use explicit output format instructions (JSON, numbered list, specific fields)</li>
+              <li>Test with edge-case inputs, not just the happy path</li>
+              <li>Parse via <code>content[0].text</code> in the Make HTTP module response</li>
+            </ul>
+            <div class="tools">
+              <span class="tool-chip">Anthropic API</span>
+              <span class="tool-chip">Make HTTP module</span>
+              <span class="tool-chip">JSON parse</span>
+            </div>
+            <div class="deliverable">
+              <div class="dlabel">Deliverable</div>
+              <ul>
+                <li>Prompt document with tested variations</li>
+                <li>Sample output for each prompt</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-card" onclick="toggleStep(this)">
+          <div class="step-header">
+            <div class="step-check">✓</div>
+            <span class="step-title">Wire the scenario blueprint in Make</span>
+            <span class="step-tag">Make.com</span>
+          </div>
+          <div class="step-body">
+            <p>Build the module-by-module architecture in Make.com before connecting live data. Use dummy data and test webhooks to validate the flow end-to-end in the design phase.</p>
+            <ul class="sub-list">
+              <li>Start from trigger, work right — never build backwards</li>
+              <li>Add error handlers on every critical module (not just the last one)</li>
+              <li>Use filters to gate paths early — cheaper than routing errors downstream</li>
+              <li>Label every module clearly — you'll be back in 3 months</li>
+            </ul>
+            <div class="tools">
+              <span class="tool-chip">Tally</span>
+              <span class="tool-chip">Airtable</span>
+              <span class="tool-chip">Gmail</span>
+              <span class="tool-chip">Google Drive</span>
+              <span class="tool-chip">Calendly</span>
+              <span class="tool-chip">Stripe</span>
+              <span class="tool-chip">Brevo</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── PHASE 4 ── -->
+    <div class="phase-panel" id="panel-3">
+      <div class="phase-header">
+        <div class="phase-icon">🔧</div>
+        <div class="phase-meta">
+          <h2>Phase 4 — Build & test</h2>
+          <p>Execute the design. Build in layers — get the skeleton working before adding AI, error handling, or edge-case logic.</p>
+        </div>
+      </div>
+
+      <div class="section-label">Steps</div>
+      <div class="steps">
+
+        <div class="step-card" onclick="toggleStep(this)">
+          <div class="step-header">
+            <div class="step-check">✓</div>
+            <span class="step-title">Build the happy-path scenario first</span>
+            <span class="step-tag">Core build</span>
+          </div>
+          <div class="step-body">
+            <p>Build only the main flow with real data. Get a clean test run from trigger to end state before layering on anything else. This is your baseline — everything else is an edge case.</p>
+            <ul class="sub-list">
+              <li>Use real (but non-critical) data for tests — fake data hides real parsing issues</li>
+              <li>Confirm every module receives what it expects before moving to the next</li>
+              <li>Verify outputs land in the correct destination fields</li>
+            </ul>
+            <div class="callout">Do not add error handling, filters, or edge cases until the happy path runs clean. Adding complexity to a broken base makes debugging exponentially harder.</div>
+          </div>
+        </div>
+
+        <div class="step-card" onclick="toggleStep(this)">
+          <div class="step-header">
+            <div class="step-check">✓</div>
+            <span class="step-title">Add AI layer and validate output</span>
+            <span class="step-tag">AI integration</span>
+          </div>
+          <div class="step-body">
+            <p>Drop Claude into the flow via the Make HTTP module. Feed it real data from the upstream modules and validate that the response is parsed correctly and passed downstream.</p>
+            <ul class="sub-list">
+              <li>POST to <code>https://api.anthropic.com/v1/messages</code></li>
+              <li>Set <code>anthropic-version</code> header and <code>x-api-key</code></li>
+              <li>Parse response body → <code>content[0].text</code></li>
+              <li>If Claude returns JSON, run it through Make's JSON parse module before mapping fields</li>
+              <li>Test with 5+ real inputs — not just one</li>
+            </ul>
+            <div class="callout">If Claude's output format varies across runs, your prompt isn't specific enough. Add stricter format constraints and retest before wiring downstream modules.</div>
+          </div>
+        </div>
+
+        <div class="step-card" onclick="toggleStep(this)">
+          <div class="step-header">
+            <div class="step-check">✓</div>
+            <span class="step-title">Build error handling and fallbacks</span>
+            <span class="step-tag">Resilience</span>
+          </div>
+          <div class="step-body">
+            <p>Every automation will fail eventually. Build for it before handoff — not after the client calls you at 9pm because something broke.</p>
+            <ul class="sub-list">
+              <li>Add error handlers on: API calls, data lookups, file creation, email sends</li>
+              <li>Route failures to a Slack alert or email notification (to you, not the client)</li>
+              <li>Use Make's "Break" error directive for anything that requires a retry</li>
+              <li>Document what manual recovery looks like for each failure point</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="step-card" onclick="toggleStep(this)">
+          <div class="step-header">
+            <div class="step-check">✓</div>
+            <span class="step-title">Run full QA with edge cases</span>
+            <span class="step-tag">Testing</span>
+          </div>
+          <div class="step-body">
+            <p>Test every variation of input the automation will realistically encounter. Don't just test what should work — test what shouldn't and confirm the automation handles it gracefully.</p>
+            <ul class="sub-list">
+              <li>Missing required fields in trigger payload</li>
+              <li>Duplicate submissions (same data triggered twice)</li>
+              <li>Long text inputs that might overflow field limits</li>
+              <li>Special characters or formatting in text fields</li>
+              <li>Upstream API being slow or unavailable</li>
+            </ul>
+            <div class="deliverable">
+              <div class="dlabel">Deliverable</div>
+              <ul>
+                <li>QA log with all test cases and results</li>
+                <li>Sign-off checklist before handoff</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── PHASE 5 ── -->
+    <div class="phase-panel" id="panel-4">
+      <div class="phase-header">
+        <div class="phase-icon">🚀</div>
+        <div class="phase-meta">
+          <h2>Phase 5 — Launch & handoff</h2>
+          <p>Hand the client a running system, not just a scenario. The handoff defines whether this becomes a recurring relationship or a one-time job.</p>
+        </div>
+      </div>
+
+      <div class="section-label">Steps</div>
+      <div class="steps">
+
+        <div class="step-card" onclick="toggleStep(this)">
+          <div class="step-header">
+            <div class="step-check">✓</div>
+            <span class="step-title">Activate and monitor go-live</span>
+            <span class="step-tag">Launch</span>
+          </div>
+          <div class="step-body">
+            <p>Turn the scenario on with the client present. Run a live test together so they see it work end-to-end before you hand over the keys.</p>
+            <ul class="sub-list">
+              <li>Use a real trigger — not a simulation — for the first go-live run</li>
+              <li>Watch the Make.com execution log in real time</li>
+              <li>Confirm the output appears in the destination (Airtable record, Google Drive file, email inbox)</li>
+              <li>Monitor the first 24–48 hours of real runs closely</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="step-card" onclick="toggleStep(this)">
+          <div class="step-header">
+            <div class="step-check">✓</div>
+            <span class="step-title">Deliver client documentation</span>
+            <span class="step-tag">Handoff</span>
+          </div>
+          <div class="step-body">
+            <p>Every engagement gets a handoff doc. This protects you from support requests and positions you as a professional. Keep it short — clients don't read essays.</p>
+            <ul class="sub-list">
+              <li>What the automation does (one sentence per scenario)</li>
+              <li>What triggers it and what it produces</li>
+              <li>How to know if it's working (what to check)</li>
+              <li>What to do if something looks wrong (and who to contact)</li>
+              <li>What's explicitly out of scope</li>
+            </ul>
+            <div class="deliverable">
+              <div class="dlabel">Deliverable</div>
+              <ul>
+                <li>1–2 page handoff doc (Notion, Google Doc, or PDF)</li>
+                <li>Loom walkthrough video (optional but high value)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-card" onclick="toggleStep(this)">
+          <div class="step-header">
+            <div class="step-check">✓</div>
+            <span class="step-title">Set up monitoring and alerts</span>
+            <span class="step-tag">Ops</span>
+          </div>
+          <div class="step-body">
+            <p>You should know when something breaks before the client does. Set up a basic monitoring layer as part of every engagement.</p>
+            <ul class="sub-list">
+              <li>Make.com email alerts on scenario errors (route to your email)</li>
+              <li>Weekly execution report for scenarios that run frequently</li>
+              <li>Airtable view or dashboard showing automation outputs (if applicable)</li>
+              <li>Agreed SLA for response time if something breaks</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="step-card" onclick="toggleStep(this)">
+          <div class="step-header">
+            <div class="step-check">✓</div>
+            <span class="step-title">Book the 30-day check-in and upsell</span>
+            <span class="step-tag">Retention</span>
+          </div>
+          <div class="step-body">
+            <p>Book a 30-day check-in call before you leave the handoff. This is the highest-leverage move in the entire engagement — it's where repeat work and referrals come from.</p>
+            <ul class="sub-list">
+              <li>Is the automation running as expected?</li>
+              <li>What's changed in the workflow since launch?</li>
+              <li>What's the next highest-friction area you haven't touched yet?</li>
+            </ul>
+            <div class="deliverable">
+              <div class="dlabel">Deliverable</div>
+              <ul>
+                <li>Check-in call booked (Calendly link sent at handoff)</li>
+                <li>Phase 2 proposal ready if expansion is likely</li>
+              </ul>
+            </div>
+            <div class="callout">The check-in call isn't support — it's a scoped conversation. If they want more work done, that's a new engagement.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <span class="footer-text">Apex Systematic — Internal use only</span>
+    <a class="footer-link" href="https://apexsystematic.com">apexsystematic.com</a>
+  </footer>
+
+  <script>
+    const TOTAL = 20;
+    const done = new Set();
+
+    function toggleStep(card) {
+      const isOpen = card.classList.contains('open');
+      if (!isOpen) {
+        card.classList.add('open');
+        return;
+      }
+      if (!card.classList.contains('done')) {
+        card.classList.remove('open');
+        return;
+      }
+      card.classList.toggle('done');
+      const id = getStepId(card);
+      card.classList.contains('done') ? done.add(id) : done.delete(id);
+      updateProgress();
+    }
+
+    function getStepId(card) {
+      const panel = card.closest('.phase-panel');
+      const steps = Array.from(panel.querySelectorAll('.step-card'));
+      return panel.id + '-' + steps.indexOf(card);
+    }
+
+    function updateProgress() {
+      const pct = Math.round((done.size / TOTAL) * 100);
+      document.getElementById('global-bar').style.width = pct + '%';
+      document.getElementById('global-pct').textContent = done.size + ' / ' + TOTAL + ' steps';
+    }
+
+    const strips = ['strip-1','strip-2','strip-3','strip-4','strip-5'];
+
+    function showPhase(idx) {
+      document.querySelectorAll('.phase-panel').forEach((p, i) => p.classList.toggle('active', i === idx));
+      document.querySelectorAll('.phase-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
+      const strip = document.getElementById('phase-strip');
+      strip.className = 'phase-strip ' + strips[idx];
+    }
+
+    // Double-click to mark done on desktop
+    document.querySelectorAll('.step-card').forEach(card => {
+      let last = 0;
+      card.addEventListener('click', () => {
+        const now = Date.now();
+        if (now - last < 400 && card.classList.contains('open')) {
+          const id = getStepId(card);
+          card.classList.toggle('done');
+          card.classList.contains('done') ? done.add(id) : done.delete(id);
+          updateProgress();
+        }
+        last = now;
+      });
+    });
+  </script>
+
+  <script>
+    const HASH = '5fc801e0ddcb20d56c44309e726d4c13ef0bd6ba68a3120719d122ff9d2faa46';
+    const SESSION_KEY = 'apex_auth';
+
+    async function sha256(str) {
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+    }
+
+    async function checkPassword() {
+      const input = document.getElementById('gate-input');
+      const error = document.getElementById('gate-error');
+      const hash = await sha256(input.value);
+      if (hash === HASH) {
+        sessionStorage.setItem(SESSION_KEY, '1');
+        document.getElementById('gate').classList.add('hidden');
+        error.textContent = '';
+      } else {
+        input.classList.add('error');
+        error.textContent = 'Incorrect password.';
+        input.value = '';
+        setTimeout(() => input.classList.remove('error'), 400);
+      }
+    }
+
+    (function() {
+      if (sessionStorage.getItem(SESSION_KEY) === '1') {
+        document.getElementById('gate').classList.add('hidden');
+      }
+    })();
+  </script>
+
+</body>
+</html>
