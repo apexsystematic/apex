@@ -82,8 +82,8 @@
   'use strict';
 
   // ── Config — update before going live ──────────────────────
-  const WEBHOOK_URL      = 'YOUR_MAKE_WEBHOOK_URL'; // ← Replace
-  const USE_LIVE_WEBHOOK = false;                    // ← Set true once Make.com scenario is live
+  const WEBHOOK_URL      = 'https://chat.apexsystematic.com';
+  const USE_LIVE_WEBHOOK = true;
   // ──────────────────────────────────────────────────────────
 
   // ── Mock responses (used while USE_LIVE_WEBHOOK is false) ──
