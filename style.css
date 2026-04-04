@@ -1001,3 +1001,343 @@ section:last-of-type {
   h1 { font-size: 2.4rem; }
   h2 { font-size: 1.8rem; }
 }
+
+/* ============================================================
+   APEX SYSTEMATIC — CHAT WIDGET
+   Paste this block into style.css
+   ============================================================ */
+
+#apex-chat-widget * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'DM Sans', -apple-system, sans-serif;
+}
+
+#apex-chat-bubble {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 54px;
+  height: 54px;
+  background: #C9A84C;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(201, 168, 76, 0.4);
+  z-index: 9998;
+  transition: all 0.25s;
+}
+
+#apex-chat-bubble:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 28px rgba(201, 168, 76, 0.5);
+}
+
+#apex-chat-bubble svg {
+  transition: all 0.2s;
+}
+
+#apex-chat-bubble .bubble-close {
+  display: none;
+}
+
+#apex-chat-bubble.open .bubble-open {
+  display: none;
+}
+
+#apex-chat-bubble.open .bubble-close {
+  display: block;
+}
+
+#apex-chat-bubble .unread-dot {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 12px;
+  height: 12px;
+  background: #E74C3C;
+  border-radius: 50%;
+  border: 2px solid #0E1117;
+  display: none;
+}
+
+#apex-chat-bubble .unread-dot.show {
+  display: block;
+}
+
+#apex-chat-window {
+  position: fixed;
+  bottom: 96px;
+  right: 28px;
+  width: 360px;
+  height: 520px;
+  background: #13181F;
+  border: 1px solid #1F2937;
+  border-radius: 16px;
+  overflow: hidden;
+  z-index: 9997;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  transform: scale(0.95) translateY(10px);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+#apex-chat-window.open {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+  pointer-events: all;
+}
+
+#apex-chat-window::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #C9A84C, transparent);
+  z-index: 1;
+}
+
+.apex-chat-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  border-bottom: 1px solid #1F2937;
+  background: rgba(255, 255, 255, 0.02);
+  flex-shrink: 0;
+}
+
+.apex-chat-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(201, 168, 76, 0.1);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.apex-chat-header-info strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #F0EDE8;
+}
+
+.apex-chat-header-info span {
+  font-size: 11px;
+  color: #8B8D96;
+}
+
+.apex-online {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #2ECC71;
+  box-shadow: 0 0 5px #2ECC71;
+  margin-left: auto;
+  flex-shrink: 0;
+  animation: apexPulse 2s infinite;
+}
+
+@keyframes apexPulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+.apex-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  scroll-behavior: smooth;
+}
+
+.apex-messages::-webkit-scrollbar {
+  width: 3px;
+}
+
+.apex-messages::-webkit-scrollbar-thumb {
+  background: #1F2937;
+  border-radius: 3px;
+}
+
+.apex-msg {
+  display: flex;
+  gap: 8px;
+  animation: apexMsgIn 0.25s ease forwards;
+  opacity: 0;
+}
+
+@keyframes apexMsgIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.apex-msg.apex-user {
+  flex-direction: row-reverse;
+}
+
+.apex-msg-av {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.apex-msg.apex-bot .apex-msg-av {
+  background: rgba(201, 168, 76, 0.1);
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  color: #C9A84C;
+}
+
+.apex-msg.apex-user .apex-msg-av {
+  background: #1A2030;
+  border: 1px solid #1F2937;
+  color: #8B8D96;
+}
+
+.apex-bubble {
+  max-width: 78%;
+  padding: 10px 13px;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #F0EDE8;
+}
+
+.apex-msg.apex-bot .apex-bubble {
+  background: #1A2030;
+  border: 1px solid #1F2937;
+  border-top-left-radius: 3px;
+}
+
+.apex-msg.apex-user .apex-bubble {
+  background: #1E2535;
+  border: 1px solid rgba(201, 168, 76, 0.15);
+  border-top-right-radius: 3px;
+}
+
+.apex-typing-dots {
+  display: flex;
+  gap: 4px;
+  padding: 12px 14px;
+  background: #1A2030;
+  border: 1px solid #1F2937;
+  border-radius: 10px;
+  border-top-left-radius: 3px;
+}
+
+.apex-typing-dots span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #4B5060;
+  animation: apexBounce 1.2s infinite;
+}
+
+.apex-typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+.apex-typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes apexBounce {
+  0%, 60%, 100% { transform: translateY(0);   opacity: 0.4; }
+  30%            { transform: translateY(-5px); opacity: 1; }
+}
+
+.apex-input-area {
+  padding: 12px 14px;
+  border-top: 1px solid #1F2937;
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.apex-input {
+  flex: 1;
+  background: #1A2030;
+  border: 1px solid #1F2937;
+  border-radius: 8px;
+  color: #F0EDE8;
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  font-size: 13px;
+  padding: 9px 12px;
+  resize: none;
+  outline: none;
+  max-height: 80px;
+  overflow-y: auto;
+  line-height: 1.5;
+  transition: border-color 0.2s;
+}
+
+.apex-input::placeholder {
+  color: #4B5060;
+}
+
+.apex-input:focus {
+  border-color: rgba(201, 168, 76, 0.4);
+}
+
+.apex-send {
+  width: 34px;
+  height: 34px;
+  background: #C9A84C;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s;
+  color: #0E1117;
+  font-size: 15px;
+}
+
+.apex-send:hover    { background: #E2C47A; }
+.apex-send:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.apex-branding {
+  text-align: center;
+  padding: 6px;
+  font-size: 10px;
+  color: #4B5060;
+  border-top: 1px solid #1F2937;
+  flex-shrink: 0;
+}
+
+.apex-branding a {
+  color: #C9A84C;
+  text-decoration: none;
+}
+
+@media (max-width: 420px) {
+  #apex-chat-window {
+    right: 12px;
+    left: 12px;
+    width: auto;
+    bottom: 88px;
+  }
+
+  #apex-chat-bubble {
+    bottom: 20px;
+    right: 20px;
+  }
+}
