@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Voice Appointment Setter — Meridian Wealth Demo</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0E1117;
+    --bg2: #141820;
+    --bg3: #1a1f2e;
+    --gold: #C9A84C;
+    --gold-dim: #a8873a;
+    --gold-glow: rgba(201,168,76,0.15);
+    --gold-glow2: rgba(201,168,76,0.06);
+    --text: #e8e0d0;
+    --text-dim: #8a8070;
+    --text-muted: #4a4540;
+    --green: #4caf82;
+    --green-dim: rgba(76,175,130,0.15);
+    --red: #c94c4c;
+    --red-dim: rgba(201,76,76,0.12);
+    --blue: #4c8fc9;
+    --border: rgba(201,168,76,0.12);
+    --border-hover: rgba(201,168,76,0.3);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Noise texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+  }
+
+  /* Radial glow background */
+  body::after {
+    content: '';
+    position: fixed;
+    top: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 600px;
+    background: radial-gradient(ellipse, rgba(201,168,76,0.04) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page-wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* ── HEADER ── */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 32px 0 48px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 56px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .logo-mark {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-icon {
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .logo-icon::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+
+  .logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--text);
+    letter-spacing: 0.02em;
+  }
+
+  .logo-text span { color: var(--gold); }
+
+  .demo-badge {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold-dim);
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: var(--gold-glow2);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    text-align: center;
+    margin-bottom: 64px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.1s forwards;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero p {
+    font-size: 16px;
+    color: var(--text-dim);
+    font-weight: 300;
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* ── MAIN GRID ── */
+  .main-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+
+  @media (max-width: 720px) {
+    .main-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── PANEL BASE ── */
+  .panel {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+    transition: border-color 0.3s;
+  }
+
+  .panel:hover { border-color: var(--border-hover); }
+
+  .panel-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 20px;
+  }
+
+  /* ── FORM PANEL ── */
+  .form-panel { animation-delay: 0.2s; }
+
+  .form-panel h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+
+  .form-panel .subtitle {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-bottom: 28px;
+    font-weight: 300;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus {
+    border-color: var(--gold-dim);
+    box-shadow: 0 0 0 3px var(--gold-glow2);
+  }
+
+  .form-group select option { background: var(--bg3); }
+
+  .submit-btn {
+    width: 100%;
+    margin-top: 8px;
+    padding: 14px;
+    background: var(--gold);
+    color: #0a0b0e;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .submit-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 60%);
+  }
+
+  .submit-btn:hover { background: #d4b05a; transform: translateY(-1px); }
+  .submit-btn:active { transform: translateY(0); }
+  .submit-btn:disabled { background: var(--text-muted); cursor: not-allowed; transform: none; }
+
+  /* ── STATUS PANEL ── */
+  .status-panel { animation-delay: 0.3s; }
+
+  .call-status-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  .call-status-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--text);
+  }
+
+  .status-pill {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    background: var(--bg3);
+    transition: all 0.4s ease;
+  }
+
+  .status-pill.idle { color: var(--text-muted); border-color: var(--text-muted); }
+  .status-pill.dialing { color: var(--gold); border-color: var(--gold-dim); background: var(--gold-glow2); }
+  .status-pill.connected { color: var(--green); border-color: var(--green); background: var(--green-dim); }
+  .status-pill.complete { color: var(--green); border-color: var(--green); background: var(--green-dim); }
+  .status-pill.failed { color: var(--red); border-color: var(--red); background: var(--red-dim); }
+
+  .status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .status-pill.connected .status-dot,
+  .status-pill.dialing .status-dot {
+    animation: pulse 1.4s ease infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  /* Call info */
+  .call-info {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+    min-height: 72px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .call-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--gold-glow);
+    border: 1px solid var(--gold-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .call-meta { flex: 1; }
+  .call-name { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+  .call-detail { font-size: 12px; color: var(--text-dim); }
+
+  .call-timer {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    min-width: 48px;
+    text-align: right;
+  }
+
+  /* Sound wave */
+  .sound-wave {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    height: 28px;
+    margin-bottom: 20px;
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  .sound-wave.active { opacity: 1; }
+
+  .wave-bar {
+    width: 3px;
+    background: var(--gold);
+    border-radius: 2px;
+    animation: wave 1.2s ease-in-out infinite;
+  }
+
+  .wave-bar:nth-child(1) { animation-delay: 0s; height: 8px; }
+  .wave-bar:nth-child(2) { animation-delay: 0.1s; height: 18px; }
+  .wave-bar:nth-child(3) { animation-delay: 0.2s; height: 24px; }
+  .wave-bar:nth-child(4) { animation-delay: 0.3s; height: 14px; }
+  .wave-bar:nth-child(5) { animation-delay: 0.4s; height: 22px; }
+  .wave-bar:nth-child(6) { animation-delay: 0.5s; height: 10px; }
+  .wave-bar:nth-child(7) { animation-delay: 0.6s; height: 20px; }
+  .wave-bar:nth-child(8) { animation-delay: 0.7s; height: 16px; }
+  .wave-bar:nth-child(9) { animation-delay: 0.8s; height: 26px; }
+  .wave-bar:nth-child(10) { animation-delay: 0.9s; height: 12px; }
+  .wave-bar:nth-child(11) { animation-delay: 1.0s; height: 20px; }
+  .wave-bar:nth-child(12) { animation-delay: 1.1s; height: 8px; }
+
+  @keyframes wave {
+    0%, 100% { transform: scaleY(0.4); opacity: 0.5; }
+    50% { transform: scaleY(1); opacity: 1; }
+  }
+
+  /* Progress steps */
+  .progress-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .step-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    opacity: 0.3;
+    transition: opacity 0.4s ease;
+  }
+
+  .step-row.active { opacity: 1; }
+  .step-row.done { opacity: 0.7; }
+
+  .step-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    flex-shrink: 0;
+    transition: all 0.4s;
+  }
+
+  .step-row.active .step-icon {
+    border-color: var(--gold);
+    background: var(--gold-glow);
+    color: var(--gold);
+  }
+
+  .step-row.done .step-icon {
+    border-color: var(--green);
+    background: var(--green-dim);
+    color: var(--green);
+  }
+
+  .step-text { font-size: 13px; color: var(--text-dim); }
+  .step-row.active .step-text { color: var(--text); }
+
+  /* ── TRANSCRIPT PANEL ── */
+  .transcript-panel {
+    grid-column: 1 / -1;
+    animation-delay: 0.4s;
+    min-height: 280px;
+  }
+
+  .transcript-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .transcript-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+  }
+
+  .transcript-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 180px;
+    gap: 12px;
+    color: var(--text-muted);
+  }
+
+  .transcript-empty-icon {
+    width: 48px;
+    height: 48px;
+    border: 1px dashed var(--text-muted);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    opacity: 0.4;
+  }
+
+  .transcript-empty p { font-size: 13px; }
+
+  .transcript-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-height: 320px;
+    overflow-y: auto;
+    padding-right: 4px;
+  }
+
+  .transcript-messages::-webkit-scrollbar { width: 4px; }
+  .transcript-messages::-webkit-scrollbar-track { background: transparent; }
+  .transcript-messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .msg {
+    display: flex;
+    gap: 12px;
+    opacity: 0;
+    transform: translateY(8px);
+    animation: msgIn 0.4s ease forwards;
+  }
+
+  @keyframes msgIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .msg-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .msg.agent .msg-avatar { background: var(--gold-glow); border: 1px solid var(--gold-dim); color: var(--gold); }
+  .msg.lead .msg-avatar { background: var(--bg3); border: 1px solid var(--border); color: var(--text-dim); }
+
+  .msg-body {}
+  .msg-speaker { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 5px; }
+  .msg.agent .msg-speaker { color: var(--gold-dim); }
+
+  .msg-text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    display: inline-block;
+    max-width: 100%;
+  }
+
+  .msg.agent .msg-text { border-color: rgba(201,168,76,0.1); }
+
+  /* Typing indicator */
+  .typing-indicator {
+    display: none;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .typing-indicator.show { display: flex; }
+
+  .typing-dots {
+    display: flex;
+    gap: 4px;
+    padding: 12px 14px;
+    background: var(--bg3);
+    border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 8px;
+  }
+
+  .typing-dots span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold-dim);
+    animation: dot 1.2s ease infinite;
+  }
+
+  .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes dot {
+    0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+    40% { transform: scale(1); opacity: 1; }
+  }
+
+  /* ── OUTCOME PANEL ── */
+  .outcome-panel {
+    grid-column: 1 / -1;
+    animation-delay: 0.5s;
+    display: none;
+  }
+
+  .outcome-panel.show { display: block; }
+
+  .outcome-inner {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .outcome-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  .outcome-icon.booked { background: var(--green-dim); border: 1px solid var(--green); }
+  .outcome-icon.missed { background: var(--red-dim); border: 1px solid var(--red); }
+
+  .outcome-text h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    margin-bottom: 4px;
+  }
+
+  .outcome-text p { font-size: 13px; color: var(--text-dim); }
+
+  .outcome-details {
+    margin-left: auto;
+    text-align: right;
+  }
+
+  .outcome-detail-item {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-bottom: 4px;
+  }
+
+  .outcome-detail-item strong { color: var(--text); }
+
+  /* Reset btn */
+  .reset-btn {
+    display: none;
+    margin: 24px auto 0;
+    padding: 10px 28px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-dim);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .reset-btn:hover { border-color: var(--gold-dim); color: var(--gold); }
+  .reset-btn.show { display: block; }
+
+  /* ── PIPELINE VISUAL ── */
+  .pipeline-panel {
+    grid-column: 1 / -1;
+    animation-delay: 0.45s;
+  }
+
+  .pipeline-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 20px;
+  }
+
+  .pipeline-track {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    position: relative;
+  }
+
+  .pipe-step {
+    flex: 1;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .pipe-step::after {
+    content: '';
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    z-index: -1;
+    transition: background 0.5s;
+  }
+
+  .pipe-step:last-child::after { display: none; }
+  .pipe-step.done::after { background: var(--gold-dim); }
+
+  .pipe-node {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 8px;
+    font-size: 13px;
+    transition: all 0.4s;
+    color: var(--text-muted);
+  }
+
+  .pipe-step.active .pipe-node {
+    border-color: var(--gold);
+    background: var(--gold-glow);
+    color: var(--gold);
+    box-shadow: 0 0 16px rgba(201,168,76,0.2);
+  }
+
+  .pipe-step.done .pipe-node {
+    border-color: var(--green);
+    background: var(--green-dim);
+    color: var(--green);
+  }
+
+  .pipe-name {
+    font-size: 11px;
+    color: var(--text-muted);
+    transition: color 0.4s;
+  }
+
+  .pipe-step.active .pipe-name { color: var(--gold); }
+  .pipe-step.done .pipe-name { color: var(--text-dim); }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding-top: 40px;
+    margin-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  footer span { color: var(--gold-dim); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <header>
+    <div class="logo-mark">
+      <div class="logo-icon"></div>
+      <div class="logo-text">Meridian <span>Wealth</span></div>
+    </div>
+    <div class="demo-badge">Live Demo</div>
+  </header>
+
+  <div class="hero">
+    <div class="hero-eyebrow">AI Voice Appointment Setter</div>
+    <h1>Your next client call,<br><em>scheduled automatically</em></h1>
+    <p>Submit the form below. An AI agent will call the lead within seconds, qualify them, and book a discovery call with your advisor.</p>
+  </div>
+
+  <!-- Pipeline -->
+  <div class="main-grid" style="margin-bottom:24px;">
+    <div class="panel pipeline-panel" style="animation-delay:0.15s;">
+      <div class="pipeline-label">Automation Pipeline — Make.com</div>
+      <div class="pipeline-track" id="pipelineTrack">
+        <div class="pipe-step" id="pipeStep0">
+          <div class="pipe-node">📋</div>
+          <div class="pipe-name">Form Submit</div>
+        </div>
+        <div class="pipe-step" id="pipeStep1">
+          <div class="pipe-node">⚡</div>
+          <div class="pipe-name">Webhook Trigger</div>
+        </div>
+        <div class="pipe-step" id="pipeStep2">
+          <div class="pipe-node">📞</div>
+          <div class="pipe-name">Vapi Call</div>
+        </div>
+        <div class="pipe-step" id="pipeStep3">
+          <div class="pipe-node">🤖</div>
+          <div class="pipe-name">AI Conversation</div>
+        </div>
+        <div class="pipe-step" id="pipeStep4">
+          <div class="pipe-node">📅</div>
+          <div class="pipe-name">Cal.com Booking</div>
+        </div>
+        <div class="pipe-step" id="pipeStep5">
+          <div class="pipe-node">✉️</div>
+          <div class="pipe-name">Confirmation</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-grid">
+
+    <!-- Form -->
+    <div class="panel form-panel">
+      <div class="panel-label">Lead Intake Form</div>
+      <h2>Request a Consultation</h2>
+      <p class="subtitle">Meridian Wealth · Financial Planning Services</p>
+
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" id="leadName" value="Michael Torres" placeholder="Full name">
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" id="leadPhone" value="+1 (555) 291-4873" placeholder="+1 (555) 000-0000">
+      </div>
+      <div class="form-group">
+        <label>Financial Goal</label>
+        <select id="leadGoal">
+          <option value="retirement">Retirement Planning</option>
+          <option value="investments">Investment Portfolio</option>
+          <option value="estate">Estate Planning</option>
+          <option value="tax">Tax Optimisation</option>
+          <option value="other">Not sure yet</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Timeline</label>
+        <select id="leadTimeline">
+          <option value="now">Ready to start now</option>
+          <option value="months">Next few months</option>
+          <option value="year">Within the year</option>
+          <option value="browsing">Just exploring</option>
+        </select>
+      </div>
+
+      <button class="submit-btn" id="submitBtn" onclick="startDemo()">
+        Submit Enquiry → Trigger AI Call
+      </button>
+    </div>
+
+    <!-- Status -->
+    <div class="panel status-panel">
+      <div class="panel-label">Call Status</div>
+      <div class="call-status-header">
+        <h2>Live Call Monitor</h2>
+        <div class="status-pill idle" id="statusPill">
+          <div class="status-dot"></div>
+          <span id="statusText">Idle</span>
+        </div>
+      </div>
+
+      <div class="call-info" id="callInfo">
+        <div class="call-avatar" id="callAvatar">—</div>
+        <div class="call-meta">
+          <div class="call-name" id="callName">Awaiting lead submission</div>
+          <div class="call-detail" id="callDetail">No active call</div>
+        </div>
+        <div class="call-timer" id="callTimer">—</div>
+      </div>
+
+      <div class="sound-wave" id="soundWave">
+        <div class="wave-bar"></div><div class="wave-bar"></div>
+        <div class="wave-bar"></div><div class="wave-bar"></div>
+        <div class="wave-bar"></div><div class="wave-bar"></div>
+        <div class="wave-bar"></div><div class="wave-bar"></div>
+        <div class="wave-bar"></div><div class="wave-bar"></div>
+        <div class="wave-bar"></div><div class="wave-bar"></div>
+      </div>
+
+      <div class="progress-steps" id="progressSteps">
+        <div class="step-row" id="step1">
+          <div class="step-icon">1</div>
+          <div class="step-text">Form data received by Make webhook</div>
+        </div>
+        <div class="step-row" id="step2">
+          <div class="step-icon">2</div>
+          <div class="step-text">Vapi outbound call initiated</div>
+        </div>
+        <div class="step-row" id="step3">
+          <div class="step-icon">3</div>
+          <div class="step-text">Lead answered — conversation active</div>
+        </div>
+        <div class="step-row" id="step4">
+          <div class="step-icon">4</div>
+          <div class="step-text">Qualification complete — booking slot</div>
+        </div>
+        <div class="step-row" id="step5">
+          <div class="step-icon">5</div>
+          <div class="step-text">Appointment confirmed + email sent</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Transcript -->
+    <div class="panel transcript-panel">
+      <div class="transcript-header">
+        <div class="panel-label" style="margin:0;">Conversation Transcript</div>
+        <h2>Live Call Transcript</h2>
+      </div>
+
+      <div id="transcriptEmpty" class="transcript-empty">
+        <div class="transcript-empty-icon">🎙</div>
+        <p>Transcript will appear here once the call begins</p>
+      </div>
+
+      <div id="transcriptMessages" class="transcript-messages" style="display:none;"></div>
+
+      <div class="typing-indicator" id="typingIndicator">
+        <div class="msg-avatar msg agent" style="display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:var(--gold-glow);border:1px solid var(--gold-dim);color:var(--gold);font-size:11px;">AI</div>
+        <div class="typing-dots">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Outcome -->
+    <div class="panel outcome-panel" id="outcomePanel">
+      <div class="panel-label">Outcome</div>
+      <div class="outcome-inner">
+        <div class="outcome-icon booked" id="outcomeIcon">✅</div>
+        <div class="outcome-text">
+          <h3 id="outcomeTitle">Appointment Booked</h3>
+          <p id="outcomeDesc">Lead qualified and discovery call scheduled with James Crawford.</p>
+        </div>
+        <div class="outcome-details" id="outcomeDetails">
+          <div class="outcome-detail-item"><strong>Thursday, April 10</strong> · 2:00 PM EST</div>
+          <div class="outcome-detail-item">30-min discovery call · Zoom</div>
+          <div class="outcome-detail-item">Confirmation sent to lead</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="text-align:center;">
+    <button class="reset-btn" id="resetBtn" onclick="resetDemo()">↺ Run Demo Again</button>
+  </div>
+
+  <footer>
+    Powered by <span>Apex Systematic</span> · Make.com + Vapi.ai + Cal.com · This is a simulated demonstration
+  </footer>
+
+</div>
+
+<script>
+  const SCRIPT = [
+    { speaker: 'agent', text: "Hi, this is Aria calling on behalf of Meridian Wealth. You recently enquired about financial planning services — I just wanted to reach out while it's fresh. Is now a good time to talk?" },
+    { speaker: 'lead', text: "Yeah, sure — I was just filling that out. Go ahead." },
+    { speaker: 'agent', text: "Great, I'll keep this brief. What's the main thing you're looking to get sorted financially — retirement planning, growing your investments, or something else?" },
+    { speaker: 'lead', text: "Primarily retirement planning. I'm about 12 years out and I don't feel like I have a real strategy yet." },
+    { speaker: 'agent', text: "That's actually the perfect time to put a proper plan in place — 12 years gives real room to work with. Are you currently working with a financial advisor, or would this be starting fresh?" },
+    { speaker: 'lead', text: "Starting fresh. I had someone years ago but we lost touch." },
+    { speaker: 'agent', text: "Understood. Based on what you've told me, a conversation with James Crawford — one of our senior advisors — would be really valuable. I can get you a 30-minute call. I have Thursday the 10th at 2 PM or Friday the 11th at 10 AM. Which works better for you?" },
+    { speaker: 'lead', text: "Thursday at 2 works for me." },
+    { speaker: 'agent', text: "Perfect. I've got you booked in for Thursday, April 10th at 2 PM Eastern with James Crawford. You'll receive a confirmation email shortly with a Zoom link. Is the email on the form the best address to send that to?" },
+    { speaker: 'lead', text: "Yes, that's fine." },
+    { speaker: 'agent', text: "Wonderful. James will be in touch if he needs any details beforehand. Thank you for your time, Michael — we look forward to speaking with you on Thursday." },
+  ];
+
+  let demoRunning = false;
+  let timerInterval = null;
+  let timerSeconds = 0;
+  let currentPipeStep = -1;
+
+  function setPipeStep(n) {
+    for (let i = 0; i < 6; i++) {
+      const el = document.getElementById('pipeStep' + i);
+      el.classList.remove('active', 'done');
+      if (i < n) el.classList.add('done');
+      else if (i === n) el.classList.add('active');
+    }
+    currentPipeStep = n;
+  }
+
+  function setStep(n) {
+    for (let i = 1; i <= 5; i++) {
+      const el = document.getElementById('step' + i);
+      el.classList.remove('active', 'done');
+      if (i < n) el.classList.add('done');
+      else if (i === n) el.classList.add('active');
+    }
+  }
+
+  function setStatus(state, text) {
+    const pill = document.getElementById('statusPill');
+    pill.className = 'status-pill ' + state;
+    document.getElementById('statusText').textContent = text;
+  }
+
+  function startTimer() {
+    timerSeconds = 0;
+    timerInterval = setInterval(() => {
+      timerSeconds++;
+      const m = String(Math.floor(timerSeconds/60)).padStart(2,'0');
+      const s = String(timerSeconds%60).padStart(2,'0');
+      document.getElementById('callTimer').textContent = m + ':' + s;
+    }, 1000);
+  }
+
+  function stopTimer() {
+    clearInterval(timerInterval);
+  }
+
+  function addMessage(msg, delay) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        const typingEl = document.getElementById('typingIndicator');
+        const messagesEl = document.getElementById('transcriptMessages');
+
+        if (msg.speaker === 'agent') {
+          typingEl.classList.add('show');
+          setTimeout(() => {
+            typingEl.classList.remove('show');
+            appendMsg(msg, messagesEl);
+            resolve();
+          }, 1400);
+        } else {
+          appendMsg(msg, messagesEl);
+          resolve();
+        }
+      }, delay);
+    });
+  }
+
+  function appendMsg(msg, container) {
+    const div = document.createElement('div');
+    div.className = 'msg ' + msg.speaker;
+    div.innerHTML = `
+      <div class="msg-avatar">${msg.speaker === 'agent' ? 'AI' : 'MT'}</div>
+      <div class="msg-body">
+        <div class="msg-speaker">${msg.speaker === 'agent' ? 'Aria · AI Agent' : 'Michael Torres · Lead'}</div>
+        <div class="msg-text">${msg.text}</div>
+      </div>
+    `;
+    container.appendChild(div);
+    container.scrollTop = container.scrollHeight;
+  }
+
+  async function startDemo() {
+    if (demoRunning) return;
+    demoRunning = true;
+
+    const name = document.getElementById('leadName').value || 'Lead';
+    const initials = name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+
+    document.getElementById('submitBtn').disabled = true;
+
+    // Step 1: form received
+    setStep(1); setPipeStep(1);
+    setStatus('dialing', 'Processing');
+    document.getElementById('callAvatar').textContent = initials;
+    document.getElementById('callName').textContent = name;
+    document.getElementById('callDetail').textContent = 'Make webhook received · preparing call';
+    document.getElementById('callTimer').textContent = '—';
+
+    await sleep(1200);
+
+    // Step 2: Vapi call initiated
+    setStep(2); setPipeStep(2);
+    setStatus('dialing', 'Dialing');
+    document.getElementById('callDetail').textContent = 'Vapi outbound call initiated';
+
+    await sleep(1800);
+
+    // Step 3: connected
+    setStep(3); setPipeStep(3);
+    setStatus('connected', 'Connected');
+    document.getElementById('callDetail').textContent = 'Call connected · AI conversation active';
+    document.getElementById('soundWave').classList.add('active');
+    startTimer();
+
+    // Show transcript
+    document.getElementById('transcriptEmpty').style.display = 'none';
+    document.getElementById('transcriptMessages').style.display = 'flex';
+
+    // Play out conversation
+    let delay = 0;
+    for (let i = 0; i < SCRIPT.length; i++) {
+      const msg = SCRIPT[i];
+      const gap = msg.speaker === 'agent' ? 600 : 1200;
+      delay += gap;
+      await addMessage(msg, 0);
+
+      // Step 4 trigger at message 6
+      if (i === 5) { setStep(4); setPipeStep(4); }
+
+      await sleep(msg.text.length * 28 + 400);
+    }
+
+    // Done
+    stopTimer();
+    document.getElementById('soundWave').classList.remove('active');
+    setStep(5); setPipeStep(5);
+    setStatus('complete', 'Complete');
+    document.getElementById('callDetail').textContent = 'Appointment booked · confirmation sent';
+
+    // Outcome
+    const outcomePanel = document.getElementById('outcomePanel');
+    outcomePanel.classList.add('show');
+    outcomePanel.style.animation = 'fadeUp 0.5s ease forwards';
+
+    document.getElementById('resetBtn').classList.add('show');
+  }
+
+  function sleep(ms) {
+    return new Promise(r => setTimeout(r, ms));
+  }
+
+  function resetDemo() {
+    demoRunning = false;
+    stopTimer();
+    document.getElementById('submitBtn').disabled = false;
+    document.getElementById('statusPill').className = 'status-pill idle';
+    document.getElementById('statusText').textContent = 'Idle';
+    document.getElementById('callAvatar').textContent = '—';
+    document.getElementById('callName').textContent = 'Awaiting lead submission';
+    document.getElementById('callDetail').textContent = 'No active call';
+    document.getElementById('callTimer').textContent = '—';
+    document.getElementById('soundWave').classList.remove('active');
+    document.getElementById('transcriptEmpty').style.display = 'flex';
+    document.getElementById('transcriptMessages').style.display = 'none';
+    document.getElementById('transcriptMessages').innerHTML = '';
+    document.getElementById('typingIndicator').classList.remove('show');
+    document.getElementById('outcomePanel').classList.remove('show');
+    document.getElementById('resetBtn').classList.remove('show');
+    for (let i=1;i<=5;i++) { const el=document.getElementById('step'+i); el.classList.remove('active','done'); }
+    for (let i=0;i<6;i++) { const el=document.getElementById('pipeStep'+i); el.classList.remove('active','done'); }
+  }
+</script>
+</body>
+</html>
