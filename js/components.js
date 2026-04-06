@@ -139,7 +139,7 @@
       + '</div>';
   }
 
-  /* ── Demo Footer (exact site footer with absolute URLs + disclaimer) ── */
+  /* ── Demo Footer (exact site footer, absolute URLs) ── */
   function injectDemoFooter() {
     var el = document.getElementById('demo-footer');
     if (!el) return;
@@ -164,7 +164,6 @@
       +         '<a href="https://apexsystematic.com/cookies.html">Cookies</a>'
       +       '</nav>'
       +     '</div>'
-      +     '<p style="width:100%;text-align:center;font-size:0.68rem;color:var(--text-dim);padding-top:12px;border-top:1px solid var(--border);margin-top:4px;">This is a sandboxed demo. No data is stored or transmitted.</p>'
       +   '</div>'
       + '</footer>';
   }
