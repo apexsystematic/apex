@@ -11,14 +11,16 @@
    8.  Mobile Nav
    9.  Hero
    10. Services
-   11. How It Works
-   12. Pricing
-   13. About
-   14. Testimonials
-   15. Contact & Form
-   16. Footer
-   17. Animations
-   18. Media Queries
+   11. Demo
+   12. How It Works
+   13. Pricing
+   14. About
+   15. Testimonials
+   16. Contact & Form
+   17. Footer
+   18. Animations
+   19. Media Queries
+   22. Chat Widget
 ═══════════════════════════════════════════ */
 
 
@@ -399,8 +401,37 @@ section:last-of-type {
   line-height: 1.75;
 }
 
+/* ── 11. Demos Preview Section ── */
 
-/* ── 11. How It Works ── */
+.demos-preview-grid .service-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.demos-preview-grid .service-card p {
+  flex: 1;
+  margin-bottom: 28px;
+}
+
+.demos-preview-link {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  transition: letter-spacing var(--ease);
+  margin-top: auto;
+}
+
+.demos-preview-link:hover {
+  letter-spacing: 0.2em;
+}
+
+
+/* ── 12. How It Works ── */
 .steps {
   border: 1px solid var(--border);
 }
@@ -442,7 +473,7 @@ section:last-of-type {
 }
 
 
-/* ── 12. Pricing ── */
+/* ── 13. Pricing ── */
 .pricing-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -527,7 +558,7 @@ section:last-of-type {
 }
 
 
-/* ── 13. About ── */
+/* ── 14. About ── */
 .about-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -584,7 +615,7 @@ section:last-of-type {
 }
 
 
-/* ── 14. Testimonials ── */
+/* ── 15. Testimonials ── */
 .testimonials-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -629,7 +660,7 @@ section:last-of-type {
 }
 
 
-/* ── 15. Contact & Form ── */
+/* ── 16. Contact & Form ── */
 .contact-form {
   max-width: 660px;
   display: flex;
@@ -693,7 +724,7 @@ section:last-of-type {
 }
 
 
-/* ── 16. Footer ── */
+/* ── 17. Footer ── */
 .footer-wrap {
   border-top: 1px solid var(--border);
 }
@@ -844,7 +875,7 @@ section:last-of-type {
 }
 
 
-/* ── 17. Scroll Reveal ── */
+/* ── 18. Scroll Reveal ── */
 .reveal {
   opacity: 0;
   transform: translateY(20px);
@@ -857,7 +888,7 @@ section:last-of-type {
 }
 
 
-/* ── 18. Animations ── */
+/* ── 19. Animations ── */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -868,7 +899,7 @@ section:last-of-type {
 .hero .hero-sub     { animation: fadeInUp 0.6s ease 0.35s both; }
 .hero .hero-actions { animation: fadeInUp 0.6s ease 0.5s both; }
 
-/* ── 19. ROI CTA ── */
+/* ── 20. ROI CTA ── */
 .roi-cta-inner {
   display: flex;
   align-items: center;
@@ -889,7 +920,7 @@ section:last-of-type {
 }
 
 
-/* ── 20. Media Queries ── */
+/* ── 21. Media Queries ── */
 
 /* Large tablet */
 @media (max-width: 1024px) {
@@ -1002,10 +1033,7 @@ section:last-of-type {
   h2 { font-size: 1.8rem; }
 }
 
-/* ============================================================
-   APEX SYSTEMATIC — CHAT WIDGET
-   Paste this block into style.css
-   ============================================================ */
+/* 22. CHAT WIDGET */
 
 #apex-chat-widget * {
   box-sizing: border-box;
