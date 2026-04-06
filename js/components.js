@@ -124,46 +124,47 @@
     });
   }
 
-  /* ── Demo Top Bar ── */
-  function injectDemoTopbar() {
+  /* ── Demo Header (logo + CTA only, no nav) ── */
+  function injectDemoHeader() {
     var el = document.getElementById('demo-topbar');
     if (!el) return;
     el.innerHTML =
-      '<div class="demo-topbar">'
-      +   '<a href="https://apexsystematic.com/" class="demo-topbar-logo" aria-label="Apex Systematic">'
-      +     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="30 42 380 70" height="32" role="img">'
-      +       '<title>Apex Systematic</title>'
-      +       '<line x1="54" y1="48" x2="34" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"/>'
-      +       '<line x1="54" y1="48" x2="74" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"/>'
-      +       '<line x1="34" y1="82" x2="74" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"/>'
-      +       '<circle cx="54" cy="48" r="2.5" fill="#C9A84C"/>'
-      +       '<text x="88" y="82" font-family="Georgia, serif" font-size="46" font-weight="400" letter-spacing="10" fill="#FFFFFF">APEX</text>'
-      +       '<text x="88" y="104" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" font-weight="300" letter-spacing="9.5" fill="#C9A84C">SYSTEMATIC</text>'
-      +     '</svg>'
-      +   '</a>'
-      +   '<a href="https://apexsystematic.com/#contact" class="demo-topbar-cta">Free Audit</a>'
+      '<div class="header-wrap">'
+      +   '<div class="header container">'
+      +     '<a href="https://apexsystematic.com/" class="header-logo" aria-label="Apex Systematic">' + LOGO_HEADER + '</a>'
+      +     '<div class="header-right">'
+      +       '<a href="https://apexsystematic.com/#contact" class="btn btn-primary header-cta">Free Audit</a>'
+      +     '</div>'
+      +   '</div>'
       + '</div>';
   }
 
-  /* ── Demo Footer ── */
+  /* ── Demo Footer (exact site footer with absolute URLs + disclaimer) ── */
   function injectDemoFooter() {
     var el = document.getElementById('demo-footer');
     if (!el) return;
     el.innerHTML =
-      '<footer>'
-      +   '<div class="demo-footer-inner">'
-      +     '<nav class="demo-footer-nav" aria-label="Site navigation">'
+      '<footer class="footer-wrap">'
+      +   '<div class="footer container">'
+      +     '<a href="https://apexsystematic.com/" class="footer-logo" aria-label="Apex Systematic">' + LOGO_FOOTER + '</a>'
+      +     '<nav class="footer-nav" aria-label="Footer navigation">'
       +       '<a href="https://apexsystematic.com/#services">Services</a>'
       +       '<a href="https://apexsystematic.com/#how-it-works">How it works</a>'
       +       '<a href="https://apexsystematic.com/demos/">Demos</a>'
       +       '<a href="https://apexsystematic.com/#pricing">Pricing</a>'
+      +       '<a href="https://apexsystematic.com/roi-calculator.html">ROI Calculator</a>'
       +       '<a href="https://apexsystematic.com/#about">About</a>'
       +       '<a href="https://apexsystematic.com/#contact">Contact</a>'
       +     '</nav>'
-      +     '<div class="demo-footer-bottom">'
-      +       '<p class="demo-footer-copy">&copy; 2026 <a href="https://apexsystematic.com/">Apex Systematic</a> &middot; AI Workflow Automation for Professional Services</p>'
-      +       '<p class="demo-footer-disclaimer">This is a sandboxed demo. No data is stored or transmitted.</p>'
+      +     '<div class="footer-bottom">'
+      +       '<p class="footer-copy">&copy; 2026 Apex Systematic</p>'
+      +       '<nav class="footer-legal" aria-label="Legal">'
+      +         '<a href="https://apexsystematic.com/terms.html">Terms</a>'
+      +         '<a href="https://apexsystematic.com/privacy.html">Privacy</a>'
+      +         '<a href="https://apexsystematic.com/cookies.html">Cookies</a>'
+      +       '</nav>'
       +     '</div>'
+      +     '<p style="width:100%;text-align:center;font-size:0.68rem;color:var(--text-dim);padding-top:12px;border-top:1px solid var(--border);margin-top:4px;">This is a sandboxed demo. No data is stored or transmitted.</p>'
       +   '</div>'
       + '</footer>';
   }
@@ -172,7 +173,7 @@
   injectHeader();
   injectFooter();
   initMobileMenu();
-  injectDemoTopbar();
+  injectDemoHeader();
   injectDemoFooter();
 
 })();
