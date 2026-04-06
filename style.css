@@ -389,7 +389,8 @@ section:last-of-type {
   border-radius: var(--radius);
   text-align: center;
   transition: border-color var(--ease), background var(--ease);
-  cursor: pointer
+  cursor: pointer;
+}
 
 .cert-badge:hover {
   border-color: var(--gold);
