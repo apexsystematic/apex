@@ -79,7 +79,7 @@
       +       '<a href="index.html#contact">Contact</a>'
       +     '</nav>'
       +     '<div class="footer-bottom">'
-      +       '<p class="footer-copy">&copy; 2025 Apex Systematic</p>'
+      +       '<p class="footer-copy">&copy; 2026 Apex Systematic</p>'
       +       '<nav class="footer-legal" aria-label="Legal">'
       +         '<a href="terms.html">Terms</a>'
       +         '<a href="privacy.html">Privacy</a>'
