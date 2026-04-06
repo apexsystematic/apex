@@ -124,9 +124,55 @@
     });
   }
 
+  /* ── Demo Top Bar ── */
+  function injectDemoTopbar() {
+    var el = document.getElementById('demo-topbar');
+    if (!el) return;
+    el.innerHTML =
+      '<div class="demo-topbar">'
+      +   '<a href="https://apexsystematic.com/" class="demo-topbar-logo" aria-label="Apex Systematic">'
+      +     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="30 42 380 70" height="32" role="img">'
+      +       '<title>Apex Systematic</title>'
+      +       '<line x1="54" y1="48" x2="34" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"/>'
+      +       '<line x1="54" y1="48" x2="74" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"/>'
+      +       '<line x1="34" y1="82" x2="74" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"/>'
+      +       '<circle cx="54" cy="48" r="2.5" fill="#C9A84C"/>'
+      +       '<text x="88" y="82" font-family="Georgia, serif" font-size="46" font-weight="400" letter-spacing="10" fill="#FFFFFF">APEX</text>'
+      +       '<text x="88" y="104" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" font-weight="300" letter-spacing="9.5" fill="#C9A84C">SYSTEMATIC</text>'
+      +     '</svg>'
+      +   '</a>'
+      +   '<a href="https://apexsystematic.com/#contact" class="demo-topbar-cta">Free Audit</a>'
+      + '</div>';
+  }
+
+  /* ── Demo Footer ── */
+  function injectDemoFooter() {
+    var el = document.getElementById('demo-footer');
+    if (!el) return;
+    el.innerHTML =
+      '<footer>'
+      +   '<div class="demo-footer-inner">'
+      +     '<nav class="demo-footer-nav" aria-label="Site navigation">'
+      +       '<a href="https://apexsystematic.com/#services">Services</a>'
+      +       '<a href="https://apexsystematic.com/#how-it-works">How it works</a>'
+      +       '<a href="https://apexsystematic.com/demos/">Demos</a>'
+      +       '<a href="https://apexsystematic.com/#pricing">Pricing</a>'
+      +       '<a href="https://apexsystematic.com/#about">About</a>'
+      +       '<a href="https://apexsystematic.com/#contact">Contact</a>'
+      +     '</nav>'
+      +     '<div class="demo-footer-bottom">'
+      +       '<p class="demo-footer-copy">&copy; 2026 <a href="https://apexsystematic.com/">Apex Systematic</a> &middot; AI Workflow Automation for Professional Services</p>'
+      +       '<p class="demo-footer-disclaimer">This is a sandboxed demo. No data is stored or transmitted.</p>'
+      +     '</div>'
+      +   '</div>'
+      + '</footer>';
+  }
+
   /* Run — script is placed at end of <body> so DOM is ready */
   injectHeader();
   injectFooter();
   initMobileMenu();
+  injectDemoTopbar();
+  injectDemoFooter();
 
 })();
