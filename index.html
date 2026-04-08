@@ -326,41 +326,46 @@
         <div class="about-grid">
           <div class="about-content">
             <span class="section-tag">About</span>
-            <!-- 
-              ABOUT HEADING OPTIONS (pick one, delete the rest):
-
-              Option A — Current (too long, 5 lines):
-              "Built by someone who's done the manual work — and refused to keep doing it"
-
-              Option B — Applied below (punchy, 2 lines):
-              "I've done the manual work.<br>I build the systems that end it."
-
-              Option C — Rhetorical hook (2–3 lines):
-              "Your expertise is too valuable<br>for work a machine can do better."
-
-              Option D — Origin story angle (2–3 lines):
-              "Operations experience.<br>Automation conviction.<br>No templates."
-            -->
-            <h2>I've done the manual work.<br>I build the systems that end it.</h2>
+            <h2>Built by someone who's done the manual work — and refused to keep doing it</h2>
             <p>Apex Systematic was founded on one conviction: highly skilled professionals should not be spending their expertise on work a machine can do better.</p>
             <p>I spent years running business operations — managing the workflows, processes, and systems that keep a practice moving. I know what it feels like to spend hours on work that should take minutes, because I've lived it. Now I build the systems that eliminate it.</p>
             <p>I work with a deliberately small number of clients at a time — because this work deserves proper attention, not a production line.</p>
           </div>
-          <div class="about-tools">
-            <span class="tools-label">Tools we work with</span>
-            <div class="tools-grid">
-              <span class="tool-tag">Make</span>
-              <span class="tool-tag">n8n</span>
-              <span class="tool-tag">Zapier</span>
-              <span class="tool-tag">OpenAI</span>
-              <span class="tool-tag">Claude AI</span>
-              <span class="tool-tag">Notion</span>
-              <span class="tool-tag">Airtable</span>
-              <span class="tool-tag">Google Workspace</span>
-              <span class="tool-tag">HubSpot</span>
-              <span class="tool-tag">Stripe</span>
-              <span class="tool-tag">Brevo</span>
-              <span class="tool-tag">Calendly</span>
+          <div class="about-sidebar">
+            <div class="about-stats">
+              <div class="about-stat">
+                <span class="about-stat-number">15+</span>
+                <span class="about-stat-label">Hours reclaimed per client per week</span>
+              </div>
+              <div class="about-stat">
+                <span class="about-stat-number">3</span>
+                <span class="about-stat-label">Active clients at a time — maximum</span>
+              </div>
+              <div class="about-stat">
+                <span class="about-stat-number">Ops</span>
+                <span class="about-stat-label">Background in business operations, not just code</span>
+              </div>
+              <div class="about-stat">
+                <span class="about-stat-number">100%</span>
+                <span class="about-stat-label">Fixed-price. No hourly billing surprises</span>
+              </div>
+            </div>
+            <div class="about-tools">
+              <span class="tools-label">Tools we work with</span>
+              <div class="tools-grid">
+                <span class="tool-tag">Make</span>
+                <span class="tool-tag">n8n</span>
+                <span class="tool-tag">Zapier</span>
+                <span class="tool-tag">OpenAI</span>
+                <span class="tool-tag">Claude AI</span>
+                <span class="tool-tag">Notion</span>
+                <span class="tool-tag">Airtable</span>
+                <span class="tool-tag">Google Workspace</span>
+                <span class="tool-tag">HubSpot</span>
+                <span class="tool-tag">Stripe</span>
+                <span class="tool-tag">Brevo</span>
+                <span class="tool-tag">Calendly</span>
+              </div>
             </div>
           </div>
         </div>
@@ -431,6 +436,16 @@
 
   <script src="js/components.js"></script>
   <script src="js/main.js"></script>
+  <script>
+    (function () {
+      function setNavHeight() {
+        const nav = document.querySelector('.header-wrap');
+        if (nav) document.documentElement.style.setProperty('--nav-h', nav.offsetHeight + 'px');
+      }
+      setNavHeight();
+      window.addEventListener('resize', setNavHeight);
+    })();
+  </script>
 
   <div id="apex-chat-widget"></div>
   
