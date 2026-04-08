@@ -63,6 +63,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  overflow-x: hidden;
 }
 
 body {
@@ -73,7 +74,6 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
 }
 
 img, svg { display: block; max-width: 100%; }
@@ -326,7 +326,7 @@ section:last-of-type {
 
 /* ── 9. Hero ── */
 .hero {
-  min-height: calc(100dvh - var(--nav-h, 97px));
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   padding-top: var(--section-y);
