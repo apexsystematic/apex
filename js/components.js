@@ -102,7 +102,7 @@
       var isOpen = mobileNav.classList.toggle('is-open');
       menuToggle.classList.toggle('is-open', isOpen);
       menuToggle.setAttribute('aria-expanded', String(isOpen));
-      document.body.style.overflow = isOpen ? 'hidden' : '';
+      document.documentElement.style.overflow = isOpen ? 'hidden' : '';
     });
 
     if (closeBtn) {
@@ -110,7 +110,7 @@
         mobileNav.classList.remove('is-open');
         menuToggle.classList.remove('is-open');
         menuToggle.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
       });
     }
 
@@ -119,7 +119,7 @@
         mobileNav.classList.remove('is-open');
         menuToggle.classList.remove('is-open');
         menuToggle.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
       });
     });
   }
