@@ -326,7 +326,7 @@ section:last-of-type {
 
 /* ── 9. Hero ── */
 .hero {
-  min-height: 100svh;
+  min-height: calc(100dvh - var(--nav-h, 97px));
   display: flex;
   align-items: center;
   padding-top: var(--section-y);
@@ -705,7 +705,7 @@ section:last-of-type {
 /* ── 14. About ── */
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 4fr 3fr;
   gap: 96px;
   align-items: start;
 }
@@ -716,16 +716,55 @@ section:last-of-type {
   gap: 20px;
 }
 
-.about-content h2 {
-  max-width: 440px;
-}
-
 .about-content p {
   line-height: 1.8;
 }
 
-.about-tools {
+.about-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
   padding-top: 72px;
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.about-stat {
+  background: var(--bg);
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: background var(--ease);
+}
+
+.about-stat:hover {
+  background: var(--surface);
+}
+
+.about-stat-number {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  color: var(--white);
+  line-height: 1;
+}
+
+.about-stat-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.about-tools {
+  display: flex;
+  flex-direction: column;
 }
 
 .tools-label {
@@ -1105,7 +1144,7 @@ section:last-of-type {
     gap: 56px;
   }
 
-  .about-tools {
+  .about-sidebar {
     padding-top: 0;
   }
 
