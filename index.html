@@ -40,6 +40,7 @@
         <span class="section-tag">AI Automation for Professionals</span>
         <h1>Still doing it<br>manually?</h1>
         <p class="hero-sub">You built your practice on expertise — not on copying data between spreadsheets, chasing documents, or manually compiling reports. We use AI to eliminate the repetitive work eating your time.</p>
+        <p class="hero-metric"><span class="hero-metric-number">15+</span> billable hours reclaimed every week, on average.</p>
         <div class="hero-actions">
           <a href="#contact" class="btn btn-primary">Get Your Free Audit</a>
           <a href="#how-it-works" class="btn btn-ghost">See how it works</a>
@@ -50,7 +51,7 @@
     <!-- ── CERTIFICATIONS ── -->
 <section class="certifications" id="certifications">
   <div class="container">
-    <p class="certs-label">Certified in the platforms we build on</p>
+    <p class="section-tag" style="display:block;text-align:center;margin-bottom:32px;">Certified in the platforms we build on</p>
     <div class="certs-grid">
 
       <!-- MAKE.COM -->
@@ -325,7 +326,22 @@
         <div class="about-grid">
           <div class="about-content">
             <span class="section-tag">About</span>
-            <h2>Built by someone who's done the manual work — and refused to keep doing it</h2>
+            <!-- 
+              ABOUT HEADING OPTIONS (pick one, delete the rest):
+
+              Option A — Current (too long, 5 lines):
+              "Built by someone who's done the manual work — and refused to keep doing it"
+
+              Option B — Applied below (punchy, 2 lines):
+              "I've done the manual work.<br>I build the systems that end it."
+
+              Option C — Rhetorical hook (2–3 lines):
+              "Your expertise is too valuable<br>for work a machine can do better."
+
+              Option D — Origin story angle (2–3 lines):
+              "Operations experience.<br>Automation conviction.<br>No templates."
+            -->
+            <h2>I've done the manual work.<br>I build the systems that end it.</h2>
             <p>Apex Systematic was founded on one conviction: highly skilled professionals should not be spending their expertise on work a machine can do better.</p>
             <p>I spent years running business operations — managing the workflows, processes, and systems that keep a practice moving. I know what it feels like to spend hours on work that should take minutes, because I've lived it. Now I build the systems that eliminate it.</p>
             <p>I work with a deliberately small number of clients at a time — because this work deserves proper attention, not a production line.</p>
@@ -377,6 +393,29 @@
           <div class="form-group">
             <label for="pain">What's your biggest time drain right now?</label>
             <textarea id="pain" name="pain" rows="5" placeholder="Describe the manual work that frustrates you most..." required></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="budget">Estimated monthly budget</label>
+              <select id="budget" name="budget">
+                <option value="" disabled selected>Select a range</option>
+                <option value="under-500">Under $500</option>
+                <option value="500-1500">$500 – $1,500</option>
+                <option value="1500-3000">$1,500 – $3,000</option>
+                <option value="3000-plus">$3,000+</option>
+                <option value="not-sure">Not sure yet</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="team-size">Size of team</label>
+              <select id="team-size" name="team_size">
+                <option value="" disabled selected>Select team size</option>
+                <option value="solo">Solo (just me)</option>
+                <option value="2-5">2–5 people</option>
+                <option value="6-20">6–20 people</option>
+                <option value="20-plus">20+ people</option>
+              </select>
+            </div>
           </div>
           <button type="submit" class="btn btn-primary">Request Free Audit</button>
         </form>
