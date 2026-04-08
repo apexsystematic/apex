@@ -33,8 +33,8 @@
   --border-light:     #263040;
 
   --text:             #D8DCE4;
-  --text-muted:       #5C6578;
-  --text-dim:         #333D50;
+  --text-muted:       #7A8299;
+  --text-dim:         #4F5B6E;
   --white:            #FFFFFF;
 
   --gold:             #C9A84C;
@@ -149,7 +149,7 @@ section:last-of-type {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.72rem;
+  font-size: 0.85rem;
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
