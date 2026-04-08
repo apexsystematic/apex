@@ -436,6 +436,18 @@
 
   <script src="js/components.js"></script>
   <script src="js/main.js"></script>
+  <script>
+    (function () {
+      function setNavHeight() {
+        var nav = document.getElementById('header-wrap');
+        if (nav) {
+          document.documentElement.style.setProperty('--nav-h', nav.offsetHeight + 'px');
+        }
+      }
+      setNavHeight();
+      window.addEventListener('resize', setNavHeight);
+    })();
+  </script>
 
   <div id="apex-chat-widget"></div>
   

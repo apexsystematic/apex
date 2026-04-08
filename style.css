@@ -144,7 +144,12 @@ section:last-of-type {
 }
 
 
-/* ── 5. Buttons ── */
+/* ── 6. Main content offset for fixed nav ── */
+#main-content {
+  padding-top: var(--nav-h, 97px);
+}
+
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -185,8 +190,11 @@ section:last-of-type {
 
 /* ── 7. Header & Nav ── */
 .header-wrap {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
   z-index: 150;
   background: var(--bg);
   border-bottom: 1px solid var(--border);
@@ -326,7 +334,7 @@ section:last-of-type {
 
 /* ── 9. Hero ── */
 .hero {
-  min-height: 100dvh;
+  min-height: calc(100dvh - var(--nav-h, 97px));
   display: flex;
   align-items: center;
   padding-top: var(--section-y);
