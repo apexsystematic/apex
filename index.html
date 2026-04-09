@@ -358,62 +358,116 @@
     </section>
 
     <!-- ── CONTACT / CTA ── -->
-    <section class="contact" id="contact">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-tag">Get started</span>
-          <h2>Let's map where your time is going</h2>
-          <p class="section-sub">Start with a free audit. No commitment, no sales pitch — just a clear picture of where your time is going and what can be automated.</p>
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Get started</span>
+        <h2>Let's map where your time is going</h2>
+        <p class="section-sub">Start with a free audit. No commitment, no sales pitch — just a clear picture of where your time is going and what can be automated.</p>
+      </div>
+  
+      <div class="audit-form-wrap">
+  
+        <!-- PROGRESS BAR -->
+        <div class="audit-progress">
+          <div class="audit-progress-bar" id="audit-progress-bar"></div>
         </div>
-        <form class="contact-form" id="contact-form" novalidate>
+        <p class="audit-step-label" id="audit-step-label">Step 1 of 3</p>
+  
+        <!-- STEP 1 -->
+        <div class="audit-step" id="audit-step-1">
+          <h3 class="audit-step-title">Tell us about your practice</h3>
+          <div class="form-group">
+            <label for="role">What do you do?</label>
+            <select id="role" name="role">
+              <option value="" disabled selected>Select your role</option>
+              <option value="lawyer">Lawyer / Solicitor</option>
+              <option value="ifa">Financial Adviser</option>
+              <option value="consultant">Consultant</option>
+              <option value="accountant">Accountant</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="team-size">Team size</label>
+            <select id="team-size" name="team_size">
+              <option value="" disabled selected>Select team size</option>
+              <option value="solo">Just me</option>
+              <option value="small">2–5 people</option>
+              <option value="medium">6–15 people</option>
+              <option value="large">16+ people</option>
+            </select>
+          </div>
+          <button class="btn btn-primary audit-next" onclick="auditNext(1)">Next →</button>
+        </div>
+  
+        <!-- STEP 2 -->
+        <div class="audit-step" id="audit-step-2" style="display:none;">
+          <h3 class="audit-step-title">Where is your time going?</h3>
+          <div class="form-group">
+            <label for="pain">Biggest time drain</label>
+            <select id="pain" name="pain">
+              <option value="" disabled selected>Select your biggest pain point</option>
+              <option value="onboarding">Client onboarding</option>
+              <option value="documents">Document drafting</option>
+              <option value="data-entry">Data entry &amp; reporting</option>
+              <option value="scheduling">Scheduling &amp; follow-ups</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="hours-lost">Estimated hours lost per week</label>
+            <select id="hours-lost" name="hours_lost">
+              <option value="" disabled selected>Select a range</option>
+              <option value="under-5">Less than 5 hrs/week</option>
+              <option value="5-10">5–10 hrs/week</option>
+              <option value="10-20">10–20 hrs/week</option>
+              <option value="20+">20+ hrs/week</option>
+            </select>
+          </div>
+          <div class="audit-step-nav">
+            <button class="btn btn-ghost" onclick="auditBack(2)">← Back</button>
+            <button class="btn btn-primary" onclick="auditNext(2)">Next →</button>
+          </div>
+        </div>
+  
+        <!-- STEP 3 -->
+        <div class="audit-step" id="audit-step-3" style="display:none;">
+          <h3 class="audit-step-title">Where should we send your audit?</h3>
           <div class="form-row">
             <div class="form-group">
               <label for="name">Full name</label>
-              <input type="text" id="name" name="name" placeholder="Your name" required>
+              <input type="text" id="name" name="name" placeholder="Your name">
             </div>
             <div class="form-group">
               <label for="email">Email address</label>
-              <input type="email" id="email" name="email" placeholder="your@email.com" required>
+              <input type="email" id="email" name="email" placeholder="your@email.com">
             </div>
           </div>
           <div class="form-group">
-            <label for="profession">What do you do?</label>
-            <input type="text" id="profession" name="profession" placeholder="e.g. Lawyer, Consultant, Financial Advisor">
+            <label for="notes">Anything else we should know? <span class="field-optional">(optional)</span></label>
+            <textarea id="notes" name="notes" rows="3" placeholder="Any extra context about your situation..."></textarea>
           </div>
-          <div class="form-group">
-            <label for="pain">What's your biggest time drain right now?</label>
-            <textarea id="pain" name="pain" rows="5" placeholder="Describe the manual work that frustrates you most..." required></textarea>
+          <div class="audit-step-nav">
+            <button class="btn btn-ghost" onclick="auditBack(3)">← Back</button>
+            <button class="btn btn-primary" id="audit-submit-btn" onclick="auditSubmit()">Get My Free Audit</button>
           </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="budget">Estimated monthly budget</label>
-              <select id="budget" name="budget">
-                <option value="" disabled selected>Select a range</option>
-                <option value="under-500">Under $500</option>
-                <option value="500-1500">$500 – $1,500</option>
-                <option value="1500-3000">$1,500 – $3,000</option>
-                <option value="3000-plus">$3,000+</option>
-                <option value="not-sure">Not sure yet</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="team-size">Size of team</label>
-              <select id="team-size" name="team_size">
-                <option value="" disabled selected>Select team size</option>
-                <option value="solo">Solo (just me)</option>
-                <option value="2-5">2–5 people</option>
-                <option value="6-20">6–20 people</option>
-                <option value="20-plus">20+ people</option>
-              </select>
-            </div>
-          </div>
-          <button type="submit" class="btn btn-primary">Request Free Audit</button>
-        </form>
-        <div class="form-success" id="form-success">
-          <p>Thank you — we'll be in touch within 24 hours.</p>
         </div>
+  
+        <!-- STEP 4: THANK YOU + CALENDLY -->
+        <div class="audit-step" id="audit-step-4" style="display:none;">
+          <div class="audit-thankyou">
+            <h3 class="audit-step-title">You're on the list.</h3>
+            <p>I'm putting together your audit now. To walk through the findings and see exactly what can be automated in your practice, book a free 15-minute call below.</p>
+            <p class="audit-sub">No pitch. No pressure. Just a clear picture of where your time is going.</p>
+          </div>
+          <div class="calendly-inline-widget" data-url="https://calendly.com/YOUR-LINK/15min" style="min-width:320px;height:700px;"></div>
+          <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+        </div>
+  
       </div>
-    </section>
+    </div>
+  </section>
 
   </main>
 
