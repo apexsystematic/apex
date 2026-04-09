@@ -998,6 +998,15 @@ section:last-of-type {
   font-size: 0.85rem;
 }
 
+.audit-form-wrap {
+  max-width: 560px;
+  margin: 0;
+}
+
+.audit-next {
+  margin-top: 1.5rem;
+}
+
 
 /* ── 17. Footer ── */
 .footer-wrap {
