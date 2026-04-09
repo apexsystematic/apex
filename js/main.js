@@ -6,159 +6,124 @@
 (function () {
 
   document.addEventListener('DOMContentLoaded', function () {
-
-    initContactForm();
     initScrollReveal();
-
   });
 
-  /* ── Contact form ── */
-  function initContactForm() {
-    var form    = document.getElementById('contact-form');
-    var success = document.getElementById('form-success');
+  /* ── Scroll reveal ── */
+  function initScrollReveal() {
+    if (!('IntersectionObserver' in window)) return;
 
-    if (!form || !success) return;
+    var revealEls = document.querySelectorAll(
+      '.service-card, .step, .pricing-card, .testimonial-card, .about-grid, .audit-form-wrap'
+    );
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
 
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
-
-      var submitBtn = form.querySelector('button[type="submit"]');
-      var originalText = submitBtn.textContent;
-
-      submitBtn.textContent = 'Sending\u2026';
-      submitBtn.disabled = true;
-
-      /*
-        Replace the setTimeout below with your actual form endpoint.
-        e.g. fetch('/api/contact', { method: 'POST', body: new FormData(form) })
-      */
-      setTimeout(function () {
-        form.style.display = 'none';
-        success.style.display = 'block';
-      }, 900);
+    revealEls.forEach(function (el) {
+      el.classList.add('reveal');
+      observer.observe(el);
     });
   }
 
-   /* ── Contact form v2 ── */
-   const AUDIT_WEBHOOK = 'https://YOUR-WORKER.workers.dev/contact';
-   
-   const auditData = {};
-   
-   function auditNext(step) {
-     if (step === 1) {
-       const role = document.getElementById('role').value;
-       const teamSize = document.getElementById('team-size').value;
-       if (!role || !teamSize) {
-         alert('Please complete both fields before continuing.');
-         return;
-       }
-       auditData.role = role;
-       auditData.team_size = teamSize;
-     }
-   
-     if (step === 2) {
-       const pain = document.getElementById('pain').value;
-       const hoursLost = document.getElementById('hours-lost').value;
-       if (!pain || !hoursLost) {
-         alert('Please complete both fields before continuing.');
-         return;
-       }
-       auditData.pain = pain;
-       auditData.hours_lost = hoursLost;
-     }
-   
-     showStep(step + 1);
-   }
-   
-   function auditBack(step) {
-     showStep(step - 1);
-   }
-   
-   async function auditSubmit() {
-     const name = document.getElementById('name').value.trim();
-     const email = document.getElementById('email').value.trim();
-     const notes = document.getElementById('notes').value.trim();
-   
-     if (!name || !email) {
-       alert('Please enter your name and email.');
-       return;
-     }
-   
-     auditData.name = name;
-     auditData.email = email;
-     auditData.notes = notes;
-   
-     const btn = document.getElementById('audit-submit-btn');
-     btn.textContent = 'Sending...';
-     btn.disabled = true;
-   
-     try {
-       await fetch(AUDIT_WEBHOOK, {
-         method: 'POST',
-         headers: { 'Content-Type': 'application/json' },
-         body: JSON.stringify(auditData)
-       });
-     } catch (e) {
-       console.error('Webhook error:', e);
-     }
-   
-     showStep(4);
-   }
-   
-   function showStep(step) {
-     for (let i = 1; i <= 4; i++) {
-       const el = document.getElementById('audit-step-' + i);
-       if (el) el.style.display = i === step ? 'block' : 'none';
-     }
-   
-     const bar = document.getElementById('audit-progress-bar');
-     const label = document.getElementById('audit-step-label');
-   
-     const progress = { 1: '33%', 2: '66%', 3: '99%', 4: '100%' };
-     const labels = { 1: 'Step 1 of 3', 2: 'Step 2 of 3', 3: 'Step 3 of 3', 4: 'Done' };
-   
-     if (bar) bar.style.width = progress[step];
-     if (label) label.textContent = labels[step];
-   }
-   
-     /* ── Scroll reveal ── */
-     function initScrollReveal() {
-       if (!('IntersectionObserver' in window)) return;
-   
-       var revealEls = document.querySelectorAll(
-         '.service-card, .step, .pricing-card, .testimonial-card, .about-grid, .contact-form'
-       );
-   
-       var observer = new IntersectionObserver(function (entries) {
-         entries.forEach(function (entry) {
-           if (entry.isIntersecting) {
-             entry.target.classList.add('is-visible');
-             observer.unobserve(entry.target);
-           }
-         });
-       }, { threshold: 0.1 });
-   
-       revealEls.forEach(function (el) {
-         el.classList.add('reveal');
-         observer.observe(el);
-       });
-     }
-   
-   })();
+})();
 
-/* ============================================================
-   APEX SYSTEMATIC — CHAT WIDGET
-   Paste this block into main.js
-   Then add this HTML just before </body> in your index.html:
 
-   <div id="apex-chat-widget"></div>
+/* ═══════════════════════════════════════════
+   APEX SYSTEMATIC — Audit multi-step form
+   ═══════════════════════════════════════════ */
 
-   ============================================================ */
+const AUDIT_WEBHOOK = 'https://YOUR-WORKER.workers.dev/contact';
+
+const auditData = {};
+
+window.auditNext = function (step) {
+  if (step === 1) {
+    const role = document.getElementById('role').value;
+    const teamSize = document.getElementById('team-size').value;
+    if (!role || !teamSize) {
+      alert('Please complete both fields before continuing.');
+      return;
+    }
+    auditData.role = role;
+    auditData.team_size = teamSize;
+  }
+
+  if (step === 2) {
+    const pain = document.getElementById('pain').value;
+    const hoursLost = document.getElementById('hours-lost').value;
+    if (!pain || !hoursLost) {
+      alert('Please complete both fields before continuing.');
+      return;
+    }
+    auditData.pain = pain;
+    auditData.hours_lost = hoursLost;
+  }
+
+  window.showStep(step + 1);
+};
+
+window.auditBack = function (step) {
+  window.showStep(step - 1);
+};
+
+window.auditSubmit = async function () {
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const notes = document.getElementById('notes').value.trim();
+
+  if (!name || !email) {
+    alert('Please enter your name and email.');
+    return;
+  }
+
+  auditData.name = name;
+  auditData.email = email;
+  auditData.notes = notes;
+
+  const btn = document.getElementById('audit-submit-btn');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
+  try {
+    await fetch(AUDIT_WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(auditData)
+    });
+  } catch (e) {
+    console.error('Webhook error:', e);
+  }
+
+  window.showStep(4);
+};
+
+window.showStep = function (step) {
+  for (let i = 1; i <= 4; i++) {
+    const el = document.getElementById('audit-step-' + i);
+    if (el) el.style.display = i === step ? 'block' : 'none';
+  }
+
+  const bar = document.getElementById('audit-progress-bar');
+  const label = document.getElementById('audit-step-label');
+
+  const progress = { 1: '33%', 2: '66%', 3: '99%', 4: '100%' };
+  const labels = { 1: 'Step 1 of 3', 2: 'Step 2 of 3', 3: 'Step 3 of 3', 4: 'Done' };
+
+  if (bar) bar.style.width = progress[step];
+  if (label) label.textContent = labels[step];
+};
+
+
+/* ═══════════════════════════════════════════
+   APEX SYSTEMATIC — Chat widget
+   ═══════════════════════════════════════════ */
 
 (function () {
   'use strict';
@@ -180,7 +145,7 @@
     },
     {
       trigger: ['cost', 'price', 'how much', 'pricing', 'fee'],
-      reply: `Project-based pricing — you pay once and own the system outright. No retainers, no monthly fees.\n\n- **Quick Win** — one automation, 2-week delivery\n- **Full System** — multiple workflows, 4–6 weeks\n- **Ongoing Partner** — monthly sprints\n\nEvery engagement starts with a free audit. Want to book one?`
+      reply: `Project-based pricing — you pay once and own the system outright. No retainers, no monthly fees.\n\n- **Foundation** — multiple workflows, 2-week delivery\n- **Connected Practice** — workflows + AI, 4–6 weeks\n- **Agent Suite** — full build with AI agents, 6–8 weeks\n\nEvery engagement starts with a free audit. Want to book one?`
     },
     {
       trigger: ['retainer', 'monthly', 'subscription', 'lock-in'],
@@ -188,7 +153,7 @@
     },
     {
       trigger: ['how long', 'timeline', 'weeks', 'deliver'],
-      reply: `Quick Win builds take **2 weeks**. Full System builds are **4–6 weeks**.\n\nProcess: free audit call → fixed-price proposal within 24hrs → build → handover with full documentation.\n\nWould you like to book an audit call?`
+      reply: `Foundation builds take **2 weeks**. Connected Practice is **4–6 weeks**. Agent Suite is **6–8 weeks**.\n\nProcess: free audit call → fixed-price proposal within 24hrs → build → handover with full documentation.\n\nWould you like to book an audit call?`
     }
   ];
 
@@ -248,7 +213,6 @@
       </div>
     `;
 
-    // Initial bot message
     setTimeout(() => {
       apexAddMsg('bot', "Hi there 👋 I'm the Apex AI assistant.\n\nAsk me anything about automating your practice — or just tell me what's taking up too much of your time.");
     }, 600);
@@ -347,7 +311,6 @@
         reply = getMock(message);
       }
 
-      // Strip any lead-capture signal before displaying
       reply = reply.replace(/LEAD_CAPTURED:\{[^}]+\}/g, '').trim();
 
       apexRemoveTyping();
