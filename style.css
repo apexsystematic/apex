@@ -105,6 +105,10 @@ h3 { font-size: 1.1rem; }
 
 p  { color: var(--text-muted); line-height: 1.8; }
 
+.highlight-gold {
+  color: #C9A84C;
+  font-weight: 500;
+}
 
 /* ── 4. Layout ── */
 .container {
