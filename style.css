@@ -935,6 +935,69 @@ section:last-of-type {
   letter-spacing: 0.05em;
 }
 
+/* ── AUDIT FORM ── */
+.audit-form-wrap {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.audit-progress {
+  height: 3px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 2px;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+}
+
+.audit-progress-bar {
+  height: 100%;
+  background: #C9A84C;
+  border-radius: 2px;
+  width: 33%;
+  transition: width 0.4s ease;
+}
+
+.audit-step-label {
+  font-size: 0.75rem;
+  color: var(--color-muted, #888);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 1.75rem;
+}
+
+.audit-step-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.audit-step-nav {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.field-optional {
+  font-size: 0.75rem;
+  color: var(--color-muted, #888);
+  font-weight: 400;
+}
+
+.audit-thankyou {
+  margin-bottom: 2rem;
+}
+
+.audit-thankyou p {
+  color: var(--color-muted, #aaa);
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+}
+
+.audit-sub {
+  font-size: 0.85rem;
+}
+
 
 /* ── 17. Footer ── */
 .footer-wrap {
