@@ -1011,6 +1011,17 @@ section:last-of-type {
   margin-top: 1.5rem;
 }
 
+#audit-error {
+  background: rgba(180, 40, 40, 0.15);
+  border: 1px solid rgba(180, 40, 40, 0.4);
+  color: #e88;
+  font-size: 0.85rem;
+  padding: 0.65rem 1rem;
+  border-radius: 4px;
+  margin-bottom: 1.25rem;
+  display: none;
+}
+
 
 /* ── 17. Footer ── */
 .footer-wrap {
