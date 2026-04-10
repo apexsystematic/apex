@@ -809,6 +809,38 @@ section:last-of-type {
   color: var(--gold);
 }
 
+.about-certified {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.certified-logos {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+
+.certified-logo {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+}
+
+.certified-logo:hover {
+  opacity: 0.85;
+}
+
+.certified-logo span {
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--color-muted, rgba(255, 255, 255, 0.6));
+}
+
 
 /* ── 15. Testimonials ── */
 .testimonials-grid {
