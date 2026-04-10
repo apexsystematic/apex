@@ -131,6 +131,16 @@ window.showStep = function (step) {
 
   if (bar) bar.style.width = progress[step];
   if (label) label.textContent = labels[step];
+
+  if (step === 4) {
+    const widget = document.querySelector('.calendly-inline-widget');
+    if (widget && auditData.name && auditData.email) {
+      const name = encodeURIComponent(auditData.name);
+      const email = encodeURIComponent(auditData.email);
+      widget.dataset.url = `https://calendly.com/apexsystematic/30min?name=${name}&email=${email}`;
+      if (window.Calendly) window.Calendly.initInlineWidgets();
+    }
+  }
 };
 
 
