@@ -43,12 +43,25 @@ const AUDIT_WEBHOOK = 'https://YOUR-WORKER.workers.dev/contact';
 
 const auditData = {};
 
+function auditShowError(message) {
+  let el = document.getElementById('audit-error');
+  if (!el) {
+    el = document.createElement('p');
+    el.id = 'audit-error';
+    const wrap = document.querySelector('.audit-form-wrap');
+    if (wrap) wrap.prepend(el);
+  }
+  el.textContent = message;
+  el.style.display = 'block';
+  setTimeout(() => { el.style.display = 'none'; }, 4000);
+}
+
 window.auditNext = function (step) {
   if (step === 1) {
     const role = document.getElementById('role').value;
     const teamSize = document.getElementById('team-size').value;
     if (!role || !teamSize) {
-      alert('Please complete both fields before continuing.');
+      auditShowError('Please complete both fields before continuing.');
       return;
     }
     auditData.role = role;
@@ -59,7 +72,7 @@ window.auditNext = function (step) {
     const pain = document.getElementById('pain').value;
     const hoursLost = document.getElementById('hours-lost').value;
     if (!pain || !hoursLost) {
-      alert('Please complete both fields before continuing.');
+      auditShowError('Please complete both fields before continuing.');
       return;
     }
     auditData.pain = pain;
@@ -79,7 +92,7 @@ window.auditSubmit = async function () {
   const notes = document.getElementById('notes').value.trim();
 
   if (!name || !email) {
-    alert('Please enter your name and email.');
+    auditShowError('Please enter your name and email.');
     return;
   }
 
