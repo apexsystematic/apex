@@ -140,7 +140,7 @@ window.showStep = function (step) {
       widget.innerHTML = '';
       widget.dataset.url = `https://calendly.com/YOUR-LINK/15min?name=${name}&email=${email}`;
       const iframe = document.createElement('iframe');
-      iframe.src = `https://calendly.com/YOUR-LINK/15min?name=${name}&email=${email}&embed_type=Inline&embed_domain=apexsystematic.com`;
+      iframe.src = `https://calendly.com/apexsystematic/30min?name=${name}&email=${email}&embed_type=Inline&embed_domain=apexsystematic.com`;
       iframe.width = '100%';
       iframe.height = '700';
       iframe.frameBorder = '0';
