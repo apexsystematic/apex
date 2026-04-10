@@ -137,8 +137,14 @@ window.showStep = function (step) {
     if (widget && auditData.name && auditData.email) {
       const name = encodeURIComponent(auditData.name);
       const email = encodeURIComponent(auditData.email);
-      widget.dataset.url = `https://calendly.com/apexsystematic/30min?name=${name}&email=${email}`;
-      if (window.Calendly) window.Calendly.initInlineWidgets();
+      widget.innerHTML = '';
+      widget.dataset.url = `https://calendly.com/YOUR-LINK/15min?name=${name}&email=${email}`;
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://calendly.com/YOUR-LINK/15min?name=${name}&email=${email}&embed_type=Inline&embed_domain=apexsystematic.com`;
+      iframe.width = '100%';
+      iframe.height = '700';
+      iframe.frameBorder = '0';
+      widget.appendChild(iframe);
     }
   }
 };
