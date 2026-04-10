@@ -1011,6 +1011,14 @@ section:last-of-type {
   margin-top: 1.5rem;
 }
 
+.audit-form-wrap .form-group {
+  margin-top: 1.25rem;
+}
+
+.audit-form-wrap .form-group:first-child {
+  margin-top: 0;
+}
+
 #audit-error {
   background: rgba(180, 40, 40, 0.15);
   border: 1px solid rgba(180, 40, 40, 0.4);
