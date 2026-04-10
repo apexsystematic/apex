@@ -1030,6 +1030,10 @@ section:last-of-type {
   display: none;
 }
 
+.audit-form-wrap .form-row .form-group {
+  margin-top: 0;
+}
+
 
 /* ── 17. Footer ── */
 .footer-wrap {
