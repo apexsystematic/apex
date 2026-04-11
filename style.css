@@ -739,18 +739,18 @@ section:last-of-type {
   padding-top: 72px;
 }
 
+.about-certs {
+  display: flex;
+  flex-direction: column;
+}
+
 .tools-label {
   display: block;
   font-size: 0.65rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--text-dim);
+  color: var(--gold);
   margin-bottom: 20px;
-}
-
-.about-certs {
-  display: flex;
-  flex-direction: column;
 }
 
 .about-cert-list {
@@ -763,7 +763,7 @@ section:last-of-type {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 24px;
+  padding: 26px 24px;
   border-bottom: 1px solid var(--border);
   transition: background var(--ease);
   color: var(--text-muted);
@@ -785,21 +785,21 @@ section:last-of-type {
 }
 
 .about-cert-icon {
-  width: 22px;
-  height: 22px;
+  width: 28px;
+  height: 28px;
   flex-shrink: 0;
   color: inherit;
   transition: color var(--ease);
 }
 
 .about-cert-icon--wide {
-  width: 32px;
-  height: 22px;
+  width: 40px;
+  height: 28px;
 }
 
 .about-cert-icon--ibm {
-  width: 44px;
-  height: 18px;
+  width: 55px;
+  height: 22px;
 }
 
 .about-cert-name {
@@ -823,18 +823,18 @@ section:last-of-type {
 .about-certs-link {
   display: inline-flex;
   align-items: center;
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: none;
   color: var(--gold);
   margin-top: 20px;
-  transition: letter-spacing var(--ease);
+  transition: color var(--ease);
   align-self: flex-start;
 }
 
 .about-certs-link:hover {
-  letter-spacing: 0.2em;
+  color: var(--white);
 }
 
 
