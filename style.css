@@ -739,46 +739,6 @@ section:last-of-type {
   padding-top: 72px;
 }
 
-.about-stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-}
-
-.about-stat {
-  background: var(--bg);
-  padding: 24px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  transition: background var(--ease);
-}
-
-.about-stat:hover {
-  background: var(--surface);
-}
-
-.about-stat-number {
-  font-family: var(--font-display);
-  font-size: 1.9rem;
-  color: var(--white);
-  line-height: 1;
-}
-
-.about-stat-label {
-  font-size: 0.72rem;
-  letter-spacing: 0.06em;
-  color: var(--text-muted);
-  line-height: 1.4;
-}
-
-.about-tools {
-  display: flex;
-  flex-direction: column;
-}
-
 .tools-label {
   display: block;
   font-size: 0.65rem;
@@ -788,57 +748,93 @@ section:last-of-type {
   margin-bottom: 20px;
 }
 
-.tools-grid {
+.about-certs {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  flex-direction: column;
 }
 
-.tool-tag {
-  font-size: 0.75rem;
-  letter-spacing: 0.04em;
-  color: var(--text-muted);
+.about-cert-list {
+  display: flex;
+  flex-direction: column;
   border: 1px solid var(--border);
-  padding: 7px 14px;
-  transition: border-color var(--ease), color var(--ease);
-  cursor: default;
 }
 
-.tool-tag:hover {
-  border-color: var(--gold);
+.about-cert-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  transition: background var(--ease);
+  color: var(--text-muted);
+}
+
+.about-cert-row:last-child {
+  border-bottom: none;
+}
+
+.about-cert-row:hover {
+  background: var(--surface);
+  color: var(--white);
+}
+
+.about-cert-row-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.about-cert-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  color: inherit;
+  transition: color var(--ease);
+}
+
+.about-cert-icon--wide {
+  width: 32px;
+  height: 22px;
+}
+
+.about-cert-icon--ibm {
+  width: 44px;
+  height: 18px;
+}
+
+.about-cert-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--white);
+  letter-spacing: 0.02em;
+}
+
+.about-cert-count {
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+  transition: color var(--ease);
+}
+
+.about-cert-row:hover .about-cert-count {
+  color: var(--text-muted);
+}
+
+.about-certs-link {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   color: var(--gold);
+  margin-top: 20px;
+  transition: letter-spacing var(--ease);
+  align-self: flex-start;
 }
 
-.about-certified {
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.certified-logos {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-top: 0.75rem;
-}
-
-.certified-logo {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  opacity: 0.5;
-  transition: opacity 0.2s ease;
-}
-
-.certified-logo:hover {
-  opacity: 0.85;
-}
-
-.certified-logo span {
-  font-size: 12px;
-  letter-spacing: 0.04em;
-  color: var(--color-muted, rgba(255, 255, 255, 0.6));
+.about-certs-link:hover {
+  letter-spacing: 0.2em;
 }
 
 
@@ -1284,7 +1280,7 @@ section:last-of-type {
 
   .about-grid {
     grid-template-columns: 1fr;
-    gap: 56px;
+    gap: 48px;
   }
 
   .about-sidebar {
