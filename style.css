@@ -845,6 +845,39 @@ section:last-of-type {
   color: var(--white);
 }
 
+.about-cert-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.about-cert-tile {
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 32px 20px;
+  transition: background var(--ease), color var(--ease);
+  color: var(--text-muted);
+}
+
+.about-cert-tile:hover {
+  background: var(--surface);
+  color: var(--white);
+}
+
+.about-cert-name {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: inherit;
+}
+
 
 /* ── 15. Testimonials ── */
 .testimonials-grid {
