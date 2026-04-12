@@ -717,7 +717,7 @@ section:last-of-type {
 /* ── 14. About ── */
 .about-grid {
   display: grid;
-  grid-template-columns: 5fr 1.5fr;
+  grid-template-columns: 5fr 2fr;
   gap: 96px;
   align-items: start;
 }
