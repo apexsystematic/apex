@@ -1055,8 +1055,6 @@ section:last-of-type {
 }
 
 .audit-thankyou p {
-  color: var(--color-muted, #aaa);
-  line-height: 1.7;
   margin-bottom: 0.75rem;
 }
 
