@@ -168,7 +168,7 @@
       + '</footer>';
   }
 
-  /* ── Contact Form ── */
+  /* ── Contact Form shared helpers ── */
 
   function buildCalendlyStep() {
     return '<div class="audit-step" id="audit-step-4" style="display:none;">'
@@ -180,6 +180,95 @@
       + '<div class="calendly-inline-widget" data-url="https://calendly.com/apexsystematic/30min" style="min-width:320px;height:700px;"></div>'
       + '</div>';
   }
+
+  function buildFullFormInner() {
+    return '<div class="audit-form-wrap">'
+      + '<div class="audit-progress"><div class="audit-progress-bar" id="audit-progress-bar"></div></div>'
+      + '<p class="audit-step-label" id="audit-step-label">Step 1 of 3</p>'
+
+      + '<div class="audit-step" id="audit-step-1">'
+      +   '<h3 class="audit-step-title">Tell us about your practice</h3>'
+      +   '<div class="form-group">'
+      +     '<label for="role">What do you do?</label>'
+      +     '<select id="role" name="role">'
+      +       '<option value="" disabled selected>Select your role</option>'
+      +       '<option value="lawyer">Lawyer / Solicitor</option>'
+      +       '<option value="ifa">Financial Adviser</option>'
+      +       '<option value="consultant">Consultant</option>'
+      +       '<option value="accountant">Accountant</option>'
+      +       '<option value="other">Other</option>'
+      +     '</select>'
+      +   '</div>'
+      +   '<div class="form-group">'
+      +     '<label for="team-size">Team size</label>'
+      +     '<select id="team-size" name="team_size">'
+      +       '<option value="" disabled selected>Select team size</option>'
+      +       '<option value="solo">Just me</option>'
+      +       '<option value="small">2\u20135 people</option>'
+      +       '<option value="medium">6\u201315 people</option>'
+      +       '<option value="large">16+ people</option>'
+      +     '</select>'
+      +   '</div>'
+      +   '<button class="btn btn-primary audit-next" onclick="auditNext(1)">Next \u2192</button>'
+      + '</div>'
+
+      + '<div class="audit-step" id="audit-step-2" style="display:none;">'
+      +   '<h3 class="audit-step-title">Where is your time going?</h3>'
+      +   '<div class="form-group">'
+      +     '<label for="pain">Biggest time drain</label>'
+      +     '<select id="pain" name="pain">'
+      +       '<option value="" disabled selected>Select your biggest pain point</option>'
+      +       '<option value="onboarding">Client onboarding</option>'
+      +       '<option value="documents">Document drafting</option>'
+      +       '<option value="data-entry">Data entry &amp; reporting</option>'
+      +       '<option value="scheduling">Scheduling &amp; follow-ups</option>'
+      +       '<option value="other">Other</option>'
+      +     '</select>'
+      +   '</div>'
+      +   '<div class="form-group">'
+      +     '<label for="hours-lost">Estimated hours lost per week</label>'
+      +     '<select id="hours-lost" name="hours_lost">'
+      +       '<option value="" disabled selected>Select a range</option>'
+      +       '<option value="under-5">Less than 5 hrs/week</option>'
+      +       '<option value="5-10">5\u201310 hrs/week</option>'
+      +       '<option value="10-20">10\u201320 hrs/week</option>'
+      +       '<option value="20+">20+ hrs/week</option>'
+      +     '</select>'
+      +   '</div>'
+      +   '<div class="audit-step-nav">'
+      +     '<button class="btn btn-ghost" onclick="auditBack(2)">\u2190 Back</button>'
+      +     '<button class="btn btn-primary" onclick="auditNext(2)">Next \u2192</button>'
+      +   '</div>'
+      + '</div>'
+
+      + '<div class="audit-step" id="audit-step-3" style="display:none;">'
+      +   '<h3 class="audit-step-title">Where should we send your audit?</h3>'
+      +   '<div class="form-row">'
+      +     '<div class="form-group">'
+      +       '<label for="name">Full name</label>'
+      +       '<input type="text" id="name" name="name" placeholder="Your name">'
+      +     '</div>'
+      +     '<div class="form-group">'
+      +       '<label for="email">Email address</label>'
+      +       '<input type="email" id="email" name="email" placeholder="your@email.com">'
+      +     '</div>'
+      +   '</div>'
+      +   '<div class="form-group">'
+      +     '<label for="notes">Anything else we should know? <span class="field-optional">(optional)</span></label>'
+      +     '<textarea id="notes" name="notes" rows="3" placeholder="Any extra context about your situation..."></textarea>'
+      +   '</div>'
+      +   '<input type="text" id="audit-honeypot" name="website" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;pointer-events:none;">'
+      +   '<div class="audit-step-nav">'
+      +     '<button class="btn btn-ghost" onclick="auditBack(3)">\u2190 Back</button>'
+      +     '<button class="btn btn-primary" id="audit-submit-btn" onclick="auditSubmit()">Get My Free Audit</button>'
+      +   '</div>'
+      + '</div>'
+
+      + buildCalendlyStep()
+      + '</div>';
+  }
+
+  /* ── Contact Form (page injection) ── */
 
   function injectContactForm() {
     var el = document.getElementById('site-contact');
@@ -193,7 +282,7 @@
     var formInner;
 
     if (variant === 'short') {
-      /* ── Short variant: name + email + notes only (ROI calculator) ── */
+      /* ── Short variant: name + email + notes only ── */
       formInner = '<div class="audit-form-wrap">'
         + '<div class="audit-step" id="audit-step-3">'
         +   '<h3 class="audit-step-title">Where should we send your audit?</h3>'
@@ -219,91 +308,7 @@
         + buildCalendlyStep()
         + '</div>';
     } else {
-      /* ── Full variant: 3-step form (index + demos) ── */
-      formInner = '<div class="audit-form-wrap">'
-        + '<div class="audit-progress"><div class="audit-progress-bar" id="audit-progress-bar"></div></div>'
-        + '<p class="audit-step-label" id="audit-step-label">Step 1 of 3</p>'
-
-        + '<div class="audit-step" id="audit-step-1">'
-        +   '<h3 class="audit-step-title">Tell us about your practice</h3>'
-        +   '<div class="form-group">'
-        +     '<label for="role">What do you do?</label>'
-        +     '<select id="role" name="role">'
-        +       '<option value="" disabled selected>Select your role</option>'
-        +       '<option value="lawyer">Lawyer / Solicitor</option>'
-        +       '<option value="ifa">Financial Adviser</option>'
-        +       '<option value="consultant">Consultant</option>'
-        +       '<option value="accountant">Accountant</option>'
-        +       '<option value="other">Other</option>'
-        +     '</select>'
-        +   '</div>'
-        +   '<div class="form-group">'
-        +     '<label for="team-size">Team size</label>'
-        +     '<select id="team-size" name="team_size">'
-        +       '<option value="" disabled selected>Select team size</option>'
-        +       '<option value="solo">Just me</option>'
-        +       '<option value="small">2\u20135 people</option>'
-        +       '<option value="medium">6\u201315 people</option>'
-        +       '<option value="large">16+ people</option>'
-        +     '</select>'
-        +   '</div>'
-        +   '<button class="btn btn-primary audit-next" onclick="auditNext(1)">Next \u2192</button>'
-        + '</div>'
-
-        + '<div class="audit-step" id="audit-step-2" style="display:none;">'
-        +   '<h3 class="audit-step-title">Where is your time going?</h3>'
-        +   '<div class="form-group">'
-        +     '<label for="pain">Biggest time drain</label>'
-        +     '<select id="pain" name="pain">'
-        +       '<option value="" disabled selected>Select your biggest pain point</option>'
-        +       '<option value="onboarding">Client onboarding</option>'
-        +       '<option value="documents">Document drafting</option>'
-        +       '<option value="data-entry">Data entry &amp; reporting</option>'
-        +       '<option value="scheduling">Scheduling &amp; follow-ups</option>'
-        +       '<option value="other">Other</option>'
-        +     '</select>'
-        +   '</div>'
-        +   '<div class="form-group">'
-        +     '<label for="hours-lost">Estimated hours lost per week</label>'
-        +     '<select id="hours-lost" name="hours_lost">'
-        +       '<option value="" disabled selected>Select a range</option>'
-        +       '<option value="under-5">Less than 5 hrs/week</option>'
-        +       '<option value="5-10">5\u201310 hrs/week</option>'
-        +       '<option value="10-20">10\u201320 hrs/week</option>'
-        +       '<option value="20+">20+ hrs/week</option>'
-        +     '</select>'
-        +   '</div>'
-        +   '<div class="audit-step-nav">'
-        +     '<button class="btn btn-ghost" onclick="auditBack(2)">\u2190 Back</button>'
-        +     '<button class="btn btn-primary" onclick="auditNext(2)">Next \u2192</button>'
-        +   '</div>'
-        + '</div>'
-
-        + '<div class="audit-step" id="audit-step-3" style="display:none;">'
-        +   '<h3 class="audit-step-title">Where should we send your audit?</h3>'
-        +   '<div class="form-row">'
-        +     '<div class="form-group">'
-        +       '<label for="name">Full name</label>'
-        +       '<input type="text" id="name" name="name" placeholder="Your name">'
-        +     '</div>'
-        +     '<div class="form-group">'
-        +       '<label for="email">Email address</label>'
-        +       '<input type="email" id="email" name="email" placeholder="your@email.com">'
-        +     '</div>'
-        +   '</div>'
-        +   '<div class="form-group">'
-        +     '<label for="notes">Anything else we should know? <span class="field-optional">(optional)</span></label>'
-        +     '<textarea id="notes" name="notes" rows="3" placeholder="Any extra context about your situation..."></textarea>'
-        +   '</div>'
-        +   '<input type="text" id="audit-honeypot" name="website" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;pointer-events:none;">'
-        +   '<div class="audit-step-nav">'
-        +     '<button class="btn btn-ghost" onclick="auditBack(3)">\u2190 Back</button>'
-        +     '<button class="btn btn-primary" id="audit-submit-btn" onclick="auditSubmit()">Get My Free Audit</button>'
-        +   '</div>'
-        + '</div>'
-
-        + buildCalendlyStep()
-        + '</div>';
+      formInner = buildFullFormInner();
     }
 
     var section = document.createElement('section');
@@ -321,6 +326,64 @@
     el.replaceWith(section);
   }
 
+  /* ── Demo contact modal ── */
+
+  function injectDemoContactModal() {
+    if (!document.getElementById('demo-topbar')) return;
+
+    var style = document.createElement('style');
+    style.textContent = [
+      '#audit-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:9999;display:none;align-items:flex-start;justify-content:center;padding:40px 20px;overflow-y:auto;}',
+      '#audit-modal-overlay.is-open{display:flex;}',
+      '.audit-modal-panel{background:#0E1117;border:1px solid rgba(201,168,76,0.18);border-radius:4px;padding:48px 52px;max-width:580px;width:100%;position:relative;margin:auto;}',
+      '.audit-modal-panel .section-header{margin-bottom:32px;}',
+      '.audit-modal-panel .section-header h2{font-size:clamp(22px,3vw,30px);}',
+      '.audit-modal-close{position:absolute;top:16px;right:20px;background:none;border:none;color:rgba(255,255,255,0.35);font-size:20px;cursor:pointer;padding:6px 10px;line-height:1;transition:color 0.2s;}',
+      '.audit-modal-close:hover{color:rgba(255,255,255,0.8);}',
+      '@media(max-width:600px){.audit-modal-panel{padding:36px 24px;}}',
+    ].join('');
+    document.head.appendChild(style);
+
+    var overlay = document.createElement('div');
+    overlay.id = 'audit-modal-overlay';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.setAttribute('aria-label', 'Book a free audit');
+    overlay.innerHTML = '<div class="audit-modal-panel" onclick="event.stopPropagation()">'
+      + '<button class="audit-modal-close" onclick="closeAuditModal()" aria-label="Close">\u2715</button>'
+      + '<div class="section-header">'
+      +   '<span class="section-tag">Get started</span>'
+      +   '<h2>Let\u2019s build this for you</h2>'
+      +   '<p class="section-sub">Start with a free audit \u2014 we\u2019ll map your workflows and show you exactly what can be automated.</p>'
+      + '</div>'
+      + buildFullFormInner()
+      + '</div>';
+    document.body.appendChild(overlay);
+
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) closeAuditModal();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeAuditModal();
+    });
+  }
+
+  window.openAuditModal = function () {
+    var overlay = document.getElementById('audit-modal-overlay');
+    if (!overlay) return;
+    overlay.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    if (typeof window.showStep === 'function') window.showStep(1);
+  };
+
+  window.closeAuditModal = function () {
+    var overlay = document.getElementById('audit-modal-overlay');
+    if (!overlay) return;
+    overlay.classList.remove('is-open');
+    document.body.style.overflow = '';
+  };
+
   /* Run — script is placed at end of <body> so DOM is ready */
   injectHeader();
   injectFooter();
@@ -328,5 +391,6 @@
   injectDemoHeader();
   injectDemoFooter();
   injectContactForm();
+  injectDemoContactModal();
 
 })();
