@@ -1624,7 +1624,7 @@ section:last-of-type {
 }
 
 .apex-input-area {
-  padding: 12px 14px;
+  padding: 12px 14px !important;
   border-top: 1px solid #1F2937;
   display: flex;
   gap: 8px;
@@ -1640,7 +1640,7 @@ section:last-of-type {
   color: #F0EDE8;
   font-family: 'DM Sans', -apple-system, sans-serif;
   font-size: 13px;
-  padding: 0 12px;
+  padding: 0 12px !important;
   resize: none;
   outline: none;
   overflow: hidden;
