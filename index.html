@@ -396,6 +396,7 @@
             <label for="notes">Anything else we should know? <span class="field-optional">(optional)</span></label>
             <textarea id="notes" name="notes" rows="3" placeholder="Any extra context about your situation..."></textarea>
           </div>
+          <input type="text" id="audit-honeypot" name="website" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute; left:-9999px; opacity:0; pointer-events:none;">
           <div class="audit-step-nav">
             <button class="btn btn-ghost" onclick="auditBack(3)">← Back</button>
             <button class="btn btn-primary" id="audit-submit-btn" onclick="auditSubmit()">Get My Free Audit</button>
