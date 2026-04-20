@@ -1482,7 +1482,7 @@ section:last-of-type {
   height: 520px;
   background: #13181F;
   border: 1px solid #1F2937;
-  border-radius: 16px;
+  border-radius: 0;
   overflow: hidden;
   z-index: 9997;
   display: flex;
@@ -1521,28 +1521,11 @@ section:last-of-type {
   flex-shrink: 0;
 }
 
-.apex-chat-avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  background: rgba(201, 168, 76, 0.1);
-  border: 1px solid rgba(201, 168, 76, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-}
-
 .apex-chat-header-info strong {
   display: block;
   font-size: 13px;
   font-weight: 600;
   color: #F0EDE8;
-}
-
-.apex-chat-header-info span {
-  font-size: 11px;
-  color: #8B8D96;
 }
 
 .apex-online {
@@ -1577,7 +1560,7 @@ section:last-of-type {
 
 .apex-messages::-webkit-scrollbar-thumb {
   background: #1F2937;
-  border-radius: 3px;
+  border-radius: 0;
 }
 
 .apex-msg {
@@ -1596,34 +1579,10 @@ section:last-of-type {
   flex-direction: row-reverse;
 }
 
-.apex-msg-av {
-  width: 26px;
-  height: 26px;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-
-.apex-msg.apex-bot .apex-msg-av {
-  background: rgba(201, 168, 76, 0.1);
-  border: 1px solid rgba(201, 168, 76, 0.25);
-  color: #C9A84C;
-}
-
-.apex-msg.apex-user .apex-msg-av {
-  background: #1A2030;
-  border: 1px solid #1F2937;
-  color: #8B8D96;
-}
-
 .apex-bubble {
-  max-width: 78%;
+  max-width: 88%;
   padding: 10px 13px;
-  border-radius: 10px;
+  border-radius: 0;
   font-size: 13px;
   line-height: 1.6;
   color: #F0EDE8;
@@ -1632,13 +1591,11 @@ section:last-of-type {
 .apex-msg.apex-bot .apex-bubble {
   background: #1A2030;
   border: 1px solid #1F2937;
-  border-top-left-radius: 3px;
 }
 
 .apex-msg.apex-user .apex-bubble {
   background: #1E2535;
   border: 1px solid rgba(201, 168, 76, 0.15);
-  border-top-right-radius: 3px;
 }
 
 .apex-typing-dots {
@@ -1647,8 +1604,7 @@ section:last-of-type {
   padding: 12px 14px;
   background: #1A2030;
   border: 1px solid #1F2937;
-  border-radius: 10px;
-  border-top-left-radius: 3px;
+  border-radius: 0;
 }
 
 .apex-typing-dots span {
@@ -1672,7 +1628,7 @@ section:last-of-type {
   border-top: 1px solid #1F2937;
   display: flex;
   gap: 8px;
-  align-items: flex-end;
+  align-items: stretch;
   flex-shrink: 0;
 }
 
@@ -1680,17 +1636,20 @@ section:last-of-type {
   flex: 1;
   background: #1A2030;
   border: 1px solid #1F2937;
-  border-radius: 8px;
+  border-radius: 0;
   color: #F0EDE8;
   font-family: 'DM Sans', -apple-system, sans-serif;
   font-size: 13px;
-  padding: 9px 12px;
+  padding: 0 12px;
   resize: none;
   outline: none;
-  max-height: 80px;
-  overflow-y: auto;
+  overflow: hidden;
   line-height: 1.5;
   transition: border-color 0.2s;
+  height: 36px;
+  /* Remove browser default textarea resize arrows */
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .apex-input::placeholder {
@@ -1702,11 +1661,11 @@ section:last-of-type {
 }
 
 .apex-send {
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   background: #C9A84C;
   border: none;
-  border-radius: 7px;
+  border-radius: 0;
   cursor: pointer;
   display: flex;
   align-items: center;
