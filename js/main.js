@@ -39,7 +39,8 @@
    APEX SYSTEMATIC — Audit multi-step form
    ═══════════════════════════════════════════ */
 
-const AUDIT_WEBHOOK = 'https://YOUR-WORKER.workers.dev/contact';
+// ── Point this at your Cloudflare Worker ──
+const AUDIT_WEBHOOK = 'https://apex-contact-form.<YOUR-SUBDOMAIN>.workers.dev/contact';
 
 const auditData = {};
 
@@ -87,7 +88,7 @@ window.auditBack = function (step) {
 };
 
 window.auditSubmit = async function () {
-  const name = document.getElementById('name').value.trim();
+  const name  = document.getElementById('name').value.trim();
   const email = document.getElementById('email').value.trim();
   const notes = document.getElementById('notes').value.trim();
 
@@ -96,22 +97,34 @@ window.auditSubmit = async function () {
     return;
   }
 
-  auditData.name = name;
+  auditData.name  = name;
   auditData.email = email;
   auditData.notes = notes;
+
+  // ── Honeypot: include the hidden field value (always blank for real users) ──
+  auditData.website = document.getElementById('audit-honeypot')?.value || '';
 
   const btn = document.getElementById('audit-submit-btn');
   btn.textContent = 'Sending...';
   btn.disabled = true;
 
   try {
-    await fetch(AUDIT_WEBHOOK, {
-      method: 'POST',
+    const res = await fetch(AUDIT_WEBHOOK, {
+      method:  'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(auditData)
+      body:    JSON.stringify(auditData)
     });
+
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      throw new Error(data.error || `Server error ${res.status}`);
+    }
   } catch (e) {
-    console.error('Webhook error:', e);
+    console.error('Submission error:', e);
+    auditShowError('Something went wrong. Please try again or email us directly.');
+    btn.textContent = 'Get My Free Audit';
+    btn.disabled = false;
+    return;
   }
 
   window.showStep(4);
@@ -123,26 +136,26 @@ window.showStep = function (step) {
     if (el) el.style.display = i === step ? 'block' : 'none';
   }
 
-  const bar = document.getElementById('audit-progress-bar');
+  const bar   = document.getElementById('audit-progress-bar');
   const label = document.getElementById('audit-step-label');
 
   const progress = { 1: '33%', 2: '66%', 3: '99%', 4: '100%' };
-  const labels = { 1: 'Step 1 of 3', 2: 'Step 2 of 3', 3: 'Step 3 of 3', 4: 'Done' };
+  const labels   = { 1: 'Step 1 of 3', 2: 'Step 2 of 3', 3: 'Step 3 of 3', 4: 'Done' };
 
-  if (bar) bar.style.width = progress[step];
-  if (label) label.textContent = labels[step];
+  if (bar)   bar.style.width    = progress[step];
+  if (label) label.textContent  = labels[step];
 
   if (step === 4) {
     const widget = document.querySelector('.calendly-inline-widget');
     if (widget && auditData.name && auditData.email) {
-      const name = encodeURIComponent(auditData.name);
+      const name  = encodeURIComponent(auditData.name);
       const email = encodeURIComponent(auditData.email);
       widget.innerHTML = '';
       widget.dataset.url = `https://calendly.com/apexsystematic/30min?name=${name}&email=${email}`;
       const iframe = document.createElement('iframe');
-      iframe.src = `https://calendly.com/apexsystematic/30min?name=${name}&email=${email}&embed_type=Inline&embed_domain=apexsystematic.com`;
-      iframe.width = '100%';
-      iframe.height = '700';
+      iframe.src         = `https://calendly.com/apexsystematic/30min?name=${name}&email=${email}&embed_type=Inline&embed_domain=apexsystematic.com`;
+      iframe.width       = '100%';
+      iframe.height      = '700';
       iframe.frameBorder = '0';
       widget.appendChild(iframe);
     }
@@ -157,10 +170,10 @@ window.showStep = function (step) {
 (function () {
   'use strict';
 
-  // ── Config — update before going live ──────────────────────
+  // ── Config ────────────────────────────────────────────────
   const WEBHOOK_URL      = 'https://chat.apexsystematic.com';
   const USE_LIVE_WEBHOOK = true;
-  // ──────────────────────────────────────────────────────────
+  // ─────────────────────────────────────────────────────────
 
   // ── Mock responses (used while USE_LIVE_WEBHOOK is false) ──
   const mockResponses = [
@@ -194,12 +207,12 @@ window.showStep = function (step) {
     return `Happy to help. AI automation can eliminate a lot of the manual work in professional practices — intake, documents, reporting, onboarding.\n\nThe best starting point depends on where you're losing the most time. What's your role, and what's taking up too much of your day?`;
   }
 
-  // ── State ──────────────────────────────────────────────────
+  // ── State ─────────────────────────────────────────────────
   let history  = [];
   let isTyping = false;
   let isOpen   = false;
 
-  // ── Build DOM ──────────────────────────────────────────────
+  // ── Build DOM ─────────────────────────────────────────────
   function init() {
     const wrap = document.getElementById('apex-chat-widget');
     if (!wrap) return;
@@ -247,7 +260,7 @@ window.showStep = function (step) {
     }, 600);
   }
 
-  // ── Toggle ─────────────────────────────────────────────────
+  // ── Toggle ────────────────────────────────────────────────
   window.apexToggleChat = function () {
     isOpen = !isOpen;
     const bubble = document.getElementById('apex-chat-bubble');
@@ -263,7 +276,7 @@ window.showStep = function (step) {
     }
   };
 
-  // ── Add message ────────────────────────────────────────────
+  // ── Add message ───────────────────────────────────────────
   function apexAddMsg(role, text) {
     const messages = document.getElementById('apexMessages');
 
@@ -309,7 +322,7 @@ window.showStep = function (step) {
     if (t) t.remove();
   }
 
-  // ── Send ───────────────────────────────────────────────────
+  // ── Send ──────────────────────────────────────────────────
   window.apexSend = async function () {
     const input   = document.getElementById('apexInput');
     const message = input.value.trim();
@@ -368,7 +381,7 @@ window.showStep = function (step) {
     el.style.height = Math.min(el.scrollHeight, 80) + 'px';
   };
 
-  // ── Init ───────────────────────────────────────────────────
+  // ── Init ──────────────────────────────────────────────────
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
