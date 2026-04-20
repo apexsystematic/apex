@@ -230,10 +230,8 @@ window.showStep = function (step) {
       </div>
       <div id="apex-chat-window">
         <div class="apex-chat-header">
-          <div class="apex-chat-avatar">⚡</div>
           <div class="apex-chat-header-info">
             <strong>Apex AI Assistant</strong>
-            <span>Usually replies instantly</span>
           </div>
           <div class="apex-online"></div>
         </div>
@@ -245,7 +243,6 @@ window.showStep = function (step) {
             placeholder="Ask me anything..."
             rows="1"
             onkeydown="apexHandleKey(event)"
-            oninput="apexResize(this)"
           ></textarea>
           <button class="apex-send" id="apexSend" onclick="apexSend()">→</button>
         </div>
@@ -283,10 +280,6 @@ window.showStep = function (step) {
     const msg = document.createElement('div');
     msg.className = `apex-msg apex-${role}`;
 
-    const av = document.createElement('div');
-    av.className = 'apex-msg-av';
-    av.textContent = role === 'bot' ? '⚡' : '👤';
-
     const bubble = document.createElement('div');
     bubble.className = 'apex-bubble';
     bubble.innerHTML = text
@@ -294,7 +287,6 @@ window.showStep = function (step) {
       .replace(/\n\n/g, '<br><br>')
       .replace(/\n/g, '<br>');
 
-    msg.appendChild(av);
     msg.appendChild(bubble);
     messages.appendChild(msg);
     messages.scrollTop = messages.scrollHeight;
@@ -310,7 +302,6 @@ window.showStep = function (step) {
     t.className = 'apex-msg apex-bot';
     t.id = 'apexTyping';
     t.innerHTML = `
-      <div class="apex-msg-av">⚡</div>
       <div class="apex-typing-dots"><span></span><span></span><span></span></div>
     `;
     messages.appendChild(t);
@@ -330,7 +321,6 @@ window.showStep = function (step) {
 
     isTyping = true;
     input.value = '';
-    apexResize(input);
     document.getElementById('apexSend').disabled = true;
 
     apexAddMsg('user', message);
@@ -374,11 +364,6 @@ window.showStep = function (step) {
       e.preventDefault();
       apexSend();
     }
-  };
-
-  window.apexResize = function (el) {
-    el.style.height = 'auto';
-    el.style.height = Math.min(el.scrollHeight, 80) + 'px';
   };
 
   // ── Init ──────────────────────────────────────────────────
