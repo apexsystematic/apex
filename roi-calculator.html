@@ -480,7 +480,14 @@
       return '$' + Math.round(n).toLocaleString('en-US');
     }
 
+    let roiTracked = false;
+
     function update() {
+      if (!roiTracked) {
+        gtag('event', 'roi_calculated');
+        roiTracked = true;
+      }
+
       const rate    = +document.getElementById('rate').value;
       const team    = +document.getElementById('team').value;
       const admin   = +document.getElementById('admin').value;
