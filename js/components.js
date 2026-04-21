@@ -400,6 +400,22 @@
     document.head.appendChild(s2);
   }
 
+  /* ── CTA click tracking ── */
+  function initCtaTracking() {
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('.btn-primary');
+      if (!btn) return;
+      var label = (btn.textContent || btn.innerText || '').trim().substring(0, 50);
+      gtag('event', 'cta_click', { cta_label: label });
+    });
+  }
+
+  /* ── ROI Calculator page tracking ── */
+  function initRoiTracking() {
+    if (!document.querySelector('.roi-section')) return;
+    gtag('event', 'roi_calculator_viewed');
+  }
+
   /* Run — script is placed at end of <body> so DOM is ready */
   injectAnalytics();
   injectHeader();
@@ -409,5 +425,7 @@
   injectDemoFooter();
   injectContactForm();
   injectDemoContactModal();
+  initCtaTracking();
+  initRoiTracking();
 
 })();

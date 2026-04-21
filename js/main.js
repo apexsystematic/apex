@@ -67,6 +67,7 @@ window.auditNext = function (step) {
     }
     auditData.role = role;
     auditData.team_size = teamSize;
+    gtag('event', 'audit_start');
   }
 
   if (step === 2) {
@@ -78,6 +79,7 @@ window.auditNext = function (step) {
     }
     auditData.pain = pain;
     auditData.hours_lost = hoursLost;
+    gtag('event', 'audit_step2_complete');
   }
 
   window.showStep(step + 1);
@@ -119,6 +121,8 @@ window.auditSubmit = async function () {
       const data = await res.json().catch(() => ({}));
       throw new Error(data.error || `Server error ${res.status}`);
     }
+
+    gtag('event', 'audit_submitted');
   } catch (e) {
     console.error('Submission error:', e);
     auditShowError('Something went wrong. Please try again or email us directly.');
@@ -146,6 +150,8 @@ window.showStep = function (step) {
   if (label) label.textContent  = labels[step];
 
   if (step === 4) {
+    gtag('event', 'audit_complete');
+    gtag('event', 'calendly_viewed');
     const widget = document.querySelector('.calendly-inline-widget');
     if (widget && auditData.name && auditData.email) {
       const name  = encodeURIComponent(auditData.name);
@@ -269,6 +275,7 @@ window.showStep = function (step) {
     unread.classList.remove('show');
 
     if (isOpen) {
+      gtag('event', 'chatbot_opened');
       setTimeout(() => document.getElementById('apexInput').focus(), 300);
     }
   };
@@ -322,6 +329,10 @@ window.showStep = function (step) {
     isTyping = true;
     input.value = '';
     document.getElementById('apexSend').disabled = true;
+
+    if (history.filter(m => m.role === 'user').length === 0) {
+      gtag('event', 'chatbot_message_sent');
+    }
 
     apexAddMsg('user', message);
     history.push({ role: 'user', content: message });
