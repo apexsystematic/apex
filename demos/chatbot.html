@@ -961,6 +961,10 @@
     autoResize(input);
     document.getElementById('sendBtn').disabled = true;
 
+    if (messageCount === 0) {
+      gtag('event', 'demo_interaction', { demo_name: 'chatbot' });
+    }
+
     // Add user message
     addMessage('user', message);
     messageCount++;
@@ -1054,5 +1058,6 @@
 
   <script src="../../js/components.js"></script>
   <script src="../../js/main.js"></script>
+  <script>gtag('event', 'demo_viewed', { demo_name: 'chatbot' });</script>
 </body>
 </html>

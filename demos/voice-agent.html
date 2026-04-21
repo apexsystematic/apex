@@ -911,6 +911,7 @@ async function addMsg(msg) {
 async function startDemo() {
   if (running) return;
   running = true;
+  gtag('event', 'demo_interaction', { demo_name: 'voice-agent' });
   const name = document.getElementById('leadName').value || 'Lead';
   const initials = name.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
   document.getElementById('submitBtn').disabled = true;
@@ -986,5 +987,6 @@ function resetDemo() {
 
   <script src="../../js/components.js"></script>
   <script src="../../js/main.js"></script>
+  <script>gtag('event', 'demo_viewed', { demo_name: 'voice-agent' });</script>
 </body>
 </html>

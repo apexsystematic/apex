@@ -895,6 +895,8 @@
     // Validation
     if (!d.industry) { alert('Please select an industry.'); return; }
 
+    gtag('event', 'demo_interaction', { demo_name: 'proposals' });
+
     const btn = document.getElementById('generateBtn');
     const btnText = document.getElementById('btnText');
     const btnArrow = document.getElementById('btnArrow');
@@ -1183,5 +1185,6 @@ Apex Systematic</div>
 
   <script src="../../js/components.js"></script>
   <script src="../../js/main.js"></script>
+  <script>gtag('event', 'demo_viewed', { demo_name: 'proposals' });</script>
 </body>
 </html>

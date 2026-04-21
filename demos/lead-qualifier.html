@@ -971,6 +971,8 @@ Warm regards,
       return;
     }
 
+    gtag('event', 'demo_interaction', { demo_name: 'lead-qualifier' });
+
     // Loading state
     btn.disabled = true;
     btnText.textContent = 'Analysing Lead...';
@@ -1106,5 +1108,6 @@ Warm regards,
 
   <script src="../../js/components.js"></script>
   <script src="../../js/main.js"></script>
+  <script>gtag('event', 'demo_viewed', { demo_name: 'lead-qualifier' });</script>
 </body>
 </html>
