@@ -713,6 +713,16 @@ section:last-of-type {
   letter-spacing: 0.02em;
 }
 
+.pricing-oneliner {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #C9A84C;
+      margin: 0 0 0.5rem 0;
+    }
+
 
 /* ── 14. About ── */
 .about-grid {
