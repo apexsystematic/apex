@@ -275,7 +275,7 @@ window.showStep = function (step) {
     unread.classList.remove('show');
 
     if (isOpen) {
-      gtag('event', 'chatbot_opened');
+      if (typeof gtag === 'function') gtag('event', 'chatbot_opened');
       setTimeout(() => document.getElementById('apexInput').focus(), 300);
     }
   };
@@ -331,7 +331,7 @@ window.showStep = function (step) {
     document.getElementById('apexSend').disabled = true;
 
     if (history.filter(m => m.role === 'user').length === 0) {
-      gtag('event', 'chatbot_message_sent');
+      if (typeof gtag === 'function') gtag('event', 'chatbot_message_sent');
     }
 
     apexAddMsg('user', message);

@@ -403,7 +403,7 @@
   /* ── CTA click tracking ── */
   function initCtaTracking() {
     document.addEventListener('click', function (e) {
-      var btn = e.target.closest('.btn-primary');
+      var btn = e.target.closest('.btn-primary, .btn-ghost');
       if (!btn) return;
       var label = (btn.textContent || btn.innerText || '').trim().substring(0, 50);
       gtag('event', 'cta_click', { cta_label: label });
@@ -414,6 +414,15 @@
   function initRoiTracking() {
     if (!document.querySelector('.roi-section')) return;
     gtag('event', 'roi_calculator_viewed');
+  }
+
+  /* ── Calendly appointment tracking ── */
+  function initCalendlyTracking() {
+    window.addEventListener('message', function (e) {
+      if (e.data && e.data.event === 'calendly.event_scheduled') {
+        gtag('event', 'calendly_booked');
+      }
+    });
   }
 
   /* Run — script is placed at end of <body> so DOM is ready */
@@ -427,5 +436,6 @@
   injectDemoContactModal();
   initCtaTracking();
   initRoiTracking();
+  initCalendlyTracking();
 
 })();
