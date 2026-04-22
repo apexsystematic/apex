@@ -609,7 +609,7 @@ section:last-of-type {
 }
 
 .service-card {
-  padding: 44px 33px;
+  padding: 44px 34px;
   border-right: 1px solid var(--border);
   transition: background var(--ease);
   position: relative;
