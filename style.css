@@ -512,6 +512,95 @@ section:last-of-type {
   }
 }
 
+
+    /* ── Industry savings band ── */
+    .industry-band { padding: var(--section-y) 0; border-bottom: 1px solid var(--border); }
+    .industry-band .section-header { margin-bottom: 40px; }
+    .industry-band-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--border);
+    }
+    .ib-card {
+      padding: 36px 32px;
+      border-right: 1px solid var(--border);
+      transition: background var(--ease);
+      position: relative;
+    }
+    .ib-card::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--gold);
+      margin-bottom: 22px;
+      transition: width var(--ease-slow);
+    }
+    .ib-card:hover::before { width: 48px; }
+    .ib-card:hover { background: var(--surface); }
+    .ib-card:last-child { border-right: none; }
+    .ib-name {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .ib-hrs {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .ib-hrs span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-family: var(--font-body);
+    }
+    .ib-workflow {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .industry-band-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .industry-band-footer p {
+      font-size: 0.72rem;
+      font-style: italic;
+      color: var(--text-dim);
+    }
+    .industry-band-footer a {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      white-space: nowrap;
+      transition: color var(--ease);
+      flex-shrink: 0;
+    }
+    .industry-band-footer a:hover { color: var(--white); }
+    @media (max-width: 1024px) {
+      .industry-band-grid { grid-template-columns: repeat(2, 1fr); }
+      .ib-card:nth-child(2) { border-right: none; }
+      .ib-card:nth-child(1),
+      .ib-card:nth-child(2) { border-bottom: 1px solid var(--border); }
+    }
+    @media (max-width: 600px) {
+      .industry-band-grid { grid-template-columns: 1fr; }
+      .ib-card { border-right: none; border-bottom: 1px solid var(--border); }
+      .ib-card:last-child { border-bottom: none; }
+      .industry-band-footer { flex-direction: column; align-items: flex-start; gap: 10px; }
+    }
+
 /* ── 10. Services ── */
 .services-grid {
   display: grid;
