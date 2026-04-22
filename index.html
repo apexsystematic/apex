@@ -25,70 +25,71 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <style>
-    /* ── Research stat band ── */
-    .research-band {
-      padding: 0;
-      border-bottom: 1px solid var(--border);
-      background: var(--surface);
-    }
-    .research-band-inner {
+    /* ── Industry savings band ── */
+    .industry-band { padding: var(--section-y) 0; border-bottom: 1px solid var(--border); }
+    .industry-band .section-header { margin-bottom: 40px; }
+    .industry-band-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      border-left: 1px solid var(--border);
+      border: 1px solid var(--border);
     }
-    .research-stat {
+    .ib-card {
       padding: 36px 32px;
       border-right: 1px solid var(--border);
+      transition: background var(--ease);
       position: relative;
-      transition: background var(--ease);
     }
-    .research-stat::before {
+    .ib-card::before {
       content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: transparent;
-      transition: background var(--ease);
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--gold);
+      margin-bottom: 22px;
+      transition: width var(--ease-slow);
     }
-    .research-stat:hover { background: var(--surface-2); }
-    .research-stat:hover::before { background: var(--gold); }
-    .rs-num {
+    .ib-card:hover::before { width: 48px; }
+    .ib-card:hover { background: var(--surface); }
+    .ib-card:last-child { border-right: none; }
+    .ib-name {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .ib-hrs {
       font-family: var(--font-display);
       font-size: 2.2rem;
-      color: var(--gold);
+      color: var(--white);
       line-height: 1;
       margin-bottom: 6px;
     }
-    .rs-label {
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--white);
-      margin-bottom: 4px;
+    .ib-hrs span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-family: var(--font-body);
     }
-    .rs-source {
-      font-size: 0.7rem;
-      font-style: italic;
-      color: var(--text-dim);
-      line-height: 1.5;
+    .ib-workflow {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.6;
     }
-    .research-band-footer {
+    .industry-band-footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 24px;
-      padding: 14px 32px;
-      border-top: 1px solid var(--border);
+      margin-top: 20px;
       flex-wrap: wrap;
     }
-    .research-band-footer p {
+    .industry-band-footer p {
       font-size: 0.72rem;
-      color: var(--text-dim);
       font-style: italic;
-      line-height: 1.5;
+      color: var(--text-dim);
     }
-    .research-band-footer a {
+    .industry-band-footer a {
       font-size: 0.72rem;
       font-weight: 500;
       letter-spacing: 0.1em;
@@ -98,14 +99,18 @@
       transition: color var(--ease);
       flex-shrink: 0;
     }
-    .research-band-footer a:hover { color: var(--white); }
+    .industry-band-footer a:hover { color: var(--white); }
     @media (max-width: 1024px) {
-      .research-band-inner { grid-template-columns: repeat(2, 1fr); }
+      .industry-band-grid { grid-template-columns: repeat(2, 1fr); }
+      .ib-card:nth-child(2) { border-right: none; }
+      .ib-card:nth-child(1),
+      .ib-card:nth-child(2) { border-bottom: 1px solid var(--border); }
     }
     @media (max-width: 600px) {
-      .research-band-inner { grid-template-columns: 1fr; }
-      .research-stat { border-right: none; border-bottom: 1px solid var(--border); }
-      .research-band-footer { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .industry-band-grid { grid-template-columns: 1fr; }
+      .ib-card { border-right: none; border-bottom: 1px solid var(--border); }
+      .ib-card:last-child { border-bottom: none; }
+      .industry-band-footer { flex-direction: column; align-items: flex-start; gap: 10px; }
     }
   </style>
 </head>
@@ -128,34 +133,39 @@
       </div>
     </section>
 
-    <!-- ── RESEARCH STAT BAND ── -->
-    <section class="research-band">
+    <!-- ── INDUSTRY SAVINGS BAND ── -->
+    <section class="industry-band">
       <div class="container">
-        <div class="research-band-inner">
-          <div class="research-stat">
-            <div class="rs-num">4–8</div>
-            <div class="rs-label">Hours reclaimed per week</div>
-            <div class="rs-source">Per person, year one — HBS/BCG &amp; MIT, 2023</div>
+        <div class="section-header">
+          <span class="section-tag">The numbers</span>
+          <h2>How much time your practice is losing</h2>
+          <p class="section-sub">Hours reclaimed per week per person, based on independent research. Conservative estimates across each sector.</p>
+        </div>
+        <div class="industry-band-grid">
+          <div class="ib-card">
+            <div class="ib-name">Legal</div>
+            <div class="ib-hrs">2–8 <span>hrs/week</span></div>
+            <div class="ib-workflow">Document drafting &amp; client intake automation</div>
           </div>
-          <div class="research-stat">
-            <div class="rs-num">&lt;&thinsp;3</div>
-            <div class="rs-label">Months to payback</div>
-            <div class="rs-source">At professional billing rates of $100–300/hr — Thomson Reuters, 2024</div>
+          <div class="ib-card">
+            <div class="ib-name">Accounting</div>
+            <div class="ib-hrs">3–8 <span>hrs/week</span></div>
+            <div class="ib-workflow">Tax research &amp; client portal automation</div>
           </div>
-          <div class="research-stat">
-            <div class="rs-num">25–40%</div>
-            <div class="rs-label">Faster on document drafting</div>
-            <div class="rs-source">Quality improved 18% simultaneously — Noy &amp; Zhang, Science, 2023</div>
+          <div class="ib-card">
+            <div class="ib-name">Financial Advisory</div>
+            <div class="ib-hrs">3–8 <span>hrs/week</span></div>
+            <div class="ib-workflow">Meeting notes → CRM → follow-up sequence</div>
           </div>
-          <div class="research-stat">
-            <div class="rs-num">~3 hrs</div>
-            <div class="rs-label">Saved on email alone</div>
-            <div class="rs-source">Strongest single-tool gain across four controlled studies — HBS/MIT, 2025</div>
+          <div class="ib-card">
+            <div class="ib-name">Consulting</div>
+            <div class="ib-hrs">5–12 <span>hrs/week</span></div>
+            <div class="ib-workflow">Proposals, research &amp; client deliverables</div>
           </div>
         </div>
-        <div class="research-band-footer">
-          <p>Conservative estimates. Peer-reviewed sources only — vendor claims excluded.</p>
-          <a href="automation-roi-full.html">Read the full research →</a>
+        <div class="industry-band-footer">
+          <p>Peer-reviewed sources only — vendor claims excluded.</p>
+          <a href="automation-roi-full.html">See the full research →</a>
         </div>
       </div>
     </section>
