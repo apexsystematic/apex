@@ -24,6 +24,90 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <style>
+    /* ── Research stat band ── */
+    .research-band {
+      padding: 0;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .research-band-inner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-left: 1px solid var(--border);
+    }
+    .research-stat {
+      padding: 36px 32px;
+      border-right: 1px solid var(--border);
+      position: relative;
+      transition: background var(--ease);
+    }
+    .research-stat::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: transparent;
+      transition: background var(--ease);
+    }
+    .research-stat:hover { background: var(--surface-2); }
+    .research-stat:hover::before { background: var(--gold); }
+    .rs-num {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .rs-label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .rs-source {
+      font-size: 0.7rem;
+      font-style: italic;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+    .research-band-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 14px 32px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .research-band-footer p {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      font-style: italic;
+      line-height: 1.5;
+    }
+    .research-band-footer a {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      white-space: nowrap;
+      transition: color var(--ease);
+      flex-shrink: 0;
+    }
+    .research-band-footer a:hover { color: var(--white); }
+    @media (max-width: 1024px) {
+      .research-band-inner { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .research-band-inner { grid-template-columns: 1fr; }
+      .research-stat { border-right: none; border-bottom: 1px solid var(--border); }
+      .research-band-footer { flex-direction: column; align-items: flex-start; gap: 10px; }
+    }
+  </style>
 </head>
 <body>
 
@@ -40,6 +124,38 @@
         <div class="hero-actions">
           <a href="#contact" class="btn btn-primary">Get Your Free Audit</a>
           <a href="#how-it-works" class="btn btn-ghost">See how it works</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── RESEARCH STAT BAND ── -->
+    <section class="research-band">
+      <div class="container">
+        <div class="research-band-inner">
+          <div class="research-stat">
+            <div class="rs-num">4–8</div>
+            <div class="rs-label">Hours reclaimed per week</div>
+            <div class="rs-source">Per person, year one — HBS/BCG &amp; MIT, 2023</div>
+          </div>
+          <div class="research-stat">
+            <div class="rs-num">&lt;&thinsp;3</div>
+            <div class="rs-label">Months to payback</div>
+            <div class="rs-source">At professional billing rates of $100–300/hr — Thomson Reuters, 2024</div>
+          </div>
+          <div class="research-stat">
+            <div class="rs-num">25–40%</div>
+            <div class="rs-label">Faster on document drafting</div>
+            <div class="rs-source">Quality improved 18% simultaneously — Noy &amp; Zhang, Science, 2023</div>
+          </div>
+          <div class="research-stat">
+            <div class="rs-num">~3 hrs</div>
+            <div class="rs-label">Saved on email alone</div>
+            <div class="rs-source">Strongest single-tool gain across four controlled studies — HBS/MIT, 2025</div>
+          </div>
+        </div>
+        <div class="research-band-footer">
+          <p>Conservative estimates. Peer-reviewed sources only — vendor claims excluded.</p>
+          <a href="automation-roi-full.html">Read the full research →</a>
         </div>
       </div>
     </section>
