@@ -213,6 +213,29 @@
     .stacking-callout p { font-size: 0.9rem; color: var(--text); line-height: 1.8; }
     .stacking-callout p + p { margin-top: 8px; }
 
+    .mid-cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      margin-top: 28px;
+      padding: 28px 32px;
+      border: 1px solid var(--border);
+      border-left: 2px solid var(--gold);
+      background: var(--surface);
+    }
+    .mid-cta-text {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin: 0;
+    }
+    .mid-cta .btn { flex-shrink: 0; }
+    @media (max-width: 768px) {
+      .mid-cta { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .mid-cta .btn { width: 100%; text-align: center; }
+    }
+
     /* ══════════════════════════════════════════
        INDUSTRY SECTION
     ══════════════════════════════════════════ */
@@ -599,6 +622,11 @@
           <div class="sc-tag">The Stacking Effect — and the Gap</div>
           <p>Workflows 01–03 compound: a solo professional with 15 client calls, 5 proposals, and 50+ emails per week can realistically reclaim 8–12 hours/week from these three alone.</p>
           <p>But each tool in the stack above works in isolation by default. The gains come from the connections — transcript to CRM, intake to calendar to invoice, draft trigger to approval to send. Building and maintaining those connections is where most firms stall, and where the real ROI either materialises or doesn't.</p>
+        </div>
+
+        <div class="mid-cta">
+          <p class="mid-cta-text">The connections are where the ROI materialises — and where most firms stall.</p>
+          <button class="btn btn-primary" onclick="openAuditModal()">See what's possible for your firm →</button>
         </div>
 
       </div>
