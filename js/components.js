@@ -329,7 +329,7 @@
   /* ── Demo contact modal ── */
 
   function injectDemoContactModal() {
-    if (!document.getElementById('demo-topbar')) return;
+    if (document.getElementById('audit-modal-overlay')) return;
 
     var style = document.createElement('style');
     style.textContent = [
