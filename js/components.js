@@ -425,6 +425,15 @@
     });
   }
 
+  /* ── Chat Widget (auto-injected on every page) ── */
+  function injectChatWidget() {
+    /* Skip if a widget container already exists in the markup */
+    if (document.getElementById('apex-chat-widget')) return;
+    var div = document.createElement('div');
+    div.id = 'apex-chat-widget';
+    document.body.appendChild(div);
+  }
+
   /* Run — script is placed at end of <body> so DOM is ready */
   injectAnalytics();
   injectHeader();
@@ -434,6 +443,7 @@
   injectDemoFooter();
   injectContactForm();
   injectDemoContactModal();
+  injectChatWidget();
   initCtaTracking();
   initRoiTracking();
   initCalendlyTracking();
