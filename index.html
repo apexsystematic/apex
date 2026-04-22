@@ -450,7 +450,14 @@
         }
       }
       setNavHeight();
-      window.addEventListener('resize', setNavHeight);
+      /* Only update on resize if it's a genuine width change (not mobile chrome show/hide) */
+      var lastWidth = window.innerWidth;
+      window.addEventListener('resize', function () {
+        if (window.innerWidth !== lastWidth) {
+          lastWidth = window.innerWidth;
+          setNavHeight();
+        }
+      });
     })();
   </script>
 
