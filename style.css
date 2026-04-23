@@ -21,6 +21,7 @@
    18. Animations
    19. Media Queries
    22. Chat Widget
+   23. Currency Toggle
 ═══════════════════════════════════════════ */
 
 
@@ -1801,4 +1802,35 @@ section:last-of-type {
     bottom: 20px;
     right: 20px;
   }
+}
+
+/* 23. CURRENCY TOGGLE */
+.currency-toggle {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.currency-btn {
+  background: transparent;
+  border: 1px solid var(--border-light);
+  color: var(--text-muted);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 7px 16px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all var(--ease);
+}
+
+.currency-btn:hover {
+  border-color: var(--text-muted);
+  color: var(--white);
+}
+
+.currency-btn.active {
+  border-color: var(--gold);
+  color: var(--gold);
 }
