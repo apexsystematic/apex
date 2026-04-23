@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>404 — Page Not Found | Apex Systematic</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <style>
+    .error-page {
+      min-height: calc(100dvh - var(--nav-h, 97px));
+      display: flex;
+      align-items: center;
+      padding: var(--section-y) 0;
+    }
+
+    .error-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 96px;
+      align-items: center;
+    }
+
+    .error-left {
+      position: relative;
+    }
+
+    .error-code {
+      font-family: var(--font-display);
+      font-size: clamp(8rem, 16vw, 14rem);
+      font-weight: 400;
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--border-light);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      animation: fadeInUp 0.6s ease 0.1s both;
+    }
+
+    .error-visual {
+      width: 100%;
+      aspect-ratio: 1;
+      max-width: 460px;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 0.6s ease 0.2s both;
+    }
+
+    .error-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 39px,
+          var(--border) 39px,
+          var(--border) 40px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 39px,
+          var(--border) 39px,
+          var(--border) 40px
+        );
+      opacity: 0.4;
+    }
+
+    .error-visual-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      text-align: center;
+      z-index: 1;
+    }
+
+    .error-apex-mark {
+      width: 56px;
+      height: 56px;
+      position: relative;
+    }
+
+    .error-apex-mark svg {
+      width: 56px;
+      height: 56px;
+    }
+
+    .error-code-overlay {
+      font-family: var(--font-display);
+      font-size: 5rem;
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .error-code-overlay span {
+      color: var(--gold);
+    }
+
+    .error-scan-line {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.4), transparent);
+      animation: scan 3s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes scan {
+      0%   { top: 0%; opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 1; }
+      100% { top: 100%; opacity: 0; }
+    }
+
+    .error-right {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .error-right .section-tag {
+      animation: fadeInUp 0.6s ease 0.15s both;
+    }
+
+    .error-right h1 {
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      animation: fadeInUp 0.6s ease 0.25s both;
+    }
+
+    .error-right > p {
+      font-size: 1rem;
+      line-height: 1.8;
+      max-width: 420px;
+      animation: fadeInUp 0.6s ease 0.35s both;
+    }
+
+    .error-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      animation: fadeInUp 0.6s ease 0.45s both;
+    }
+
+    .error-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border);
+      animation: fadeInUp 0.6s ease 0.55s both;
+    }
+
+    .error-link-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      transition: background var(--ease), color var(--ease);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .error-link-row:last-child {
+      border-bottom: none;
+    }
+
+    .error-link-row:hover {
+      background: var(--surface);
+      color: var(--white);
+    }
+
+    .error-link-row span {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      transition: letter-spacing var(--ease);
+    }
+
+    .error-link-row:hover span {
+      letter-spacing: 0.16em;
+    }
+
+    @media (max-width: 900px) {
+      .error-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .error-left {
+        order: 2;
+      }
+
+      .error-right {
+        order: 1;
+      }
+
+      .error-visual {
+        max-width: 100%;
+        aspect-ratio: 16 / 9;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .error-actions {
+        flex-direction: column;
+      }
+
+      .error-actions .btn {
+        text-align: center;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <main id="main-content">
+    <section class="error-page">
+      <div class="container">
+        <div class="error-inner">
+
+          <!-- Visual -->
+          <div class="error-left">
+            <div class="error-visual">
+              <div class="error-scan-line"></div>
+              <div class="error-visual-center">
+                <div class="error-apex-mark">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
+                    <line x1="40" y1="8"  x2="12" y2="58" stroke="#C9A84C" stroke-width="2.2" stroke-linecap="square"/>
+                    <line x1="40" y1="8"  x2="68" y2="58" stroke="#C9A84C" stroke-width="2.2" stroke-linecap="square"/>
+                    <line x1="12" y1="58" x2="68" y2="58" stroke="#C9A84C" stroke-width="2.2" stroke-linecap="square"/>
+                    <circle cx="40" cy="8" r="3" fill="#C9A84C"/>
+                  </svg>
+                </div>
+                <div class="error-code-overlay">4<span>0</span>4</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Copy -->
+          <div class="error-right">
+            <span class="section-tag">Page not found</span>
+            <h1>This page doesn't exist — yet.</h1>
+            <p>The page you're looking for has either moved, been removed, or never existed. It's the one thing we couldn't automate away.</p>
+
+            <div class="error-actions">
+              <a href="index.html" class="btn btn-primary">Back to home</a>
+              <a href="index.html#contact" class="btn btn-ghost">Book a free audit</a>
+            </div>
+
+            <div class="error-links">
+              <a href="index.html#services" class="error-link-row">
+                Services
+                <span>→</span>
+              </a>
+              <a href="demos.html" class="error-link-row">
+                Live demos
+                <span>→</span>
+              </a>
+              <a href="roi-calculator.html" class="error-link-row">
+                ROI Calculator
+                <span>→</span>
+              </a>
+              <a href="index.html#pricing" class="error-link-row">
+                Pricing
+                <span>→</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="js/components.js"></script>
+  <script>
+    (function () {
+      function setNavHeight() {
+        var nav = document.getElementById('header-wrap');
+        if (nav) document.documentElement.style.setProperty('--nav-h', nav.offsetHeight + 'px');
+      }
+      setNavHeight();
+      window.addEventListener('resize', setNavHeight);
+    })();
+  </script>
+
+  <div id="apex-chat-widget"></div>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
