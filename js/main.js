@@ -387,3 +387,78 @@ window.showStep = function (step) {
   }
 
 })();
+
+/* ═══════════════════════════════════════════
+   APEX SYSTEMATIC — Localised pricing
+   ═══════════════════════════════════════════ */
+
+(function () {
+
+  // ── Prices per tier (add new page prices here later) ──
+  const PRICES = {
+    foundation:        { USD: 899,  GBP: 699,  EUR: 849  },
+    connected_practice:{ USD: 1899, GBP: 1499, EUR: 1749 },
+    agent_suite:       { USD: 2999, GBP: 2399, EUR: 2799 },
+  };
+
+  const SYMBOLS = { USD: '$', GBP: '£', EUR: '€' };
+
+  // ── Format ──
+  function fmt(symbol, amount) {
+    return symbol + amount.toLocaleString('en-GB');
+  }
+
+  // ── Apply to DOM ──
+  function applyPricing(currency) {
+    const sym = SYMBOLS[currency];
+
+    // Pricing cards — targets the btn text inside each card
+    const cards = document.querySelectorAll('[data-tier]');
+    cards.forEach(function (el) {
+      const tier = el.dataset.tier;
+      if (PRICES[tier] && PRICES[tier][currency] !== undefined) {
+        el.textContent = 'From ' + fmt(sym, PRICES[tier][currency]);
+      }
+    });
+
+    // Update toggle active state
+    document.querySelectorAll('.currency-btn').forEach(function (btn) {
+      btn.classList.toggle('active', btn.dataset.currency === currency);
+    });
+
+    // Persist choice
+    try { localStorage.setItem('apex_currency', currency); } catch (e) {}
+  }
+
+  // ── Toggle handler (called from HTML) ──
+  window.apexSetCurrency = function (currency) {
+    applyPricing(currency);
+  };
+
+  // ── Init ──
+  async function init() {
+    // 1. Honour manual override
+    let currency;
+    try { currency = localStorage.getItem('apex_currency'); } catch (e) {}
+
+    if (!currency) {
+      // 2. Ask the geo worker
+      try {
+        const res  = await fetch('https://geo.apexsystematic.com');
+        const data = await res.json();
+        currency = data.currency;
+      } catch (e) {
+        currency = 'USD'; // fallback
+      }
+    }
+
+    applyPricing(currency);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+})();
