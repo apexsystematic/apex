@@ -425,6 +425,18 @@
     });
   }
 
+  /* ── GTM noscript (injected immediately after <body> opens) ── */
+  function injectGtmNoscript() {
+    var ns = document.createElement('noscript');
+    var iframe = document.createElement('iframe');
+    iframe.src = 'https://www.googletagmanager.com/ns.html?id=GTM-52T88XLZ';
+    iframe.height = '0';
+    iframe.width = '0';
+    iframe.style.cssText = 'display:none;visibility:hidden';
+    ns.appendChild(iframe);
+    document.body.insertBefore(ns, document.body.firstChild);
+  }
+
   /* ── Chat Widget (auto-injected on every page) ── */
   function injectChatWidget() {
     /* Skip if a widget container already exists in the markup */
@@ -435,6 +447,7 @@
   }
 
   /* Run — script is placed at end of <body> so DOM is ready */
+  injectGtmNoscript();
   injectAnalytics();
   injectHeader();
   injectFooter();
