@@ -201,6 +201,11 @@
           <h2>Straightforward pricing. No surprises.</h2>
           <p class="section-sub">No retainers. No monthly fees. You pay for the work, once — and the system is yours to keep.</p>
         </div>
+        <div class="currency-toggle">
+          <button class="currency-btn" data-currency="USD" onclick="apexSetCurrency('USD')">USD</button>
+          <button class="currency-btn" data-currency="GBP" onclick="apexSetCurrency('GBP')">GBP</button>
+          <button class="currency-btn" data-currency="EUR" onclick="apexSetCurrency('EUR')">EUR</button>
+        </div>
         <div class="pricing-grid">
           <div class="pricing-card">
             <h3>Foundation</h3>
@@ -213,7 +218,7 @@
               <li>Free audit included</li>
               <li>Full handover, documentation &amp; 30-day support</li>
             </ul>
-            <a href="#contact" class="btn btn-ghost">From €699</a>
+            <a href="#contact" class="btn btn-ghost" data-tier="foundation">From €699</a>
           </div>
           <div class="pricing-card pricing-card--featured">
             <!-- <div class="pricing-badge">Most popular</div> -->
@@ -227,7 +232,7 @@
               <li>Free audit included</li>
               <li>Full handover, documentation &amp; 30-day support</li>
             </ul>
-            <a href="#contact" class="btn btn-primary">From €1,599</a>
+            <a href="#contact" class="btn btn-primary" data-tier="connected_practice">From €1,599</a>
           </div>
           <div class="pricing-card">
             <h3>Agent Suite</h3>
@@ -241,7 +246,7 @@
               <li>Free audit included</li>
               <li>Full handover, documentation &amp; 60-day support</li>
             </ul>
-            <a href="#contact" class="btn btn-ghost">From €2,899</a>
+            <a href="#contact" class="btn btn-ghost" data-tier="agent_suite">From €2,899</a>
           </div>
         </div>
         <p class="pricing-note">Every engagement starts with a free audit. No quote until we fully understand your situation.</p>
