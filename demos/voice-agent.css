@@ -51,7 +51,7 @@
 
 
 
-input, select {
+.page-wrapper input, .page-wrapper select {
   background: var(--bg-input);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -65,9 +65,7 @@ input, select {
   appearance: none;
 }
 
-
-
-input:focus, select:focus {
+.page-wrapper input:focus, .page-wrapper select:focus {
   border-color: var(--border-gold);
   box-shadow: 0 0 0 3px rgba(201,168,76,0.07);
 }

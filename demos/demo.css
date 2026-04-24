@@ -32,7 +32,7 @@ body {
   min-height: 100vh;
 }
 
-h3 {
+.page-wrapper h3 {
   font-family: var(--font-display);
   font-weight: 400;
 }
@@ -218,7 +218,7 @@ h3 {
   margin-bottom: 0;
 }
 
-label {
+.page-wrapper label {
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.08em;
@@ -226,9 +226,9 @@ label {
   color: var(--text-muted);
 }
 
-input,
-select,
-textarea {
+.page-wrapper input,
+.page-wrapper select,
+.page-wrapper textarea {
   background: var(--bg-input);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -242,19 +242,19 @@ textarea {
   -webkit-appearance: none;
 }
 
-input::placeholder,
-textarea::placeholder {
+.page-wrapper input::placeholder,
+.page-wrapper textarea::placeholder {
   color: var(--text-dim);
 }
 
-input:focus,
-select:focus,
-textarea:focus {
+.page-wrapper input:focus,
+.page-wrapper select:focus,
+.page-wrapper textarea:focus {
   border-color: var(--border-gold);
   box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.07);
 }
 
-select {
+.page-wrapper select {
   cursor: pointer;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238B8D96' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
@@ -262,12 +262,12 @@ select {
   padding-right: 38px;
 }
 
-select option {
+.page-wrapper select option {
   background: var(--bg-input);
   color: var(--white);
 }
 
-textarea {
+.page-wrapper textarea {
   resize: vertical;
   min-height: 120px;
   line-height: 1.55;
@@ -502,15 +502,7 @@ textarea {
 
 
 /* ── 14. Footer ──────────────────────────────── */
-footer {
-  text-align: center;
-  padding: 32px 0 0;
-  font-size: 12px;
-  color: var(--text-dim);
-  border-top: 1px solid var(--border);
-  border-bottom: none;
-  margin-top: 60px;
-}
+/* (site footer is injected by components.js and styled by style.css — no overrides here) */
 
 
 /* ── 15. Shared animations ───────────────────── */
