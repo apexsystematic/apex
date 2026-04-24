@@ -469,8 +469,6 @@ textarea {
 /* ── 13. CTA section ─────────────────────────── */
 .cta-section {
   margin-top: 40px;
-  background: linear-gradient(135deg, rgba(201, 168, 76, 0.06) 0%, rgba(201, 168, 76, 0.02) 100%);
-  border: 1px solid var(--border-gold);
   padding: 36px 40px;
   text-align: center;
   position: relative;
