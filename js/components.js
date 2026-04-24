@@ -125,51 +125,6 @@
     });
   }
 
-  /* ── Demo Header (logo + CTA only, no nav) ── */
-  function injectDemoHeader() {
-    var el = document.getElementById('demo-topbar');
-    if (!el) return;
-    el.innerHTML =
-      '<div class="header-wrap">'
-      +   '<div class="header container">'
-      +     '<a href="https://apexsystematic.com/" class="header-logo" aria-label="Apex Systematic">' + LOGO_HEADER + '</a>'
-      +     '<div class="header-right">'
-      +       '<a href="https://apexsystematic.com/#contact" class="btn btn-primary header-cta">Free Audit</a>'
-      +     '</div>'
-      +   '</div>'
-      + '</div>';
-  }
-
-  /* ── Demo Footer (exact site footer, absolute URLs) ── */
-  function injectDemoFooter() {
-    var el = document.getElementById('demo-footer');
-    if (!el) return;
-    el.innerHTML =
-      '<footer class="footer-wrap">'
-      +   '<div class="footer container">'
-      +     '<a href="https://apexsystematic.com/" class="footer-logo" aria-label="Apex Systematic">' + LOGO_FOOTER + '</a>'
-      +     '<nav class="footer-nav" aria-label="Footer navigation">'
-      +       '<a href="https://apexsystematic.com/#services">Services</a>'
-      +       '<a href="https://apexsystematic.com/#how-it-works">How it works</a>'
-      +       '<a href="https://apexsystematic.com/demos/">Demos</a>'
-      +       '<a href="https://apexsystematic.com/#pricing">Pricing</a>'
-      +       '<a href="https://apexsystematic.com/roi-calculator.html">ROI Calculator</a>'
-      +       '<a href="https://apexsystematic.com/#about">About</a>'
-      +       '<a href="https://apexsystematic.com/#contact">Contact</a>'
-      +     '</nav>'
-      +     '<div class="footer-bottom">'
-      +       '<p class="footer-copy">&copy; 2026 Apex Systematic</p>'
-      +       '<nav class="footer-legal" aria-label="Legal">'
-      +         '<a href="https://apexsystematic.com/terms.html">Terms</a>'
-      +         '<a href="https://apexsystematic.com/privacy.html">Privacy</a>'
-      +         '<a href="https://apexsystematic.com/cookies.html">Cookies</a>'
-      +         '<a href="#" class="cky-banner-element">Cookie Settings</a>'
-      +       '</nav>'
-      +     '</div>'
-      +   '</div>'
-      + '</footer>';
-  }
-
   /* ── Contact Form shared helpers ── */
 
   function buildCalendlyStep() {
@@ -454,8 +409,6 @@
   injectHeader();
   injectFooter();
   initMobileMenu();
-  injectDemoHeader();
-  injectDemoFooter();
   injectContactForm();
   injectDemoContactModal();
   injectChatWidget();
