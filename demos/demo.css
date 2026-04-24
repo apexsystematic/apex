@@ -37,8 +37,8 @@ body {
   font-weight: 400;
 }
 
-.page-wrapper a,
-.cta-section a {
+.page-wrapper a:not(.btn):not(.btn-primary):not(.btn-ghost),
+.cta-section a:not(.btn):not(.btn-primary):not(.btn-ghost) {
   color: var(--gold);
 }
 
@@ -203,18 +203,18 @@ body {
 
 
 /* ── 7. Form elements ────────────────────────── */
-.form-group.full {
+.page-wrapper .form-group.full {
   grid-column: 1 / -1;
 }
 
-.form-group {
+.page-wrapper .form-group {
   display: flex;
   flex-direction: column;
   gap: 7px;
   margin-bottom: 16px;
 }
 
-.form-group:last-of-type {
+.page-wrapper .form-group:last-of-type {
   margin-bottom: 0;
 }
 
