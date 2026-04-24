@@ -27,7 +27,7 @@
   <meta name="twitter:image" content="https://apexsystematic.com/og-image-v1.png">
   <title>Client Intake & Qualifier Demo — Apex Systematic</title>
   <link rel="stylesheet" href="/style.css">
-  <link rel="stylesheet" href="demo.css">
+  <link rel="stylesheet" href="/demos/demo.css">
   <link rel="stylesheet" href="lead-qualifier.css">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -62,8 +62,8 @@
     <div class="scenario-bar">
       <span class="scenario-label">Test scenario</span>
       <div class="scenario-btns">
-        <button class="scenario-btn active" onclick="loadScenario('qualified')">✓ Qualified Lead</button>
-        <button class="scenario-btn" onclick="loadScenario('disqualified')">✗ Disqualified Lead</button>
+        <button class="scenario-btn active" onclick="loadScenario('qualified', this)">✓ Qualified Lead</button>
+        <button class="scenario-btn" onclick="loadScenario('disqualified', this)">✗ Disqualified Lead</button>
       </div>
     </div>
 
@@ -176,10 +176,10 @@
 
   let currentScenario = 'qualified';
 
-  function loadScenario(type) {
+  function loadScenario(type, btn) {
     currentScenario = type;
     document.querySelectorAll('.scenario-btn').forEach(b => b.classList.remove('active'));
-    event.target.classList.add('active');
+    if (btn) btn.classList.add('active');
 
     const s = scenarios[type];
     document.getElementById('fname').value = s.fname;
@@ -195,7 +195,7 @@
   }
 
   // Load qualified scenario on page load
-  window.addEventListener('DOMContentLoaded', () => loadScenario('qualified'));
+  window.addEventListener('DOMContentLoaded', () => loadScenario('qualified', null));
 
   // ── Mock AI responses ──
   const mockResponses = {
