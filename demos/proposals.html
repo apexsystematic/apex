@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/19a036e48e9005dddd5999b15ed936e7/script.js"></script>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-52T88XLZ');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="See Apex Systematic's AI proposal and quote generation demo — produces tailored proposals in seconds, not hours.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Proposal & Quote Generation Demo — Apex Systematic">
+  <meta property="og:description" content="See Apex Systematic's AI proposal and quote generation demo — produces tailored proposals in seconds, not hours.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://apexsystematic.com/demos/proposals">
+  <meta property="og:image" content="https://apexsystematic.com/og-image-v1.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Apex Systematic">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Proposal & Quote Generation Demo — Apex Systematic">
+  <meta name="twitter:description" content="See Apex Systematic's AI proposal and quote generation demo — produces tailored proposals in seconds, not hours.">
+  <meta name="twitter:image" content="https://apexsystematic.com/og-image-v1.png">
+  <title>Proposal & Quote Generation Demo — Apex Systematic</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/demos/demo.css">
+  <link rel="stylesheet" href="proposals.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <div class="page-wrapper">
+
+  <!-- HEADER -->
+  <header>
+    <div class="badge"><span class="badge-dot"></span>Live Interactive Demo</div>
+    <h1>AI Proposal Generation <em>In Action</em></h1>
+    <p class="subtitle">Fill in the client brief on the left. The AI generates a complete, structured proposal in seconds — and fires the downstream workflow.</p>
+  </header>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <span class="divider-icon">◆</span>
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- PIPELINE BAR -->
+  <div class="pipeline-bar">
+    <div class="pipe-step">
+      <div class="pipe-icon" id="pipe-tally">📋</div>
+      <div class="pipe-label" id="label-tally">Tally Webhook</div>
+    </div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-step">
+      <div class="pipe-icon" id="pipe-tools">⚙️</div>
+      <div class="pipe-label" id="label-tools">Set Variables</div>
+    </div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-step">
+      <div class="pipe-icon" id="pipe-claude">🤖</div>
+      <div class="pipe-label" id="label-claude">Claude Opus</div>
+    </div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-step">
+      <div class="pipe-icon" id="pipe-json">{ }</div>
+      <div class="pipe-label" id="label-json">Parse JSON</div>
+    </div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-step">
+      <div class="pipe-icon" id="pipe-admin">📧</div>
+      <div class="pipe-label" id="label-admin">Admin Email</div>
+    </div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-step">
+      <div class="pipe-icon" id="pipe-client">✉️</div>
+      <div class="pipe-label" id="label-client">Client Draft</div>
+    </div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-step">
+      <div class="pipe-icon" id="pipe-airtable">🗃️</div>
+      <div class="pipe-label" id="label-airtable">Save Record</div>
+    </div>
+  </div>
+
+  <!-- MAIN LAYOUT -->
+  <div class="main-layout">
+
+    <!-- INPUT FORM -->
+    <div class="form-card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(201,168,76,0.1);color:var(--gold);">📋</div>
+        <span class="card-title">Client Brief</span>
+      </div>
+      <div class="card-body">
+
+        <div class="two-col">
+          <div class="form-group">
+            <label for="clientName">Client Name</label>
+            <input type="text" id="clientName" placeholder="e.g. Sarah Chen" />
+          </div>
+          <div class="form-group">
+            <label for="companyName">Company / Firm</label>
+            <input type="text" id="companyName" placeholder="e.g. Chen & Partners" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="industry">Industry / Sector</label>
+          <select id="industry">
+            <option value="">Select industry...</option>
+            <option value="Law Firm">Law Firm</option>
+            <option value="Independent Financial Advisory">Independent Financial Advisory</option>
+            <option value="Management Consulting">Management Consulting</option>
+            <option value="Accounting & Tax">Accounting & Tax</option>
+            <option value="Architecture & Design">Architecture & Design</option>
+            <option value="Healthcare Practice">Healthcare Practice</option>
+            <option value="Recruitment Agency">Recruitment Agency</option>
+            <option value="Other Professional Services">Other Professional Services</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="challenge">Core Challenge</label>
+          <textarea id="challenge" placeholder="What problem are they trying to solve? What manual work is costing them the most time?" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="workflows">Workflows to Automate</label>
+          <textarea id="workflows" placeholder="e.g. Client intake, document generation, weekly reporting..." rows="2"></textarea>
+        </div>
+
+        <div class="two-col">
+          <div class="form-group">
+            <label for="teamSize">Team Size</label>
+            <select id="teamSize">
+              <option value="">Select...</option>
+              <option value="Solo (1 person)">Solo</option>
+              <option value="Small (2–5 people)">2–5 people</option>
+              <option value="Medium (6–15 people)">6–15 people</option>
+              <option value="Larger (15+ people)">15+ people</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="budget">Budget Range</label>
+            <select id="budget">
+              <option value="">Select...</option>
+              <option value="Under $2,000">Under $2,000</option>
+              <option value="$2,000 – $5,000">$2,000 – $5,000</option>
+              <option value="$5,000 – $15,000">$5,000 – $15,000</option>
+              <option value="$15,000+">$15,000+</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="timeline">Desired Timeline</label>
+          <select id="timeline">
+            <option value="">Select...</option>
+            <option value="ASAP (within 2 weeks)">ASAP — within 2 weeks</option>
+            <option value="1 month">Within 1 month</option>
+            <option value="2–3 months">2–3 months</option>
+            <option value="Flexible">Flexible</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="tools">Current Tools Used</label>
+          <input type="text" id="tools" placeholder="e.g. Clio, Xero, Google Workspace, HubSpot..." />
+        </div>
+
+        <button class="generate-btn" id="generateBtn" onclick="generateProposal()">
+          <span id="btnText">Generate Proposal</span>
+          <span id="btnArrow">→</span>
+          <div class="spinner" id="spinner"></div>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- OUTPUT PANEL -->
+    <div class="output-card" id="outputCard">
+
+      <!-- Empty state -->
+      <div class="empty-state" id="emptyState">
+        <div class="empty-icon">📄</div>
+        <h3>Proposal will appear here</h3>
+        <p>Fill in the client brief and hit Generate. The AI will build a complete proposal in seconds.</p>
+      </div>
+
+      <!-- Proposal output (hidden until generated) -->
+      <div id="proposalOutput">
+        <div class="proposal-meta">
+          <div class="proposal-meta-left">
+            <span class="status-pill generated" id="statusPill">✓ Generated</span>
+            <span style="font-size:12px;color:var(--text-muted);" id="proposalTimestamp"></span>
+          </div>
+          <div class="proposal-actions">
+            <button class="action-btn" onclick="resetDemo()">↺ Reset</button>
+          </div>
+        </div>
+
+        <div class="output-tabs">
+          <button class="tab-btn active" onclick="switchTab('proposal', this)">Proposal Document</button>
+          <button class="tab-btn" onclick="switchTab('emails', this)">Emails Sent</button>
+          <button class="tab-btn" onclick="switchTab('airtable', this)">Airtable Record</button>
+        </div>
+
+        <!-- Tab: Proposal -->
+        <div class="tab-content active" id="tab-proposal">
+          <div class="proposal-doc" id="proposalDoc"></div>
+        </div>
+
+        <!-- Tab: Emails -->
+        <div class="tab-content" id="tab-emails">
+          <div class="email-wrap" id="emailContent"></div>
+        </div>
+
+        <!-- Tab: Airtable -->
+        <div class="tab-content" id="tab-airtable">
+          <div class="airtable-wrap" id="airtableContent"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <h3>Want This Generating Proposals for You?</h3>
+    <p>Fully built and handed over in under 2 weeks.<br>You own everything — no retainers, no lock-in.</p>
+    <div class="cta-btns">
+      <button class="btn btn-primary" onclick="openAuditModal()">Book a Free Call →</button>
+      <a href="https://apexsystematic.com" class="btn btn-ghost">Learn More</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="site-footer"></div>
+
+<script>
+  // ── Pipeline animation ──────────────────────────────────────
+  const pipeSteps = ['tally','tools','claude','json','admin','client','airtable'];
+  const pipeDelays = [0, 500, 1000, 2800, 3400, 3900, 4400];
+
+  function resetPipeline() {
+    pipeSteps.forEach(s => {
+      document.getElementById(`pipe-${s}`).className = 'pipe-icon';
+      document.getElementById(`label-${s}`).className = 'pipe-label';
+    });
+  }
+
+  async function animatePipeline() {
+    resetPipeline();
+    for (let i = 0; i < pipeSteps.length; i++) {
+      await new Promise(r => setTimeout(r, i === 0 ? 0 : pipeDelays[i] - pipeDelays[i-1]));
+      document.getElementById(`pipe-${pipeSteps[i]}`).className = 'pipe-icon active';
+      document.getElementById(`label-${pipeSteps[i]}`).className = 'pipe-label active';
+      await new Promise(r => setTimeout(r, 400));
+      document.getElementById(`pipe-${pipeSteps[i]}`).className = 'pipe-icon done';
+      document.getElementById(`label-${pipeSteps[i]}`).className = 'pipe-label done';
+    }
+  }
+
+  // ── Proposal generation ─────────────────────────────────────
+  function getFormData() {
+    return {
+      clientName:  document.getElementById('clientName').value.trim()  || 'Sarah Chen',
+      companyName: document.getElementById('companyName').value.trim() || 'Chen & Partners',
+      industry:    document.getElementById('industry').value           || 'Law Firm',
+      challenge:   document.getElementById('challenge').value.trim()   || 'Spending 2+ hours daily on manual client intake, document preparation, and status updates that could be automated.',
+      workflows:   document.getElementById('workflows').value.trim()   || 'Client intake qualification, document generation, weekly reporting',
+      teamSize:    document.getElementById('teamSize').value           || 'Small (2–5 people)',
+      budget:      document.getElementById('budget').value             || '$5,000 – $15,000',
+      timeline:    document.getElementById('timeline').value           || '1 month',
+      tools:       document.getElementById('tools').value.trim()       || 'Google Workspace, Clio'
+    };
+  }
+
+  function buildProposal(d) {
+    const workflowList = d.workflows.split(',').map(w => w.trim()).filter(Boolean);
+    const isLaw = d.industry.toLowerCase().includes('law');
+    const isIFA = d.industry.toLowerCase().includes('financial');
+
+    // Pricing logic
+    let projectName, phase1, phase2, total, deliveryWeeks;
+    if (d.budget === 'Under $2,000') {
+      projectName = 'Quick Win Automation'; phase1 = 1200; phase2 = null; total = 1200; deliveryWeeks = 2;
+    } else if (d.budget === '$2,000 – $5,000') {
+      projectName = 'Focused Automation Build'; phase1 = 2400; phase2 = 1200; total = 3600; deliveryWeeks = 3;
+    } else if (d.budget === '$5,000 – $15,000') {
+      projectName = 'Full Automation System'; phase1 = 4500; phase2 = 3500; total = 8000; deliveryWeeks = 5;
+    } else {
+      projectName = 'Enterprise Automation System'; phase1 = 7500; phase2 = 6500; total = 14000; deliveryWeeks = 7;
+    }
+
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' });
+
+    return { projectName, phase1, phase2, total, deliveryWeeks, dateStr, workflowList, isLaw, isIFA };
+  }
+
+  async function generateProposal() {
+    const d = getFormData();
+
+    // Validation
+    if (!d.industry) { alert('Please select an industry.'); return; }
+
+    gtag('event', 'demo_interaction', { demo_name: 'proposals' });
+
+    const btn = document.getElementById('generateBtn');
+    const btnText = document.getElementById('btnText');
+    const btnArrow = document.getElementById('btnArrow');
+    const spinner = document.getElementById('spinner');
+
+    btn.disabled = true;
+    btnText.textContent = 'Generating...';
+    btnArrow.style.display = 'none';
+    spinner.style.display = 'block';
+
+    // Animate pipeline (runs in background)
+    animatePipeline();
+
+    // Simulate Claude processing time (Opus is slower, this feels authentic)
+    await new Promise(r => setTimeout(r, 4800));
+
+    const p = buildProposal(d);
+    renderProposal(d, p);
+
+    btn.disabled = false;
+    btnText.textContent = 'Regenerate';
+    btnArrow.style.display = 'inline';
+    spinner.style.display = 'none';
+  }
+
+  function renderProposal(d, p) {
+    // Show output, hide empty state
+    document.getElementById('emptyState').style.display = 'none';
+    document.getElementById('proposalOutput').style.display = 'block';
+
+    // Timestamp
+    const now = new Date();
+    document.getElementById('proposalTimestamp').textContent =
+      'Generated ' + now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
+    // ── Proposal doc ──
+    const deliverableItems = p.workflowList.map(w =>
+      `<li>${w} — fully automated end-to-end, with error handling and notifications</li>`
+    ).join('');
+
+    const timelineRows = buildTimeline(p);
+    const investmentRows = buildInvestment(p);
+    const executiveSummary = buildExecSummary(d, p);
+    const challengeText = buildChallenge(d, p);
+    const solutionText = buildSolution(d, p);
+
+    document.getElementById('proposalDoc').innerHTML = `
+      <div class="doc-header">
+        <div class="doc-label">Proposal Document</div>
+        <div class="doc-title">${p.projectName}</div>
+        <div class="doc-meta">Prepared for ${d.clientName}, ${d.companyName} &nbsp;·&nbsp; ${p.dateStr}</div>
+      </div>
+
+      <div class="doc-section">
+        <div class="section-heading">Executive Summary</div>
+        <div class="section-body">${executiveSummary}</div>
+      </div>
+
+      <div class="doc-section">
+        <div class="section-heading">The Challenge</div>
+        <div class="section-body">${challengeText}</div>
+      </div>
+
+      <div class="doc-section">
+        <div class="section-heading">Proposed Solution</div>
+        <div class="section-body">${solutionText}</div>
+      </div>
+
+      <div class="doc-section">
+        <div class="section-heading">Deliverables</div>
+        <ul class="deliverable-list">${deliverableItems}
+          <li>Full technical documentation and handover training</li>
+          <li>30-day post-launch support window</li>
+        </ul>
+      </div>
+
+      <div class="doc-section">
+        <div class="section-heading">Timeline</div>
+        <div class="timeline">${timelineRows}</div>
+      </div>
+
+      <div class="doc-section">
+        <div class="section-heading">Investment</div>
+        ${investmentRows}
+        <div class="investment-note">✓ Fixed price. No retainers. No monthly fees. You own the system outright.</div>
+      </div>
+
+      <div class="doc-section">
+        <div class="section-heading">Next Steps</div>
+        <div class="next-steps">
+          <div class="next-step">
+            <div class="step-num">1</div>
+            <div class="step-text">Review this proposal and confirm you'd like to proceed</div>
+          </div>
+          <div class="next-step">
+            <div class="step-num">2</div>
+            <div class="step-text">Sign the engagement letter (sent separately)</div>
+          </div>
+          <div class="next-step">
+            <div class="step-num">3</div>
+            <div class="step-text">50% deposit to kick off — build begins within 48 hours</div>
+          </div>
+          <div class="next-step">
+            <div class="step-num">4</div>
+            <div class="step-text">Handover call, documentation, and you're live</div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    // ── Emails tab ──
+    document.getElementById('emailContent').innerHTML = `
+      <div style="margin-bottom:24px;">
+        <div class="email-type-badge badge-admin">📧 Admin Notification — Sent to You</div>
+        <div class="email-preview">
+          <div class="email-fields">
+            <div class="email-row"><span class="email-row-label">To:</span><span class="email-row-val">you@apexsystematic.com</span></div>
+            <div class="email-row"><span class="email-row-label">Re:</span><span class="email-row-val">New Proposal Generated — ${d.clientName} · ${d.companyName}</span></div>
+          </div>
+          <div class="email-body-text">Hi,
+
+A new proposal has been generated and a draft sent to the client.
+
+Client: ${d.clientName}
+Company: ${d.companyName}
+Industry: ${d.industry}
+Project: ${p.projectName}
+Total Value: $${p.total.toLocaleString()}
+Timeline: ${p.deliveryWeeks} weeks
+
+The draft email to the client is waiting in your Gmail drafts for review before sending.
+
+— Apex Systematic Automation</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="email-type-badge badge-client">✉️ Client Draft — Saved to Gmail Drafts</div>
+        <div class="email-preview">
+          <div class="email-fields">
+            <div class="email-row"><span class="email-row-label">To:</span><span class="email-row-val">${d.clientName.toLowerCase().replace(' ','.')}@${d.companyName.toLowerCase().replace(/[^a-z]/g,'')}.com</span></div>
+            <div class="email-row"><span class="email-row-label">Re:</span><span class="email-row-val">Your Automation Proposal — ${p.projectName}</span></div>
+          </div>
+          <div class="email-body-text">Hi ${d.clientName.split(' ')[0]},
+
+Thank you for taking the time to walk me through your current workflow. I've put together a proposal based on what we discussed.
+
+I've attached the full proposal document. In summary:
+
+Project: ${p.projectName}
+Delivery: ${p.deliveryWeeks} weeks from kick-off
+Investment: $${p.total.toLocaleString()} (fixed price, no retainers)
+
+The proposal covers ${p.workflowList.slice(0, 2).join(' and ')}${p.workflowList.length > 2 ? `, plus ${p.workflowList.length - 2} additional workflow${p.workflowList.length - 2 > 1 ? 's' : ''}` : ''}.
+
+Everything is built to your exact workflow and handed over fully documented — you own it outright with no ongoing dependency on me.
+
+Happy to walk through any questions on a quick call. Let me know.
+
+Best regards,
+Apex Systematic</div>
+        </div>
+      </div>
+    `;
+
+    // ── Airtable tab ──
+    const ts = new Date().toISOString().replace('T',' ').substring(0,19) + ' UTC';
+    document.getElementById('airtableContent').innerHTML = `
+      <table class="airtable-table">
+        <tr><td>Contact Name</td><td>${d.clientName}</td></tr>
+        <tr><td>Company</td><td>${d.companyName}</td></tr>
+        <tr><td>Industry</td><td>${d.industry}</td></tr>
+        <tr><td>Team Size</td><td>${d.teamSize}</td></tr>
+        <tr><td>Budget</td><td>${d.budget}</td></tr>
+        <tr><td>Timeline</td><td>${d.timeline}</td></tr>
+        <tr><td>Tools</td><td>${d.tools || '—'}</td></tr>
+        <tr><td>Project Name</td><td>${p.projectName}</td></tr>
+        <tr><td>Proposal Value</td><td>$${p.total.toLocaleString()}</td></tr>
+        <tr><td>Delivery Weeks</td><td>${p.deliveryWeeks} weeks</td></tr>
+        <tr><td>Status</td><td><span class="crm-tag new">Proposal Sent</span></td></tr>
+        <tr><td>Created At</td><td><span class="mono">${ts}</span></td></tr>
+      </table>
+    `;
+
+    // Scroll output into view
+    setTimeout(() => {
+      document.getElementById('outputCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  }
+
+  // ── Content builders ────────────────────────────────────────
+  function buildExecSummary(d, p) {
+    return `This proposal outlines a ${p.deliveryWeeks}-week engagement to build a custom automation system for ${d.companyName}. The project will eliminate the manual, repetitive work currently consuming your team's time — freeing your people to focus on the work that actually requires their expertise. At project close, you own the system outright with full documentation and no ongoing dependency on Apex Systematic.`;
+  }
+
+  function buildChallenge(d, p) {
+    if (d.challenge) return d.challenge;
+    if (p.isLaw) return `${d.companyName} is spending significant time on manual client intake, document preparation, and administrative follow-up that could be handled automatically. This is a common challenge for ${d.teamSize} practices — the overhead scales with client volume, pulling fee-earners away from billable work.`;
+    if (p.isIFA) return `${d.companyName} is facing the challenge of manual client onboarding, suitability documentation, and reporting processes that consume advisor time without adding professional value. As the practice grows, this overhead compounds.`;
+    return `${d.companyName} is investing valuable professional time in manual, repeatable processes that are well-suited to automation. The challenge is not complexity — it's that these tasks have never been systematised, so they continue to consume time disproportionate to their actual value.`;
+  }
+
+  function buildSolution(d, p) {
+    const toolStr = d.tools ? ` integrated with your existing stack (${d.tools})` : '';
+    return `We will design and build a custom automation system using Make.com and the Anthropic Claude API${toolStr}. Each workflow will be built around your exact process — not adapted from a template — and delivered with full documentation so your team can understand, maintain, and modify it independently. The system will handle ${p.workflowList.join(', ')}, running reliably in the background without manual intervention.`;
+  }
+
+  function buildTimeline(p) {
+    const weeks = p.deliveryWeeks;
+    const rows = [
+      { week: 'Week 1', task: 'Discovery, workflow mapping, and system architecture' },
+      { week: weeks <= 2 ? 'Week 2' : 'Weeks 2–3', task: 'Core automation build and internal testing' },
+    ];
+    if (weeks > 3) rows.push({ week: `Weeks ${Math.floor(weeks/2)}–${weeks-1}`, task: 'Integration, edge-case handling, and QA' });
+    rows.push({ week: `Week ${weeks}`, task: 'Handover, documentation, and training session' });
+
+    return rows.map(r => `
+      <div class="timeline-row">
+        <span class="timeline-week">${r.week}</span>
+        <span class="timeline-task">${r.task}</span>
+      </div>
+    `).join('');
+  }
+
+  function buildInvestment(p) {
+    let rows = '';
+    if (p.phase2) {
+      rows = `
+        <table class="investment-table">
+          <tr><td>Phase 1 — Audit, architecture & core build</td><td>$${p.phase1.toLocaleString()}</td></tr>
+          <tr><td>Phase 2 — Integration, QA & handover</td><td>$${p.phase2.toLocaleString()}</td></tr>
+        </table>
+      `;
+    } else {
+      rows = `
+        <table class="investment-table">
+          <tr><td>Automation build, testing & handover</td><td>$${p.phase1.toLocaleString()}</td></tr>
+        </table>
+      `;
+    }
+
+    return rows + `
+      <div class="investment-total">
+        <span>Total Investment</span>
+        <span>$${p.total.toLocaleString()}</span>
+      </div>
+    `;
+  }
+
+  // ── Tab switching ───────────────────────────────────────────
+  function switchTab(name, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(`tab-${name}`).classList.add('active');
+  }
+
+  // ── Reset ───────────────────────────────────────────────────
+  // -- Default field values --
+  function populateDefaults() {
+    document.getElementById('clientName').value   = 'Sarah Chen';
+    document.getElementById('companyName').value  = 'Chen & Partners LLP';
+    document.getElementById('industry').value     = 'Law Firm';
+    document.getElementById('challenge').value    = 'We spend 2-3 hours daily on manual client intake, chasing documents, and preparing engagement letters from scratch. Every new matter requires the same repetitive admin regardless of complexity.';
+    document.getElementById('workflows').value    = 'Client intake & qualification, engagement letter generation, matter status updates';
+    document.getElementById('teamSize').value     = 'Small (2–5 people)';
+    document.getElementById('budget').value       = '$5,000 – $15,000';
+    document.getElementById('timeline').value     = '1 month';
+    document.getElementById('tools').value        = 'Clio, Google Workspace, DocuSign';
+  }
+
+  window.addEventListener('DOMContentLoaded', populateDefaults);
+
+  function resetDemo() {
+    document.getElementById('emptyState').style.display = 'flex';
+    document.getElementById('proposalOutput').style.display = 'none';
+    resetPipeline();
+    const btn = document.getElementById('generateBtn');
+    const btnText = document.getElementById('btnText');
+    const btnArrow = document.getElementById('btnArrow');
+    btn.disabled = false;
+    btnText.textContent = 'Generate Proposal';
+    btnArrow.style.display = 'inline';
+  }
+</script>
+
+  <script src="/js/components.js"></script>
+  <script src="/js/main.js"></script>
+  <script>gtag('event', 'demo_viewed', { demo_name: 'proposals' });</script>
+</body>
+</html>
