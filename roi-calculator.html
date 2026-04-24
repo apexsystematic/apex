@@ -46,7 +46,7 @@
         <div class="roi-page-header">
           <span class="section-tag">ROI Calculator</span>
           <h2>How much is manual work<br><em>actually</em> costing you?</h2>
-          <p class="section-sub">Move the sliders to your situation. See the real dollar value of the time your practice loses every week.</p>
+          <p class="section-sub">Set the sliders to your situation. See the annual cost of the work you're still doing manually.</p>
         </div>
         <div class="roi-layout">
 
@@ -57,27 +57,27 @@
 
             <div class="input-row">
               <div class="input-label-row">
-                <span class="input-label-text">Your billable hourly rate</span>
-                <span class="input-label-value" id="val-rate">$150 / hr</span>
+                <span class="input-label-text">Your average billable rate</span>
+                <span class="input-label-value" id="val-rate">€150 / hr</span>
               </div>
               <input type="range" id="rate" min="50" max="1000" step="10" value="150" oninput="update()">
-              <div class="range-limits"><span>$50</span><span>$1,000</span></div>
+              <div class="range-limits"><span>€50</span><span>€1,000</span></div>
             </div>
 
             <div class="input-row">
               <div class="input-label-row">
-                <span class="input-label-text">People affected — you and your team</span>
+                <span class="input-label-text">People in your team (including you)</span>
                 <span class="input-label-value" id="val-team">1 person</span>
               </div>
               <input type="range" id="team" min="1" max="20" step="1" value="1" oninput="update()">
               <div class="range-limits"><span>1</span><span>20</span></div>
             </div>
 
-            <span class="inputs-block-label">Weekly Hours Lost To...</span>
+            <span class="inputs-block-label">Hours lost per week on...</span>
 
             <div class="input-row">
               <div class="input-label-row">
-                <span class="input-label-text">Admin & email management</span>
+                <span class="input-label-text">Admin and email</span>
                 <span class="input-label-value" id="val-admin">5 hrs / wk</span>
               </div>
               <input type="range" id="admin" min="0" max="30" step="1" value="5" oninput="update()">
@@ -86,7 +86,7 @@
 
             <div class="input-row">
               <div class="input-label-row">
-                <span class="input-label-text">Document drafting & formatting</span>
+                <span class="input-label-text">Document drafting and formatting</span>
                 <span class="input-label-value" id="val-docs">4 hrs / wk</span>
               </div>
               <input type="range" id="docs" min="0" max="20" step="1" value="4" oninput="update()">
@@ -95,7 +95,7 @@
 
             <div class="input-row">
               <div class="input-label-row">
-                <span class="input-label-text">Client onboarding & follow-up</span>
+                <span class="input-label-text">Client onboarding and chasing</span>
                 <span class="input-label-value" id="val-onboard">3 hrs / wk</span>
               </div>
               <input type="range" id="onboard" min="0" max="20" step="1" value="3" oninput="update()">
@@ -104,7 +104,7 @@
 
             <div class="input-row">
               <div class="input-label-row">
-                <span class="input-label-text">Data entry & reporting</span>
+                <span class="input-label-text">Data entry and reporting</span>
                 <span class="input-label-value" id="val-data">3 hrs / wk</span>
               </div>
               <input type="range" id="data" min="0" max="20" step="1" value="3" oninput="update()">
@@ -122,10 +122,10 @@
             </div>
 
             <div class="metric-primary">
-              <div class="metric-label">Value of time lost per year</div>
-              <div class="metric-value-large" id="res-value">$0</div>
+              <div class="metric-label">Based on your billable rate</div>
+              <div class="metric-value-large" id="res-value">€0</div>
               <p class="metric-benchmark">
-                Based on industry averages, professionals automate <strong>60–80%</strong> of this time — returning <strong id="res-recoverable">$0</strong> to billable work.
+                Based on industry averages, firms like yours automate <strong>60–80%</strong> of this time — returning <strong id="res-recoverable">€0</strong> to billable work.
               </p>
             </div>
 
@@ -145,7 +145,7 @@
             <div class="breakdown">
               <div class="breakdown-title">Breakdown by area</div>
               <div class="breakdown-row">
-                <span class="breakdown-category">Admin & email</span>
+                <span class="breakdown-category">Admin and email</span>
                 <span class="breakdown-val" id="br-admin">0 hrs / yr</span>
               </div>
               <div class="breakdown-row">
@@ -157,14 +157,15 @@
                 <span class="breakdown-val" id="br-onboard">0 hrs / yr</span>
               </div>
               <div class="breakdown-row">
-                <span class="breakdown-category">Data & reporting</span>
+                <span class="breakdown-category">Data and reporting</span>
                 <span class="breakdown-val" id="br-data">0 hrs / yr</span>
               </div>
             </div>
 
             <div class="results-cta">
-              <a href="#contact" class="btn btn-primary">Get Your Free Audit</a>
-              <p class="results-cta-note">No commitment. We map your workflows<br>and show you exactly what can be automated.</p>
+              <a href="#contact" class="btn btn-primary">Book a Free Audit</a>
+              <p class="results-cta-note">We map your workflows, show you exactly what's worth building, and give you a fixed-price quote within 24 hours.
+</p>
             </div>
 
           </div>
@@ -189,7 +190,7 @@
 
   <script>
     function fmt(n) {
-      return '$' + Math.round(n).toLocaleString('en-US');
+      return '€' + Math.round(n).toLocaleString('en-UK');
     }
 
     let roiTracked = false;
@@ -208,7 +209,7 @@
       const data    = +document.getElementById('data').value;
 
       // Slider display values
-      document.getElementById('val-rate').textContent    = '$' + rate.toLocaleString() + ' / hr';
+      document.getElementById('val-rate').textContent    = '€' + rate.toLocaleString() + ' / hr';
       document.getElementById('val-team').textContent    = team + (team === 1 ? ' person' : ' people');
       document.getElementById('val-admin').textContent   = admin + ' hrs / wk';
       document.getElementById('val-docs').textContent    = docs + ' hrs / wk';
