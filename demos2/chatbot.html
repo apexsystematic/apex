@@ -33,7 +33,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 </head>
 <body>
-  <div id="demo-topbar"></div>
+  <div id="site-header"></div>
 
   <div class="page-wrapper">
 
@@ -76,7 +76,7 @@
 
       <div class="chat-input-area">
         <textarea
-          class="chat-input"
+          class="chat-msg-input"
           id="chatInput"
           placeholder="Type a message..."
           rows="1"
@@ -158,7 +158,7 @@
             </div>
             <div class="lead-field">
               <span class="lead-field-label">Messages</span>
-              <span class="lead-field-val" id="msgCount">1</span>
+              <span class="lead-field-val" id="msgCount">0</span>
             </div>
             <div class="lead-field">
               <span class="lead-field-label">Intent Signal</span>
@@ -196,13 +196,11 @@
       <button class="btn btn-primary" onclick="openAuditModal()">Book a Free Call →</button>
       <a href="https://apexsystematic.com" class="btn btn-ghost">Learn More</a>
     </div>
-
-    <p style="margin-top:20px;font-size:0.78rem;color:var(--text-dim);font-style:italic;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.6;">These are interactive simulations for demonstration purposes only. No data is stored or transmitted, and AI responses are pre-scripted — not live AI agents.</p>
   </div>
 
 </div>
 
-<div id="demo-footer"></div>
+<div id="site-footer"></div>
 
 <script>
   // ── Config ──
@@ -211,7 +209,7 @@
 
   // ── State ──
   let history = [];
-  let messageCount = 1;
+  let messageCount = 0;
   let leadCaptured = false;
   let isTyping = false;
 
