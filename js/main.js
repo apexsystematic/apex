@@ -179,41 +179,8 @@ window.showStep = function (step) {
   'use strict';
 
   // ── Config ────────────────────────────────────────────────
-  const WEBHOOK_URL      = 'https://chat.apexsystematic.com';
-  const USE_LIVE_WEBHOOK = true;
+  const WEBHOOK_URL = 'https://chat.apexsystematic.com';
   // ─────────────────────────────────────────────────────────
-
-  // ── Mock responses (used while USE_LIVE_WEBHOOK is false) ──
-  const mockResponses = [
-    {
-      trigger: ['law firm', 'lawyer', 'solicitor', 'legal'],
-      reply: `For law firms the biggest wins are usually:\n\n**Client intake & qualification** — automatic triage of enquiries, sending Calendly links to qualified leads and polite decline emails to others.\n\n**Document generation** — engagement letters, client care letters generated automatically from intake data.\n\nWhat does your current intake process look like?`
-    },
-    {
-      trigger: ['ifa', 'financial advisor', 'financial adviser', 'wealth'],
-      reply: `For IFAs, onboarding and reporting are typically the biggest time drains.\n\n**Client onboarding** — from enquiry to signed letter of engagement, fully automated.\n\n**Suitability reports** — structured drafts generated automatically, ready for your review.\n\nAre you looking to automate a specific part of your workflow?`
-    },
-    {
-      trigger: ['cost', 'price', 'how much', 'pricing', 'fee'],
-      reply: `Project-based pricing — you pay once and own the system outright. No retainers, no monthly fees.\n\n- **Foundation** — multiple workflows, 2-week delivery\n- **Connected Practice** — workflows + AI, 4–6 weeks\n- **Agent Suite** — full build with AI agents, 6–8 weeks\n\nEvery engagement starts with a free audit. Want to book one?`
-    },
-    {
-      trigger: ['retainer', 'monthly', 'subscription', 'lock-in'],
-      reply: `No retainers, no monthly fees — that's a core part of how we work.\n\nYou pay for the project once and own it outright. Most agencies lock you in, we don't.\n\nWant to start with a free audit to see what's possible?`
-    },
-    {
-      trigger: ['how long', 'timeline', 'weeks', 'deliver'],
-      reply: `Foundation builds take **2 weeks**. Connected Practice is **4–6 weeks**. Agent Suite is **6–8 weeks**.\n\nProcess: free audit call → fixed-price proposal within 24hrs → build → handover with full documentation.\n\nWould you like to book an audit call?`
-    }
-  ];
-
-  function getMock(msg) {
-    const lower = msg.toLowerCase();
-    for (const r of mockResponses) {
-      if (r.trigger.some(t => lower.includes(t))) return r.reply;
-    }
-    return `Happy to help. AI automation can eliminate a lot of the manual work in professional practices — intake, documents, reporting, onboarding.\n\nThe best starting point depends on where you're losing the most time. What's your role, and what's taking up too much of your day?`;
-  }
 
   // ── State ─────────────────────────────────────────────────
   let history  = [];
@@ -294,7 +261,15 @@ window.showStep = function (step) {
     bubble.innerHTML = text
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
       .replace(/\n\n/g, '<br><br>')
-      .replace(/\n/g, '<br>');
+      .replace(/\n/g, '<br>')
+      .replace(
+        /https:\/\/calendly\.com\/[^\s<"]+/g,
+        '<a href="$&" target="_blank" rel="noopener" style="color:#C9A84C;text-decoration:underline;">book directly here</a>'
+      )
+      .replace(
+        /(?<!href=")https?:\/\/(?!calendly\.com)[^\s<"]+/g,
+        '<a href="$&" target="_blank" rel="noopener" style="color:#C9A84C;text-decoration:underline;">$&</a>'
+      );
 
     msg.appendChild(bubble);
     messages.appendChild(msg);
@@ -341,21 +316,13 @@ window.showStep = function (step) {
     apexShowTyping();
 
     try {
-      let reply;
-
-      if (USE_LIVE_WEBHOOK && WEBHOOK_URL !== 'YOUR_MAKE_WEBHOOK_URL') {
-        const res  = await fetch(WEBHOOK_URL, {
-          method:  'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body:    JSON.stringify({ message, history })
-        });
-        const data = await res.json();
-        reply = data.reply;
-      } else {
-        await new Promise(r => setTimeout(r, 1400 + Math.random() * 800));
-        reply = getMock(message);
-      }
-
+      const res  = await fetch(WEBHOOK_URL, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ message, history })
+      });
+      const data = await res.json();
+      let reply  = data.reply;
       reply = reply.replace(/LEAD_CAPTURED:\{[^}]+\}/g, '').trim();
 
       apexRemoveTyping();
