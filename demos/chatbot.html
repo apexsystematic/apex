@@ -57,7 +57,6 @@
     <!-- CHAT -->
     <div class="chat-card">
       <div class="chat-header">
-        <div class="chat-avatar">⚡</div>
         <div class="chat-header-info">
           <strong>Apex AI Assistant</strong>
           <span>Powered by Claude · Apex Systematic</span>
@@ -68,7 +67,6 @@
       <div class="messages" id="messages">
         <!-- Intro message -->
         <div class="msg bot">
-          <div class="msg-avatar">⚡</div>
           <div class="msg-bubble">
             Hi there. I'm the Apex Systematic assistant. Ask me anything about automating your practice — law firms, IFAs, consultants. I can walk you through what's realistic, what it costs, and how long it takes. What's the biggest time drain in your week right now?
           </div>
@@ -94,7 +92,6 @@
       <!-- Pipeline -->
       <div class="panel-card">
         <div class="panel-header">
-          <div class="panel-icon" style="background:rgba(201,168,76,0.1); color:var(--gold);">⚙</div>
           <span class="panel-title">Make.com Workflow</span>
         </div>
         <div class="panel-body">
@@ -141,7 +138,6 @@
       <!-- Lead Status -->
       <div class="panel-card">
         <div class="panel-header">
-          <div class="panel-icon" style="background:rgba(46,204,113,0.08); color:var(--green);">👤</div>
           <span class="panel-title">Lead Capture Status</span>
         </div>
         <div class="panel-body">
@@ -172,7 +168,6 @@
       <!-- Suggested prompts -->
       <div class="panel-card">
         <div class="panel-header">
-          <div class="panel-icon" style="background:rgba(201,168,76,0.08); color:var(--gold);">💬</div>
           <span class="panel-title">Try These</span>
         </div>
         <div class="panel-body">
@@ -297,15 +292,10 @@
     msg.className = `msg ${role}`;
     if (!animate) msg.style.opacity = '1';
 
-    const avatar = document.createElement('div');
-    avatar.className = 'msg-avatar';
-    avatar.textContent = role === 'bot' ? '⚡' : '👤';
-
     const bubble = document.createElement('div');
     bubble.className = 'msg-bubble';
     bubble.innerHTML = formatMessage(text);
 
-    msg.appendChild(avatar);
     msg.appendChild(bubble);
     messages.appendChild(msg);
     messages.scrollTop = messages.scrollHeight;
@@ -325,16 +315,10 @@
     typing.className = 'typing-indicator';
     typing.id = 'typingIndicator';
 
-    const avatar = document.createElement('div');
-    avatar.className = 'msg-avatar';
-    avatar.style.cssText = 'width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;background:var(--gold-dim);border:1px solid var(--border-gold);color:var(--gold);flex-shrink:0;';
-    avatar.textContent = '⚡';
-
     const dots = document.createElement('div');
     dots.className = 'typing-dots';
     dots.innerHTML = '<span></span><span></span><span></span>';
 
-    typing.appendChild(avatar);
     typing.appendChild(dots);
     messages.appendChild(typing);
     messages.scrollTop = messages.scrollHeight;
