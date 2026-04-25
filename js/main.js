@@ -14,10 +14,10 @@
     if (!('IntersectionObserver' in window)) return;
 
     var revealEls = document.querySelectorAll(
-      '.service-card, .step, .pricing-card, .testimonial-card, .about-grid, .audit-form-wrap,'
-      + '.hero-stat, .barrier-card, .industry-card, .roadmap-step, .roadmap-col,'
-      + '.wf-row:not(.wf-header), .insight-band-inner, .stacking-callout, .mid-cta'
-    );
+        '.service-card, .step, .pricing-card, .opt-c-tier, .testimonial-card, .about-grid, .audit-form-wrap,'
+        + '.hero-stat, .barrier-card, .industry-card, .ib-card, .roadmap-step, .roadmap-col,'
+        + '.wf-row:not(.wf-header), .insight-band-inner, .stacking-callout, .mid-cta'
+      );
 
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
