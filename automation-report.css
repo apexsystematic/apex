@@ -215,16 +215,27 @@
   border-left: 2px solid var(--gold);
   background: var(--surface);
 }
+
 .mid-cta-text {
   font-size: 1rem;
   color: var(--text-muted);
   line-height: 1.7;
   margin: 0;
 }
+
 .mid-cta .btn { flex-shrink: 0; }
+
+.mid-cta-actions {
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
 @media (max-width: 768px) {
   .mid-cta { flex-direction: column; align-items: flex-start; gap: 20px; }
-  .mid-cta .btn { width: 100%; text-align: center; }
+  .mid-cta-actions { width: 100%; }
+  .mid-cta-actions .btn { flex: 1; min-width: 140px; text-align: center; }
 }
 
 /* ══════════════════════════════════════════
