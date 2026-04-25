@@ -47,8 +47,8 @@
       Live Interactive Demo
     </div>
 
-    <h1>AI Client Intake <em>In Action</em></h1>
-    <p class="subtitle">Submit a test enquiry below. The AI qualification engine will analyse the lead and show you exactly what happens next — in real time.</p>
+    <h1>AI Lead Qualifier <em>In Action</em></h1>
+    <p class="subtitle">Submit a test enquiry. The system qualifies it against your criteria and shows you exactly what fires next — in real time.</p>
   </header>
 
   <!-- DIVIDER -->
@@ -126,7 +126,7 @@
     </div>
 
     <button class="submit-btn" id="submitBtn" onclick="handleSubmit()">
-      <span id="btnText">Run Qualification Engine</span>
+      <span id="btnText">Run the qualifier</span>
       <span>→</span>
       <div class="spinner" id="spinner"></div>
     </button>
@@ -142,11 +142,11 @@
 
   <!-- CTA -->
   <div class="cta-section" id="ctaSection" style="margin-top: 60px;">
-    <h3>Want This Running in Your Firm?</h3>
-    <p>Fully built and handed over in under 2 weeks.<br>You own everything — no retainers, no lock-in.</p>
+    <h3>Want this qualifying your leads?</h3>
+    <p>Built to your criteria, handed over in under 2 weeks. Fixed price. No retainer. You own it.</p>
     <div class="cta-btns">
       <button class="btn btn-primary" onclick="openAuditModal()">Book a Free Call →</button>
-      <a href="https://apexsystematic.com" class="btn btn-ghost">Learn More</a>
+      <a href="/demos.html" class="btn btn-ghost">More Demos</a>
     </div>
   </div>
 
@@ -312,7 +312,6 @@ Warm regards,
     card1.className = 'result-card';
     card1.innerHTML = `
       <div class="card-header">
-        <div class="card-icon" style="background:rgba(201,168,76,0.1); color:var(--gold);">⚡</div>
         <span class="card-title">AI Qualification Decision</span>
       </div>
       <div class="card-body">
@@ -336,14 +335,13 @@ Warm regards,
       actionBody = `
         <div class="action-type calendly">▶ Calendly Link Sent</div>
         <div class="calendly-mock">
-          <div class="calendly-icon">📅</div>
           <div class="calendly-text">
             <strong>Consultation Booking Link</strong>
             <span>Sent to ${form.email || 'client@example.com'} — 30-min intro call</span>
           </div>
           <span class="calendly-link">Book Now →</span>
         </div>
-        <p style="margin-top:14px; font-size:13px; color:var(--text-muted);">A Slack notification was also sent to the firm owner with the lead summary and qualification score for review.</p>
+        <p style="margin-top:14px; font-size:13px; color:var(--text-muted);">A notification was also sent to the firm owner with the lead summary and qualification score for review.</p>
       `;
     } else {
       actionBody = `
@@ -360,7 +358,6 @@ Warm regards,
 
     card2.innerHTML = `
       <div class="card-header">
-        <div class="card-icon" style="background:rgba(46,204,113,0.08); color:var(--green);">⚙</div>
         <span class="card-title">Action Triggered</span>
       </div>
       <div class="card-body">${actionBody}</div>
@@ -374,8 +371,7 @@ Warm regards,
 
     card3.innerHTML = `
       <div class="card-header">
-        <div class="card-icon" style="background:rgba(201,168,76,0.08); color:var(--gold);">🗃</div>
-        <span class="card-title">Airtable Record Created</span>
+        <span class="card-title">Record Created</span>
       </div>
       <div class="card-body">
         <table class="crm-table">
