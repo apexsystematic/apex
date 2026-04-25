@@ -401,8 +401,8 @@ window.showStep = function (step) {
   // ── Prices per tier ──
   const PRICES = {
     foundation:         { USD: [899,  1499], GBP: [699,  1099], EUR: [799,  1299] },
-    connected_practice: { USD: [1799, 2799], GBP: [1299, 2099], EUR: [1599, 2399] },
-    agent_suite:        { USD: [3899, 5399], GBP: [2899, 3999], EUR: [3299, 4599] },
+    connected_practice: { USD: [2199, 3399], GBP: [1599, 2499], EUR: [1899, 2899] },
+    agent_suite:        { USD: [4199, 5699], GBP: [3099, 4199], EUR: [3599, 4899] },
   };
 
   const SYMBOLS = { USD: '$', GBP: '£', EUR: '€' };
