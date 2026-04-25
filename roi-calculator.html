@@ -60,8 +60,8 @@
                 <span class="input-label-text">Your average billable rate</span>
                 <span class="input-label-value" id="val-rate">€150 / hr</span>
               </div>
-              <input type="range" id="rate" min="50" max="1000" step="10" value="150" oninput="update()">
-              <div class="range-limits"><span>€50</span><span>€1,000</span></div>
+              <input type="range" id="rate" min="50" max="400" step="10" value="150" oninput="update()">
+              <div class="range-limits"><span>€50</span><span>€400</span></div>
             </div>
 
             <div class="input-row">
@@ -217,15 +217,15 @@
 
       // Calculations
       const weeklyTotal  = (admin + docs + onboard + data) * team;
-      const annualHours  = weeklyTotal * 52;
+      const annualHours  = weeklyTotal * 48;
       const annualValue  = annualHours * rate;
       const recoverable  = annualValue * 0.70; // midpoint of 60–80%
 
       // Breakdown (annual, per team)
-      const bAdmin   = admin   * team * 52;
-      const bDocs    = docs    * team * 52;
-      const bOnboard = onboard * team * 52;
-      const bData    = data    * team * 52;
+      const bAdmin   = admin   * team * 48;
+      const bDocs    = docs    * team * 48;
+      const bOnboard = onboard * team * 48;
+      const bData    = data    * team * 48;
 
       // Outputs
       document.getElementById('res-value').textContent      = fmt(annualValue);
