@@ -95,6 +95,30 @@
 }
 
 /* ══════════════════════════════════════════
+   HERO BRIDGE
+══════════════════════════════════════════ */
+
+.hero-bridge {
+  padding: 28px var(--gutter);
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+.hero-bridge p {
+  font-size: 0.95rem;
+  margin: 0;
+  color: var(--text-muted);
+}
+.hero-bridge-link {
+  color: var(--gold);
+  font-weight: 500;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--ease);
+}
+.hero-bridge-link:hover {
+  border-bottom-color: var(--gold);
+}
+
+/* ══════════════════════════════════════════
    KEY INSIGHT BAND
 ══════════════════════════════════════════ */
 .insight-band {
