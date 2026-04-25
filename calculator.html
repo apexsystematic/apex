@@ -76,8 +76,8 @@
                 <span class="input-label-text">Average billable rate</span>
                 <span class="input-label-value" id="val-rate">£180 / hr</span>
               </div>
-              <input type="range" id="rate" min="50" max="1000" step="10" value="180" oninput="update()">
-              <div class="range-limits"><span id="lim-rate-min">£50</span><span id="lim-rate-max">£1,000</span></div>
+              <input type="range" id="rate" min="50" max="400" step="10" value="180" oninput="update()">
+              <div class="range-limits"><span id="lim-rate-min">£50</span><span id="lim-rate-max">£400</span></div>
             </div>
 
             <!-- Team size -->
@@ -350,7 +350,7 @@
 
       // Convert slider min/max/step/value to local currency (rounded to 10)
       const newMin  = Math.round((50   * fx.rate) / 10) * 10;
-      const newMax  = Math.round((1000 * fx.rate) / 10) * 10;
+      const newMax  = Math.round((400 * fx.rate) / 10) * 10;
       const newStep = 10;
 
       slider.min  = newMin;
