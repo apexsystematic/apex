@@ -392,13 +392,17 @@ window.showStep = function (step) {
    APEX SYSTEMATIC — Localised pricing
    ═══════════════════════════════════════════ */
 
+/* ═══════════════════════════════════════════
+   APEX SYSTEMATIC — Geo pricing
+   ═══════════════════════════════════════════ */
+
 (function () {
 
-  // ── Prices per tier (add new page prices here later) ──
+  // ── Prices per tier ──
   const PRICES = {
-    foundation:        { USD: 899,  GBP: 699,  EUR: 799  },
-    connected_practice:{ USD: 1899, GBP: 1399, EUR: 1599 },
-    agent_suite:       { USD: 2999, GBP: 2199, EUR: 2499 },
+    foundation:         { USD: [899,  1499], GBP: [699,  1099], EUR: [799,  1299] },
+    connected_practice: { USD: [1799, 2799], GBP: [1299, 2099], EUR: [1599, 2399] },
+    agent_suite:        { USD: [3899, 5399], GBP: [2899, 3999], EUR: [3299, 4599] },
   };
 
   const SYMBOLS = { USD: '$', GBP: '£', EUR: '€' };
@@ -408,25 +412,25 @@ window.showStep = function (step) {
     return symbol + amount.toLocaleString('en-GB');
   }
 
+  function fmtRange(currency, tier) {
+    const sym = SYMBOLS[currency];
+    const [lo, hi] = PRICES[tier][currency];
+    return fmt(sym, lo) + '–' + fmt(sym, hi);
+  }
+
   // ── Apply to DOM ──
   function applyPricing(currency) {
-    const sym = SYMBOLS[currency];
-
-    // Pricing cards — targets the btn text inside each card
-    const cards = document.querySelectorAll('[data-tier]');
-    cards.forEach(function (el) {
+    document.querySelectorAll('[data-tier]').forEach(function (el) {
       const tier = el.dataset.tier;
-      if (PRICES[tier] && PRICES[tier][currency] !== undefined) {
-        el.textContent = 'From ' + fmt(sym, PRICES[tier][currency]);
+      if (PRICES[tier] && PRICES[tier][currency]) {
+        el.textContent = fmtRange(currency, tier);
       }
     });
 
-    // Update toggle active state
     document.querySelectorAll('.currency-btn').forEach(function (btn) {
       btn.classList.toggle('active', btn.dataset.currency === currency);
     });
 
-    // Persist choice
     try { localStorage.setItem('apex_currency', currency); } catch (e) {}
   }
 
@@ -437,8 +441,9 @@ window.showStep = function (step) {
 
   // ── Init ──
   async function init() {
-    // 1. Honour manual override
     let currency;
+
+    // 1. Honour manual override
     try { currency = localStorage.getItem('apex_currency'); } catch (e) {}
 
     if (!currency) {
@@ -448,7 +453,7 @@ window.showStep = function (step) {
         const data = await res.json();
         currency = data.currency;
       } catch (e) {
-        currency = 'USD'; // fallback
+        currency = 'EUR'; // fallback
       }
     }
 
