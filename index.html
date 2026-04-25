@@ -206,58 +206,104 @@
       <div class="container">
         <div class="section-header">
           <span class="section-tag">Pricing</span>
-          <h2>Straightforward pricing. No surprises.</h2>
-          <p class="section-sub">No retainers. No monthly fees. You pay for the work, once — and the system is yours to keep.</p>
+          <h2>Straightforward pricing.<br>No surprises.</h2>
+          <p class="section-sub">You pay once. You own the system forever. No retainers, no monthly fees.</p>
         </div>
+    
         <div class="currency-toggle">
           <button class="currency-btn" data-currency="USD" onclick="apexSetCurrency('USD')">USD</button>
           <button class="currency-btn" data-currency="GBP" onclick="apexSetCurrency('GBP')">GBP</button>
           <button class="currency-btn" data-currency="EUR" onclick="apexSetCurrency('EUR')">EUR</button>
         </div>
+    
         <div class="pricing-grid">
-          <div class="pricing-card">
-            <h3>Foundation</h3>
-            <p class="pricing-oneliner">Automate the essentials.</p>
-            <p>Automate the repetitive tasks slowing down your practice. Rule-based automation that follows your process exactly — no AI required. Delivered in around 2 weeks.</p>
-            <ul class="pricing-features">
-              <li>Multiple tasks and workflows automated</li>
-              <li>Rule-based — fast, reliable, no AI required</li>
-              <li>Intake forms, notifications, data routing</li>
-              <li>Free audit included</li>
-              <li>Full handover, documentation &amp; 30-day support</li>
-            </ul>
-            <a href="#contact" class="btn btn-ghost" data-tier="foundation">From €699</a>
+    
+          <!-- Foundation -->
+          <div class="opt-c-tier">
+            <div class="opt-c-content">
+              <div class="opt-c-name">Foundation</div>
+              <div class="opt-c-quote">"The same admin tasks, every single day."</div>
+              <p class="opt-c-desc">Every firm has them — the manual jobs that eat hours and add nothing to the bill. Pulling data from intake forms, copying details into your case management system, sending the same follow-up for the hundredth time. Rules-based automations that do these jobs exactly the way you'd do them. No AI, no guesswork.</p>
+              <ul class="tier-features">
+                <li>Multiple repetitive tasks automated end-to-end</li>
+                <li>Intake forms, notifications, data routing</li>
+                <li>Free audit, full handover, 30-day support</li>
+              </ul>
+            </div>
+            <div class="opt-c-aside">
+              <div>
+                <div class="opt-c-price-label">Typically</div>
+                <div class="opt-c-price" data-tier="foundation">€799–€1,499</div>
+              </div>
+              <div>
+                <div class="opt-c-result-label">The result</div>
+                <div class="opt-c-result">Hours back in your week. Nothing falls through the cracks.</div>
+              </div>
+              <a href="#contact" class="btn btn-ghost">Free audit →</a>
+            </div>
           </div>
-          <div class="pricing-card pricing-card--featured">
-            <!-- <div class="pricing-badge">Most popular</div> -->
-            <h3>Connected Practice</h3>
-            <p class="pricing-oneliner">AI that works while you don't.</p>
-            <p>Your workflows unified into one seamless system — with AI that can read, decide, draft and follow up on your behalf. Delivered in 4–6 weeks.</p>
-            <ul class="pricing-features">
-              <li>Multiple workflows connected into one system</li>
-              <li>AI handles decisions, drafting &amp; follow-up</li>
-              <li>Client onboarding, document generation, scheduling</li>
-              <li>Free audit included</li>
-              <li>Full handover, documentation &amp; 30-day support</li>
-            </ul>
-            <a href="#contact" class="btn btn-primary" data-tier="connected_practice">From €1,599</a>
+    
+          <!-- Connected Practice -->
+          <div class="opt-c-tier opt-c-tier--featured">
+            <div class="opt-c-content">
+              <div class="opt-c-name">Connected Practice</div>
+              <div class="opt-c-quote">"I need something that can actually think."</div>
+              <p class="opt-c-desc">Foundation handles predictable work. Connected Practice handles work that needs judgement. An AI assistant that reads incoming documents, drafts replies in your tone, generates client paperwork from your templates, and handles scheduling and follow-up automatically.</p>
+              <ul class="tier-features">
+                <li>Workflows joined into one connected system</li>
+                <li>AI reads documents, drafts replies in your tone</li>
+                <li>Client paperwork generated from your templates</li>
+                <li>Scheduling and follow-up automated</li>
+                <li>Free audit, full handover, 30-day support</li>
+              </ul>
+            </div>
+            <div class="opt-c-aside">
+              <div>
+                <div class="opt-c-price-label">Typically</div>
+                <div class="opt-c-price" data-tier="connected_practice">€1,599–€2,399</div>
+              </div>
+              <div>
+                <div class="opt-c-result-label">The result</div>
+                <div class="opt-c-result">The work that used to need a paralegal now runs itself. You step in for the calls that need you.</div>
+              </div>
+              <a href="#contact" class="btn btn-primary">Free audit →</a>
+            </div>
           </div>
-          <div class="pricing-card">
-            <h3>Agent Suite</h3>
-            <p class="pricing-oneliner">The complete build.</p>
-            <p>The full picture — connected workflows plus AI that actively handles your clients. It reads documents, qualifies leads, books appointments and responds on your behalf. Delivered in 6–8 weeks.</p>
-            <ul class="pricing-features">
-              <li>Everything in Connected Practice</li>
-              <li>AI that reads, qualifies &amp; responds to clients</li>
-              <li>Voice agent for appointment setting</li>
-              <li>Document analysis &amp; intelligent processing</li>
-              <li>Free audit included</li>
-              <li>Full handover, documentation &amp; 60-day support</li>
-            </ul>
-            <a href="#contact" class="btn btn-ghost" data-tier="agent_suite">From €2,899</a>
+    
+          <!-- Agent Suite -->
+          <div class="opt-c-tier">
+            <div class="opt-c-content">
+              <div class="opt-c-name">Agent Suite</div>
+              <div class="opt-c-quote">"I want my firm to run when I'm not at my desk."</div>
+              <p class="opt-c-desc">A full digital team. AI agents that speak to your clients directly — answering the phone, handling website enquiries, qualifying leads, booking appointments, processing documents. A new client at 9pm Sunday: greeted, qualified, and booked in before Monday morning.</p>
+              <ul class="tier-features">
+                <li>Everything in Connected Practice</li>
+                <li>Voice agent for inbound calls and appointment setting</li>
+                <li>Chat agent for your website</li>
+                <li>Intelligent document processing</li>
+                <li>Free audit, full handover, 30-day support</li>
+              </ul>
+            </div>
+            <div class="opt-c-aside">
+              <div>
+                <div class="opt-c-price-label">Typically</div>
+                <div class="opt-c-price" data-tier="agent_suite">€2,499–€3,999</div>
+              </div>
+              <div>
+                <div class="opt-c-result-label">The result</div>
+                <div class="opt-c-result">Fewer missed enquiries, faster intake, and your time spent on fee-earning work.</div>
+              </div>
+              <a href="#contact" class="btn btn-ghost">Free audit →</a>
+            </div>
           </div>
+    
         </div>
-        <p class="pricing-note">Every engagement starts with a free audit. No quote until we fully understand your situation.</p>
+    
+        <div class="pricing-no-retainer">
+          <span class="pricing-no-retainer-label">Why no monthly fee</span>
+          <p>Most automation agencies lock you into a retainer. We don't. We build the system, hand it over, and walk away. The code is yours, the logic is yours, the documentation is yours. If you want us back for changes later, you pay for the changes.</p>
+        </div>
+    
       </div>
     </section>
 
