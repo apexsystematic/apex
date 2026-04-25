@@ -411,6 +411,13 @@
   max-width: 480px;
 }
 
+.roi-cta-actions {
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
 /* ══════════════════════════════════════════
    RESPONSIVE
 ══════════════════════════════════════════ */
@@ -440,4 +447,14 @@
   .wf-row           { grid-template-columns: 1fr 110px; }
   .wf-row .wf-cell:nth-child(3),
   .wf-row .wf-cell:last-child { display: none; }
+}
+
+@media (max-width: 600px) {
+  .roi-cta-actions {
+    width: 100%;
+  }
+  .roi-cta-actions .btn {
+    flex: 1;
+    min-width: 140px;
+  }
 }
