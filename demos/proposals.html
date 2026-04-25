@@ -44,7 +44,7 @@
   <header>
     <div class="badge"><span class="badge-dot"></span>Live Interactive Demo</div>
     <h1>AI Proposal Generation <em>In Action</em></h1>
-    <p class="subtitle">Fill in the client brief on the left. The AI generates a complete, structured proposal in seconds — and fires the downstream workflow.</p>
+    <p class="subtitle">Fill in the client brief. A complete proposal appears in seconds — client email drafted, record saved, team notified.</p>
   </header>
 
   <div class="divider">
@@ -129,12 +129,12 @@
         </div>
 
         <div class="form-group">
-          <label for="challenge">Core Challenge</label>
+          <label for="challenge">What's the main problem to solve?</label>
           <textarea id="challenge" placeholder="What problem are they trying to solve? What manual work is costing them the most time?" rows="3"></textarea>
         </div>
 
         <div class="form-group">
-          <label for="workflows">Workflows to Automate</label>
+          <label for="workflows">Which tasks should this handle?</label>
           <textarea id="workflows" placeholder="e.g. Client intake, document generation, weekly reporting..." rows="2"></textarea>
         </div>
 
@@ -173,7 +173,7 @@
         </div>
 
         <div class="form-group">
-          <label for="tools">Current Tools Used</label>
+          <label for="tools">Tools they're already using</label>
           <input type="text" id="tools" placeholder="e.g. Clio, Xero, Google Workspace, HubSpot..." />
         </div>
 
@@ -192,8 +192,8 @@
       <!-- Empty state -->
       <div class="empty-state" id="emptyState">
         <div class="empty-icon">📄</div>
-        <h3>Proposal will appear here</h3>
-        <p>Fill in the client brief and hit Generate. The AI will build a complete proposal in seconds.</p>
+        <h3>Your proposal will appear here</h3>
+        <p>Fill in the brief on the left and hit generate. Takes about five seconds.</p>
       </div>
 
       <!-- Proposal output (hidden until generated) -->
@@ -235,11 +235,11 @@
 
   <!-- CTA -->
   <div class="cta-section">
-    <h3>Want This Generating Proposals for You?</h3>
-    <p>Fully built and handed over in under 2 weeks.<br>You own everything — no retainers, no lock-in.</p>
+    <h3>Want this generating proposals automatically?</h3>
+    <p>Built to your exact workflow, handed over in under 2 weeks.Fixed price. No retainer. You own it outright.</p>
     <div class="cta-btns">
       <button class="btn btn-primary" onclick="openAuditModal()">Book a Free Call →</button>
-      <a href="https://apexsystematic.com" class="btn btn-ghost">Learn More</a>
+      <a href="/demos.html" class="btn btn-ghost">More Demos</a>
     </div>
   </div>
 
@@ -509,7 +509,7 @@ Apex Systematic</div>
 
   // ── Content builders ────────────────────────────────────────
   function buildExecSummary(d, p) {
-    return `This proposal outlines a ${p.deliveryWeeks}-week engagement to build a custom automation system for ${d.companyName}. The project will eliminate the manual, repetitive work currently consuming your team's time — freeing your people to focus on the work that actually requires their expertise. At project close, you own the system outright with full documentation and no ongoing dependency on Apex Systematic.`;
+    return `This proposal outlines a ${p.deliveryWeeks}-week engagement to build a custom automation system for ${d.companyName}. The project will eliminate the manual, repetitive work currently consuming your team's time — freeing your people to focus on the work that actually requires their expertise. At handover, you own the system outright — full documentation included, no ongoing dependency on us.`;
   }
 
   function buildChallenge(d, p) {
