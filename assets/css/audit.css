@@ -1,0 +1,348 @@
+/* ═══════════════════════════════════════════
+   APEX SYSTEMATIC — audit.css
+   Page-specific styles for /audit/
+   Builds on top of style.css. Variables, buttons,
+   form-groups and base typography come from there.
+   ═══════════════════════════════════════════ */
+
+
+/* ── Intro screen ── */
+.audit-intro {
+  min-height: calc(100dvh - var(--nav-h, 97px));
+  display: flex;
+  align-items: center;
+  padding-top: var(--section-y);
+  padding-bottom: var(--section-y);
+  border-bottom: none;
+}
+
+.audit-intro-inner {
+  max-width: 640px;
+}
+
+.audit-intro h1 {
+  margin-bottom: 1.5rem;
+}
+
+.audit-lede {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--gold);
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.audit-body {
+  font-size: 1rem;
+  line-height: 1.85;
+  margin-bottom: 1.25rem;
+  max-width: 560px;
+}
+
+.audit-intro-actions {
+  margin-top: 2.5rem;
+  margin-bottom: 0.875rem;
+}
+
+.audit-microcopy {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  letter-spacing: 0.02em;
+  line-height: 1.6;
+}
+
+
+/* ── Form section wrapper ── */
+.audit-section {
+  padding-top: 80px;
+  padding-bottom: var(--section-y);
+  border-bottom: none;
+  min-height: calc(100dvh - var(--nav-h, 97px));
+}
+
+
+/* ── Audit form wrap (extends what's in style.css) ── */
+.audit-form-wrap {
+  max-width: 640px;
+}
+
+.audit-step-label {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin-bottom: 2.5rem;
+}
+
+.audit-step-label span {
+  color: var(--gold);
+  font-weight: 500;
+}
+
+.audit-step-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.6rem, 2.4vw, 2rem);
+  color: var(--white);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.75rem;
+}
+
+.audit-helper {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  max-width: 540px;
+}
+
+
+/* ── Steps (animated transitions) ── */
+.audit-step {
+  display: none;
+  animation: auditStepIn 0.35s ease both;
+}
+
+.audit-step.is-active {
+  display: block;
+}
+
+@keyframes auditStepIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ── Option buttons (single + multi select) ── */
+.audit-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 0.5rem;
+}
+
+.audit-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  padding: 18px 22px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.45;
+  cursor: pointer;
+  transition: border-color var(--ease), background var(--ease), color var(--ease), transform var(--ease);
+  position: relative;
+}
+
+.audit-option:hover {
+  border-color: var(--text-muted);
+  background: var(--surface-2);
+  color: var(--white);
+}
+
+.audit-option:focus-visible {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.audit-option.is-selected {
+  border-color: var(--gold);
+  background: rgba(201, 168, 76, 0.06);
+  color: var(--white);
+}
+
+.audit-option.is-selected::after {
+  content: '✓';
+  font-size: 0.95rem;
+  color: var(--gold);
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.audit-option-sub {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  font-weight: 400;
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+.audit-option:hover .audit-option-sub,
+.audit-option.is-selected .audit-option-sub {
+  color: var(--text-muted);
+}
+
+
+/* ── Multi-select continue button row ── */
+.audit-multi-actions {
+  margin-top: 1.75rem;
+}
+
+.audit-final-actions {
+  margin-top: 1.75rem;
+  margin-bottom: 0.875rem;
+}
+
+
+/* ── Back nav ── */
+.audit-step-nav {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.audit-back-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 6px 0;
+  transition: color var(--ease);
+}
+
+.audit-back-btn:hover {
+  color: var(--white);
+}
+
+
+/* ── Consent ── */
+.audit-consent {
+  margin-top: 0.5rem;
+}
+
+.audit-consent-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.85rem !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  color: var(--text-muted) !important;
+  line-height: 1.6;
+  cursor: pointer;
+}
+
+.audit-consent-label input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border-light);
+  border-radius: 2px;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-top: 2px;
+  position: relative;
+  transition: border-color var(--ease), background var(--ease);
+}
+
+.audit-consent-label input[type="checkbox"]:checked {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+
+.audit-consent-label input[type="checkbox"]:checked::after {
+  content: '✓';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--bg);
+  font-weight: 700;
+}
+
+
+/* ── Thank-you screen ── */
+.audit-thankyou-wrap {
+  text-align: left;
+}
+
+.audit-thankyou-wrap .section-tag {
+  margin-bottom: 1.5rem;
+}
+
+.audit-thankyou-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 1.75rem;
+}
+
+.audit-thankyou p {
+  font-size: 1rem;
+  line-height: 1.85;
+  margin-bottom: 1rem;
+  color: var(--text-muted);
+}
+
+.audit-thankyou a {
+  color: var(--gold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.audit-thankyou-wrap .demos-preview-link {
+  margin-top: 2rem;
+  display: inline-flex;
+}
+
+
+/* ── Loading state on submit ── */
+.audit-loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.audit-loading::after {
+  content: '...';
+  display: inline-block;
+  margin-left: 4px;
+}
+
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .audit-intro {
+    align-items: flex-start;
+    padding-top: 60px;
+  }
+
+  .audit-section {
+    padding-top: 40px;
+  }
+
+  .audit-step-title {
+    font-size: 1.4rem;
+  }
+
+  .audit-option {
+    padding: 16px 18px;
+    font-size: 0.92rem;
+  }
+
+  .audit-final-actions .btn,
+  .audit-multi-actions .btn,
+  .audit-intro-actions .btn {
+    width: 100%;
+  }
+}
