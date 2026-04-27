@@ -2,14 +2,15 @@
    APEX SYSTEMATIC — landingpages.css
    Vertical landing pages (law firms, IFAs,
    accountants, consultants, HR, mortgage
-   brokers, insurance, estate agents, lettings).
+   brokers, insurance, estate agents, lettings,
+   SEO consultants).
    ═══════════════════════════════════════════
    1. Hero
-   2. Pain points ("Sound familiar?")
-   3. Services ("What we build")
-   4. Credibility ("Why us")
+   2. Pain points
+   3. Services
+   4. Credibility
    5. Bottom CTA
-   6. Inter-page nav (other verticals)
+   6. Inter-page nav
    7. Media queries
 ═══════════════════════════════════════════ */
 
@@ -20,14 +21,8 @@
   border-bottom: 1px solid var(--border);
 }
 
-.lp-hero-inner {
-  max-width: 880px;
-}
-
-.lp-hero h1 {
-  margin-bottom: 1.75rem;
-  max-width: 820px;
-}
+.lp-hero-inner { max-width: 880px; }
+.lp-hero h1 { margin-bottom: 1.75rem; max-width: 820px; }
 
 .lp-hero-sub {
   font-size: 1.1rem;
@@ -87,22 +82,21 @@
   transition: background var(--ease);
 }
 
-.lp-pain:hover {
-  background: var(--surface);
-}
+.lp-pain:hover { background: var(--surface); }
 
-.lp-pain:nth-child(2n) {
-  border-right: none;
-}
+.lp-pain:nth-child(2n) { border-right: none; }
 
-.lp-pains-grid .lp-pain:nth-last-child(-n+2) {
+/* Strip bottom border on last-row items.
+   - Always: the last child.
+   - Even count only: the second-to-last (anchored via :has() to last child in column 2). */
+.lp-pains-grid .lp-pain:last-child,
+.lp-pains-grid .lp-pain:nth-last-child(2):has(+ .lp-pain:nth-child(even)) {
   border-bottom: none;
 }
 
-/* If the last row has only one item, ensure no dangling borders */
+/* Odd count: lone last item also has no right border. */
 .lp-pains-grid .lp-pain:last-child:nth-child(odd) {
   border-right: none;
-  border-bottom: none;
 }
 
 .lp-pain-num {
@@ -122,7 +116,7 @@
 }
 
 
-/* ── 3. Services ("What we build") ── */
+/* ── 3. Services ── */
 .lp-services {
   padding: var(--section-y) 0;
   border-bottom: 1px solid var(--border);
@@ -152,19 +146,12 @@
   transition: width var(--ease-slow);
 }
 
-.lp-service:hover::before {
-  width: 48px;
-}
+.lp-service:hover::before { width: 48px; }
+.lp-service:hover { background: var(--surface); }
+.lp-service:nth-child(2n) { border-right: none; }
 
-.lp-service:hover {
-  background: var(--surface);
-}
-
-.lp-service:nth-child(2n) {
-  border-right: none;
-}
-
-.lp-services-grid .lp-service:nth-last-child(-n+2) {
+.lp-services-grid .lp-service:last-child,
+.lp-services-grid .lp-service:nth-last-child(2):has(+ .lp-service:nth-child(even)) {
   border-bottom: none;
 }
 
@@ -201,9 +188,7 @@
   transition: letter-spacing var(--ease);
 }
 
-.lp-services-footer a:hover {
-  letter-spacing: 0.2em;
-}
+.lp-services-footer a:hover { letter-spacing: 0.2em; }
 
 
 /* ── 4. Credibility ── */
@@ -232,9 +217,7 @@
   margin-bottom: 1.5rem;
 }
 
-.lp-cred-body p:last-child {
-  margin-bottom: 0;
-}
+.lp-cred-body p:last-child { margin-bottom: 0; }
 
 .lp-cred-body strong {
   color: var(--text);
@@ -286,19 +269,12 @@
   padding: 15px 0;
 }
 
-.lp-cta-secondary:hover {
-  letter-spacing: 0.2em;
-}
+.lp-cta-secondary:hover { letter-spacing: 0.2em; }
 
 
 /* ── 6. Inter-page nav ── */
-.lp-other-verticals {
-  padding: calc(var(--section-y) * 0.7) 0;
-}
-
-.lp-other-verticals .section-header {
-  margin-bottom: 32px;
-}
+.lp-other-verticals { padding: calc(var(--section-y) * 0.7) 0; }
+.lp-other-verticals .section-header { margin-bottom: 32px; }
 
 .lp-vert-grid {
   display: grid;
@@ -318,6 +294,18 @@
   gap: 10px;
 }
 
+/* Last column (every 4th item): no right border. */
+.lp-vert-grid .lp-vert:nth-child(4n) { border-right: none; }
+
+/* Strip bottom border on every item in the last row. */
+.lp-vert-grid .lp-vert:nth-child(4n+1):has(~ .lp-vert:last-child),
+.lp-vert-grid .lp-vert:nth-child(4n+1):last-child,
+.lp-vert-grid .lp-vert:nth-child(4n+1):has(~ .lp-vert:last-child) ~ .lp-vert {
+  border-bottom: none;
+}
+
+.lp-vert-grid .lp-vert:last-child { border-right: none; }
+
 .lp-vert:hover {
   background: var(--surface);
   color: var(--white);
@@ -329,9 +317,7 @@
   transition: transform var(--ease);
 }
 
-.lp-vert:hover .lp-vert-arrow {
-  transform: translateX(3px);
-}
+.lp-vert:hover .lp-vert-arrow { transform: translateX(3px); }
 
 .lp-vert.is-current {
   color: var(--gold);
@@ -348,13 +334,18 @@
     gap: 32px;
   }
 
-  .lp-vert-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  .lp-vert-grid { grid-template-columns: repeat(2, 1fr); }
 
-  .lp-vert:nth-child(2n) {
-    border-right: none;
+  .lp-vert-grid .lp-vert {
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
   }
+  .lp-vert-grid .lp-vert:nth-child(2n) { border-right: none; }
+  .lp-vert-grid .lp-vert:last-child,
+  .lp-vert-grid .lp-vert:nth-last-child(2):has(+ .lp-vert:nth-child(even)) {
+    border-bottom: none;
+  }
+  .lp-vert-grid .lp-vert:last-child:nth-child(odd) { border-right: none; }
 }
 
 @media (max-width: 768px) {
@@ -374,33 +365,21 @@
     border-bottom: none !important;
   }
 
-  .lp-services-grid .lp-service:last-child:nth-child(odd) {
-    grid-column: auto;
-  }
+  .lp-services-grid .lp-service:last-child:nth-child(odd) { grid-column: auto; }
 
-  .lp-pain {
-    padding: 26px 24px;
-  }
-
-  .lp-service {
-    padding: 32px 24px;
-  }
-
-  .lp-cred-inner {
-    gap: 28px;
-  }
-
-  .lp-services-footer {
-    text-align: left;
-  }
+  .lp-pain { padding: 26px 24px; }
+  .lp-service { padding: 32px 24px; }
+  .lp-cred-inner { gap: 28px; }
+  .lp-services-footer { text-align: left; }
 }
 
 @media (max-width: 600px) {
-  .lp-vert-grid {
-    grid-template-columns: 1fr;
+  .lp-vert-grid { grid-template-columns: 1fr; }
+  .lp-vert-grid .lp-vert {
+    border-right: none !important;
+    border-bottom: 1px solid var(--border) !important;
   }
-
-  .lp-vert {
-    border-right: none;
+  .lp-vert-grid .lp-vert:last-child {
+    border-bottom: none !important;
   }
 }
