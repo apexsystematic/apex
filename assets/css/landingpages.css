@@ -69,8 +69,6 @@
 .lp-pains-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1px;
-  background: var(--border);
   border: 1px solid var(--border);
 }
 
@@ -80,6 +78,10 @@
   gap: 20px;
   padding: 32px 36px;
   background: var(--bg);
+  box-shadow:
+    1px 0 0 0 var(--border),
+    0 1px 0 0 var(--border),
+    1px 1px 0 0 var(--border) inset;
   transition: background var(--ease);
 }
 
