@@ -234,8 +234,8 @@
 
 @media (max-width: 768px) {
   .mid-cta { flex-direction: column; align-items: flex-start; gap: 20px; }
-  .mid-cta-actions { width: 100%; }
-  .mid-cta-actions .btn { flex: 1; min-width: 0; text-align: center; }
+  .mid-cta-actions { width: 100%; flex-direction: column; align-items: stretch; }
+  .mid-cta-actions .btn { text-align: center; white-space: normal; }
 }
 
 /* ══════════════════════════════════════════
@@ -463,10 +463,11 @@
 @media (max-width: 600px) {
   .roi-cta-actions {
     width: 100%;
+    flex-direction: column;
+    align-items: stretch;
   }
   .roi-cta-actions .btn {
-    flex: 1;
-    min-width: 0;
     text-align: center;
+    white-space: normal;
   }
 }
