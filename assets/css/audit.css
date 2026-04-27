@@ -1,348 +1,621 @@
 /* ═══════════════════════════════════════════
    APEX SYSTEMATIC — audit.css
-   Page-specific styles for /audit/
-   Builds on top of style.css. Variables, buttons,
-   form-groups and base typography come from there.
-   ═══════════════════════════════════════════ */
+   Styles for /tools/audit/
+═══════════════════════════════════════════ */
 
+/* ── Hero ── */
+.audit-hero {
+  padding: var(--section-y) 0 64px;
+  border-bottom: 1px solid var(--border);
+}
 
-/* ── Intro screen ── */
-.audit-intro {
-  min-height: calc(100dvh - var(--nav-h, 97px));
+.audit-hero h1 {
+  margin: 1rem 0 1.5rem;
+  font-size: clamp(2.4rem, 4.5vw, 4rem);
+}
+
+.audit-meta-row {
   display: flex;
   align-items: center;
-  padding-top: var(--section-y);
-  padding-bottom: var(--section-y);
-  border-bottom: none;
+  gap: 12px;
+  margin-top: 28px;
 }
 
-.audit-intro-inner {
-  max-width: 640px;
-}
-
-.audit-intro h1 {
-  margin-bottom: 1.5rem;
-}
-
-.audit-lede {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 1.25rem;
-  color: var(--gold);
-  margin-bottom: 2rem;
-  line-height: 1.5;
-}
-
-.audit-body {
-  font-size: 1rem;
-  line-height: 1.85;
-  margin-bottom: 1.25rem;
-  max-width: 560px;
-}
-
-.audit-intro-actions {
-  margin-top: 2.5rem;
-  margin-bottom: 0.875rem;
-}
-
-.audit-microcopy {
-  font-size: 0.78rem;
-  color: var(--text-dim);
-  letter-spacing: 0.02em;
-  line-height: 1.6;
-}
-
-
-/* ── Form section wrapper ── */
-.audit-section {
-  padding-top: 80px;
-  padding-bottom: var(--section-y);
-  border-bottom: none;
-  min-height: calc(100dvh - var(--nav-h, 97px));
-}
-
-
-/* ── Audit form wrap (extends what's in style.css) ── */
-.audit-form-wrap {
-  max-width: 640px;
-}
-
-.audit-step-label {
-  font-size: 0.68rem;
-  color: var(--text-muted);
+.audit-meta-item {
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
-  margin-bottom: 2.5rem;
-}
-
-.audit-step-label span {
-  color: var(--gold);
-  font-weight: 500;
-}
-
-.audit-step-title {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(1.6rem, 2.4vw, 2rem);
-  color: var(--white);
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-  margin-bottom: 0.75rem;
-}
-
-.audit-helper {
-  font-size: 0.9rem;
   color: var(--text-muted);
-  line-height: 1.7;
-  margin-bottom: 2rem;
-  max-width: 540px;
+}
+
+.audit-meta-dot {
+  color: var(--text-dim);
 }
 
 
-/* ── Steps (animated transitions) ── */
+/* ── Body section ── */
+.audit-body {
+  padding: 72px 0 120px;
+  border-bottom: none;
+}
+
+.audit-wrap {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+
+/* ── Progress ── */
+.audit-progress {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 52px;
+}
+
+.audit-progress-bar {
+  flex: 1;
+  height: 2px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.audit-progress-fill {
+  height: 100%;
+  background: var(--gold);
+  border-radius: 2px;
+  transition: width 0.35s ease;
+  width: 0%;
+}
+
+.audit-progress-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+
+/* ── Question ── */
 .audit-step {
+  animation: auditFadeIn 0.3s ease;
+}
+
+.audit-step.hidden {
   display: none;
-  animation: auditStepIn 0.35s ease both;
 }
 
-.audit-step.is-active {
-  display: block;
-}
-
-@keyframes auditStepIn {
+@keyframes auditFadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
+.audit-q-label {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.8vw, 2rem);
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 12px;
+  font-weight: 400;
+}
 
-/* ── Option buttons (single + multi select) ── */
+.audit-q-helper {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+
+
+/* ── Options ── */
 .audit-options {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-top: 0.5rem;
+  margin-top: 28px;
 }
 
-.audit-option {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+.audit-opt {
+  display: block;
+  width: 100%;
   text-align: left;
+  padding: 16px 22px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   color: var(--text);
-  padding: 18px 22px;
-  font-family: var(--font-body);
   font-size: 0.95rem;
   font-weight: 400;
-  line-height: 1.45;
   cursor: pointer;
-  transition: border-color var(--ease), background var(--ease), color var(--ease), transform var(--ease);
-  position: relative;
+  transition: border-color var(--ease), background var(--ease), color var(--ease);
+  line-height: 1.5;
 }
 
-.audit-option:hover {
-  border-color: var(--text-muted);
+.audit-opt:hover {
+  border-color: var(--border-light);
+  color: var(--white);
+  background: var(--surface-2);
+}
+
+.audit-opt.selected {
+  border-color: var(--gold);
   background: var(--surface-2);
   color: var(--white);
 }
 
-.audit-option:focus-visible {
-  outline: none;
-  border-color: var(--gold);
-}
-
-.audit-option.is-selected {
-  border-color: var(--gold);
-  background: rgba(201, 168, 76, 0.06);
-  color: var(--white);
-}
-
-.audit-option.is-selected::after {
+.audit-opt.selected::after {
   content: '✓';
-  font-size: 0.95rem;
+  float: right;
   color: var(--gold);
-  margin-left: auto;
-  flex-shrink: 0;
+  font-size: 0.85rem;
 }
 
-.audit-option-sub {
-  display: block;
-  font-size: 0.78rem;
-  color: var(--text-dim);
+.audit-opt.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+
+/* ── Nav buttons (Q2 multi-select) ── */
+.audit-nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.audit-back {
+  font-size: 0.8rem;
+}
+
+.audit-next:disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+
+/* ── Budget gate ── */
+.audit-gate {
+  animation: auditFadeIn 0.3s ease;
+}
+
+.audit-gate.hidden { display: none; }
+
+.audit-gate-inner {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  padding: 36px 40px;
+  border-radius: var(--radius);
+}
+
+.audit-gate-label {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--white);
+  margin-bottom: 14px;
   font-weight: 400;
-  margin-top: 4px;
-  line-height: 1.5;
 }
 
-.audit-option:hover .audit-option-sub,
-.audit-option.is-selected .audit-option-sub {
+.audit-gate-inner p {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+
+/* ── Output ── */
+.audit-output {
+  animation: auditFadeIn 0.4s ease;
+}
+
+.audit-output.hidden { display: none; }
+
+/* Header */
+.ao-header {
+  margin-bottom: 52px;
+}
+
+.ao-header h2 {
+  margin: 1rem 0 0;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+}
+
+.ao-pains {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.ao-pain-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(201,168,76,0.3);
+  padding: 5px 12px;
+  border-radius: var(--radius);
+}
+
+
+/* Automation cards */
+.ao-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.ao-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 36px 40px;
+}
+
+.ao-card-name {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--white);
+  margin-bottom: 6px;
+  font-weight: 400;
+}
+
+.ao-card-what {
+  font-size: 0.95rem;
+  color: var(--text);
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.ao-card-stop {
+  font-size: 0.88rem;
   color: var(--text-muted);
+  margin-bottom: 24px;
+  font-style: italic;
 }
 
-
-/* ── Multi-select continue button row ── */
-.audit-multi-actions {
-  margin-top: 1.75rem;
+.ao-card-included {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 28px;
+  padding: 0;
 }
 
-.audit-final-actions {
-  margin-top: 1.75rem;
-  margin-bottom: 0.875rem;
+.ao-card-included li {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  padding-left: 16px;
+  position: relative;
 }
 
+.ao-card-included li::before {
+  content: '–';
+  position: absolute;
+  left: 0;
+  color: var(--text-dim);
+}
 
-/* ── Back nav ── */
-.audit-step-nav {
-  margin-top: 2.5rem;
-  padding-top: 1.5rem;
+.ao-card-stats {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  padding-top: 24px;
   border-top: 1px solid var(--border);
 }
 
-.audit-back-btn {
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  font-family: var(--font-body);
-  font-size: 0.78rem;
-  font-weight: 400;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  cursor: pointer;
-  padding: 6px 0;
-  transition: color var(--ease);
+.ao-card-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
-.audit-back-btn:hover {
+.ao-stat-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.ao-stat-val {
+  font-size: 1.05rem;
+  font-weight: 500;
   color: var(--white);
 }
 
-
-/* ── Consent ── */
-.audit-consent {
-  margin-top: 0.5rem;
+.ao-stat-val--gold {
+  color: var(--gold);
 }
 
-.audit-consent-label {
+
+/* Summary table */
+.ao-summary {
+  margin-bottom: 48px;
+  overflow-x: auto;
+}
+
+.ao-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.ao-table th {
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-weight: 400;
+  text-align: left;
+  padding: 0 16px 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.ao-table td {
+  padding: 16px 16px 16px 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  vertical-align: top;
+}
+
+.ao-table td:first-child {
+  color: var(--white);
+  font-weight: 500;
+}
+
+.ao-table tfoot td {
+  font-weight: 500;
+  color: var(--white);
+  border-bottom: none;
+  padding-top: 20px;
+}
+
+.ao-table tfoot td:first-child {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.ao-table .ao-price {
+  color: var(--gold);
+  font-weight: 500;
+}
+
+
+/* ROI */
+.ao-roi {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 32px 40px;
+  border-radius: var(--radius);
+  margin-bottom: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ao-roi-rate {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.ao-roi-rate label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.ao-rate-field {
+  display: flex;
+  align-items: center;
+  background: var(--bg);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 8px 14px;
+  gap: 6px;
+}
+
+.ao-rate-symbol,
+.ao-rate-unit {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.ao-rate-field input {
+  width: 72px;
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--white);
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: right;
+  -moz-appearance: textfield;
+}
+
+.ao-rate-field input::-webkit-outer-spin-button,
+.ao-rate-field input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.ao-rate-hint {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.ao-roi-calc {
+  font-size: 0.95rem;
+  color: var(--text);
+  line-height: 1.6;
+  max-width: 320px;
+}
+
+.ao-roi-calc strong {
+  color: var(--gold);
+}
+
+
+/* Exclusions */
+.ao-exclusions {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  line-height: 1.7;
+  margin-bottom: 48px;
+  font-style: italic;
+}
+
+
+/* CTA */
+.ao-cta {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  padding: 36px 40px;
+  border-radius: var(--radius);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 52px;
+}
+
+.ao-cta-text strong {
+  display: block;
+  font-size: 1.1rem;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+.ao-cta-text p {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  max-width: 380px;
+}
+
+.ao-cta-btn {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+
+/* Email capture */
+.ao-email-capture {
+  border-top: 1px solid var(--border);
+  padding-top: 40px;
+}
+
+.ao-email-capture strong {
+  display: block;
+  color: var(--white);
+  margin-bottom: 6px;
+  font-size: 1rem;
+}
+
+.ao-email-capture > p {
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.ao-email-form {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.ao-email-form input[type="email"] {
+  flex: 1;
+  min-width: 200px;
+  padding: 14px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  color: var(--white);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color var(--ease);
+}
+
+.ao-email-form input[type="email"]::placeholder {
+  color: var(--text-dim);
+}
+
+.ao-email-form input[type="email"]:focus {
+  border-color: var(--text-muted);
+}
+
+.ao-gdpr-label {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  font-size: 0.85rem !important;
-  font-weight: 400 !important;
-  letter-spacing: 0 !important;
-  text-transform: none !important;
-  color: var(--text-muted) !important;
-  line-height: 1.6;
+  margin-bottom: 10px;
   cursor: pointer;
 }
 
-.audit-consent-label input[type="checkbox"] {
-  appearance: none;
-  -webkit-appearance: none;
-  width: 16px;
-  height: 16px;
-  background: var(--surface);
-  border: 1px solid var(--border-light);
-  border-radius: 2px;
-  cursor: pointer;
+.ao-gdpr-label input[type="checkbox"] {
+  margin-top: 3px;
+  accent-color: var(--gold);
   flex-shrink: 0;
-  margin-top: 2px;
-  position: relative;
-  transition: border-color var(--ease), background var(--ease);
 }
 
-.audit-consent-label input[type="checkbox"]:checked {
-  background: var(--gold);
-  border-color: var(--gold);
-}
-
-.audit-consent-label input[type="checkbox"]:checked::after {
-  content: '✓';
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  color: var(--bg);
-  font-weight: 700;
-}
-
-
-/* ── Thank-you screen ── */
-.audit-thankyou-wrap {
-  text-align: left;
-}
-
-.audit-thankyou-wrap .section-tag {
-  margin-bottom: 1.5rem;
-}
-
-.audit-thankyou-title {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 3.5vw, 2.8rem);
-  color: var(--white);
-  line-height: 1.2;
-  margin-bottom: 1.75rem;
-}
-
-.audit-thankyou p {
-  font-size: 1rem;
-  line-height: 1.85;
-  margin-bottom: 1rem;
+.ao-gdpr-label span {
+  font-size: 0.82rem;
   color: var(--text-muted);
+  line-height: 1.5;
 }
 
-.audit-thankyou a {
-  color: var(--gold);
+.ao-privacy-link {
+  font-size: 0.78rem;
+  color: var(--text-dim);
   text-decoration: underline;
-  text-underline-offset: 3px;
+  text-underline-offset: 2px;
 }
 
-.audit-thankyou-wrap .demos-preview-link {
-  margin-top: 2rem;
-  display: inline-flex;
+.ao-email-confirm {
+  margin-top: 16px;
+  font-size: 0.88rem;
+  color: var(--gold);
 }
 
-
-/* ── Loading state on submit ── */
-.audit-loading {
-  pointer-events: none;
-  opacity: 0.7;
-}
-
-.audit-loading::after {
-  content: '...';
-  display: inline-block;
-  margin-left: 4px;
-}
+.ao-email-confirm.hidden { display: none; }
 
 
-/* ── Mobile ── */
-@media (max-width: 768px) {
-  .audit-intro {
-    align-items: flex-start;
-    padding-top: 60px;
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .ao-card {
+    padding: 28px 24px;
   }
 
-  .audit-section {
-    padding-top: 40px;
+  .ao-roi {
+    padding: 24px 24px;
   }
 
-  .audit-step-title {
-    font-size: 1.4rem;
+  .ao-cta {
+    padding: 28px 24px;
+    flex-direction: column;
   }
 
-  .audit-option {
-    padding: 16px 18px;
-    font-size: 0.92rem;
-  }
-
-  .audit-final-actions .btn,
-  .audit-multi-actions .btn,
-  .audit-intro-actions .btn {
+  .ao-cta-btn {
     width: 100%;
+    text-align: center;
+  }
+
+  .audit-gate-inner {
+    padding: 28px 24px;
+  }
+
+  .ao-card-stats {
+    gap: 20px;
   }
 }
