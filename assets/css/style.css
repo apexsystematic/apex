@@ -504,7 +504,6 @@ section:last-of-type {
     width: 48px;
   }
 }
-}
 
 @media (max-width: 500px) {
   .certs-grid {
