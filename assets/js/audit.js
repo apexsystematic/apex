@@ -1,228 +1,412 @@
 /* ═══════════════════════════════════════════
    APEX SYSTEMATIC — audit.js
-   8-Hour Audit form logic.
-   ═══════════════════════════════════════════ */
+   Self-serve automation audit tool
+═══════════════════════════════════════════ */
 
 (function () {
-  'use strict';
 
-  // --- Config ----------------------------------------------------
-  // Endpoint for the Cloudflare Worker that handles the submission.
-  // Update this once the Worker is deployed.
-  var ENDPOINT = '/api/audit';
+  /* ── Data ── */
 
-  var TOTAL_STEPS = 10;
-
-  // --- Element refs ---------------------------------------------
-  var introScreen   = document.getElementById('intro-screen');
-  var formScreen    = document.getElementById('form-screen');
-  var thankyouScreen = document.getElementById('thankyou-screen');
-  var startBtn      = document.getElementById('audit-start-btn');
-  var form          = document.getElementById('audit-form');
-  var errorBox      = document.getElementById('audit-error');
-  var progressBar   = document.getElementById('audit-progress-bar');
-  var stepCurrent   = document.getElementById('audit-step-current');
-  var stepTotal     = document.getElementById('audit-step-total');
-  var backNav       = document.getElementById('audit-back-nav');
-  var backBtn       = document.getElementById('audit-back-btn');
-  var submitBtn     = document.getElementById('audit-submit-btn');
-
-  if (!form) return; // safety: if markup isn't on the page, do nothing
-
-  stepTotal.textContent = TOTAL_STEPS;
-
-  // --- State ----------------------------------------------------
-  var currentStep = 1;
-  var data = {
-    firm_type: null,
-    firm_size: null,
-    top_timesinks: [],
-    weekly_hours_lost: null,
-    current_software: [],
-    previous_automation: null,
-    main_blocker: null,
-    reclaimed_time_use: null,
-    budget: null,
-    email: '',
-    firm_name: ''
+  var AUTOMATIONS = {
+    1:  { name: 'Enquiry & Lead Capture',          saveRate: 0.70, priceRange: '£950–£1,800',   buildTime: '1–2 weeks', priceMid: 1375, included: ['AI-powered enquiry triage', 'Automatic lead qualification', 'CRM record creation', 'Instant response to all new enquiries'] },
+    2:  { name: 'Appointment Setting',             saveRate: 0.75, priceRange: '£700–£1,400',   buildTime: '1 week',    priceMid: 1050, included: ['Calendar availability sync', 'Automated booking confirmation and reminders', 'No-show follow-up', 'Rescheduling handled automatically'] },
+    3:  { name: 'Client Onboarding',               saveRate: 0.60, priceRange: '£1,400–£2,800', buildTime: '2–3 weeks', priceMid: 2100, included: ['Welcome sequence triggered on signature', 'Document request and collection', 'Portal or folder setup', 'Internal team notifications'] },
+    4:  { name: 'Document & Proposal Generation',  saveRate: 0.65, priceRange: '£1,200–£2,400', buildTime: '2–3 weeks', priceMid: 1800, included: ['Template-driven document generation', 'Client data pre-populated from your CRM', 'Draft email prepared for review', 'Record saved automatically'] },
+    5:  { name: 'Document & Payment Chasing',      saveRate: 0.75, priceRange: '£900–£1,600',   buildTime: '1–2 weeks', priceMid: 1250, included: ['Automated chase sequence on schedule', 'Escalating reminders with custom copy', 'Stops automatically on receipt', 'Status logged to your CRM'] },
+    6:  { name: 'Deadline & Compliance Tracking',  saveRate: 0.70, priceRange: '£1,100–£2,200', buildTime: '2–3 weeks', priceMid: 1650, included: ['Deadline monitoring across all matters', 'Escalating alerts to the right people', 'Compliance checklist automation', 'Audit trail maintained automatically'] },
+    7:  { name: 'Reporting & Data Sync',           saveRate: 0.70, priceRange: '£800–£1,800',   buildTime: '1–2 weeks', priceMid: 1300, included: ['Scheduled report generation and delivery', 'Bi-directional sync between your systems', 'Data validation and error alerts', 'No manual exports or copy-paste'] },
+    8:  { name: 'Client Retention & Referrals',   saveRate: 0.50, priceRange: '£700–£1,400',   buildTime: '1 week',    priceMid: 1050, included: ['Automated check-in sequences', 'Anniversary and milestone triggers', 'Referral request workflows', 'Re-engagement for lapsed clients'] },
+    9:  { name: 'Client Intake Triage',            saveRate: 0.70, priceRange: '£850–£1,600',   buildTime: '1–2 weeks', priceMid: 1225, included: ['Inbound request classification', 'Routing to the right team member', 'Priority scoring and queue management', 'Acknowledgement sent automatically'] },
+    10: { name: 'Invoice Generation',              saveRate: 0.80, priceRange: '£800–£1,500',   buildTime: '1–2 weeks', priceMid: 1150, included: ['Invoices generated from completed work', 'Sent automatically on trigger', 'Payment status tracked and updated', 'Overdue escalation without manual input'] },
+    11: { name: 'Call Notes to CRM',               saveRate: 0.75, priceRange: '£900–£1,600',   buildTime: '1 week',    priceMid: 1250, included: ['Meeting transcription and summarisation', 'Action items extracted and assigned', 'CRM record updated automatically', 'Follow-up email drafted for review'] },
+    12: { name: 'Client Portal Updates',           saveRate: 0.65, priceRange: '£900–£1,700',   buildTime: '1–2 weeks', priceMid: 1300, included: ['Status updates pushed to client portal', 'Triggered on matter milestones', 'Client notification emails automated', 'No manual logging required'] }
   };
 
-  // --- Helpers --------------------------------------------------
-  function showError(msg) {
-    errorBox.textContent = msg;
-    errorBox.style.display = 'block';
+  var PAIN_TO_AUTO = {
+    'Responding to enquiries and qualifying leads': 1,
+    'Booking and managing appointments': 2,
+    'Getting new clients set up and onboarded': 3,
+    'Generating invoices and chasing payment': 10,
+    'Drafting documents, contracts, or proposals': 4,
+    'Chasing clients for documents or signatures': 5,
+    'Managing requests from existing clients': 9,
+    'Tracking deadlines and compliance steps': 6,
+    'Keeping clients updated on progress': 12,
+    'Capturing call notes and updating records': 11,
+    'Moving data between systems or generating reports': 7,
+    'Staying in touch with past clients': 8
+  };
+
+  var PRACTICE_LABELS = {
+    law: 'law firm',
+    accounting: 'accounting practice',
+    financial: 'financial advisory firm',
+    consulting: 'consulting practice',
+    brokerage: 'brokerage',
+    estate: 'estate or letting agency',
+    other: 'professional services firm'
+  };
+
+  /* ── State ── */
+  var state = {
+    q1: null, q1Rate: null,
+    q2: [],   q2Labels: [],
+    q3: null, q3Label: null,
+    q4: null,
+    q5: null,
+    q6: null,
+    currentStep: 1
+  };
+
+  /* ── Init ── */
+  document.addEventListener('DOMContentLoaded', function () {
+    initQ1();
+    initQ2();
+    initQ3();
+    initQ4();
+    initQ5();
+    initQ6();
+    updateProgress(1);
+  });
+
+  /* ── Single-select handler factory ── */
+  function initSingleSelect(containerId, stateKey, rateKey, nextStep, extraFn) {
+    var container = document.getElementById(containerId);
+    if (!container) return;
+    container.querySelectorAll('.audit-opt').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        container.querySelectorAll('.audit-opt').forEach(function (b) { b.classList.remove('selected'); });
+        btn.classList.add('selected');
+        state[stateKey] = btn.dataset.value;
+        if (rateKey) state[rateKey] = parseInt(btn.dataset.rate, 10);
+        if (extraFn) extraFn(btn);
+        setTimeout(function () { goToStep(nextStep); }, 220);
+      });
+    });
   }
 
-  function clearError() {
-    errorBox.style.display = 'none';
-    errorBox.textContent = '';
+  function initQ1() { initSingleSelect('q1-options', 'q1', 'q1Rate', 2, function () { fireEvent('audit_started'); }); }
+  function initQ3() { initSingleSelect('q3-options', 'q3', null, 4, function (btn) { state.q3Label = btn.dataset.label; }); }
+  function initQ4() { initSingleSelect('q4-options', 'q4', null, 5); }
+  function initQ5() { initSingleSelect('q5-options', 'q5', null, 6); }
+
+  function initQ6() {
+    var container = document.getElementById('q6-options');
+    if (!container) return;
+    container.querySelectorAll('.audit-opt').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        container.querySelectorAll('.audit-opt').forEach(function (b) { b.classList.remove('selected'); });
+        btn.classList.add('selected');
+        state.q6 = btn.dataset.value;
+        setTimeout(function () { renderOutput(); }, 220);
+      });
+    });
   }
 
-  function updateProgress() {
-    var pct = Math.round((currentStep / TOTAL_STEPS) * 100);
-    progressBar.style.width = pct + '%';
-    stepCurrent.textContent = currentStep;
-    backNav.hidden = currentStep === 1;
+  /* ── Q2: Multi-select ── */
+  function initQ2() {
+    var container = document.getElementById('q2-options');
+    var nextBtn   = document.getElementById('q2-next');
+    if (!container) return;
+
+    container.querySelectorAll('.audit-opt').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var label = btn.textContent.trim();
+        var idx   = state.q2Labels.indexOf(label);
+
+        if (idx > -1) {
+          // deselect
+          state.q2Labels.splice(idx, 1);
+          state.q2.splice(idx, 1);
+          btn.classList.remove('selected');
+        } else {
+          if (state.q2.length >= 2) return; // cap at 2
+          var autoNum = PAIN_TO_AUTO[label];
+          if (!autoNum) return;
+          state.q2.push(autoNum);
+          state.q2Labels.push(label);
+          btn.classList.add('selected');
+        }
+
+        // disable unselected once 2 chosen
+        container.querySelectorAll('.audit-opt').forEach(function (b) {
+          if (!b.classList.contains('selected')) {
+            b.classList.toggle('disabled', state.q2.length >= 2);
+          }
+        });
+
+        nextBtn.disabled = state.q2.length === 0;
+      });
+    });
+  }
+
+  /* ── Navigation ── */
+  function goToStep(step) {
+    hideStep(state.currentStep);
+    state.currentStep = step;
+    showStep(step);
+    updateProgress(step);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function hideStep(n) {
+    var el = document.getElementById('step-' + n);
+    if (el) el.classList.add('hidden');
   }
 
   function showStep(n) {
-    var steps = form.querySelectorAll('.audit-step');
-    steps.forEach(function (s) {
-      s.classList.toggle('is-active', Number(s.dataset.step) === n);
+    var el = document.getElementById('step-' + n);
+    if (el) el.classList.remove('hidden');
+  }
+
+  function updateProgress(step) {
+    var pct = Math.round(((step - 1) / 6) * 100);
+    var fill  = document.getElementById('audit-progress-fill');
+    var label = document.getElementById('audit-progress-label');
+    if (fill)  fill.style.width = pct + '%';
+    if (label) label.textContent = 'Question ' + step + ' of 6';
+  }
+
+  /* Exposed for inline onclick attributes */
+  window.auditBack = function (fromStep) {
+    goToStep(fromStep - 1);
+  };
+
+  window.auditNext = function (fromStep) {
+    if (fromStep === 2 && state.q2.length === 0) return;
+    goToStep(fromStep + 1);
+  };
+
+  /* ── Output ── */
+  function renderOutput() {
+    hideStep(state.currentStep);
+    document.getElementById('audit-progress').style.display = 'none';
+
+    if (state.q6 === 'under') {
+      // Budget gate
+      document.getElementById('audit-gate').classList.remove('hidden');
+      fireEvent('audit_budget_gate');
+      return;
+    }
+
+    fireEvent('audit_completed');
+    buildProposal();
+    document.getElementById('audit-output').classList.remove('hidden');
+
+    // Scroll to output
+    setTimeout(function () {
+      var el = document.getElementById('audit-output');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  }
+
+  function buildProposal() {
+    var practiceLabel = PRACTICE_LABELS[state.q1] || 'professional services firm';
+    var hoursInput    = parseFloat(state.q3);
+    var rate          = state.q1Rate || 100;
+    var tone          = state.q5; // 'manual' | 'partial' | 'inconsistent'
+
+    /* Header */
+    var headline = document.getElementById('ao-headline');
+    headline.textContent = 'Based on your answers, here\'s what we\'d build for your ' + practiceLabel + '.';
+
+    /* Pain tags */
+    var painsEl = document.getElementById('ao-pains');
+    painsEl.innerHTML = '';
+    state.q2Labels.forEach(function (label) {
+      var tag = document.createElement('span');
+      tag.className = 'ao-pain-tag';
+      tag.textContent = label;
+      painsEl.appendChild(tag);
     });
-    currentStep = n;
-    updateProgress();
-    clearError();
-    // Scroll to top of form on mobile
-    if (window.innerWidth < 768) {
-      formScreen.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  }
 
-  function goNext() {
-    if (currentStep < TOTAL_STEPS) {
-      showStep(currentStep + 1);
-    }
-  }
+    /* Cards + table */
+    var cardsEl    = document.getElementById('ao-cards');
+    var tbodyEl    = document.getElementById('ao-table-body');
+    var tfootEl    = document.getElementById('ao-table-foot');
+    cardsEl.innerHTML = '';
+    tbodyEl.innerHTML = '';
+    tfootEl.innerHTML = '';
 
-  function goBack() {
-    if (currentStep > 1) {
-      showStep(currentStep - 1);
-    }
-  }
+    var combinedHrsSaved = 0;
+    var combinedPriceMid = 0;
 
-  // --- Start button ---------------------------------------------
-  startBtn.addEventListener('click', function () {
-    introScreen.hidden = true;
-    formScreen.hidden = false;
-    showStep(1);
-    formScreen.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
+    state.q2.forEach(function (autoNum) {
+      var a = AUTOMATIONS[autoNum];
+      if (!a) return;
 
-  // --- Back button ----------------------------------------------
-  backBtn.addEventListener('click', goBack);
+      var hrsSavedUpper = Math.round(hoursInput * a.saveRate * 10) / 10;
+      var hrsSavedLower = Math.round(hoursInput * (a.saveRate - 0.1) * 10) / 10;
+      var hrsDisplay    = hrsSavedLower + '–' + hrsSavedUpper + ' hrs/wk';
 
-  // --- Option selection (single + multi) ------------------------
-  form.addEventListener('click', function (e) {
-    var btn = e.target.closest('.audit-option');
-    if (!btn) return;
+      combinedHrsSaved += hrsSavedUpper;
+      combinedPriceMid += a.priceMid;
 
-    var group = btn.closest('.audit-options');
-    var name = group.dataset.name;
-    var type = group.dataset.type;
-    var max = group.dataset.max ? Number(group.dataset.max) : null;
-    var value = btn.dataset.value;
-
-    if (type === 'single') {
-      // Deselect siblings, select this, then auto-advance.
-      group.querySelectorAll('.audit-option').forEach(function (b) {
-        b.classList.remove('is-selected');
-      });
-      btn.classList.add('is-selected');
-      data[name] = value;
-
-      // Brief delay so the user sees the selection before moving on.
-      setTimeout(goNext, 220);
-    } else if (type === 'multi') {
-      var arr = data[name];
-      var idx = arr.indexOf(value);
-
-      if (idx > -1) {
-        arr.splice(idx, 1);
-        btn.classList.remove('is-selected');
+      /* Tone modifier */
+      var intro = '';
+      if (tone === 'manual') {
+        intro = 'Right now this is handled entirely manually. Once built, ';
+      } else if (tone === 'inconsistent') {
+        intro = 'You have something in place, but it\'s inconsistent. This build standardises it completely — ';
       } else {
-        if (max && arr.length >= max) {
-          showError('Maximum ' + max + ' selections.');
-          return;
-        }
-        arr.push(value);
-        btn.classList.add('is-selected');
-        clearError();
+        intro = 'This automation takes over the manual parts of ';
       }
-    }
-  });
 
-  // --- Continue buttons on multi-select steps -------------------
-  form.querySelectorAll('.audit-next-btn').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var step = Number(btn.dataset.step);
-      var group = form.querySelector('.audit-step[data-step="' + step + '"] .audit-options');
-      var name = group.dataset.name;
+      /* Card */
+      var card = document.createElement('div');
+      card.className = 'ao-card';
+      card.innerHTML =
+        '<div class="ao-card-name">' + a.name + '</div>' +
+        '<div class="ao-card-what">' + intro + getWhatItDoes(autoNum) + '</div>' +
+        '<div class="ao-card-stop">You stop: ' + getStopDoing(autoNum) + '</div>' +
+        '<ul class="ao-card-included">' +
+          a.included.map(function (item) { return '<li>' + item + '</li>'; }).join('') +
+        '</ul>' +
+        '<div class="ao-card-stats">' +
+          '<div class="ao-card-stat"><span class="ao-stat-label">Hours saved</span><span class="ao-stat-val">' + hrsDisplay + '</span></div>' +
+          '<div class="ao-card-stat"><span class="ao-stat-label">Build time</span><span class="ao-stat-val">' + a.buildTime + '</span></div>' +
+          '<div class="ao-card-stat"><span class="ao-stat-label">Fixed price</span><span class="ao-stat-val ao-stat-val--gold">' + a.priceRange + '</span></div>' +
+        '</div>';
+      cardsEl.appendChild(card);
 
-      if (data[name].length === 0) {
-        showError('Pick at least one option to continue.');
-        return;
-      }
-      goNext();
+      /* Table row */
+      var tr = document.createElement('tr');
+      tr.innerHTML =
+        '<td>' + a.name + '</td>' +
+        '<td>' + hrsDisplay + '</td>' +
+        '<td>' + a.buildTime + '</td>' +
+        '<td class="ao-price">' + a.priceRange + '</td>';
+      tbodyEl.appendChild(tr);
     });
-  });
 
-  // --- Final submit ---------------------------------------------
-  form.addEventListener('submit', function (e) {
+    /* Table footer — combined (only if 2 automations) */
+    if (state.q2.length === 2) {
+      var combinedHrsDisplay = Math.round((combinedHrsSaved - combinedHrsSaved * 0.1) * 10) / 10 + '–' + Math.round(combinedHrsSaved * 10) / 10 + ' hrs/wk';
+      var tf = document.createElement('tr');
+      tf.innerHTML =
+        '<td>Combined</td>' +
+        '<td>' + combinedHrsDisplay + '</td>' +
+        '<td></td>' +
+        '<td class="ao-price">' + getCombinedRange(state.q2) + '</td>';
+      tfootEl.appendChild(tf);
+    }
+
+    /* Rate + ROI */
+    var rateInput = document.getElementById('ao-rate-input');
+    rateInput.value = rate;
+    updateROI(rate, combinedHrsSaved, combinedPriceMid);
+
+    rateInput.addEventListener('input', function () {
+      var r = parseFloat(rateInput.value) || rate;
+      fireEvent('audit_rate_adjusted');
+      updateROI(r, combinedHrsSaved, combinedPriceMid);
+    });
+
+    /* Book a call */
+    document.getElementById('ao-book-btn').addEventListener('click', function () {
+      fireEvent('audit_call_cta_clicked');
+    });
+  }
+
+  function updateROI(rate, hrsSaved, priceMid) {
+    var roiEl = document.getElementById('ao-roi-calc');
+    if (!roiEl || hrsSaved === 0) return;
+
+    var weeklyValue = hrsSaved * rate;
+    var weeks       = priceMid / weeklyValue;
+    var display;
+
+    if (weeks < 1) {
+      display = 'under 1 week';
+    } else if (weeks > 52) {
+      display = 'over a year';
+    } else {
+      display = Math.round(weeks * 10) / 10 + ' weeks';
+    }
+
+    roiEl.innerHTML =
+      'At £' + Math.round(rate) + '/hr, recovering ' +
+      Math.round(hrsSaved * 10) / 10 + ' hrs/week pays back the full cost of this build in ' +
+      '<strong>' + display + '</strong>.';
+  }
+
+  function getCombinedRange(autoNums) {
+    var lo = 0, hi = 0;
+    autoNums.forEach(function (n) {
+      var a = AUTOMATIONS[n];
+      if (!a) return;
+      var parts = a.priceRange.replace(/£/g, '').split('–');
+      lo += parseInt(parts[0].replace(/,/g, ''), 10);
+      hi += parseInt(parts[1].replace(/,/g, ''), 10);
+    });
+    return '£' + lo.toLocaleString() + '–£' + hi.toLocaleString();
+  }
+
+  /* ── Email capture ── */
+  window.auditEmailSubmit = function (e) {
     e.preventDefault();
-    clearError();
+    var gdpr = document.getElementById('ao-gdpr-check');
+    if (!gdpr.checked) { gdpr.focus(); return; }
 
-    var emailEl = document.getElementById('audit-email');
-    var firmEl = document.getElementById('audit-firm-name');
-    var consentEl = document.getElementById('audit-consent');
+    fireEvent('audit_email_captured');
 
-    data.email = emailEl.value.trim();
-    data.firm_name = firmEl.value.trim();
-
-    // Validation
-    if (!data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
-      showError('Please enter a valid work email address.');
-      emailEl.focus();
-      return;
-    }
-    if (!data.firm_name) {
-      showError('Please enter your firm name.');
-      firmEl.focus();
-      return;
-    }
-    if (!consentEl.checked) {
-      showError('Please confirm you\'re happy to receive the report.');
-      return;
-    }
-
-    submitBtn.disabled = true;
-    submitBtn.classList.add('audit-loading');
-    var originalLabel = submitBtn.textContent;
-    submitBtn.textContent = 'Generating';
-
-    // Push to dataLayer for GTM (optional but useful)
-    if (window.dataLayer) {
-      window.dataLayer.push({
-        event: 'audit_submit',
-        firm_type: data.firm_type,
-        firm_size: data.firm_size,
-        budget: data.budget
-      });
-    }
-
-    fetch(ENDPOINT, {
+    // Submit to Formspree (update action URL when configured)
+    var email = document.getElementById('ao-email-input').value;
+    fetch('https://formspree.io/f/apexsystematic', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    })
-      .then(function (res) {
-        if (!res.ok) throw new Error('Server returned ' + res.status);
-        return res.json().catch(function () { return {}; });
-      })
-      .then(function () {
-        formScreen.hidden = true;
-        thankyouScreen.hidden = false;
-        thankyouScreen.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      })
-      .catch(function (err) {
-        console.error('Audit submission failed:', err);
-        submitBtn.disabled = false;
-        submitBtn.classList.remove('audit-loading');
-        submitBtn.textContent = originalLabel;
-        showError('Something went wrong sending your audit. Please try again, or email apex@apexsystematic.com directly.');
-      });
-  });
+      body: JSON.stringify({ email: email, source: 'audit_tool' })
+    }).catch(function () {}); // silent fail — show confirm regardless
 
-  // --- Initial state --------------------------------------------
-  updateProgress();
+    document.getElementById('ao-email-form').style.display = 'none';
+    document.getElementById('ao-email-confirm').classList.remove('hidden');
+  };
+
+  /* ── Analytics ── */
+  function fireEvent(name) {
+    if (typeof gtag === 'function') {
+      gtag('event', name);
+    }
+    if (window.dataLayer) {
+      window.dataLayer.push({ event: name });
+    }
+  }
+
+  /* ── Copy helpers ── */
+  function getWhatItDoes(n) {
+    var map = {
+      1:  'it handles every inbound enquiry automatically — qualifying the lead, updating your CRM, and triggering the right follow-up without you lifting a finger.',
+      2:  'every appointment request, confirmation, and reminder runs on autopilot.',
+      3:  'the entire onboarding sequence — from signed agreement to fully set-up client — runs without manual intervention.',
+      4:  'your documents and proposals are generated from your templates and data the moment a trigger fires.',
+      5:  'every outstanding document or payment is chased on schedule, escalated if needed, and stopped the moment it\'s resolved.',
+      6:  'every deadline and compliance step across your matters is tracked, flagged, and escalated automatically.',
+      7:  'data moves between your systems on schedule and your reports are built and delivered without manual effort.',
+      8:  'your past clients receive timely check-ins, milestone messages, and referral prompts — all without manual effort.',
+      9:  'every incoming client request is classified, prioritised, and routed to the right person immediately.',
+      10: 'invoices are generated and sent automatically the moment work is completed or a trigger fires.',
+      11: 'call notes are transcribed, summarised, and logged to your CRM automatically after every meeting.',
+      12: 'your clients receive status updates at every milestone without anyone needing to write or send them.'
+    };
+    return map[n] || 'the manual work is handled automatically end to end.';
+  }
+
+  function getStopDoing(n) {
+    var map = {
+      1:  'manually checking, qualifying, and following up on every new enquiry',
+      2:  'back-and-forth booking emails and manual calendar management',
+      3:  'chasing documents, setting up folders, and managing the onboarding process yourself',
+      4:  'drafting documents and proposals from scratch every time',
+      5:  'manually tracking and sending chase emails for overdue items',
+      6:  'manually monitoring deadlines and reminding the team about compliance steps',
+      7:  'manually exporting data, building reports, and copy-pasting between systems',
+      8:  'trying to remember to stay in touch with past clients',
+      9:  'triaging every request manually and deciding who should handle it',
+      10: 'manually generating, checking, and sending invoices',
+      11: 'taking notes during calls and manually updating your CRM afterwards',
+      12: 'writing update emails to clients at every stage of a matter'
+    };
+    return map[n] || 'doing this manually';
+  }
+
 })();
