@@ -69,6 +69,8 @@
 .lp-pains-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--border);
   border: 1px solid var(--border);
 }
 
@@ -77,27 +79,11 @@
   align-items: flex-start;
   gap: 20px;
   padding: 32px 36px;
-  border-right: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
+  background: var(--bg);
   transition: background var(--ease);
 }
 
 .lp-pain:hover { background: var(--surface); }
-
-.lp-pain:nth-child(2n) { border-right: none; }
-
-/* Strip bottom border on last-row items.
-   - Always: the last child.
-   - Even count only: the second-to-last (anchored via :has() to last child in column 2). */
-.lp-pains-grid .lp-pain:last-child,
-.lp-pains-grid .lp-pain:nth-last-child(2):has(+ .lp-pain:nth-child(even)) {
-  border-bottom: none;
-}
-
-/* Odd count: lone last item also has no right border. */
-.lp-pains-grid .lp-pain:last-child:nth-child(odd) {
-  border-right: none;
-}
 
 .lp-pain-num {
   font-family: var(--font-display);
@@ -125,13 +111,14 @@
 .lp-services-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--border);
   border: 1px solid var(--border);
 }
 
 .lp-service {
   padding: 36px 36px;
-  border-right: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
+  background: var(--bg);
   transition: background var(--ease);
   position: relative;
 }
@@ -148,18 +135,6 @@
 
 .lp-service:hover::before { width: 48px; }
 .lp-service:hover { background: var(--surface); }
-.lp-service:nth-child(2n) { border-right: none; }
-
-.lp-services-grid .lp-service:last-child,
-.lp-services-grid .lp-service:nth-last-child(2):has(+ .lp-service:nth-child(even)) {
-  border-bottom: none;
-}
-
-.lp-services-grid .lp-service:last-child:nth-child(odd) {
-  border-right: none;
-  border-bottom: none;
-  grid-column: 1 / -1;
-}
 
 .lp-service h3 {
   font-size: 1rem;
@@ -279,13 +254,14 @@
 .lp-vert-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
   border: 1px solid var(--border);
 }
 
 .lp-vert {
   padding: 22px 24px;
-  border-right: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
+  background: var(--bg);
   font-size: 0.85rem;
   color: var(--text-muted);
   transition: background var(--ease), color var(--ease);
@@ -293,18 +269,6 @@
   align-items: center;
   gap: 10px;
 }
-
-/* Last column (every 4th item): no right border. */
-.lp-vert-grid .lp-vert:nth-child(4n) { border-right: none; }
-
-/* Strip bottom border on every item in the last row. */
-.lp-vert-grid .lp-vert:nth-child(4n+1):has(~ .lp-vert:last-child),
-.lp-vert-grid .lp-vert:nth-child(4n+1):last-child,
-.lp-vert-grid .lp-vert:nth-child(4n+1):has(~ .lp-vert:last-child) ~ .lp-vert {
-  border-bottom: none;
-}
-
-.lp-vert-grid .lp-vert:last-child { border-right: none; }
 
 .lp-vert:hover {
   background: var(--surface);
@@ -334,18 +298,9 @@
     gap: 32px;
   }
 
-  .lp-vert-grid { grid-template-columns: repeat(2, 1fr); }
-
-  .lp-vert-grid .lp-vert {
-    border-right: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+  .lp-vert-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
-  .lp-vert-grid .lp-vert:nth-child(2n) { border-right: none; }
-  .lp-vert-grid .lp-vert:last-child,
-  .lp-vert-grid .lp-vert:nth-last-child(2):has(+ .lp-vert:nth-child(even)) {
-    border-bottom: none;
-  }
-  .lp-vert-grid .lp-vert:last-child:nth-child(odd) { border-right: none; }
 }
 
 @media (max-width: 768px) {
@@ -353,19 +308,6 @@
   .lp-services-grid {
     grid-template-columns: 1fr;
   }
-
-  .lp-pain,
-  .lp-service {
-    border-right: none !important;
-    border-bottom: 1px solid var(--border) !important;
-  }
-
-  .lp-pains-grid .lp-pain:last-child,
-  .lp-services-grid .lp-service:last-child {
-    border-bottom: none !important;
-  }
-
-  .lp-services-grid .lp-service:last-child:nth-child(odd) { grid-column: auto; }
 
   .lp-pain { padding: 26px 24px; }
   .lp-service { padding: 32px 24px; }
@@ -375,11 +317,4 @@
 
 @media (max-width: 600px) {
   .lp-vert-grid { grid-template-columns: 1fr; }
-  .lp-vert-grid .lp-vert {
-    border-right: none !important;
-    border-bottom: 1px solid var(--border) !important;
-  }
-  .lp-vert-grid .lp-vert:last-child {
-    border-bottom: none !important;
-  }
 }
