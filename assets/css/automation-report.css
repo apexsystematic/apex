@@ -235,7 +235,7 @@
 @media (max-width: 768px) {
   .mid-cta { flex-direction: column; align-items: flex-start; gap: 20px; }
   .mid-cta-actions { width: 100%; }
-  .mid-cta-actions .btn { flex: 1; min-width: 140px; text-align: center; }
+  .mid-cta-actions .btn { flex: 1; min-width: 0; text-align: center; }
 }
 
 /* ══════════════════════════════════════════
@@ -466,6 +466,7 @@
   }
   .roi-cta-actions .btn {
     flex: 1;
-    min-width: 140px;
+    min-width: 0;
+    text-align: center;
   }
 }
