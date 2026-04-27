@@ -149,7 +149,8 @@ section:last-of-type {
 
 
 /* ── 6. Main content offset for fixed nav ── */
-#main-content {
+#main-content,
+main {
   padding-top: var(--nav-h, 97px);
 }
 
@@ -1408,7 +1409,7 @@ section:last-of-type {
 
 /* ── Legal Pages ── */
 .legal-page {
-  padding-top: 64px;
+  padding-top: var(--section-y);
   padding-bottom: var(--section-y);
   max-width: 760px;
   margin: 0 auto;
