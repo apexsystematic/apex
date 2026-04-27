@@ -1,0 +1,231 @@
+/* ════════════════════════════════════════════
+   SERVICES HUB PAGE
+   Append to style.css
+   ════════════════════════════════════════════ */
+
+
+/* ── Services Hub Hero ── */
+.services-hub-hero {
+  padding-top: calc(var(--section-y) + 20px);
+  padding-bottom: var(--section-y);
+}
+
+.services-hub-hero-inner {
+  max-width: 820px;
+}
+
+.services-hub-hero .section-tag {
+  margin-bottom: 1.5rem;
+}
+
+.services-hub-hero h1 {
+  margin-bottom: 1.75rem;
+  max-width: 780px;
+}
+
+.services-hub-hero-sub {
+  font-size: 1.1rem;
+  max-width: 640px;
+  margin-bottom: 1.75rem;
+  line-height: 1.8;
+}
+
+.services-hub-hero-model {
+  display: inline-block;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  padding: 12px 18px;
+  border-left: 2px solid var(--gold);
+  background: rgba(201, 168, 76, 0.05);
+  margin-bottom: 2.5rem;
+}
+
+
+/* ── The Model (Why this works) ── */
+.sh-model-inner {
+  display: grid;
+  grid-template-columns: 2fr 5fr;
+  gap: 96px;
+  align-items: start;
+}
+
+.sh-model-heading h2 {
+  margin-top: 1.25rem;
+}
+
+.sh-model-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sh-model-body p {
+  line-height: 1.8;
+}
+
+.sh-model-body strong {
+  color: var(--white);
+  font-weight: 500;
+}
+
+
+/* ── Find Your Firm ── */
+.sh-find-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--border);
+}
+
+.sh-find-card {
+  display: flex;
+  flex-direction: column;
+  padding: 40px 32px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: background var(--ease);
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+}
+
+.sh-find-card::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--gold);
+  margin-bottom: 24px;
+  transition: width var(--ease-slow);
+}
+
+.sh-find-card:hover {
+  background: var(--surface);
+}
+
+.sh-find-card:hover::before {
+  width: 56px;
+}
+
+/* Remove right-border on every 3rd card */
+.sh-find-card:nth-child(3n) {
+  border-right: none;
+}
+
+/* Remove bottom-border on the last row (last 1, 2, or 3 cards) */
+.sh-find-card:nth-last-child(-n+3):nth-child(3n+1),
+.sh-find-card:nth-last-child(-n+3):nth-child(3n+1) ~ .sh-find-card {
+  border-bottom: none;
+}
+
+.sh-find-name {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--white);
+  margin-bottom: 0.625rem;
+  line-height: 1.2;
+}
+
+.sh-find-desc {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--text);
+  margin-bottom: 28px;
+  flex: 1;
+}
+
+.sh-find-link {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  transition: letter-spacing var(--ease);
+  margin-top: auto;
+}
+
+.sh-find-card:hover .sh-find-link {
+  letter-spacing: 0.2em;
+}
+
+
+/* ── Not Listed ── */
+.sh-not-listed {
+  margin-top: 56px;
+  padding: 36px 40px;
+  border-left: 2px solid var(--gold);
+  background: var(--surface);
+}
+
+.sh-not-listed-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+
+.sh-not-listed p {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  max-width: 820px;
+}
+
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .sh-find-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .sh-find-card {
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .sh-find-card:nth-child(3n) {
+    border-right: 1px solid var(--border);
+  }
+  .sh-find-card:nth-child(2n) {
+    border-right: none;
+  }
+  .sh-find-card:nth-last-child(-n+3):nth-child(3n+1),
+  .sh-find-card:nth-last-child(-n+3):nth-child(3n+1) ~ .sh-find-card {
+    border-bottom: 1px solid var(--border);
+  }
+  .sh-find-card:nth-last-child(-n+2):nth-child(2n+1),
+  .sh-find-card:nth-last-child(-n+2):nth-child(2n+1) ~ .sh-find-card {
+    border-bottom: none;
+  }
+
+  .sh-model-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .services-hub-hero h1 {
+    max-width: 100%;
+  }
+  .services-hub-hero-sub {
+    font-size: 1rem;
+  }
+
+  .sh-find-grid {
+    grid-template-columns: 1fr;
+  }
+  .sh-find-card {
+    border-right: none !important;
+    border-bottom: 1px solid var(--border) !important;
+  }
+  .sh-find-card:last-child {
+    border-bottom: none !important;
+  }
+
+  .sh-not-listed {
+    padding: 28px 24px;
+  }
+}
