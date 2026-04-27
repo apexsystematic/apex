@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Evidence-based research on AI automation ROI for solo professionals and small firms. Real data from MIT, Harvard, Stanford and 15+ industry surveys.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="The Automation ROI Report — Apex Systematic">
+  <meta property="og:description" content="What solo professionals and small firms are actually saving in 2025. 4 peer-reviewed studies. No hype.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://apexsystematic.com/automation-roi.html">
+  <meta property="og:image" content="https://apexsystematic.com/assets/images/og-image-v1.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Apex Systematic">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Automation ROI Report — Apex Systematic">
+  <meta name="twitter:description" content="What solo professionals and small firms are actually saving in 2025. 4 peer-reviewed studies. No hype.">
+  <meta name="twitter:image" content="https://apexsystematic.com/assets/images/og-image-v1.png">
+  <title>The Automation ROI Report — Apex Systematic</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon.png">
+
+  <style>
+
+    /* ── Page offset ── */
+    #main-content { padding-top: var(--nav-h, 97px); }
+
+    /* ══════════════════════════════════════════
+       HERO
+    ══════════════════════════════════════════ */
+    .roi-hero {
+      padding: var(--section-y) 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .roi-hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .roi-hero-left .section-tag { margin-bottom: 1.25rem; }
+    .roi-hero-left h1 {
+      font-size: clamp(2.4rem, 4vw, 3.6rem);
+      margin-bottom: 1.25rem;
+      line-height: 1.1;
+    }
+    .roi-hero-left p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      max-width: 460px;
+    }
+    .roi-hero-left .hero-actions {
+      margin-top: 2rem;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* Evidence note */
+    .evidence-note {
+      margin-top: 2.5rem;
+      padding: 14px 18px;
+      border-left: 2px solid var(--gold);
+      background: rgba(201,168,76,0.04);
+    }
+    .evidence-note p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .evidence-note p + p { margin-top: 4px; font-style: italic; color: var(--text-dim); }
+
+    /* Right: stat stack */
+    .roi-hero-right {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .hero-stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 28px 32px;
+      position: relative;
+      transition: background var(--ease);
+    }
+    .hero-stat::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 2px; height: 100%;
+      background: var(--border);
+      transition: background var(--ease);
+    }
+    .hero-stat:hover { background: var(--surface-2); }
+    .hero-stat:hover::before { background: var(--gold); }
+    .hs-num {
+      font-family: var(--font-display);
+      font-size: 2.6rem;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .hs-label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-top: 6px;
+    }
+    .hs-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+      line-height: 1.6;
+    }
+    .hs-src {
+      font-size: 0.72rem;
+      font-style: italic;
+      color: var(--text-dim);
+      margin-top: 8px;
+    }
+
+    /* ══════════════════════════════════════════
+       KEY INSIGHT BAND
+    ══════════════════════════════════════════ */
+    .insight-band {
+      padding: 52px 0;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .insight-band-inner {
+      display: grid;
+      grid-template-columns: 2fr 3fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .insight-label {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .insight-band-left h2 {
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      line-height: 1.25;
+    }
+    .insight-band-right p {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--text-muted);
+    }
+    .insight-band-right p + p { margin-top: 1rem; }
+    .insight-band-right strong { color: var(--white); font-weight: 500; }
+
+    /* ══════════════════════════════════════════
+       WORKFLOWS TABLE
+    ══════════════════════════════════════════ */
+    .workflows-section { padding: var(--section-y) 0; border-bottom: 1px solid var(--border); }
+    .workflows-section .section-header { margin-bottom: 40px; }
+
+    .wf-table-wrap {
+      border: 1px solid var(--border);
+    }
+    .wf-row {
+      display: grid;
+      grid-template-columns: 40px 1fr 160px 90px 180px;
+      align-items: start;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+      transition: background var(--ease);
+    }
+    .wf-row:last-child { border-bottom: none; }
+    .wf-row:hover { background: var(--surface); }
+    .wf-row.wf-header {
+      background: var(--surface-2);
+      pointer-events: none;
+    }
+
+    .wf-cell {
+      padding: 20px 24px;
+      border-right: 1px solid var(--border);
+    }
+    .wf-cell:last-child { border-right: none; }
+    .wf-cell.wf-num-cell {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 0;
+      border-right: 1px solid var(--border);
+    }
+
+    .wf-header .wf-cell {
+      font-size: 0.64rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      padding: 12px 24px;
+    }
+    .wf-header .wf-num-cell { padding: 12px 0; }
+
+    .wf-num {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--gold);
+    }
+    .wf-name {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 5px;
+    }
+    .wf-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .wf-saved {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: var(--gold);
+      line-height: 1.3;
+    }
+    .wf-stack {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+    .wf-badge {
+      display: inline-block;
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+    }
+    .wf-badge.easy   { background: rgba(76,175,122,0.12); color: #4CAF7A; }
+    .wf-badge.medium { background: rgba(232,160,32,0.12);  color: #E8A020; }
+
+    /* Stacking callout */
+    .stacking-callout {
+      margin-top: 28px;
+      padding: 20px 24px;
+      border-left: 2px solid var(--gold);
+      background: rgba(201,168,76,0.04);
+    }
+    .stacking-callout .sc-tag {
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .stacking-callout p {
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 1.8;
+    }
+    .stacking-callout p + p { margin-top: 8px; }
+
+    /* ══════════════════════════════════════════
+       INDUSTRY SECTION
+    ══════════════════════════════════════════ */
+    .industry-section { padding: var(--section-y) 0; border-bottom: 1px solid var(--border); }
+    .industry-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--border);
+    }
+    .industry-card {
+      padding: 36px 32px;
+      border-right: 1px solid var(--border);
+      position: relative;
+      transition: background var(--ease);
+    }
+    .industry-card::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--gold);
+      margin-bottom: 22px;
+      transition: width var(--ease-slow);
+    }
+    .industry-card:hover::before { width: 48px; }
+    .industry-card:hover { background: var(--surface); }
+    .industry-card:last-child { border-right: none; }
+
+    .ind-name {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .ind-hrs {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .ind-hrs span { font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-body); }
+    .ind-workflow {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    .ind-adoption {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+    .ind-adoption b { color: var(--text-muted); }
+
+    /* ══════════════════════════════════════════
+       PDF DOWNLOAD SECTION
+    ══════════════════════════════════════════ */
+    .pdf-section {
+      padding: var(--section-y) 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .pdf-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .pdf-left h2 { margin-bottom: 1rem; }
+    .pdf-left p {
+      font-size: 0.95rem;
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .pdf-contents {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border);
+    }
+    .pdf-content-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+      transition: background var(--ease);
+    }
+    .pdf-content-row:last-child { border-bottom: none; }
+    .pdf-content-row:hover { background: var(--surface); }
+    .pcr-num {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      color: var(--gold);
+      flex-shrink: 0;
+      min-width: 20px;
+    }
+    .pcr-text {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Form */
+    .pdf-form-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 40px 36px;
+      position: relative;
+    }
+    .pdf-form-wrap::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--gold);
+    }
+    .pdf-form-tag {
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+    .pdf-form-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--white);
+      margin-bottom: 0.6rem;
+      line-height: 1.25;
+    }
+    .pdf-form-sub {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 1.75rem;
+    }
+    .pdf-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .pdf-form .form-group { margin: 0; }
+    .pdf-form input {
+      width: 100%;
+      background: var(--surface-2);
+      border: 1px solid var(--border-light);
+      color: var(--white);
+      padding: 13px 16px;
+      border-radius: var(--radius);
+      outline: none;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      transition: border-color var(--ease);
+    }
+    .pdf-form input::placeholder { color: var(--text-dim); }
+    .pdf-form input:focus { border-color: var(--gold); }
+    .pdf-form label {
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 7px;
+      display: block;
+    }
+    .pdf-submit {
+      width: 100%;
+      margin-top: 4px;
+    }
+    .pdf-privacy {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      text-align: center;
+      margin-top: 10px;
+      line-height: 1.6;
+    }
+
+    /* Success state */
+    .pdf-success {
+      display: none;
+      text-align: center;
+      padding: 20px 0;
+    }
+    .pdf-success-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 1.2rem;
+    }
+    .pdf-success h3 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .pdf-success p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    /* ══════════════════════════════════════════
+       FINAL CTA
+    ══════════════════════════════════════════ */
+    .roi-cta-section { padding: var(--section-y) 0; }
+    .roi-cta-box {
+      border: 1px solid var(--border);
+      padding: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .roi-cta-box::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .roi-cta-text .section-tag { margin-bottom: 1rem; }
+    .roi-cta-text h2 { font-size: clamp(1.6rem, 2.5vw, 2.2rem); }
+    .roi-cta-text p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-top: 0.75rem;
+      max-width: 480px;
+    }
+
+    /* ══════════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .roi-hero-inner     { grid-template-columns: 1fr; gap: 48px; }
+      .roi-hero-right     { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+      .insight-band-inner { grid-template-columns: 1fr; gap: 32px; }
+      .industry-grid      { grid-template-columns: repeat(2, 1fr); }
+      .industry-card:nth-child(2) { border-right: none; }
+      .industry-card:nth-child(1),
+      .industry-card:nth-child(2) { border-bottom: 1px solid var(--border); }
+      .pdf-inner          { grid-template-columns: 1fr; gap: 40px; }
+      .roi-cta-box        { flex-direction: column; align-items: flex-start; gap: 28px; padding: 40px; }
+      .wf-row             { grid-template-columns: 40px 1fr 130px 80px; }
+      .wf-row .wf-cell:last-child { display: none; }
+    }
+
+    @media (max-width: 768px) {
+      .roi-hero-right { grid-template-columns: 1fr; }
+      .industry-grid  { grid-template-columns: 1fr; }
+      .industry-card  { border-right: none !important; border-bottom: 1px solid var(--border); }
+      .industry-card:last-child { border-bottom: none; }
+      .wf-row         { grid-template-columns: 40px 1fr 110px; }
+      .wf-row .wf-cell:nth-child(4),
+      .wf-row .wf-cell:last-child { display: none; }
+      .pdf-form-wrap  { padding: 28px 22px; }
+      .roi-cta-box    { padding: 32px 24px; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <main id="main-content">
+
+    <!-- ── HERO ── -->
+    <section class="roi-hero">
+      <div class="container">
+        <div class="roi-hero-inner">
+
+          <div class="roi-hero-left">
+            <span class="section-tag">Research Report — 2025</span>
+            <h1>What automation is actually worth</h1>
+            <p>Four peer-reviewed studies. Fifteen industry surveys. What solo professionals and small firms are realistically saving — and where most of them are leaving time on the table.</p>
+            <div class="hero-actions">
+              <a href="#get-report" class="btn btn-primary">Download the report</a>
+              <a href="#workflows" class="btn btn-ghost">See the data →</a>
+            </div>
+            <div class="evidence-note">
+              <p>Sources: MIT, Harvard/BCG, Stanford, Thomson Reuters, Clio, Intuit, Karbon (2023–2025)</p>
+              <p>Conservative estimates throughout. Vendor-only claims excluded from primary metrics.</p>
+            </div>
+          </div>
+
+          <div class="roi-hero-right">
+            <div class="hero-stat">
+              <div class="hs-num">4–8</div>
+              <div class="hs-label">hours / week reclaimed</div>
+              <div class="hs-desc">Per person, in year one. Conservative peer-reviewed baseline — not vendor claims.</div>
+              <div class="hs-src">Dell'Acqua et al. (HBS/BCG, 2023) · Noy & Zhang (MIT, 2023)</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hs-num">&lt; 3</div>
+              <div class="hs-label">months to payback</div>
+              <div class="hs-desc">At $50–200/user/month and professional billing rates of $100–300/hr.</div>
+              <div class="hs-src">Thomson Reuters Future of Professionals 2024</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hs-num">25–40%</div>
+              <div class="hs-label">faster on drafting tasks</div>
+              <div class="hs-desc">Time reduction on writing tasks. Quality improved 18% simultaneously.</div>
+              <div class="hs-src">Noy & Zhang, Science 381:187–192, July 2023</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hs-num">~3 hrs</div>
+              <div class="hs-label">saved on email alone</div>
+              <div class="hs-desc">25% email time reduction. Strongest single-tool gain across four controlled studies.</div>
+              <div class="hs-src">HBS/MIT Copilot field study, April 2025</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── KEY INSIGHT BAND ── -->
+    <section class="insight-band">
+      <div class="container">
+        <div class="insight-band-inner">
+          <div class="insight-band-left">
+            <div class="insight-label">The most important finding</div>
+            <h2>AI is a floor-raiser, not a ceiling-raiser</h2>
+          </div>
+          <div class="insight-band-right">
+            <p>Across every peer-reviewed study reviewed, the largest gains consistently go to <strong>below-average performers</strong>. Bottom-quartile workers improved 43% vs. 17% for top performers (BCG/Harvard, 2023). The effect is reproduced in every independent study.</p>
+            <p>For solo and small firms competing against larger, better-resourced operations, this is the most important finding in the literature. <strong>Automation narrows the capability gap.</strong> The firms that haven't adopted it yet aren't just leaving time on the table — they're falling behind competitors who have.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── WORKFLOWS ── -->
+    <section class="workflows-section" id="workflows">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Top automation opportunities</span>
+          <h2>Where your hours are going</h2>
+          <p class="section-sub">Ranked by realistic time reclaimed for solo professionals and 1–12 person firms. The "Stack" column lists the components each workflow requires — these tools work in isolation by default. The gains come from connecting them.</p>
+        </div>
+
+        <div class="wf-table-wrap">
+
+          <div class="wf-row wf-header">
+            <div class="wf-num-cell"></div>
+            <div class="wf-cell">WORKFLOW</div>
+            <div class="wf-cell">TIME SAVED</div>
+            <div class="wf-cell">LEVEL</div>
+            <div class="wf-cell">STACK</div>
+          </div>
+
+          <div class="wf-row">
+            <div class="wf-num-cell"><span class="wf-num">01</span></div>
+            <div class="wf-cell">
+              <div class="wf-name">Meeting Notes &amp; Follow-up</div>
+              <div class="wf-desc">Transcription + auto-drafted follow-ups synced to CRM</div>
+            </div>
+            <div class="wf-cell"><div class="wf-saved">3–8 hrs/week</div></div>
+            <div class="wf-cell"><span class="wf-badge easy">Easy</span></div>
+            <div class="wf-cell"><div class="wf-stack">Fathom / Fireflies<br>+ CRM + email</div></div>
+          </div>
+
+          <div class="wf-row">
+            <div class="wf-num-cell"><span class="wf-num">02</span></div>
+            <div class="wf-cell">
+              <div class="wf-name">Document &amp; Proposal Drafting</div>
+              <div class="wf-desc">First drafts for proposals, contracts, engagement letters</div>
+            </div>
+            <div class="wf-cell"><div class="wf-saved">25–40% faster</div></div>
+            <div class="wf-cell"><span class="wf-badge easy">Easy</span></div>
+            <div class="wf-cell"><div class="wf-stack">Claude / ChatGPT<br>+ templates + triggers</div></div>
+          </div>
+
+          <div class="wf-row">
+            <div class="wf-num-cell"><span class="wf-num">03</span></div>
+            <div class="wf-cell">
+              <div class="wf-name">Email Triage &amp; Response</div>
+              <div class="wf-desc">Prioritisation, draft responses, automated follow-up sequences</div>
+            </div>
+            <div class="wf-cell"><div class="wf-saved">~3 hrs/week</div></div>
+            <div class="wf-cell"><span class="wf-badge easy">Easy</span></div>
+            <div class="wf-cell"><div class="wf-stack">Copilot / Gmail AI<br>+ routing rules</div></div>
+          </div>
+
+          <div class="wf-row">
+            <div class="wf-num-cell"><span class="wf-num">04</span></div>
+            <div class="wf-cell">
+              <div class="wf-name">Client Intake &amp; Onboarding</div>
+              <div class="wf-desc">Form → CRM → calendar → welcome sequence, end-to-end</div>
+            </div>
+            <div class="wf-cell"><div class="wf-saved">2–4 hrs/week</div></div>
+            <div class="wf-cell"><span class="wf-badge medium">Medium</span></div>
+            <div class="wf-cell"><div class="wf-stack">Forms + CRM<br>+ calendar + email</div></div>
+          </div>
+
+          <div class="wf-row">
+            <div class="wf-num-cell"><span class="wf-num">05</span></div>
+            <div class="wf-cell">
+              <div class="wf-name">Scheduling Automation</div>
+              <div class="wf-desc">Self-serve booking with smart routing, buffers &amp; reminders</div>
+            </div>
+            <div class="wf-cell"><div class="wf-saved">2–4 hrs/week</div></div>
+            <div class="wf-cell"><span class="wf-badge easy">Easy</span></div>
+            <div class="wf-cell"><div class="wf-stack">Calendly / Reclaim<br>+ CRM + notifications</div></div>
+          </div>
+
+        </div>
+
+        <div class="stacking-callout">
+          <div class="sc-tag">The Stacking Effect — and the Gap</div>
+          <p>Workflows 01–03 compound: a solo professional with 15 client calls, 5 proposals, and 50+ emails per week can realistically reclaim 8–12 hours/week from these three alone.</p>
+          <p>But each tool in the stack above works in isolation by default. The gains come from the connections — transcript to CRM, intake to calendar to invoice, draft trigger to approval to send. Building and maintaining those connections is where most firms stall, and where the real ROI either materialises or doesn't.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── INDUSTRY ── -->
+    <section class="industry-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Industry breakdown</span>
+          <h2>Savings vary by practice type</h2>
+          <p class="section-sub">Hours reclaimed per week per person, based on independent research and conservative estimates for each sector.</p>
+        </div>
+
+        <div class="industry-grid">
+
+          <div class="industry-card">
+            <div class="ind-name">Legal</div>
+            <div class="ind-hrs">2–8 <span>hrs/week</span></div>
+            <div class="ind-workflow">Top workflow: document drafting &amp; intake automation</div>
+            <div class="ind-adoption"><b>Deep adoption:</b> 4–8% of firms — despite 79% reporting any AI use</div>
+          </div>
+
+          <div class="industry-card">
+            <div class="ind-name">Accounting</div>
+            <div class="ind-hrs">3–8 <span>hrs/week</span></div>
+            <div class="ind-workflow">Top workflow: tax research &amp; client portal automation</div>
+            <div class="ind-adoption"><b>Deep adoption:</b> 6% fully implemented — per AICPA/CIMA 2024</div>
+          </div>
+
+          <div class="industry-card">
+            <div class="ind-name">Financial Advisory</div>
+            <div class="ind-hrs">3–8 <span>hrs/week</span></div>
+            <div class="ind-workflow">Top workflow: meeting notes → CRM → follow-up sequence</div>
+            <div class="ind-adoption"><b>Deep adoption:</b> ~18% using specialised advisor AI tools</div>
+          </div>
+
+          <div class="industry-card">
+            <div class="ind-name">Consulting</div>
+            <div class="ind-hrs">5–12 <span>hrs/week</span></div>
+            <div class="ind-workflow">Top workflow: proposals, research &amp; client deliverables</div>
+            <div class="ind-adoption"><b>Strongest ROI:</b> consulting tasks have the most peer-reviewed evidence</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PDF DOWNLOAD ── -->
+    <section class="pdf-section" id="get-report">
+      <div class="container">
+        <div class="pdf-inner">
+
+          <div class="pdf-left">
+            <span class="section-tag">Free download</span>
+            <h2>The full report, in one document</h2>
+            <p>A four-page PDF covering all the data above plus industry-specific quick-start roadmaps — formatted to share with partners, colleagues, or anyone evaluating whether automation is worth it for their firm.</p>
+            <p>No pitch. No fluff. Just the research, clearly laid out.</p>
+
+            <div class="pdf-contents">
+              <div class="pdf-content-row">
+                <span class="pcr-num">01</span>
+                <span class="pcr-text">Key findings — 4 peer-reviewed metrics with sources</span>
+              </div>
+              <div class="pdf-content-row">
+                <span class="pcr-num">02</span>
+                <span class="pcr-text">Top 5 workflows ranked by time saved</span>
+              </div>
+              <div class="pdf-content-row">
+                <span class="pcr-num">03</span>
+                <span class="pcr-text">Industry breakdown across legal, accounting, advisory &amp; consulting</span>
+              </div>
+              <div class="pdf-content-row">
+                <span class="pcr-num">04</span>
+                <span class="pcr-text">Quick-start roadmap for solos and 2–12 person teams</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pdf-form-wrap">
+            <div id="pdf-form-container">
+              <div class="pdf-form-tag">Get the report</div>
+              <div class="pdf-form-title">Download free — no spam, ever</div>
+              <p class="pdf-form-sub">Enter your email and we'll send the PDF directly. We'll follow up once to ask if a free workflow audit would be useful. That's it.</p>
+
+              <form class="pdf-form" id="pdf-download-form" onsubmit="handlePdfSubmit(event)">
+                <div class="form-group">
+                  <label for="dl-name">Full name</label>
+                  <input type="text" id="dl-name" name="name" placeholder="Your name" required>
+                </div>
+                <div class="form-group">
+                  <label for="dl-email">Work email</label>
+                  <input type="email" id="dl-email" name="email" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                  <label for="dl-role">Your role</label>
+                  <input type="text" id="dl-role" name="role" placeholder="e.g. Solicitor, IFA, Consultant">
+                </div>
+                <button type="submit" class="btn btn-primary pdf-submit" id="pdf-submit-btn">
+                  Download the report →
+                </button>
+              </form>
+              <p class="pdf-privacy">Your email is used only to send the report and one follow-up. No list. No ads. Unsubscribe any time.</p>
+            </div>
+
+            <div class="pdf-success" id="pdf-success">
+              <div class="pdf-success-icon">✓</div>
+              <h3>It's on its way.</h3>
+              <p>Check your inbox for the report. We'll follow up once within a couple of days to ask if a free workflow audit would be useful for your specific practice.</p>
+              <a href="/apex_automation_roi_report.html" download="Apex_Systematic_Automation_ROI_Report.html" class="btn btn-primary">
+                Download now if it hasn't arrived →
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FINAL CTA ── -->
+    <section class="roi-cta-section">
+      <div class="container">
+        <div class="roi-cta-box">
+          <div class="roi-cta-text">
+            <span class="section-tag">Free audit</span>
+            <h2>See what's possible for your specific firm</h2>
+            <p>The data above is the general picture. A free workflow audit maps your actual processes, identifies the specific tasks costing you the most time, and gives you a precise picture of what can be connected and automated.</p>
+          </div>
+          <a href="/index.html#contact" class="btn btn-primary" style="flex-shrink:0;">Book a free audit →</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="/assets/js/components.js"></script>
+  <script src="/assets/js/main.js"></script>
+
+  <script>
+    /* ── Nav height offset ── */
+    (function () {
+      function setNavHeight() {
+        var nav = document.getElementById('header-wrap');
+        if (nav) document.documentElement.style.setProperty('--nav-h', nav.offsetHeight + 'px');
+      }
+      setNavHeight();
+      window.addEventListener('resize', setNavHeight);
+    })();
+
+    /* ── PDF download form ── */
+    async function handlePdfSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('pdf-submit-btn');
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+
+      const data = {
+        name:   document.getElementById('dl-name').value.trim(),
+        email:  document.getElementById('dl-email').value.trim(),
+        role:   document.getElementById('dl-role').value.trim(),
+        source: 'automation-roi-page'
+      };
+
+      /* Send to the same contact worker — update URL before going live */
+      try {
+        await fetch('https://YOUR-WORKER.workers.dev/contact', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify(data)
+        });
+      } catch (err) {
+        console.error('Webhook error:', err);
+      }
+
+      /* Show success state regardless of webhook result */
+      document.getElementById('pdf-form-container').style.display = 'none';
+      document.getElementById('pdf-success').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,498 @@
+/* ═══════════════════════════════
+   roi-calculator.css — Apex Systematic
+═══════════════════════════════ */
+
+.roi-page-header {
+  padding-bottom: 48px;
+}
+
+.roi-page-header h2 {
+  max-width: 700px;
+  margin-bottom: 0.75rem;
+}
+
+.roi-page-header .section-sub {
+  max-width: 520px;
+}
+
+/* ── Calculator layout ── */
+.roi-section {
+  padding: var(--section-y) 0;
+}
+
+.roi-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 32px;
+  align-items: start;
+}
+
+/* ── Input groups ── */
+.inputs-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputs-block-label {
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding: 18px 0 14px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0;
+}
+
+.input-row {
+  padding: 28px 32px;
+  border: 1px solid var(--border);
+  border-top: none;
+  transition: background var(--ease);
+}
+
+.input-row:hover {
+  background: var(--surface);
+}
+
+.input-row + .inputs-block-label {
+  margin-top: 32px;
+}
+
+.input-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 18px;
+}
+
+.input-label-text {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--white);
+  line-height: 1.4;
+}
+
+.input-label-value {
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+  white-space: nowrap;
+  margin-left: 16px;
+  flex-shrink: 0;
+}
+
+/* ── Sector selector ── */
+.input-row--sector {
+  /* No hover background — buttons handle their own state */
+}
+
+.input-row--sector:hover {
+  background: transparent;
+}
+
+.sector-options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.sector-btn {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 400;
+  padding: 11px 10px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color var(--ease), background var(--ease), color var(--ease);
+  text-align: center;
+}
+
+.sector-btn:hover {
+  border-color: var(--text-muted);
+  color: var(--white);
+}
+
+.sector-btn.is-selected {
+  background: rgba(201, 168, 76, 0.08);
+  border-color: var(--gold);
+  color: var(--white);
+}
+
+/* ── Slider ── */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 1px;
+  background: var(--border-light);
+  outline: none;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: var(--gold);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform var(--ease), box-shadow var(--ease);
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.25);
+  box-shadow: 0 0 0 6px rgba(201, 168, 76, 0.15);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: var(--gold);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.range-limits {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+
+/* ── Footnote under inputs ── */
+.inputs-footnote {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  line-height: 1.65;
+  margin-top: 24px;
+  padding: 0 4px;
+}
+
+/* ── Results panel ── */
+.results-panel {
+  position: sticky;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+}
+
+.results-header {
+  padding: 22px 28px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.results-header .section-tag {
+  margin-bottom: 0.5rem;
+}
+
+.results-header h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.2;
+}
+
+.metric-primary {
+  padding: 36px 28px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-2);
+}
+
+.metric-label {
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.metric-value-large {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  font-weight: 400;
+  color: var(--gold);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  transition: color 0.25s ease;
+}
+
+.metric-benchmark {
+  margin-top: 12px;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.metric-benchmark strong {
+  color: var(--gold-light);
+  font-weight: 500;
+}
+
+.metric-secondary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--border);
+}
+
+.metric-cell {
+  padding: 22px 28px;
+}
+
+.metric-cell + .metric-cell {
+  border-left: 1px solid var(--border);
+}
+
+.metric-value-mid {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.metric-sub-label {
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  letter-spacing: 0.06em;
+  margin-top: 6px;
+}
+
+/* ── Stalling block ── */
+.stalling-block {
+  padding: 28px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.stalling-header {
+  margin-bottom: 18px;
+}
+
+.stalling-tag {
+  display: inline-block;
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.stalling-intro {
+  font-size: 0.88rem;
+  color: var(--text);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.stalling-rows {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--border);
+  margin-bottom: 16px;
+}
+
+.stalling-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.stalling-row:last-child {
+  border-bottom: none;
+}
+
+.stalling-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.stalling-val {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--white);
+  letter-spacing: -0.01em;
+}
+
+.stalling-row--feature .stalling-label {
+  color: var(--white);
+  font-weight: 500;
+}
+
+.stalling-row--feature .stalling-val {
+  color: var(--gold);
+  font-size: 1.4rem;
+}
+
+.stalling-note {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── CTA ── */
+.results-cta {
+  padding: 24px 28px;
+  background: var(--surface);
+}
+
+.results-cta .btn {
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.results-cta-note {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  text-align: center;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+}
+
+/* ── Methodology ── */
+.method-section {
+  background: var(--surface);
+  padding: var(--section-y) 0;
+  border-top: 1px solid var(--border);
+}
+
+.method-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.method-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 32px;
+  border-radius: var(--radius);
+}
+
+.method-card .section-tag {
+  margin-bottom: 0.8rem;
+}
+
+.method-h {
+  margin-bottom: 0.85rem;
+  color: var(--white);
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+
+.method-card p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.method-callout {
+  background: var(--surface-2);
+  border: 1px solid var(--border-light);
+  padding: 24px 28px;
+  border-radius: var(--radius);
+}
+
+.method-callout p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+.method-callout strong {
+  color: var(--white);
+  font-weight: 500;
+}
+
+/* ── Calibration ── */
+.calibration-section {
+  background: var(--bg);
+  padding: var(--section-y) 0;
+  border-top: 1px solid var(--border);
+}
+
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.cal-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 32px;
+  border-radius: var(--radius);
+}
+
+.cal-h {
+  margin-bottom: 1rem;
+  color: var(--white);
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+
+.cal-card p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 960px) {
+  .method-grid,
+  .cal-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .roi-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .results-panel {
+    position: static;
+    order: -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .input-row {
+    padding: 22px var(--gutter);
+  }
+
+  .metric-value-large {
+    font-size: 2.2rem;
+  }
+
+  .sector-options {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .method-card,
+  .cal-card {
+    padding: 24px;
+  }
+}

@@ -1,0 +1,490 @@
+/* ═══════════════════════════════════════════
+   lead-qualifier.css — Apex Systematic
+   Page-specific styles for the lead qualifier demo.
+   Requires: style.css, demo.css
+═══════════════════════════════════════════ */
+
+/* ── HEADER ── */
+
+/* ── DIVIDER ── */
+
+/* ── FORM CARD ── */
+
+
+    .form-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+
+
+    .form-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+/* ── SCENARIO TOGGLE ── */
+
+
+    .scenario-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 28px;
+      padding: 12px 16px;
+      background: rgba(201,168,76,0.04);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius);
+    }
+
+
+
+    .scenario-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+
+
+    .scenario-btns {
+      display: flex;
+      gap: 8px;
+      flex: 1;
+    }
+
+
+
+    .scenario-btn {
+      flex: 1;
+      padding: 7px 12px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.04em;
+    }
+
+
+
+    .scenario-btn.active {
+      background: var(--gold-dim);
+      border-color: var(--border-gold);
+      color: var(--gold);
+    }
+
+/* ── SUBMIT BUTTON ── */
+
+/* ── RESULTS PANEL ── */
+
+
+    #results {
+      margin-top: 32px;
+      display: none;
+      animation: fadeUp 0.5s ease forwards;
+    }
+
+
+
+    .results-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+
+
+    .results-header h2 {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+
+
+    .result-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+
+
+    .result-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      animation: fadeUp 0.4s ease forwards;
+      opacity: 0;
+    }
+
+
+
+    .result-card:nth-child(1) { animation-delay: 0.05s; }
+
+
+    .result-card:nth-child(2) { animation-delay: 0.15s; }
+
+
+    .result-card:nth-child(3) { animation-delay: 0.25s; }
+
+/* Decision card */
+
+
+    .decision-banner {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      border-radius: var(--radius);
+      margin-bottom: 16px;
+    }
+
+
+
+    .decision-banner.qualified {
+      background: var(--green-dim);
+      border: 1px solid rgba(46,204,113,0.25);
+    }
+
+
+
+    .decision-banner.disqualified {
+      background: var(--red-dim);
+      border: 1px solid rgba(231,76,60,0.25);
+    }
+
+
+
+    .decision-icon {
+      font-size: 22px;
+      line-height: 1;
+    }
+
+
+
+    .decision-label {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+
+
+    .decision-banner.qualified .decision-label { color: var(--green); }
+
+
+    .decision-banner.disqualified .decision-label { color: var(--red); }
+
+
+
+    .decision-score {
+      margin-left: auto;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+
+
+    .decision-score strong {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+
+
+    .reasoning {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+
+
+    .reasoning-factors {
+      margin-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+
+
+    .factor {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+
+
+    .factor-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      margin-top: 7px;
+      flex-shrink: 0;
+    }
+
+/* Action card */
+
+
+    .action-type {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 12px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+
+
+    .action-type.calendly {
+      background: rgba(46,204,113,0.1);
+      border: 1px solid rgba(46,204,113,0.25);
+      color: var(--green);
+    }
+
+
+
+    .action-type.decline {
+      background: var(--red-dim);
+      border: 1px solid rgba(231,76,60,0.25);
+      color: var(--red);
+    }
+
+
+
+    .email-preview {
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+
+
+    .email-meta {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+
+
+    .email-row {
+      display: flex;
+      gap: 8px;
+      font-size: 12px;
+    }
+
+
+
+    .email-row-label {
+      color: var(--text-dim);
+      width: 36px;
+      flex-shrink: 0;
+    }
+
+
+
+    .email-row-val { color: var(--text-muted); }
+
+
+
+    .email-body {
+      padding: 16px;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.75;
+      white-space: pre-wrap;
+    }
+
+
+
+    .calendly-mock {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+
+
+    .calendly-icon {
+      width: 42px;
+      height: 42px;
+      background: rgba(46,204,113,0.1);
+      border: 1px solid rgba(46,204,113,0.2);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+
+
+    .calendly-text { flex: 1; }
+
+
+    .calendly-text strong { display: block; font-size: 14px; margin-bottom: 2px; }
+
+
+    .calendly-text span { font-size: 12px; color: var(--text-muted); }
+
+
+
+    .calendly-link {
+      padding: 8px 14px;
+      background: var(--green-dim);
+      border: 1px solid rgba(46,204,113,0.3);
+      border-radius: var(--radius);
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 500;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+/* CRM card */
+
+
+    .crm-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+
+
+    .crm-table tr {
+      border-bottom: 1px solid var(--border);
+    }
+
+
+
+    .crm-table tr:last-child { border-bottom: none; }
+
+
+
+    .crm-table td {
+      padding: 10px 0;
+      vertical-align: top;
+    }
+
+
+
+    .crm-table td:first-child {
+      color: var(--text-dim);
+      font-size: 11px;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      font-weight: 500;
+      width: 38%;
+      padding-right: 12px;
+      padding-top: 12px;
+    }
+
+
+
+    .crm-table td:last-child { color: var(--text); }
+
+
+
+    .crm-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 9px;
+      border-radius: var(--radius);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+    }
+
+
+
+    .crm-tag.qualified {
+      background: var(--green-dim);
+      color: var(--green);
+      border: 1px solid rgba(46,204,113,0.25);
+    }
+
+
+
+    .crm-tag.disqualified {
+      background: var(--red-dim);
+      color: var(--red);
+      border: 1px solid rgba(231,76,60,0.2);
+    }
+
+
+
+    .crm-tag.pending {
+      background: rgba(201,168,76,0.08);
+      color: var(--gold);
+      border: 1px solid var(--border-gold);
+    }
+
+
+
+    .timestamp {
+      font-size: 11px;
+      color: var(--text-dim);
+      font-family: monospace;
+    }
+
+/* ── CTA ── */
+
+/* ── FOOTER ── */
+
+/* ── RESPONSIVE ── */
+
+
+    @media (max-width: 600px) {
+      .form-card { padding: 24px 20px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .cta-section { padding: 28px 20px; }
+      .scenario-bar { flex-direction: column; align-items: flex-start; }
+    }
+
+/* ── UTILITY ── */
