@@ -181,24 +181,27 @@
   /* ── Output ── */
   function renderOutput() {
     hideStep(state.currentStep);
-    document.getElementById('audit-progress').style.display = 'none';
 
     if (state.q6 === 'under') {
-      // Budget gate
       document.getElementById('audit-gate').classList.remove('hidden');
       fireEvent('audit_budget_gate');
       return;
     }
 
+    // Hide the split section, reveal the full-width output section
+    var splitSection = document.getElementById('audit-split');
+    if (splitSection) splitSection.style.display = 'none';
+
+    var outputSection = document.getElementById('audit-output-section');
+    if (outputSection) outputSection.classList.remove('hidden');
+
     fireEvent('audit_completed');
     buildProposal();
-    document.getElementById('audit-output').classList.remove('hidden');
 
-    // Scroll to output
+    // Scroll to top of output
     setTimeout(function () {
-      var el = document.getElementById('audit-output');
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 50);
   }
 
   function buildProposal() {
