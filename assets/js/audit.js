@@ -42,8 +42,6 @@
     accounting: 'accounting practice',
     financial: 'financial advisory firm',
     consulting: 'consulting practice',
-    brokerage: 'brokerage',
-    estate: 'estate or letting agency',
     other: 'professional services firm'
   };
 
@@ -54,7 +52,6 @@
     q3: null, q3Label: null,
     q4: null,
     q5: null,
-    q6: null,
     currentStep: 1
   };
 
@@ -65,7 +62,6 @@
     initQ3();
     initQ4();
     initQ5();
-    initQ6();
     updateProgress(1);
   });
 
@@ -80,7 +76,7 @@
         state[stateKey] = btn.dataset.value;
         if (rateKey) state[rateKey] = parseInt(btn.dataset.rate, 10);
         if (extraFn) extraFn(btn);
-        setTimeout(function () { goToStep(nextStep); }, 220);
+        if (nextStep) setTimeout(function () { goToStep(nextStep); }, 220);
       });
     });
   }
@@ -88,20 +84,7 @@
   function initQ1() { initSingleSelect('q1-options', 'q1', 'q1Rate', 2, function () { fireEvent('audit_started'); }); }
   function initQ3() { initSingleSelect('q3-options', 'q3', null, 4, function (btn) { state.q3Label = btn.dataset.label; }); }
   function initQ4() { initSingleSelect('q4-options', 'q4', null, 5); }
-  function initQ5() { initSingleSelect('q5-options', 'q5', null, 6); }
-
-  function initQ6() {
-    var container = document.getElementById('q6-options');
-    if (!container) return;
-    container.querySelectorAll('.audit-opt').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        container.querySelectorAll('.audit-opt').forEach(function (b) { b.classList.remove('selected'); });
-        btn.classList.add('selected');
-        state.q6 = btn.dataset.value;
-        setTimeout(function () { renderOutput(); }, 220);
-      });
-    });
-  }
+  function initQ5() { initSingleSelect('q5-options', 'q5', null, null, function () { setTimeout(renderOutput, 220); }); }
 
   /* ── Q2: Multi-select ── */
   function initQ2() {
@@ -160,11 +143,11 @@
   }
 
   function updateProgress(step) {
-    var pct = Math.round(((step - 1) / 6) * 100);
+    var pct = Math.round(((step - 1) / 5) * 100);
     var fill  = document.getElementById('audit-progress-fill');
     var label = document.getElementById('audit-progress-label');
     if (fill)  fill.style.width = pct + '%';
-    if (label) label.textContent = 'Question ' + step + ' of 6';
+    if (label) label.textContent = 'Question ' + step + ' of 5';
   }
 
   /* Exposed for inline onclick attributes */
@@ -182,13 +165,6 @@
   function renderOutput() {
     hideStep(state.currentStep);
 
-    if (state.q6 === 'under') {
-      document.getElementById('audit-gate').classList.remove('hidden');
-      fireEvent('audit_budget_gate');
-      return;
-    }
-
-    // Hide the split section, reveal the full-width output section
     var splitSection = document.getElementById('audit-split');
     if (splitSection) splitSection.style.display = 'none';
 
@@ -198,7 +174,6 @@
     fireEvent('audit_completed');
     buildProposal();
 
-    // Scroll to top of output
     setTimeout(function () {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 50);
