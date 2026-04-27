@@ -64,7 +64,10 @@
 .audit-progress {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
 }
 
 .audit-progress-label {
@@ -72,12 +75,13 @@
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--text-muted);
+  margin-bottom: 4px;
 }
 
 .audit-progress-bar {
   width: 100%;
-  height: 2px;
-  background: var(--border);
+  height: 3px;
+  background: var(--border-light);
   border-radius: 2px;
   overflow: hidden;
 }
@@ -93,16 +97,17 @@
 
 /* ── Question steps ── */
 .audit-step {
-  animation: auditFadeIn 0.25s ease;
+  animation: auditFadeIn 0.2s ease;
 }
 
 .audit-step.hidden {
   display: none;
 }
 
+/* No transform — prevents layout jump */
 @keyframes auditFadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 .audit-q-label {
@@ -135,7 +140,8 @@
   justify-content: space-between;
   width: 100%;
   text-align: left;
-  padding: 14px 18px;
+  padding: 0 18px;
+  height: 52px;           /* fixed height — no reflow on select */
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -145,7 +151,14 @@
   cursor: pointer;
   transition: border-color var(--ease), background var(--ease), color var(--ease);
   line-height: 1.45;
+  box-sizing: border-box;
+}
+
+/* Q2 has long option text — allow it to grow */
+.audit-options--multi .audit-opt {
+  height: auto;
   min-height: 52px;
+  padding: 14px 18px;
 }
 
 .audit-opt:hover {
@@ -188,13 +201,19 @@
 /* ── Nav buttons ── */
 .audit-nav {
   display: flex;
-  align-items: center;
+  align-items: stretch;   /* equal height */
   gap: 14px;
   margin-top: 28px;
 }
 
 .audit-nav .btn {
-  min-width: 110px;
+  height: 48px;           /* explicit — same for both */
+  padding-top: 0;
+  padding-bottom: 0;
+  min-width: 120px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .audit-next:disabled {
