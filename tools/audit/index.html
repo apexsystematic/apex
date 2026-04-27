@@ -1,1 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/19a036e48e9005dddd5999b15ed936e7/script.js"></script>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-52T88XLZ');</script>
+  <!-- End Google Tag Manager -->
 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The 8-Hour Audit — a free, tailored automation audit for UK professional services firms. Ten questions, one practical report. No call required.">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:title" content="The 8-Hour Audit — Apex Systematic">
+  <meta property="og:description" content="Ten questions. One tailored report. No sales call.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://apexsystematic.com/audit/">
+  <meta property="og:image" content="https://apexsystematic.com/assets/images/og-image-v1.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Apex Systematic">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The 8-Hour Audit — Apex Systematic">
+  <meta name="twitter:description" content="Ten questions. One tailored report. No sales call.">
+  <meta name="twitter:image" content="https://apexsystematic.com/assets/images/og-image-v1.png">
+
+  <title>The 8-Hour Audit — Apex Systematic</title>
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/audit.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <main id="main-content">
+
+    <!-- ── INTRO ── -->
+    <section class="audit-intro" id="intro-screen">
+      <div class="container">
+        <div class="audit-intro-inner">
+          <span class="section-tag">Free · Three minutes · No call</span>
+          <h1>The 8-Hour Audit</h1>
+          <p class="audit-lede">Ten questions. One tailored report. No sales call.</p>
+          <p class="audit-body">Tell us where the hours go and Apex Systematic will send back a specific automation plan for your firm — which workflows to fix first, how many hours you'd reclaim, and what it would cost as a fixed-price build.</p>
+          <p class="audit-body">Takes about three minutes. Report arrives in your inbox within ten.</p>
+
+          <div class="audit-intro-actions">
+            <button type="button" class="btn btn-primary" id="audit-start-btn">Start the audit</button>
+          </div>
+          <p class="audit-microcopy">No credit card. No call booked. No follow-up sequence.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FORM ── -->
+    <section class="audit-section" id="form-screen" hidden>
+      <div class="container">
+        <div class="audit-form-wrap">
+
+          <div class="audit-progress" aria-hidden="true">
+            <div class="audit-progress-bar" id="audit-progress-bar"></div>
+          </div>
+          <div class="audit-step-label">
+            <span id="audit-step-current">1</span> of <span id="audit-step-total">10</span>
+          </div>
+
+          <div id="audit-error" role="alert"></div>
+
+          <form id="audit-form" novalidate>
+
+            <!-- Step 1: Firm type -->
+            <div class="audit-step is-active" data-step="1">
+              <h2 class="audit-step-title">What type of firm are you?</h2>
+              <div class="audit-options" data-name="firm_type" data-type="single">
+                <button type="button" class="audit-option" data-value="Solicitor">Solicitor</button>
+                <button type="button" class="audit-option" data-value="Accountant">Accountant</button>
+                <button type="button" class="audit-option" data-value="Financial adviser">Financial adviser</button>
+                <button type="button" class="audit-option" data-value="Consultant">Consultant</button>
+                <button type="button" class="audit-option" data-value="Other">Other</button>
+              </div>
+            </div>
+
+            <!-- Step 2: Firm size -->
+            <div class="audit-step" data-step="2">
+              <h2 class="audit-step-title">How many fee earners?</h2>
+              <p class="audit-helper">Including you.</p>
+              <div class="audit-options" data-name="firm_size" data-type="single">
+                <button type="button" class="audit-option" data-value="Just me">Just me</button>
+                <button type="button" class="audit-option" data-value="2–5">2–5</button>
+                <button type="button" class="audit-option" data-value="6–15">6–15</button>
+                <button type="button" class="audit-option" data-value="16+">16+</button>
+              </div>
+            </div>
+
+            <!-- Step 3: Top time-sinks -->
+            <div class="audit-step" data-step="3">
+              <h2 class="audit-step-title">Which of these eat the most time each week?</h2>
+              <p class="audit-helper">Pick up to three. Be honest — the report only works if these are the actual bottlenecks.</p>
+              <div class="audit-options" data-name="top_timesinks" data-type="multi" data-max="3">
+                <button type="button" class="audit-option" data-value="Meeting notes & follow-ups">Meeting notes &amp; follow-ups</button>
+                <button type="button" class="audit-option" data-value="Document & proposal drafting">Document &amp; proposal drafting</button>
+                <button type="button" class="audit-option" data-value="Email triage & response">Email triage &amp; response</button>
+                <button type="button" class="audit-option" data-value="Client intake & onboarding">Client intake &amp; onboarding</button>
+                <button type="button" class="audit-option" data-value="Scheduling & booking">Scheduling &amp; booking</button>
+                <button type="button" class="audit-option" data-value="Chasing clients for documents or info">Chasing clients for documents or info</button>
+                <button type="button" class="audit-option" data-value="Internal admin & reporting">Internal admin &amp; reporting</button>
+                <button type="button" class="audit-option" data-value="Billing & time capture">Billing &amp; time capture</button>
+              </div>
+              <div class="audit-multi-actions">
+                <button type="button" class="btn btn-primary audit-next-btn" data-step="3">Continue</button>
+              </div>
+            </div>
+
+            <!-- Step 4: Hours lost -->
+            <div class="audit-step" data-step="4">
+              <h2 class="audit-step-title">Roughly how many hours per week does your team spend on those?</h2>
+              <p class="audit-helper">Across everyone, not just you.</p>
+              <div class="audit-options" data-name="weekly_hours_lost" data-type="single">
+                <button type="button" class="audit-option" data-value="Under 5">Under 5</button>
+                <button type="button" class="audit-option" data-value="5–10">5–10</button>
+                <button type="button" class="audit-option" data-value="10–20">10–20</button>
+                <button type="button" class="audit-option" data-value="20+">20+</button>
+              </div>
+            </div>
+
+            <!-- Step 5: Software -->
+            <div class="audit-step" data-step="5">
+              <h2 class="audit-step-title">What software do you currently use?</h2>
+              <p class="audit-helper">Pick all that apply.</p>
+              <div class="audit-options" data-name="current_software" data-type="multi">
+                <button type="button" class="audit-option" data-value="Practice management system">Practice management system <span class="audit-option-sub">(Clio, LEAP, Xero Practice Manager, etc.)</span></button>
+                <button type="button" class="audit-option" data-value="Microsoft 365">Microsoft 365</button>
+                <button type="button" class="audit-option" data-value="Google Workspace">Google Workspace</button>
+                <button type="button" class="audit-option" data-value="Document automation">Document automation <span class="audit-option-sub">(HotDocs, Lawyaw, etc.)</span></button>
+                <button type="button" class="audit-option" data-value="CRM">CRM <span class="audit-option-sub">(HubSpot, Salesforce, etc.)</span></button>
+                <button type="button" class="audit-option" data-value="None of the above">None of the above</button>
+              </div>
+              <div class="audit-multi-actions">
+                <button type="button" class="btn btn-primary audit-next-btn" data-step="5">Continue</button>
+              </div>
+            </div>
+
+            <!-- Step 6: Previous automation -->
+            <div class="audit-step" data-step="6">
+              <h2 class="audit-step-title">Have you tried to automate any of this before?</h2>
+              <div class="audit-options" data-name="previous_automation" data-type="single">
+                <button type="button" class="audit-option" data-value="No">No</button>
+                <button type="button" class="audit-option" data-value="Tried and gave up">Tried and gave up</button>
+                <button type="button" class="audit-option" data-value="Tried with mixed results">Tried with mixed results</button>
+                <button type="button" class="audit-option" data-value="Yes, working well in places">Yes, working well in places</button>
+              </div>
+            </div>
+
+            <!-- Step 7: Main blocker -->
+            <div class="audit-step" data-step="7">
+              <h2 class="audit-step-title">What's stopped you so far?</h2>
+              <p class="audit-helper">Pick the closest match.</p>
+              <div class="audit-options" data-name="main_blocker" data-type="single">
+                <button type="button" class="audit-option" data-value="Don't know where to start">Don't know where to start</button>
+                <button type="button" class="audit-option" data-value="Too expensive">Too expensive</button>
+                <button type="button" class="audit-option" data-value="Don't trust the tech">Don't trust the tech</button>
+                <button type="button" class="audit-option" data-value="No time to set it up">No time to set it up</button>
+                <button type="button" class="audit-option" data-value="Tried it, didn't work">Tried it, didn't work</button>
+              </div>
+            </div>
+
+            <!-- Step 8: Use of reclaimed time -->
+            <div class="audit-step" data-step="8">
+              <h2 class="audit-step-title">If you reclaimed 8 hours a week, what would you actually do with them?</h2>
+              <p class="audit-helper">No wrong answer. Shapes the recommendation.</p>
+              <div class="audit-options" data-name="reclaimed_time_use" data-type="single">
+                <button type="button" class="audit-option" data-value="More billable work">More billable work</button>
+                <button type="button" class="audit-option" data-value="Business development">Business development</button>
+                <button type="button" class="audit-option" data-value="Time off">Time off</button>
+                <button type="button" class="audit-option" data-value="Hire less / delay a hire">Hire less / delay a hire</button>
+                <button type="button" class="audit-option" data-value="Other">Other</button>
+              </div>
+            </div>
+
+            <!-- Step 9: Budget -->
+            <div class="audit-step" data-step="9">
+              <h2 class="audit-step-title">What's your rough budget for solving this?</h2>
+              <p class="audit-helper">Apex Systematic builds are fixed-price one-offs, not retainers. This helps shape what's realistic.</p>
+              <div class="audit-options" data-name="budget" data-type="single">
+                <button type="button" class="audit-option" data-value="Under £500">Under £500</button>
+                <button type="button" class="audit-option" data-value="£500–£2,000">£500–£2,000</button>
+                <button type="button" class="audit-option" data-value="£2,000–£5,000">£2,000–£5,000</button>
+                <button type="button" class="audit-option" data-value="£5,000+">£5,000+</button>
+                <button type="button" class="audit-option" data-value="Not sure yet">Not sure yet</button>
+              </div>
+            </div>
+
+            <!-- Step 10: Email + firm name -->
+            <div class="audit-step" data-step="10">
+              <h2 class="audit-step-title">Where should the report go?</h2>
+              <p class="audit-helper">It'll be in your inbox within ten minutes.</p>
+
+              <div class="form-group">
+                <label for="audit-email">Work email</label>
+                <input type="email" id="audit-email" name="email" placeholder="you@firmname.co.uk" autocomplete="email" required>
+              </div>
+
+              <div class="form-group">
+                <label for="audit-firm-name">Firm name</label>
+                <input type="text" id="audit-firm-name" name="firm_name" placeholder="Smith &amp; Co Solicitors" autocomplete="organization" required>
+              </div>
+
+              <div class="form-group audit-consent">
+                <label class="audit-consent-label">
+                  <input type="checkbox" id="audit-consent" name="consent" required>
+                  <span>I'm happy for Apex Systematic to email this report and reply if I follow up.</span>
+                </label>
+              </div>
+
+              <div class="audit-final-actions">
+                <button type="submit" class="btn btn-primary" id="audit-submit-btn">Generate my audit</button>
+              </div>
+              <p class="audit-microcopy">Apex Systematic won't share your details or add you to a list. The report is the report.</p>
+            </div>
+
+            <!-- Back nav (hidden on step 1 + thank-you) -->
+            <div class="audit-step-nav" id="audit-back-nav" hidden>
+              <button type="button" class="audit-back-btn" id="audit-back-btn">← Back</button>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── THANK YOU ── -->
+    <section class="audit-section" id="thankyou-screen" hidden>
+      <div class="container">
+        <div class="audit-form-wrap audit-thankyou-wrap">
+          <span class="section-tag">Submission received</span>
+          <h2 class="audit-thankyou-title">Audit being generated.</h2>
+          <div class="audit-thankyou">
+            <p>The report is being put together now. Expect it in your inbox within ten minutes — check spam if it doesn't show.</p>
+            <p>If it doesn't arrive, email <a href="mailto:apex@apexsystematic.com">apex@apexsystematic.com</a> and Apex Systematic will sort it.</p>
+          </div>
+          <a href="/demos/" class="demos-preview-link">Browse working demos →</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="/assets/js/components.js"></script>
+  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/audit.js"></script>
+  <script>
+    (function () {
+      function setNavHeight() {
+        var nav = document.getElementById('header-wrap');
+        if (nav) {
+          document.documentElement.style.setProperty('--nav-h', nav.offsetHeight + 'px');
+        }
+      }
+      setNavHeight();
+      var lastWidth = window.innerWidth;
+      window.addEventListener('resize', function () {
+        if (window.innerWidth !== lastWidth) {
+          lastWidth = window.innerWidth;
+          setNavHeight();
+        }
+      });
+    })();
+  </script>
+
+  <div id="apex-chat-widget"></div>
+
+</body>
+</html>
