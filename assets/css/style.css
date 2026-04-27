@@ -490,6 +490,11 @@ section:last-of-type {
 }
 
 @media (max-width: 768px) {
+  :root {
+    --section-y: 64px;
+    --gutter: 20px;
+  }
+
   .certs-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
@@ -1554,12 +1559,7 @@ section:last-of-type {
 }
 
 /* Mobile */
-@media (max-width: 768px) {
-  :root {
-    --section-y: 64px;
-    --gutter: 20px;
-  }
-
+@media (max-width: 1180px) {
   .header-nav,
   .header-cta {
     display: none;
