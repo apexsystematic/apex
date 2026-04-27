@@ -1,17 +1,5 @@
 /* ═══════════════════════════════════════════
    APEX SYSTEMATIC — landingpages.css
-   Vertical landing pages (law firms, IFAs,
-   accountants, consultants, HR, mortgage
-   brokers, insurance, estate agents, lettings,
-   SEO consultants).
-   ═══════════════════════════════════════════
-   1. Hero
-   2. Pain points
-   3. Services
-   4. Credibility
-   5. Bottom CTA
-   6. Inter-page nav
-   7. Media queries
 ═══════════════════════════════════════════ */
 
 
@@ -52,13 +40,6 @@
   flex-wrap: wrap;
 }
 
-.lp-hero-cta-note {
-  font-size: 0.78rem;
-  color: var(--text-dim);
-  letter-spacing: 0.04em;
-  margin-top: 1rem;
-}
-
 
 /* ── 2. Pain points ── */
 .lp-pains {
@@ -69,7 +50,8 @@
 .lp-pains-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  border: 1px solid var(--border);
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
 }
 
 .lp-pain {
@@ -77,11 +59,8 @@
   align-items: flex-start;
   gap: 20px;
   padding: 32px 36px;
-  background: var(--bg);
-  box-shadow:
-    1px 0 0 0 var(--border),
-    0 1px 0 0 var(--border),
-    1px 1px 0 0 var(--border) inset;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
   transition: background var(--ease);
 }
 
@@ -113,14 +92,14 @@
 .lp-services-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
 }
 
 .lp-service {
   padding: 36px 36px;
-  background: var(--bg);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
   transition: background var(--ease);
   position: relative;
 }
@@ -256,14 +235,14 @@
 .lp-vert-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
 }
 
 .lp-vert {
   padding: 22px 24px;
-  background: var(--bg);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
   font-size: 0.85rem;
   color: var(--text-muted);
   transition: background var(--ease), color var(--ease);
