@@ -169,6 +169,7 @@
 
   /* Exposed for inline onclick attributes */
   window.auditBack = function (fromStep) {
+    if (fromStep <= 1) return;
     goToStep(fromStep - 1);
   };
 
