@@ -25,8 +25,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 </head>
 <body>
 
@@ -34,217 +34,189 @@
 
   <main id="main-content">
 
-    <section class="audit-hero">
+    <!-- SPLIT: hero left + questionnaire right -->
+    <section class="audit-split" id="audit-split">
       <div class="container">
-        <span class="section-tag">Free Automation Audit</span>
-        <h1>What would we<br>build for you?</h1>
-        <p class="hero-sub">Answer 6 questions about your practice. Get a personalised proposal — what we'd automate, what it costs, and how fast you'd get your money back.</p>
-        <div class="audit-meta-row">
-          <span class="audit-meta-item">6 questions</span>
-          <span class="audit-meta-dot">·</span>
-          <span class="audit-meta-item">2 minutes</span>
-          <span class="audit-meta-dot">·</span>
-          <span class="audit-meta-item">No email required</span>
-        </div>
+        <div class="audit-split-grid" id="audit-split-grid">
+
+          <!-- LEFT: sticky hero -->
+          <div class="audit-split-hero" id="audit-split-hero">
+            <span class="section-tag">Free Automation Audit</span>
+            <h1>What would we build for you?</h1>
+            <p class="audit-hero-sub">Answer 6 questions about your practice. Get a personalised proposal — what we'd automate, what it costs, and how fast you'd get your money back.</p>
+            <div class="audit-hero-meta">
+              <span>5 questions</span>
+              <span class="audit-meta-dot">·</span>
+              <span>2 minutes</span>
+              <span class="audit-meta-dot">·</span>
+              <span>No email required</span>
+            </div>
+            <div class="audit-progress" id="audit-progress">
+              <div class="audit-progress-bar">
+                <div class="audit-progress-fill" id="audit-progress-fill"></div>
+              </div>
+              <span class="audit-progress-label" id="audit-progress-label">Question 1 of 6</span>
+            </div>
+          </div>
+
+          <!-- RIGHT: questionnaire -->
+          <div class="audit-split-form" id="audit-split-form">
+
+            <div class="audit-questions" id="audit-questions">
+
+              <!-- Q1 -->
+              <div class="audit-step" id="step-1">
+                <div class="audit-q-label">What type of practice are you?</div>
+                <div class="audit-options" id="q1-options">
+                  <button class="audit-opt" data-value="law" data-rate="150">Law firm</button>
+                  <button class="audit-opt" data-value="accounting" data-rate="125">Accounting practice</button>
+                  <button class="audit-opt" data-value="financial" data-rate="150">Financial advisory</button>
+                  <button class="audit-opt" data-value="consulting" data-rate="100">Consulting</button>
+                  <button class="audit-opt" data-value="other" data-rate="100">Other professional services</button>
+                </div>
+              </div>
+
+              <!-- Q2 -->
+              <div class="audit-step hidden" id="step-2">
+                <div class="audit-q-label">Where are you losing the most time right now?</div>
+                <div class="audit-q-helper">Pick your top two — or just one if only one applies.</div>
+                <div class="audit-options audit-options--multi" id="q2-options">
+                  <button class="audit-opt" data-value="1" data-label="Responding to enquiries">Responding to enquiries and qualifying leads</button>
+                  <button class="audit-opt" data-value="2" data-label="Booking appointments">Booking and managing appointments</button>
+                  <button class="audit-opt" data-value="3" data-label="Client onboarding">Getting new clients set up and onboarded</button>
+                  <button class="audit-opt" data-value="10" data-label="Invoicing and payment">Generating invoices and chasing payment</button>
+                  <button class="audit-opt" data-value="4" data-label="Drafting documents">Drafting documents, contracts, or proposals</button>
+                  <button class="audit-opt" data-value="5" data-label="Chasing documents">Chasing clients for documents or signatures</button>
+                  <button class="audit-opt" data-value="9" data-label="Managing client requests">Managing requests from existing clients</button>
+                  <button class="audit-opt" data-value="6" data-label="Deadlines and compliance">Tracking deadlines and compliance steps</button>
+                  <button class="audit-opt" data-value="12" data-label="Client updates">Keeping clients updated on progress</button>
+                  <button class="audit-opt" data-value="11" data-label="Call notes">Capturing call notes and updating records</button>
+                  <button class="audit-opt" data-value="7" data-label="Data and reporting">Moving data between systems or generating reports</button>
+                  <button class="audit-opt" data-value="8" data-label="Client retention">Staying in touch with past clients</button>
+                </div>
+                <div class="audit-nav">
+                  <button class="btn btn-ghost audit-back" onclick="auditBack(2)">&#8592; Back</button>
+                  <button class="btn btn-primary audit-next" id="q2-next" onclick="auditNext(2)" disabled>Continue &#8594;</button>
+                </div>
+              </div>
+
+              <!-- Q3 -->
+              <div class="audit-step hidden" id="step-3">
+                <div class="audit-q-label">How many hours per week does this cost your firm in total?</div>
+                <div class="audit-options" id="q3-options">
+                  <button class="audit-opt" data-value="2" data-label="1-3 hours">1&#8211;3 hours</button>
+                  <button class="audit-opt" data-value="4" data-label="3-5 hours">3&#8211;5 hours</button>
+                  <button class="audit-opt" data-value="7.5" data-label="5-10 hours">5&#8211;10 hours</button>
+                  <button class="audit-opt" data-value="15" data-label="10-20 hours">10&#8211;20 hours</button>
+                  <button class="audit-opt" data-value="25" data-label="20+ hours">20+ hours</button>
+                </div>
+                <div class="audit-nav">
+                  <button class="btn btn-ghost audit-back" onclick="auditBack(3)">&#8592; Back</button>
+                </div>
+              </div>
+
+              <!-- Q4 -->
+              <div class="audit-step hidden" id="step-4">
+                <div class="audit-q-label">How many people are in your firm, including you?</div>
+                <div class="audit-options" id="q4-options">
+                  <button class="audit-opt" data-value="solo" data-label="Just me">Just me</button>
+                  <button class="audit-opt" data-value="2-5" data-label="2-5 people">2&#8211;5 people</button>
+                  <button class="audit-opt" data-value="6-10" data-label="6-10 people">6&#8211;10 people</button>
+                  <button class="audit-opt" data-value="11-20" data-label="11-20 people">11&#8211;20 people</button>
+                  <button class="audit-opt" data-value="20+" data-label="20+ people">20+ people</button>
+                </div>
+                <div class="audit-nav">
+                  <button class="btn btn-ghost audit-back" onclick="auditBack(4)">&#8592; Back</button>
+                </div>
+              </div>
+
+              <!-- Q5 -->
+              <div class="audit-step hidden" id="step-5">
+                <div class="audit-q-label">How are you currently handling this?</div>
+                <div class="audit-options" id="q5-options">
+                  <button class="audit-opt" data-value="manual" data-label="Entirely manually">Entirely manually &#8212; no system in place</button>
+                  <button class="audit-opt" data-value="partial" data-label="Partly manual">Partly manual &#8212; some tools but still a lot of hands-on work</button>
+                  <button class="audit-opt" data-value="inconsistent" data-label="Inconsistent process">We have a process but it&#8217;s inconsistent across the team</button>
+                </div>
+                <div class="audit-nav">
+                  <button class="btn btn-ghost audit-back" onclick="auditBack(5)">&#8592; Back</button>
+                </div>
+              </div>
+
+            </div><!-- /audit-questions -->
+
+          </div><!-- /audit-split-form -->
+        </div><!-- /audit-split-grid -->
       </div>
     </section>
 
-    <section class="audit-body">
+    <!-- OUTPUT: full width, revealed after questionnaire -->
+    <section class="audit-output-section hidden" id="audit-output-section">
       <div class="container">
-        <div class="audit-wrap" id="audit-app">
+        <div class="audit-output" id="audit-output">
 
-          <!-- STEP INDICATOR -->
-          <div class="audit-progress" id="audit-progress">
-            <div class="audit-progress-bar">
-              <div class="audit-progress-fill" id="audit-progress-fill"></div>
-            </div>
-            <span class="audit-progress-label" id="audit-progress-label">Question 1 of 6</span>
+          <div class="ao-header">
+            <span class="section-tag">Your Automation Proposal</span>
+            <h2 id="ao-headline">Based on your answers, here&#8217;s what we&#8217;d build for your practice.</h2>
+            <div class="ao-pains" id="ao-pains"></div>
           </div>
 
-          <!-- QUESTION PANELS -->
-          <div class="audit-questions" id="audit-questions">
+          <div class="ao-cards" id="ao-cards"></div>
 
-            <!-- Q1: Practice type -->
-            <div class="audit-step" id="step-1">
-              <div class="audit-q-label">What type of practice are you?</div>
-              <div class="audit-options" id="q1-options">
-                <button class="audit-opt" data-value="law" data-rate="150">Law firm</button>
-                <button class="audit-opt" data-value="accounting" data-rate="125">Accounting practice</button>
-                <button class="audit-opt" data-value="financial" data-rate="150">Financial advisory</button>
-                <button class="audit-opt" data-value="consulting" data-rate="100">Consulting</button>
-                <button class="audit-opt" data-value="brokerage" data-rate="75">Mortgage or insurance brokerage</button>
-                <button class="audit-opt" data-value="estate" data-rate="75">Estate or letting agency</button>
-                <button class="audit-opt" data-value="other" data-rate="100">Other professional services</button>
-              </div>
-            </div>
-
-            <!-- Q2: Pain points -->
-            <div class="audit-step hidden" id="step-2">
-              <div class="audit-q-label">Where are you losing the most time right now?</div>
-              <div class="audit-q-helper">Pick your top two — or just one if only one applies.</div>
-              <div class="audit-options audit-options--multi" id="q2-options">
-                <button class="audit-opt" data-value="1" data-label="Responding to enquiries">Responding to enquiries and qualifying leads</button>
-                <button class="audit-opt" data-value="2" data-label="Booking appointments">Booking and managing appointments</button>
-                <button class="audit-opt" data-value="3" data-label="Client onboarding">Getting new clients set up and onboarded</button>
-                <button class="audit-opt" data-value="10" data-label="Invoicing and payment">Generating invoices and chasing payment</button>
-                <button class="audit-opt" data-value="4" data-label="Drafting documents">Drafting documents, contracts, or proposals</button>
-                <button class="audit-opt" data-value="5" data-label="Chasing documents">Chasing clients for documents or signatures</button>
-                <button class="audit-opt" data-value="9" data-label="Managing client requests">Managing requests from existing clients</button>
-                <button class="audit-opt" data-value="6" data-label="Deadlines and compliance">Tracking deadlines and compliance steps</button>
-                <button class="audit-opt" data-value="12" data-label="Client updates">Keeping clients updated on progress</button>
-                <button class="audit-opt" data-value="11" data-label="Call notes">Capturing call notes and updating records</button>
-                <button class="audit-opt" data-value="7" data-label="Data and reporting">Moving data between systems or generating reports</button>
-                <button class="audit-opt" data-value="8" data-label="Client retention">Staying in touch with past clients</button>
-              </div>
-              <div class="audit-nav">
-                <button class="btn btn-ghost audit-back" onclick="auditBack(2)">← Back</button>
-                <button class="btn btn-primary audit-next" id="q2-next" onclick="auditNext(2)" disabled>Continue →</button>
-              </div>
-            </div>
-
-            <!-- Q3: Hours lost -->
-            <div class="audit-step hidden" id="step-3">
-              <div class="audit-q-label">How many hours per week does this cost your firm in total?</div>
-              <div class="audit-options" id="q3-options">
-                <button class="audit-opt" data-value="2" data-label="1–3 hours">1–3 hours</button>
-                <button class="audit-opt" data-value="4" data-label="3–5 hours">3–5 hours</button>
-                <button class="audit-opt" data-value="7.5" data-label="5–10 hours">5–10 hours</button>
-                <button class="audit-opt" data-value="15" data-label="10–20 hours">10–20 hours</button>
-                <button class="audit-opt" data-value="25" data-label="20+ hours">20+ hours</button>
-              </div>
-              <div class="audit-nav">
-                <button class="btn btn-ghost audit-back" onclick="auditBack(3)">← Back</button>
-              </div>
-            </div>
-
-            <!-- Q4: Team size -->
-            <div class="audit-step hidden" id="step-4">
-              <div class="audit-q-label">How many people are in your firm, including you?</div>
-              <div class="audit-options" id="q4-options">
-                <button class="audit-opt" data-value="solo" data-label="Just me">Just me</button>
-                <button class="audit-opt" data-value="2-5" data-label="2–5 people">2–5 people</button>
-                <button class="audit-opt" data-value="6-10" data-label="6–10 people">6–10 people</button>
-                <button class="audit-opt" data-value="11-20" data-label="11–20 people">11–20 people</button>
-                <button class="audit-opt" data-value="20+" data-label="20+ people">20+ people</button>
-              </div>
-              <div class="audit-nav">
-                <button class="btn btn-ghost audit-back" onclick="auditBack(4)">← Back</button>
-              </div>
-            </div>
-
-            <!-- Q5: Current process -->
-            <div class="audit-step hidden" id="step-5">
-              <div class="audit-q-label">How are you currently handling this?</div>
-              <div class="audit-options" id="q5-options">
-                <button class="audit-opt" data-value="manual" data-label="Entirely manually">Entirely manually — no system in place</button>
-                <button class="audit-opt" data-value="partial" data-label="Partly manual">Partly manual — some tools but still a lot of hands-on work</button>
-                <button class="audit-opt" data-value="inconsistent" data-label="Inconsistent process">We have a process but it's inconsistent across the team</button>
-              </div>
-              <div class="audit-nav">
-                <button class="btn btn-ghost audit-back" onclick="auditBack(5)">← Back</button>
-              </div>
-            </div>
-
-            <!-- Q6: Budget -->
-            <div class="audit-step hidden" id="step-6">
-              <div class="audit-q-label">What's your rough budget for this kind of project?</div>
-              <div class="audit-options" id="q6-options">
-                <button class="audit-opt" data-value="under" data-label="Under £1,000">Under £1,000</button>
-                <button class="audit-opt" data-value="1-3k" data-label="£1,000–£3,000">£1,000–£3,000</button>
-                <button class="audit-opt" data-value="3-5k" data-label="£3,000–£5,000">£3,000–£5,000</button>
-                <button class="audit-opt" data-value="5k+" data-label="£5,000+">£5,000+</button>
-                <button class="audit-opt" data-value="unsure" data-label="Not sure yet">Not sure yet</button>
-              </div>
-              <div class="audit-nav">
-                <button class="btn btn-ghost audit-back" onclick="auditBack(6)">← Back</button>
-              </div>
-            </div>
-
-          </div><!-- /audit-questions -->
-
-          <!-- BUDGET GATE -->
-          <div class="audit-gate hidden" id="audit-gate">
-            <div class="audit-gate-inner">
-              <div class="audit-gate-label">Our projects typically start from £1,000.</div>
-              <p>If budget is a constraint right now, the best next step is watching the demos — you'll see exactly what the builds look like before committing to anything.</p>
-              <a href="/demos/" class="btn btn-primary" style="margin-top: 28px;">Watch the demos →</a>
-            </div>
+          <div class="ao-summary">
+            <table class="ao-table" id="ao-table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Hours saved/wk</th>
+                  <th>Build time</th>
+                  <th>Fixed price</th>
+                </tr>
+              </thead>
+              <tbody id="ao-table-body"></tbody>
+              <tfoot id="ao-table-foot"></tfoot>
+            </table>
           </div>
 
-          <!-- OUTPUT -->
-          <div class="audit-output hidden" id="audit-output">
-
-            <!-- Output header -->
-            <div class="ao-header">
-              <span class="section-tag">Your Automation Proposal</span>
-              <h2 id="ao-headline">Based on your answers, here's what we'd build for your practice.</h2>
-              <div class="ao-pains" id="ao-pains"></div>
-            </div>
-
-            <!-- Automation cards -->
-            <div class="ao-cards" id="ao-cards"></div>
-
-            <!-- Summary table -->
-            <div class="ao-summary">
-              <table class="ao-table" id="ao-table">
-                <thead>
-                  <tr>
-                    <th></th>
-                    <th>Hours saved/wk</th>
-                    <th>Build time</th>
-                    <th>Fixed price</th>
-                  </tr>
-                </thead>
-                <tbody id="ao-table-body"></tbody>
-                <tfoot id="ao-table-foot"></tfoot>
-              </table>
-            </div>
-
-            <!-- Editable rate + ROI -->
-            <div class="ao-roi">
-              <div class="ao-roi-rate">
-                <label for="ao-rate-input">Your billable rate:</label>
-                <div class="ao-rate-field">
-                  <span class="ao-rate-symbol">£</span>
-                  <input type="number" id="ao-rate-input" min="10" max="1000" step="5">
-                  <span class="ao-rate-unit">/ hr</span>
-                </div>
-                <span class="ao-rate-hint">Adjust to match your own</span>
+          <div class="ao-roi">
+            <div class="ao-roi-rate">
+              <label for="ao-rate-input">Your billable rate:</label>
+              <div class="ao-rate-field">
+                <span class="ao-rate-symbol">&#163;</span>
+                <input type="number" id="ao-rate-input" min="10" max="1000" step="5">
+                <span class="ao-rate-unit">/ hr</span>
               </div>
-              <div class="ao-roi-calc" id="ao-roi-calc"></div>
+              <span class="ao-rate-hint">Adjust to match your own</span>
             </div>
+            <div class="ao-roi-calc" id="ao-roi-calc"></div>
+          </div>
 
-            <!-- Exclusions -->
-            <p class="ao-exclusions">Prices exclude Make.com subscription and third-party API costs. Full documentation and 30-day bug fix warranty included on every build. You own everything we deliver.</p>
+          <p class="ao-exclusions">Prices exclude Make.com subscription and third-party API costs. Full documentation and 30-day bug fix warranty included on every build. You own everything we deliver.</p>
 
-            <!-- CTA -->
-            <div class="ao-cta">
-              <div class="ao-cta-text">
-                <strong>Got questions about this proposal?</strong>
-                <p>Book a free 30-minute call and we'll walk through exactly what your build would involve — and confirm the price before anything starts.</p>
-              </div>
-              <a href="https://calendly.com/apexsystematic/30min" target="_blank" rel="noopener" class="btn btn-primary ao-cta-btn" id="ao-book-btn">Book a call →</a>
+          <div class="ao-cta">
+            <div class="ao-cta-text">
+              <strong>Got questions about this proposal?</strong>
+              <p>Book a free 30-minute call and we&#8217;ll walk through exactly what your build would involve &#8212; and confirm the price before anything starts.</p>
             </div>
+            <a href="https://calendly.com/apexsystematic/30min" target="_blank" rel="noopener" class="btn btn-primary ao-cta-btn" id="ao-book-btn">Book a call &#8594;</a>
+          </div>
 
-            <!-- Email capture -->
-            <div class="ao-email-capture">
-              <strong>Want a copy of this proposal?</strong>
-              <p>Enter your email and we'll send it over. Nothing else.</p>
-              <form class="ao-email-form" id="ao-email-form" onsubmit="auditEmailSubmit(event)">
-                <input type="email" id="ao-email-input" placeholder="your@email.com" required>
-                <button type="submit" class="btn btn-ghost">Send me a copy →</button>
-              </form>
-              <label class="ao-gdpr-label">
-                <input type="checkbox" id="ao-gdpr-check" required>
-                <span>I'm happy for Apex Systematic to contact me about my proposal.</span>
-              </label>
-              <a href="/privacy/" class="ao-privacy-link">Privacy policy</a>
-              <div class="ao-email-confirm hidden" id="ao-email-confirm">Done — check your inbox.</div>
-            </div>
+          <div class="ao-email-capture">
+            <strong>Want a copy of this proposal?</strong>
+            <p>Enter your email and we&#8217;ll send it over. Nothing else.</p>
+            <form class="ao-email-form" id="ao-email-form" onsubmit="auditEmailSubmit(event)">
+              <input type="email" id="ao-email-input" placeholder="your@email.com" required>
+              <button type="submit" class="btn btn-ghost">Send me a copy &#8594;</button>
+            </form>
+            <label class="ao-gdpr-label">
+              <input type="checkbox" id="ao-gdpr-check" required>
+              <span>I&#8217;m happy for Apex Systematic to contact me about my proposal.</span>
+            </label>
+            <a href="/privacy/" class="ao-privacy-link">Privacy policy</a>
+            <div class="ao-email-confirm hidden" id="ao-email-confirm">Done &#8212; check your inbox.</div>
+          </div>
 
-          </div><!-- /audit-output -->
-
-        </div><!-- /audit-wrap -->
+        </div><!-- /audit-output -->
       </div>
     </section>
 
