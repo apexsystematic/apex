@@ -54,11 +54,13 @@
 
 /* ── Progress ── */
 .audit-progress {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr;
   align-items: center;
   gap: 20px;
   margin-bottom: 48px;
   width: 100%;
+  max-width: 620px;
 }
 
 .audit-progress-label {
@@ -67,24 +69,42 @@
   text-transform: uppercase;
   color: var(--text-muted);
   white-space: nowrap;
-  flex-shrink: 0;
 }
 
 .audit-progress-bar {
-  flex: 1;
+  display: block;
+  width: 100%;
   height: 3px;
   background: #263040;
   border-radius: 2px;
   overflow: hidden;
-  min-width: 0;
 }
 
 .audit-progress-fill {
+  display: block;
   height: 100%;
   background: var(--gold);
   border-radius: 2px;
   transition: width 0.35s ease;
   width: 0%;
+}
+
+
+/* ── Nav buttons — DO NOT override height or padding, just min-width ── */
+.audit-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.audit-nav .btn {
+  min-width: 130px;
+}
+
+.audit-next:disabled {
+  opacity: 0.4;
+  pointer-events: none;
 }
 
 
@@ -145,7 +165,6 @@
   transition: border-color var(--ease), background var(--ease), color var(--ease);
 }
 
-/* Multi-select options can wrap */
 .audit-options--multi .audit-opt {
   height: auto;
   min-height: 52px;
@@ -165,7 +184,6 @@
   color: var(--white);
 }
 
-/* Reserve checkmark space always — prevents layout shift */
 .audit-opt::after {
   content: '';
   display: block;
@@ -190,30 +208,6 @@
 }
 
 
-/* ── Nav buttons ── */
-.audit-nav {
-  display: flex;
-  align-items: stretch;
-  gap: 12px;
-  margin-top: 28px;
-}
-
-.audit-nav .btn {
-  box-sizing: border-box;
-  height: 52px;
-  padding: 0 30px;
-  min-width: 130px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.audit-next:disabled {
-  opacity: 0.4;
-  pointer-events: none;
-}
-
-
 /* ── Output ── */
 .audit-output-section {
   padding: var(--section-y) 0;
@@ -225,7 +219,8 @@
 }
 
 .audit-output {
-  max-width: 860px;
+  width: 100%;
+  max-width: 620px;
 }
 
 .ao-header {
