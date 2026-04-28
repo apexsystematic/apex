@@ -56,10 +56,10 @@
         <div class="audit-wrap">
 
           <!-- Progress -->
-          <div class="audit-progress" id="audit-progress">
-            <span class="audit-progress-label" id="audit-progress-label">Question 1 of 5</span>
-            <div class="audit-progress-bar">
-              <div class="audit-progress-fill" id="audit-progress-fill"></div>
+          <div class="audit-progress-wrap" id="audit-progress">
+            <span class="audit-prog-label" id="audit-progress-label">Question 1 of 5</span>
+            <div class="audit-prog-bar">
+              <div class="audit-prog-fill" id="audit-progress-fill"></div>
             </div>
           </div>
 
@@ -85,15 +85,16 @@
                 <button class="audit-opt" data-value="1" data-label="Responding to enquiries">Responding to enquiries and qualifying leads</button>
                 <button class="audit-opt" data-value="2" data-label="Booking appointments">Booking and managing appointments</button>
                 <button class="audit-opt" data-value="3" data-label="Client onboarding">Getting new clients set up and onboarded</button>
-                <button class="audit-opt" data-value="10" data-label="Invoicing and payment">Generating invoices and chasing payment</button>
                 <button class="audit-opt" data-value="4" data-label="Drafting documents">Drafting documents, contracts, or proposals</button>
                 <button class="audit-opt" data-value="5" data-label="Chasing documents">Chasing clients for documents or signatures</button>
-                <button class="audit-opt" data-value="9" data-label="Managing client requests">Managing requests from existing clients</button>
+                <button class="audit-opt" data-value="10" data-label="Invoicing and payment">Generating invoices and chasing payment</button>
+                <button class="audit-opt" data-value="9" data-label="Managing client requests">Managing ongoing requests from existing clients</button>
+                <button class="audit-opt" data-value="11" data-label="Call notes">Capturing call notes and updating records</button>
                 <button class="audit-opt" data-value="6" data-label="Deadlines and compliance">Tracking deadlines and compliance steps</button>
                 <button class="audit-opt" data-value="12" data-label="Client updates">Keeping clients updated on progress</button>
-                <button class="audit-opt" data-value="11" data-label="Call notes">Capturing call notes and updating records</button>
                 <button class="audit-opt" data-value="7" data-label="Data and reporting">Moving data between systems or generating reports</button>
-                <button class="audit-opt" data-value="8" data-label="Client retention">Staying in touch with past clients</button>
+                <button class="audit-opt" data-value="8" data-label="Client retention">Staying in touch with and re-engaging past clients</button>
+                <button class="audit-opt" data-value="13" data-label="NPS and satisfaction">Collecting client feedback and satisfaction scores</button>
               </div>
               <div class="audit-nav">
                 <button class="btn btn-ghost audit-back" onclick="auditBack(2)">&#8592; Back</button>
@@ -161,23 +162,7 @@
           </div>
 
           <div class="ao-cards" id="ao-cards"></div>
-
-          <div class="ao-summary">
-            <table class="ao-table">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Hours saved/wk</th>
-                  <th>Build time</th>
-                  <th>Fixed price</th>
-                </tr>
-              </thead>
-              <tbody id="ao-table-body"></tbody>
-              <tfoot id="ao-table-foot"></tfoot>
-            </table>
-          </div>
-
-          <div class="ao-roi">
+<div class="ao-roi">
             <div class="ao-roi-rate">
               <label for="ao-rate-input">Your billable rate:</label>
               <div class="ao-rate-field">
