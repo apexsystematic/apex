@@ -21,7 +21,7 @@
   <meta property="og:site_name" content="Apex Systematic">
   <title>Free Automation Audit — Apex Systematic</title>
   <link rel="stylesheet" href="/assets/css/style.css">
-  <link rel="stylesheet" href="/assets/css/audit2.css">
+  <link rel="stylesheet" href="/assets/css/audit.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -84,9 +84,6 @@
             </button>
           </div>
           <div class="audit-error" id="error-1">Please select your practice type.</div>
-          <div class="audit-nav">
-            <button class="btn btn-primary audit-next" data-next="2">Continue</button>
-          </div>
         </div>
 
         <!-- ── Q2: Pain Points ── -->
@@ -182,7 +179,6 @@
           <div class="audit-error" id="error-3">Please select an option.</div>
           <div class="audit-nav">
             <button class="audit-back" data-prev="2">← Back</button>
-            <button class="btn btn-primary audit-next" data-next="4">Continue</button>
           </div>
         </div>
 
@@ -215,7 +211,6 @@
           <div class="audit-error" id="error-4">Please select your team size.</div>
           <div class="audit-nav">
             <button class="audit-back" data-prev="3">← Back</button>
-            <button class="btn btn-primary audit-next" data-next="5">Continue</button>
           </div>
         </div>
 
@@ -240,7 +235,6 @@
           <div class="audit-error" id="error-5">Please select an option.</div>
           <div class="audit-nav">
             <button class="audit-back" data-prev="4">← Back</button>
-            <button class="btn btn-primary" id="audit-submit">See my proposal</button>
           </div>
         </div>
 
@@ -289,21 +283,21 @@
       other: 'practice'
     };
 
-    var CURRENCY_SYMBOL = '£';
+    var CURRENCY_SYMBOL = '\u00A3';
 
     var AUTOMATIONS = {
-      lead_capture:    { id: 1,  name: 'Enquiry & Lead Capture',       saveRate: 0.70, priceMin: 950,  priceMax: 1800, buildTime: '1–2 weeks', priceMid: 1375, whatItDoes: 'Every new enquiry is instantly captured, qualified, and routed — before you see the notification.', whatYouStop: 'Manually checking inboxes, replying to initial enquiries, and logging lead details by hand.', includes: ['Automated enquiry capture from web, email and phone', 'AI lead qualification and scoring', 'CRM record creation and assignment', 'Instant acknowledgement to the prospect', 'Notification to you for qualified leads only'] },
-      appointments:    { id: 2,  name: 'Appointment Setting',           saveRate: 0.75, priceMin: 700,  priceMax: 1400, buildTime: '1 week',    priceMid: 1050, whatItDoes: 'Clients book, reschedule and cancel directly — your calendar stays clean without you touching it.', whatYouStop: 'Going back and forth on availability, sending reminders, and updating your calendar manually.', includes: ['Self-service booking linked to your calendar', 'Automated confirmations and reminders', 'Rescheduling and cancellation handling', 'No-show follow-up sequence', 'CRM sync on every booking'] },
-      onboarding:      { id: 3,  name: 'Client Onboarding',             saveRate: 0.60, priceMin: 1400, priceMax: 2800, buildTime: '2–3 weeks', priceMid: 2100, whatItDoes: 'From signed agreement to fully set-up client — every step runs automatically with no chasing required.', whatYouStop: 'Sending welcome packs manually, chasing documents, and setting up client records by hand.', includes: ['Automated welcome sequence', 'Document collection with reminders', 'Client record creation across your systems', 'Engagement letter or agreement delivery', 'Status dashboard for onboarding progress'] },
-      invoicing:       { id: 10, name: 'Invoice Generation',            saveRate: 0.80, priceMin: 800,  priceMax: 1500, buildTime: '1–2 weeks', priceMid: 1150, whatItDoes: 'Invoices generated, sent and chased automatically — you only step in when payment lands.', whatYouStop: 'Creating invoices manually, copying data between systems, and sending payment reminders by hand.', includes: ['Automated invoice creation from time or project data', 'Branded invoice delivery via email', 'Payment reminder sequence', 'Overdue escalation alerts', 'Payment status sync to your records'] },
-      documents:       { id: 4,  name: 'Document & Proposal Generation', saveRate: 0.65, priceMin: 1200, priceMax: 2400, buildTime: '2–3 weeks', priceMid: 1800, whatItDoes: 'Client paperwork generated from your templates in seconds — consistent, accurate, and ready to send.', whatYouStop: 'Drafting proposals, contracts, and reports from scratch every time.', includes: ['Template-based document generation', 'Client data auto-populated from your CRM', 'PDF creation and delivery', 'Version tracking and audit trail', 'Custom branding and formatting'] },
-      chasing:         { id: 5,  name: 'Document & Payment Chasing',    saveRate: 0.75, priceMin: 900,  priceMax: 1600, buildTime: '1–2 weeks', priceMid: 1250, whatItDoes: 'Outstanding documents and payments chased automatically — escalating until resolved.', whatYouStop: 'Sending follow-up emails, checking what\u2019s still missing, and logging every chase by hand.', includes: ['Automated chase sequences for missing items', 'Escalation rules with configurable timelines', 'Status tracking dashboard', 'Client-facing portal for uploads', 'Notifications when items are received'] },
-      intake_triage:   { id: 9,  name: 'Client Intake Triage',          saveRate: 0.70, priceMin: 850,  priceMax: 1600, buildTime: '1–2 weeks', priceMid: 1225, whatItDoes: 'Every client request is categorised, prioritised, and routed to the right person — before anyone has to read it.', whatYouStop: 'Reading and sorting every incoming request manually, then deciding who should handle it.', includes: ['AI categorisation of incoming requests', 'Priority scoring and SLA assignment', 'Automatic routing to the right team member', 'Client acknowledgement on receipt', 'Dashboard for open requests and status'] },
-      deadlines:       { id: 6,  name: 'Deadline & Compliance Tracking', saveRate: 0.70, priceMin: 1100, priceMax: 2200, buildTime: '2–3 weeks', priceMid: 1650, whatItDoes: 'Every deadline tracked, every owner notified, every step logged — nothing gets missed.', whatYouStop: 'Maintaining spreadsheets of deadlines, manually checking dates, and chasing team members.', includes: ['Centralised deadline register', 'Automated reminders with escalation', 'Owner assignment and accountability tracking', 'Compliance audit trail', 'Dashboard with upcoming and overdue items'] },
-      client_updates:  { id: 12, name: 'Client Portal Updates',         saveRate: 0.65, priceMin: 900,  priceMax: 1700, buildTime: '1–2 weeks', priceMid: 1300, whatItDoes: 'Clients see their progress in real time — no calls, no emails, no "just checking in."', whatYouStop: 'Writing status update emails, fielding "where are we?" calls, and updating trackers manually.', includes: ['Automated status updates from your workflow', 'Client-facing progress view', 'Milestone notifications', 'Secure document sharing', 'Reduced inbound "status check" volume'] },
-      call_notes:      { id: 11, name: 'Call Notes to CRM',             saveRate: 0.75, priceMin: 900,  priceMax: 1600, buildTime: '1 week',    priceMid: 1250, whatItDoes: 'Every call transcribed, summarised, and pushed to your CRM — you hang up and the record is already done.', whatYouStop: 'Writing up call notes after meetings and copying them into your system.', includes: ['Call recording and transcription', 'AI-generated summaries and action items', 'Automatic CRM record update', 'Searchable call archive', 'Action item assignment and follow-up'] },
-      reporting:       { id: 7,  name: 'Reporting & Data Sync',         saveRate: 0.70, priceMin: 800,  priceMax: 1800, buildTime: '1–2 weeks', priceMid: 1300, whatItDoes: 'Your numbers pulled, compiled, and delivered on schedule — no spreadsheets to update.', whatYouStop: 'Pulling data from multiple systems, building reports manually, and sending them out.', includes: ['Scheduled data extraction from your tools', 'Automated report generation', 'Multi-system data sync', 'Dashboard with key metrics', 'Email delivery on your schedule'] },
-      retention:       { id: 8,  name: 'Client Retention & Referrals',  saveRate: 0.50, priceMin: 700,  priceMax: 1400, buildTime: '1 week',    priceMid: 1050, whatItDoes: 'Past clients stay warm with zero effort — check-ins, reminders, and referral prompts run automatically.', whatYouStop: 'Forgetting to follow up with past clients and missing referral opportunities.', includes: ['Automated client re-engagement sequences', 'Anniversary and milestone check-ins', 'Referral request campaigns', 'Feedback collection', 'Win-back sequences for lapsed clients'] }
+      lead_capture:    { id: 1,  name: 'Enquiry & Lead Capture',       saveRate: 0.70, priceMin: 950,  priceMax: 1800, buildTime: '1\u20132 weeks', priceMid: 1375, whatItDoes: 'Every new enquiry is instantly captured, qualified, and routed \u2014 before you see the notification.', whatYouStop: 'Manually checking inboxes, replying to initial enquiries, and logging lead details by hand.', includes: ['Automated enquiry capture from web, email and phone', 'AI lead qualification and scoring', 'CRM record creation and assignment', 'Instant acknowledgement to the prospect', 'Notification to you for qualified leads only'] },
+      appointments:    { id: 2,  name: 'Appointment Setting',           saveRate: 0.75, priceMin: 700,  priceMax: 1400, buildTime: '1 week',    priceMid: 1050, whatItDoes: 'Clients book, reschedule and cancel directly \u2014 your calendar stays clean without you touching it.', whatYouStop: 'Going back and forth on availability, sending reminders, and updating your calendar manually.', includes: ['Self-service booking linked to your calendar', 'Automated confirmations and reminders', 'Rescheduling and cancellation handling', 'No-show follow-up sequence', 'CRM sync on every booking'] },
+      onboarding:      { id: 3,  name: 'Client Onboarding',             saveRate: 0.60, priceMin: 1400, priceMax: 2800, buildTime: '2\u20133 weeks', priceMid: 2100, whatItDoes: 'From signed agreement to fully set-up client \u2014 every step runs automatically with no chasing required.', whatYouStop: 'Sending welcome packs manually, chasing documents, and setting up client records by hand.', includes: ['Automated welcome sequence', 'Document collection with reminders', 'Client record creation across your systems', 'Engagement letter or agreement delivery', 'Status dashboard for onboarding progress'] },
+      invoicing:       { id: 10, name: 'Invoice Generation',            saveRate: 0.80, priceMin: 800,  priceMax: 1500, buildTime: '1\u20132 weeks', priceMid: 1150, whatItDoes: 'Invoices generated, sent and chased automatically \u2014 you only step in when payment lands.', whatYouStop: 'Creating invoices manually, copying data between systems, and sending payment reminders by hand.', includes: ['Automated invoice creation from time or project data', 'Branded invoice delivery via email', 'Payment reminder sequence', 'Overdue escalation alerts', 'Payment status sync to your records'] },
+      documents:       { id: 4,  name: 'Document & Proposal Generation', saveRate: 0.65, priceMin: 1200, priceMax: 2400, buildTime: '2\u20133 weeks', priceMid: 1800, whatItDoes: 'Client paperwork generated from your templates in seconds \u2014 consistent, accurate, and ready to send.', whatYouStop: 'Drafting proposals, contracts, and reports from scratch every time.', includes: ['Template-based document generation', 'Client data auto-populated from your CRM', 'PDF creation and delivery', 'Version tracking and audit trail', 'Custom branding and formatting'] },
+      chasing:         { id: 5,  name: 'Document & Payment Chasing',    saveRate: 0.75, priceMin: 900,  priceMax: 1600, buildTime: '1\u20132 weeks', priceMid: 1250, whatItDoes: 'Outstanding documents and payments chased automatically \u2014 escalating until resolved.', whatYouStop: 'Sending follow-up emails, checking what\u2019s still missing, and logging every chase by hand.', includes: ['Automated chase sequences for missing items', 'Escalation rules with configurable timelines', 'Status tracking dashboard', 'Client-facing portal for uploads', 'Notifications when items are received'] },
+      intake_triage:   { id: 9,  name: 'Client Intake Triage',          saveRate: 0.70, priceMin: 850,  priceMax: 1600, buildTime: '1\u20132 weeks', priceMid: 1225, whatItDoes: 'Every client request is categorised, prioritised, and routed to the right person \u2014 before anyone has to read it.', whatYouStop: 'Reading and sorting every incoming request manually, then deciding who should handle it.', includes: ['AI categorisation of incoming requests', 'Priority scoring and SLA assignment', 'Automatic routing to the right team member', 'Client acknowledgement on receipt', 'Dashboard for open requests and status'] },
+      deadlines:       { id: 6,  name: 'Deadline & Compliance Tracking', saveRate: 0.70, priceMin: 1100, priceMax: 2200, buildTime: '2\u20133 weeks', priceMid: 1650, whatItDoes: 'Every deadline tracked, every owner notified, every step logged \u2014 nothing gets missed.', whatYouStop: 'Maintaining spreadsheets of deadlines, manually checking dates, and chasing team members.', includes: ['Centralised deadline register', 'Automated reminders with escalation', 'Owner assignment and accountability tracking', 'Compliance audit trail', 'Dashboard with upcoming and overdue items'] },
+      client_updates:  { id: 12, name: 'Client Portal Updates',         saveRate: 0.65, priceMin: 900,  priceMax: 1700, buildTime: '1\u20132 weeks', priceMid: 1300, whatItDoes: 'Clients see their progress in real time \u2014 no calls, no emails, no "just checking in."', whatYouStop: 'Writing status update emails, fielding "where are we?" calls, and updating trackers manually.', includes: ['Automated status updates from your workflow', 'Client-facing progress view', 'Milestone notifications', 'Secure document sharing', 'Reduced inbound "status check" volume'] },
+      call_notes:      { id: 11, name: 'Call Notes to CRM',             saveRate: 0.75, priceMin: 900,  priceMax: 1600, buildTime: '1 week',    priceMid: 1250, whatItDoes: 'Every call transcribed, summarised, and pushed to your CRM \u2014 you hang up and the record is already done.', whatYouStop: 'Writing up call notes after meetings and copying them into your system.', includes: ['Call recording and transcription', 'AI-generated summaries and action items', 'Automatic CRM record update', 'Searchable call archive', 'Action item assignment and follow-up'] },
+      reporting:       { id: 7,  name: 'Reporting & Data Sync',         saveRate: 0.70, priceMin: 800,  priceMax: 1800, buildTime: '1\u20132 weeks', priceMid: 1300, whatItDoes: 'Your numbers pulled, compiled, and delivered on schedule \u2014 no spreadsheets to update.', whatYouStop: 'Pulling data from multiple systems, building reports manually, and sending them out.', includes: ['Scheduled data extraction from your tools', 'Automated report generation', 'Multi-system data sync', 'Dashboard with key metrics', 'Email delivery on your schedule'] },
+      retention:       { id: 8,  name: 'Client Retention & Referrals',  saveRate: 0.50, priceMin: 700,  priceMax: 1400, buildTime: '1 week',    priceMid: 1050, whatItDoes: 'Past clients stay warm with zero effort \u2014 check-ins, reminders, and referral prompts run automatically.', whatYouStop: 'Forgetting to follow up with past clients and missing referral opportunities.', includes: ['Automated client re-engagement sequences', 'Anniversary and milestone check-ins', 'Referral request campaigns', 'Feedback collection', 'Win-back sequences for lapsed clients'] }
     };
 
     /* ═══════════════════════════════════════
@@ -335,6 +329,14 @@
        NAVIGATION
        ═══════════════════════════════════════ */
 
+    function scrollToAudit() {
+      var el = document.getElementById('audit-start');
+      if (el) {
+        var top = el.getBoundingClientRect().top + window.pageYOffset - (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 97);
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+    }
+
     function showStep(n) {
       document.querySelectorAll('.audit-screen').forEach(function (s) {
         s.classList.remove('active');
@@ -342,114 +344,18 @@
       var target = document.querySelector('.audit-screen[data-step="' + n + '"]');
       if (target) {
         target.classList.add('active');
-        /* re-trigger animation */
         target.style.animation = 'none';
         target.offsetHeight;
         target.style.animation = '';
       }
-      /* progress */
       var step = typeof n === 'number' ? n : TOTAL_STEPS;
       var pct = Math.round((step / TOTAL_STEPS) * 100);
       document.getElementById('audit-progress-bar').style.width = pct + '%';
       document.getElementById('audit-progress-label').textContent =
         n === 'output' ? 'Your proposal' : 'Step ' + n + ' of ' + TOTAL_STEPS;
 
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      scrollToAudit();
     }
-
-    /* ═══════════════════════════════════════
-       SINGLE-SELECT HANDLER
-       ═══════════════════════════════════════ */
-
-    document.querySelectorAll('.audit-options:not(.audit-options--multi)').forEach(function (group) {
-      group.querySelectorAll('.audit-option').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          group.querySelectorAll('.audit-option').forEach(function (b) { b.classList.remove('selected'); });
-          btn.classList.add('selected');
-          /* hide error */
-          var err = btn.closest('.audit-screen').querySelector('.audit-error');
-          if (err) err.classList.remove('show');
-        });
-      });
-    });
-
-    /* ═══════════════════════════════════════
-       MULTI-SELECT HANDLER
-       ═══════════════════════════════════════ */
-
-    document.querySelectorAll('.audit-options--multi').forEach(function (group) {
-      var max = parseInt(group.getAttribute('data-max')) || 99;
-      group.querySelectorAll('.audit-option').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          if (btn.classList.contains('selected')) {
-            btn.classList.remove('selected');
-          } else {
-            var selected = group.querySelectorAll('.audit-option.selected').length;
-            if (selected >= max) return;
-            btn.classList.add('selected');
-          }
-          var err = btn.closest('.audit-screen').querySelector('.audit-error');
-          if (err) err.classList.remove('show');
-        });
-      });
-    });
-
-    /* ═══════════════════════════════════════
-       CONTINUE BUTTONS
-       ═══════════════════════════════════════ */
-
-    document.querySelectorAll('.audit-next').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var screen = btn.closest('.audit-screen');
-        var step = parseInt(screen.getAttribute('data-step'));
-        var next = parseInt(btn.getAttribute('data-next'));
-        var group = screen.querySelector('.audit-options');
-        var err = screen.querySelector('.audit-error');
-
-        /* Validate */
-        if (group.classList.contains('audit-options--multi')) {
-          var sel = group.querySelectorAll('.audit-option.selected');
-          if (sel.length === 0) { if (err) err.classList.add('show'); return; }
-        } else {
-          var sel = group.querySelector('.audit-option.selected');
-          if (!sel) { if (err) err.classList.add('show'); return; }
-        }
-
-        /* Save state */
-        saveStepState(step, group);
-
-        if (step === 1) fireEvent('audit_started');
-
-        showStep(next);
-      });
-    });
-
-    /* ═══════════════════════════════════════
-       BACK BUTTONS
-       ═══════════════════════════════════════ */
-
-    document.querySelectorAll('.audit-back').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        showStep(parseInt(btn.getAttribute('data-prev')));
-      });
-    });
-
-    /* ═══════════════════════════════════════
-       SUBMIT
-       ═══════════════════════════════════════ */
-
-    document.getElementById('audit-submit').addEventListener('click', function () {
-      var screen = document.querySelector('.audit-screen[data-step="5"]');
-      var group = screen.querySelector('.audit-options');
-      var sel = group.querySelector('.audit-option.selected');
-      var err = screen.querySelector('.audit-error');
-      if (!sel) { if (err) err.classList.add('show'); return; }
-
-      saveStepState(5, group);
-      renderProposal();
-      showStep('output');
-      fireEvent('audit_completed');
-    });
 
     /* ═══════════════════════════════════════
        SAVE STATE
@@ -472,6 +378,97 @@
     }
 
     /* ═══════════════════════════════════════
+       AUTO-ADVANCE: steps 1, 3, 4, 5
+       Single-select steps advance after a short delay
+       ═══════════════════════════════════════ */
+
+    var autoAdvanceSteps = { 1: 2, 3: 4, 4: 5 };
+
+    document.querySelectorAll('.audit-options:not(.audit-options--multi)').forEach(function (group) {
+      var screen = group.closest('.audit-screen');
+      var step = parseInt(screen.getAttribute('data-step'));
+
+      group.querySelectorAll('.audit-option').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          group.querySelectorAll('.audit-option').forEach(function (b) { b.classList.remove('selected'); });
+          btn.classList.add('selected');
+          var err = screen.querySelector('.audit-error');
+          if (err) err.classList.remove('show');
+
+          /* Save state */
+          saveStepState(step, group);
+
+          if (step === 1) fireEvent('audit_started');
+
+          /* Auto-advance or auto-submit */
+          setTimeout(function () {
+            if (step === 5) {
+              /* Final step — generate proposal */
+              renderProposal();
+              showStep('output');
+              fireEvent('audit_completed');
+            } else if (autoAdvanceSteps[step]) {
+              showStep(autoAdvanceSteps[step]);
+            }
+          }, 300);
+        });
+      });
+    });
+
+    /* ═══════════════════════════════════════
+       MULTI-SELECT HANDLER (step 2 only)
+       ═══════════════════════════════════════ */
+
+    document.querySelectorAll('.audit-options--multi').forEach(function (group) {
+      var max = parseInt(group.getAttribute('data-max')) || 99;
+      group.querySelectorAll('.audit-option').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          if (btn.classList.contains('selected')) {
+            btn.classList.remove('selected');
+          } else {
+            var selected = group.querySelectorAll('.audit-option.selected').length;
+            if (selected >= max) return;
+            btn.classList.add('selected');
+          }
+          var err = btn.closest('.audit-screen').querySelector('.audit-error');
+          if (err) err.classList.remove('show');
+        });
+      });
+    });
+
+    /* ═══════════════════════════════════════
+       CONTINUE BUTTON (step 2 only)
+       ═══════════════════════════════════════ */
+
+    document.querySelectorAll('.audit-next').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var screen = btn.closest('.audit-screen');
+        var step = parseInt(screen.getAttribute('data-step'));
+        var next = parseInt(btn.getAttribute('data-next'));
+        var group = screen.querySelector('.audit-options');
+        var err = screen.querySelector('.audit-error');
+
+        if (group.classList.contains('audit-options--multi')) {
+          var sel = group.querySelectorAll('.audit-option.selected');
+          if (sel.length === 0) { if (err) err.classList.add('show'); return; }
+        }
+
+        saveStepState(step, group);
+        showStep(next);
+      });
+    });
+
+    /* ═══════════════════════════════════════
+       BACK BUTTONS
+       ═══════════════════════════════════════ */
+
+    document.querySelectorAll('.audit-back').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        showStep(parseInt(btn.getAttribute('data-prev')));
+      });
+    });
+
+    /* ═══════════════════════════════════════
        RENDER PROPOSAL
        ═══════════════════════════════════════ */
 
@@ -483,7 +480,6 @@
       var pains = state.painPoints;
       var count = pains.length;
 
-      /* Build automation data */
       var autos = pains.map(function (key) {
         var a = AUTOMATIONS[key];
         var savedHi = mid * a.saveRate;
@@ -503,13 +499,11 @@
         };
       });
 
-      /* Tone */
       var tonePrefix = '';
-      if (process === 'manual') tonePrefix = 'You\'re doing all of this by hand right now. Here\'s what changes.';
-      else if (process === 'inconsistent') tonePrefix = 'You have a process — it just doesn\'t run the same way every time. Here\'s how we standardise it.';
-      else tonePrefix = 'You\'ve got some tools in place but you\'re still doing too much manually. Here\'s how we close the gap.';
+      if (process === 'manual') tonePrefix = 'You\u2019re doing all of this by hand right now. Here\u2019s what changes.';
+      else if (process === 'inconsistent') tonePrefix = 'You have a process \u2014 it just doesn\u2019t run the same way every time. Here\u2019s how we standardise it.';
+      else tonePrefix = 'You\u2019ve got some tools in place but you\u2019re still doing too much manually. Here\u2019s how we close the gap.';
 
-      /* Combined stats */
       var totalSavedLo = 0, totalSavedHi = 0, totalPriceMin = 0, totalPriceMax = 0, totalPriceMid = 0;
       autos.forEach(function (a) {
         totalSavedLo += a.savedLo;
@@ -519,16 +513,13 @@
         totalPriceMid += a.priceMid;
       });
 
-      /* Pain labels for header */
       var painLabels = pains.map(function (key) { return AUTOMATIONS[key].name; });
 
-      /* ── Build HTML ── */
       var html = '';
 
-      /* Header */
       html += '<div class="proposal-header">';
       html += '<span class="proposal-tag">Your automation proposal</span>';
-      html += '<h2 class="proposal-title">Here\'s what we\'d build for your ' + label + '.</h2>';
+      html += '<h2 class="proposal-title">Here\u2019s what we\u2019d build for your ' + label + '.</h2>';
       html += '<p class="proposal-meta">' + tonePrefix + '</p>';
       if (count > 0) {
         html += '<div class="proposal-pains">';
@@ -539,7 +530,6 @@
       }
       html += '</div>';
 
-      /* Automation cards */
       autos.forEach(function (a) {
         html += '<div class="automation-card">';
         html += '<div class="automation-card-header">';
@@ -548,7 +538,7 @@
         html += '<div class="automation-card-stop">' + a.whatYouStop + '</div>';
         html += '</div>';
         html += '<div class="automation-card-body">';
-        html += '<div class="automation-card-includes-label">What\'s included</div>';
+        html += '<div class="automation-card-includes-label">What\u2019s included</div>';
         html += '<ul class="automation-card-includes">';
         a.includes.forEach(function (item) {
           html += '<li>' + item + '</li>';
@@ -556,14 +546,13 @@
         html += '</ul>';
         html += '</div>';
         html += '<div class="automation-card-stats">';
-        html += '<div class="automation-stat"><div class="automation-stat-label">Hours saved / week</div><div class="automation-stat-value">' + a.savedLo + '–' + a.savedHi + ' hrs</div></div>';
+        html += '<div class="automation-stat"><div class="automation-stat-label">Hours saved / week</div><div class="automation-stat-value">' + a.savedLo + '\u2013' + a.savedHi + ' hrs</div></div>';
         html += '<div class="automation-stat"><div class="automation-stat-label">Build time</div><div class="automation-stat-value">' + a.buildTime + '</div></div>';
-        html += '<div class="automation-stat"><div class="automation-stat-label">Fixed price</div><div class="automation-stat-value automation-stat-value--gold">' + CURRENCY_SYMBOL + a.priceMin.toLocaleString() + '–' + CURRENCY_SYMBOL + a.priceMax.toLocaleString() + '</div></div>';
+        html += '<div class="automation-stat"><div class="automation-stat-label">Fixed price</div><div class="automation-stat-value automation-stat-value--gold">' + CURRENCY_SYMBOL + a.priceMin.toLocaleString() + '\u2013' + CURRENCY_SYMBOL + a.priceMax.toLocaleString() + '</div></div>';
         html += '</div>';
         html += '</div>';
       });
 
-      /* Summary table */
       html += '<div class="proposal-summary">';
       html += '<div class="proposal-summary-row proposal-summary-row--header">';
       html += '<div class="proposal-summary-cell">Automation</div>';
@@ -574,65 +563,59 @@
       autos.forEach(function (a) {
         html += '<div class="proposal-summary-row">';
         html += '<div class="proposal-summary-cell">' + a.name + '</div>';
-        html += '<div class="proposal-summary-cell">' + a.savedLo + '–' + a.savedHi + ' hrs</div>';
+        html += '<div class="proposal-summary-cell">' + a.savedLo + '\u2013' + a.savedHi + ' hrs</div>';
         html += '<div class="proposal-summary-cell">' + a.buildTime + '</div>';
-        html += '<div class="proposal-summary-cell proposal-summary-cell--price">' + CURRENCY_SYMBOL + a.priceMin.toLocaleString() + '–' + CURRENCY_SYMBOL + a.priceMax.toLocaleString() + '</div>';
+        html += '<div class="proposal-summary-cell proposal-summary-cell--price">' + CURRENCY_SYMBOL + a.priceMin.toLocaleString() + '\u2013' + CURRENCY_SYMBOL + a.priceMax.toLocaleString() + '</div>';
         html += '</div>';
       });
       if (count > 1) {
         html += '<div class="proposal-summary-row proposal-summary-row--total">';
         html += '<div class="proposal-summary-cell">Combined</div>';
-        html += '<div class="proposal-summary-cell">' + (Math.round(totalSavedLo * 10) / 10) + '–' + (Math.round(totalSavedHi * 10) / 10) + ' hrs</div>';
+        html += '<div class="proposal-summary-cell">' + (Math.round(totalSavedLo * 10) / 10) + '\u2013' + (Math.round(totalSavedHi * 10) / 10) + ' hrs</div>';
         html += '<div class="proposal-summary-cell"></div>';
-        html += '<div class="proposal-summary-cell proposal-summary-cell--price">' + CURRENCY_SYMBOL + totalPriceMin.toLocaleString() + '–' + CURRENCY_SYMBOL + totalPriceMax.toLocaleString() + '</div>';
+        html += '<div class="proposal-summary-cell proposal-summary-cell--price">' + CURRENCY_SYMBOL + totalPriceMin.toLocaleString() + '\u2013' + CURRENCY_SYMBOL + totalPriceMax.toLocaleString() + '</div>';
         html += '</div>';
       }
       html += '</div>';
 
-      /* ROI section */
       html += '<div class="proposal-roi">';
       html += '<span class="proposal-roi-label">Return on investment</span>';
       html += '<div class="proposal-roi-rate">';
       html += '<label for="roi-rate-input">Your billable rate:</label>';
       html += '<span style="display:flex;align-items:center;gap:4px;"><span style="color:var(--white);font-family:var(--font-display);font-size:1.1rem;">' + CURRENCY_SYMBOL + '</span><input type="number" id="roi-rate-input" class="proposal-roi-input" value="' + rate + '" min="1"></span>';
-      html += '<span class="proposal-roi-rate-hint">/ hr — adjust to match your own</span>';
+      html += '<span class="proposal-roi-rate-hint">/ hr \u2014 adjust to match your own</span>';
       html += '</div>';
       html += '<p class="proposal-roi-result" id="roi-result"></p>';
       html += '</div>';
 
-      /* Exclusions */
       html += '<p class="proposal-exclusions">Prices exclude Make.com subscription and third-party API costs. Full documentation and 30-day bug fix warranty included on every build. You own everything we deliver.</p>';
 
-      /* CTA */
       html += '<div class="proposal-cta">';
       html += '<h3>Got questions about this proposal?</h3>';
-      html += '<p>Book a free 30-minute call and we\'ll walk through exactly what your build would involve — and confirm the price before anything starts.</p>';
+      html += '<p>Book a free 30-minute call and we\u2019ll walk through exactly what your build would involve \u2014 and confirm the price before anything starts.</p>';
       html += '<a href="https://calendly.com/apexsystematic/automation-audit" target="_blank" rel="noopener" class="btn btn-primary" id="proposal-book-btn">Book a call</a>';
       html += '</div>';
 
-      /* Email capture */
       html += '<div class="proposal-email">';
       html += '<h3>Want a copy of this proposal?</h3>';
-      html += '<p>Enter your email and we\'ll send it over. Nothing else.</p>';
+      html += '<p>Enter your email and we\u2019ll send it over. Nothing else.</p>';
       html += '<div class="proposal-email-form">';
       html += '<input type="email" class="proposal-email-input" id="proposal-email-field" placeholder="you@yourfirm.com">';
       html += '<button class="btn btn-ghost" id="proposal-email-btn">Send me a copy</button>';
       html += '</div>';
       html += '<div class="proposal-email-consent">';
       html += '<input type="checkbox" id="proposal-email-consent-check">';
-      html += '<label for="proposal-email-consent-check">I\'m happy for Apex Systematic to contact me about my proposal. <a href="/privacy/" target="_blank">Privacy policy</a></label>';
+      html += '<label for="proposal-email-consent-check">I\u2019m happy for Apex Systematic to contact me about my proposal. <a href="/privacy/" target="_blank">Privacy policy</a></label>';
       html += '</div>';
-      html += '<div class="proposal-email-success" id="proposal-email-success"><p>Done — check your inbox.</p></div>';
+      html += '<div class="proposal-email-success" id="proposal-email-success"><p>Done \u2014 check your inbox.</p></div>';
       html += '</div>';
 
-      /* Restart */
       html += '<div class="proposal-restart">';
       html += '<button class="proposal-restart-btn" id="proposal-restart">Start over</button>';
       html += '</div>';
 
       document.getElementById('audit-output').innerHTML = html;
 
-      /* ── ROI calc ── */
       function calcROI() {
         var rateInput = document.getElementById('roi-rate-input');
         var r = parseFloat(rateInput.value) || 1;
@@ -656,24 +639,19 @@
         fireEvent('audit_rate_adjusted');
       });
 
-      /* ── CTA click ── */
       document.getElementById('proposal-book-btn').addEventListener('click', function () {
         fireEvent('audit_call_cta_clicked');
       });
 
-      /* ── Email capture ── */
       document.getElementById('proposal-email-btn').addEventListener('click', function () {
         var email = document.getElementById('proposal-email-field').value.trim();
         var consent = document.getElementById('proposal-email-consent-check').checked;
         if (!email || !email.includes('@')) return;
         if (!consent) return;
-
-        /* In production: POST to your form endpoint here */
         document.getElementById('proposal-email-success').style.display = 'block';
         fireEvent('audit_email_captured');
       });
 
-      /* ── Restart ── */
       document.getElementById('proposal-restart').addEventListener('click', function () {
         state.practiceType = null;
         state.painPoints = [];
