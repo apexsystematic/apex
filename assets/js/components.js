@@ -199,7 +199,7 @@
       + '</div>'
 
       + '<div class="audit-step" id="audit-step-3" style="display:none;">'
-      +   '<h3 class="audit-step-title">Where should we send your audit?</h3>'
+      +   '<h3 class="audit-step-title">Book your free audit</h3>'
       +   '<div class="form-row">'
       +     '<div class="form-group">'
       +       '<label for="name">Full name</label>'
@@ -217,7 +217,7 @@
       +   '<input type="text" id="audit-honeypot" name="website" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;pointer-events:none;">'
       +   '<div class="audit-step-nav">'
       +     '<button class="btn btn-ghost" onclick="auditBack(3)">\u2190 Back</button>'
-      +     '<button class="btn btn-primary" id="audit-submit-btn" onclick="auditSubmit()">Get My Free Audit</button>'
+      +     '<button class="btn btn-primary" id="audit-submit-btn" onclick="auditSubmit()">Book My Free Audit</button>'
       +   '</div>'
       + '</div>'
 
@@ -242,7 +242,7 @@
       /* ── Short variant: name + email + notes only ── */
       formInner = '<div class="audit-form-wrap">'
         + '<div class="audit-step" id="audit-step-3">'
-        +   '<h3 class="audit-step-title">Where should we send your audit?</h3>'
+        +   '<h3 class="audit-step-title">WBook your free audit</h3>'
         +   '<div class="form-row">'
         +     '<div class="form-group">'
         +       '<label for="name">Full name</label>'
@@ -259,7 +259,7 @@
         +   '</div>'
         +   '<input type="text" id="audit-honeypot" name="website" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;pointer-events:none;">'
         +   '<div style="text-align:right;">'
-        +     '<button class="btn btn-primary" id="audit-submit-btn" onclick="auditSubmit()">Get My Free Audit</button>'
+        +     '<button class="btn btn-primary" id="audit-submit-btn" onclick="auditSubmit()">Book My Free Audit</button>'
         +   '</div>'
         + '</div>'
         + buildCalendlyStep()
