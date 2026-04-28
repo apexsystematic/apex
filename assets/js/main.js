@@ -367,9 +367,19 @@ window.showStep = function (step) {
 
   // ── Prices per tier ──
   const PRICES = {
-    foundation:         { USD: [899,  1499], GBP: [699,  1099], EUR: [799,  1299] },
-    connected_practice: { USD: [2199, 3399], GBP: [1599, 2499], EUR: [1899, 2899] },
-    agent_suite:        { USD: [4199, 5699], GBP: [3099, 4199], EUR: [3599, 4899] },
+    // ── Suite bundle prices ──
+    intake_suite:       { USD: [3300,  6500], GBP: [2600,  5100], EUR: [3000,  5900] },
+    client_suite:       { USD: [3700,  7400], GBP: [2900,  5800], EUR: [3400,  6700] },
+    admin_suite:        { USD: [4300,  8600], GBP: [3400,  6800], EUR: [3900,  7800] },
+    retention_suite:    { USD: [1400,  2700], GBP: [1100,  2100], EUR: [1300,  2400] },
+    complete_firm:      { USD: [10800, 21000], GBP: [8500, 16500], EUR: [9800, 19000] },
+
+    // ── Standalone reference prices ──
+    intake_standalone:    { USD: [3900,  7600], GBP: [3050,  6000], EUR: [3500,  6900] },
+    client_standalone:    { USD: [4400,  8700], GBP: [3450,  6800], EUR: [3900,  7800] },
+    admin_standalone:     { USD: [5100, 10200], GBP: [4000,  8000], EUR: [4600,  9200] },
+    retention_standalone: { USD: [1650,  3200], GBP: [1300,  2500], EUR: [1500,  2900] },
+    complete_standalone:  { USD: [15000, 29100], GBP: [11800, 22900], EUR: [13500, 26400] },
   };
 
   const SYMBOLS = { USD: '$', GBP: '£', EUR: '€' };
