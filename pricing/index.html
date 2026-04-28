@@ -31,8 +31,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 </head>
 <body>
 
@@ -48,6 +48,11 @@
             <span class="section-tag">Pricing</span>
             <h1>Everything we build.<br>Every price.</h1>
             <p class="hero-sub">Fixed-price builds across 13 automations and 4 suites — plus advanced add-ons for firms that want to go further. No retainers. No lock-in. You own everything.</p>
+            <div class="currency-toggle">
+              <button class="currency-btn" data-currency="GBP" onclick="apexSetCurrency('GBP')">GBP</button>
+              <button class="currency-btn" data-currency="USD" onclick="apexSetCurrency('USD')">USD</button>
+              <button class="currency-btn" data-currency="EUR" onclick="apexSetCurrency('EUR')">EUR</button>
+            </div>
             <div class="hero-actions">
               <a href="#contact" class="btn btn-primary">Book a free audit</a>
               <a href="/tools/audit/" class="btn btn-ghost">Try the audit tool</a>
@@ -65,28 +70,13 @@
           <h2>Start with a suite.<br>Expand when you're ready.</h2>
           <p class="section-sub">Each suite targets a specific part of your practice. Start with the one costing you the most time — add others as you go. Bundle discount applies at 2+ automations within a suite.</p>
         </div>
-        <div class="currency-toggle">
-              <button class="currency-btn" data-currency="GBP" onclick="apexSetCurrency('GBP')">GBP</button>
-              <button class="currency-btn" data-currency="USD" onclick="apexSetCurrency('USD')">USD</button>
-              <button class="currency-btn" data-currency="EUR" onclick="apexSetCurrency('EUR')">EUR</button>
-        </div>
 
         <!-- Intake Suite -->
         <div class="suite-block" id="intake-suite">
           <div class="suite-header">
-            <div class="suite-header-left">
-              <span class="suite-tag suite-tag--popular">Most popular</span>
-              <h3 class="suite-title">Intake Suite</h3>
-              <p class="suite-tagline">From first enquiry to onboarded client — automated</p>
-            </div>
-            <div class="suite-header-right">
-              <div class="suite-price-wrap">
-                <div class="suite-standalone">Standalone: <span data-tier="intake_standalone">£3,050–£6,000</span></div>
-                <div class="suite-price" data-tier="intake_suite">£2,600–£5,100</div>
-                <div class="suite-saving">~15% saving vs standalone</div>
-              </div>
-              <a href="#contact" class="btn btn-primary">Get a free audit</a>
-            </div>
+            <span class="suite-tag suite-tag--popular">Most popular</span>
+            <h3 class="suite-title">Intake Suite</h3>
+            <p class="suite-tagline">From first enquiry to onboarded client — automated</p>
           </div>
           <p class="suite-desc">The complete front-of-house sequence. A stranger becomes a qualified, onboarded client without manual intervention. Most firms start here — the ROI is immediate and visible. Fewer missed enquiries, faster onboarding, no manual back-and-forth.</p>
           <div class="suite-automations">
@@ -104,7 +94,7 @@
                 <p>Cal.com booking, confirmation and reminder emails at 24h and 2h, preparation materials sent automatically by matter type, rescheduling handler, no-show flag, post-meeting follow-up.</p>
               </div>
             </div>
-            <div class="automation-card">
+            <div class="automation-card automation-card--full">
               <div class="automation-num">#3</div>
               <div class="automation-body">
                 <h4>Client Onboarding</h4>
@@ -112,138 +102,140 @@
               </div>
             </div>
           </div>
+          <div class="suite-footer">
+            <div class="suite-footer-prices">
+              <div class="suite-standalone">Standalone: <span data-tier="intake_standalone">£3,050–£6,000</span></div>
+              <div class="suite-price" data-tier="intake_suite">£2,600–£5,100</div>
+              <div class="suite-saving">~15% saving vs standalone</div>
+            </div>
+            <a href="#contact" class="btn btn-primary">Book a free audit</a>
+          </div>
         </div>
 
         <!-- Client Suite -->
         <div class="suite-block" id="client-suite">
           <div class="suite-header">
-            <div class="suite-header-left">
-              <h3 class="suite-title">Client Suite</h3>
-              <p class="suite-tagline">Keep active clients moving without the admin</p>
-            </div>
-            <div class="suite-header-right">
-              <div class="suite-price-wrap">
-                <div class="suite-standalone">Standalone: <span data-tier="client_standalone">£3,450–£6,800</span></div>
-                <div class="suite-price" data-tier="client_suite">£2,900–£5,800</div>
-                <div class="suite-saving">~15% saving vs standalone</div>
-              </div>
-              <a href="#contact" class="btn btn-ghost">Get a free audit</a>
-            </div>
+            <h3 class="suite-title">Client Suite</h3>
+            <p class="suite-tagline">Keep active clients moving without the admin</p>
           </div>
           <p class="suite-desc">Everything the client experiences after onboarding — requests handled, updates sent, invoices raised, documents and payments chased. Your clients feel looked after. You don't lift a finger.</p>
           <div class="suite-automations">
             <div class="automation-card">
-              <div class="automation-num">#1</div>
+              <div class="automation-num">#9</div>
               <div class="automation-body">
                 <h4>Client Intake Triage</h4>
                 <p>Structured request form, Claude AI classifies by type and urgency, conflict of interest scan against your existing client database, automatic routing, acknowledgement email with expected response time, owner dashboard.</p>
               </div>
             </div>
             <div class="automation-card">
-              <div class="automation-num">#2</div>
+              <div class="automation-num">#12</div>
               <div class="automation-body">
                 <h4>Client Portal Updates</h4>
                 <p>Matter status change triggers a plain-English client update drafted by Claude AI, delivered by email at each defined stage, with links to relevant documents. Reduces inbound status calls.</p>
               </div>
             </div>
             <div class="automation-card">
-              <div class="automation-num">#3</div>
+              <div class="automation-num">#10</div>
               <div class="automation-body">
                 <h4>Invoice Generation</h4>
                 <p>Invoice auto-generated on matter completion or milestone, correct line items including disbursements, emailed with payment link, payment reconciliation back to Airtable. Feeds directly into payment chasing on non-payment.</p>
               </div>
             </div>
             <div class="automation-card">
-              <div class="automation-num">#4</div>
+              <div class="automation-num">#5</div>
               <div class="automation-body">
                 <h4>Document &amp; Payment Chasing</h4>
                 <p>Escalating sequences for outstanding documents, signatures, and invoices. Tone escalates across Day 1/4/7/10. Auto-stops on signature or payment. Access revocation flag at Day 10 non-payment. Slack alert to owner.</p>
               </div>
             </div>
           </div>
+          <div class="suite-footer">
+            <div class="suite-footer-prices">
+              <div class="suite-standalone">Standalone: <span data-tier="client_standalone">£3,450–£6,800</span></div>
+              <div class="suite-price" data-tier="client_suite">£2,900–£5,800</div>
+              <div class="suite-saving">~15% saving vs standalone</div>
+            </div>
+            <a href="#contact" class="btn btn-ghost">Book a free audit</a>
+          </div>
         </div>
 
         <!-- Admin Suite -->
         <div class="suite-block" id="admin-suite">
           <div class="suite-header">
-            <div class="suite-header-left">
-              <h3 class="suite-title">Admin Suite</h3>
-              <p class="suite-tagline">Run active matters without lifting a finger</p>
-            </div>
-            <div class="suite-header-right">
-              <div class="suite-price-wrap">
-                <div class="suite-standalone">Standalone: <span data-tier="admin_standalone">£4,000–£8,000</span></div>
-                <div class="suite-price" data-tier="admin_suite">£3,400–£6,800</div>
-                <div class="suite-saving">~15% saving vs standalone</div>
-              </div>
-              <a href="#contact" class="btn btn-ghost">Get a free audit</a>
-            </div>
+            <h3 class="suite-title">Admin Suite</h3>
+            <p class="suite-tagline">Run active matters without lifting a finger</p>
           </div>
           <p class="suite-desc">The internal engine. Documents drafted and gated for approval, deadlines tracked with evidence checks, call notes actioned automatically, data synced and reported on schedule. The work that fills your evenings — done before you've thought about it.</p>
           <div class="suite-automations">
             <div class="automation-card">
-              <div class="automation-num">#1</div>
+              <div class="automation-num">#4</div>
               <div class="automation-body">
                 <h4>Document &amp; Proposal Generation</h4>
                 <p>Triggered via form, Airtable, or webhook. Claude AI drafts using client data. Approval gate in Airtable — AI drafts, you release. Google Docs template merge, PDF export to Drive, Gmail delivery with covering note.</p>
               </div>
             </div>
             <div class="automation-card">
-              <div class="automation-num">#2</div>
+              <div class="automation-num">#6</div>
               <div class="automation-body">
                 <h4>Deadline &amp; Compliance Tracking</h4>
                 <p>Deadlines table with 30/14/7/3/1-day alert windows. Evidence-check loop flags missing files 24 hours before the deadline. Tiered alerts to client and owner. Missed deadline escalation. Weekly digest email.</p>
               </div>
             </div>
             <div class="automation-card">
-              <div class="automation-num">#3</div>
+              <div class="automation-num">#11</div>
               <div class="automation-body">
                 <h4>Call Notes to CRM</h4>
                 <p>Transcript webhook triggers on call end. Claude AI extracts action items, decisions, client context, and next steps. Pushed to Airtable. Tasks created with owner and due date. Flags urgency or dissatisfaction.</p>
               </div>
             </div>
             <div class="automation-card">
-              <div class="automation-num">#4</div>
+              <div class="automation-num">#7</div>
               <div class="automation-body">
                 <h4>Reporting &amp; Data Sync</h4>
                 <p>Scheduled pull from Airtable, data transformation, Google Sheets population, Claude AI commentary, variance analysis against previous month, automated delivery. Error alerts on bad data.</p>
               </div>
             </div>
           </div>
+          <div class="suite-footer">
+            <div class="suite-footer-prices">
+              <div class="suite-standalone">Standalone: <span data-tier="admin_standalone">£4,000–£8,000</span></div>
+              <div class="suite-price" data-tier="admin_suite">£3,400–£6,800</div>
+              <div class="suite-saving">~15% saving vs standalone</div>
+            </div>
+            <a href="#contact" class="btn btn-ghost">Book a free audit</a>
+          </div>
         </div>
 
         <!-- Retention Suite -->
         <div class="suite-block" id="retention-suite">
           <div class="suite-header">
-            <div class="suite-header-left">
-              <h3 class="suite-title">Retention Suite</h3>
-              <p class="suite-tagline">Monetise relationships after the matter closes</p>
-            </div>
-            <div class="suite-header-right">
-              <div class="suite-price-wrap">
-                <div class="suite-standalone">Standalone: <span data-tier="retention_standalone">£1,300–£2,500</span></div>
-                <div class="suite-price" data-tier="retention_suite">£1,100–£2,100</div>
-                <div class="suite-saving">~15% saving vs standalone</div>
-              </div>
-              <a href="#contact" class="btn btn-ghost">Get a free audit</a>
-            </div>
+            <h3 class="suite-title">Retention Suite</h3>
+            <p class="suite-tagline">Monetise relationships after the matter closes</p>
           </div>
           <p class="suite-desc">The work most firms never get around to. Past clients re-engaged at the right moment, satisfaction measured after every matter, referrals tracked and credited. Running in the background without you thinking about it.</p>
           <div class="suite-automations">
             <div class="automation-card">
-              <div class="automation-num">#1</div>
+              <div class="automation-num">#8</div>
               <div class="automation-body">
                 <h4>Client Retention &amp; Referrals</h4>
                 <p>Airtable segments by last contact and tier. Identifies clients not touched in 60, 90, or 180 days. Claude AI drafts a personalised re-engagement email — Gmail draft only, you review before it sends. Post-matter review request at 14 days. Referral tracking credits past clients automatically.</p>
               </div>
             </div>
             <div class="automation-card">
-              <div class="automation-num">#2</div>
+              <div class="automation-num">#13</div>
               <div class="automation-body">
                 <h4>NPS &amp; Satisfaction Survey</h4>
                 <p>Tally survey triggered automatically after matter close. Score and comment pushed to the client record in Airtable. High scores trigger a referral nudge. Low scores send a Slack alert to the owner for personal follow-up.</p>
               </div>
             </div>
+          </div>
+          <div class="suite-footer">
+            <div class="suite-footer-prices">
+              <div class="suite-standalone">Standalone: <span data-tier="retention_standalone">£1,300–£2,500</span></div>
+              <div class="suite-price" data-tier="retention_suite">£1,100–£2,100</div>
+              <div class="suite-saving">~15% saving vs standalone</div>
+            </div>
+            <a href="#contact" class="btn btn-ghost">Book a free audit</a>
           </div>
         </div>
 
@@ -260,7 +252,7 @@
               <div class="complete-firm-standalone">Standalone: <span data-tier="complete_standalone">£11,800–£22,900</span></div>
               <div class="complete-firm-price" data-tier="complete_firm">£8,500–£16,500</div>
               <div class="complete-firm-saving">~28% saving</div>
-              <a href="#contact" class="btn btn-primary">Get a free audit</a>
+              <a href="#contact" class="btn btn-primary">Book a free audit</a>
             </div>
           </div>
         </div>
@@ -276,7 +268,7 @@
           <h2>Only need one thing fixed?</h2>
           <p class="section-sub">Not every practice needs a full suite. If there's one task eating your time, we'll scope it, build it, and hand it over at a fixed price.</p>
         </div>
-        <a href="/tools/audit/" class="btn btn-ghost">Get your instant proposal →</a>
+        <a href="/tools/audit/" class="btn btn-ghost">Get an instant proposal →</a>
       </div>
     </section>
 
@@ -402,7 +394,7 @@
         <div class="expect-grid">
           <div class="expect-card">
             <h4>What's not in the price</h4>
-            <p>Subscriptions, third-party API costs, template and copy writing, and manual data entry to seed your initial Airtable base. These are running costs you pay directly to the providers.</p>
+            <p>Make.com subscription, third-party API costs, template and copy writing, and manual data entry to seed your initial Airtable base. These are running costs you pay directly to the providers — typically £50–£150/month depending on volume and stack.</p>
           </div>
           <div class="expect-card">
             <h4>What every build includes</h4>
@@ -410,7 +402,7 @@
           </div>
           <div class="expect-card">
             <h4>How long it takes</h4>
-            <p>Single automation: 1–2 weeks. Full suite: 2–4 weeks. Complete Firm: 6–10 weeks in sprints. Timeframes confirmed at scoping — never extended without your agreement.</p>
+            <p>Single automation: 1–3 weeks. Full suite: 2–4 weeks. Complete Firm: 6–10 weeks in sprints. Timeframes confirmed at scoping — never extended without your agreement.</p>
           </div>
           <div class="expect-card">
             <h4>Built to comply</h4>
