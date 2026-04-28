@@ -19,7 +19,8 @@
     9:  { name: 'Client Intake Triage',            saveRate: 0.70, priceRange: '£850–£1,600',   buildTime: '1–2 weeks', priceMid: 1225, included: ['Inbound request classification', 'Routing to the right team member', 'Priority scoring and queue management', 'Acknowledgement sent automatically'] },
     10: { name: 'Invoice Generation',              saveRate: 0.80, priceRange: '£800–£1,500',   buildTime: '1–2 weeks', priceMid: 1150, included: ['Invoices generated from completed work', 'Sent automatically on trigger', 'Payment status tracked and updated', 'Overdue escalation without manual input'] },
     11: { name: 'Call Notes to CRM',               saveRate: 0.75, priceRange: '£900–£1,600',   buildTime: '1 week',    priceMid: 1250, included: ['Meeting transcription and summarisation', 'Action items extracted and assigned', 'CRM record updated automatically', 'Follow-up email drafted for review'] },
-    12: { name: 'Client Portal Updates',           saveRate: 0.65, priceRange: '£900–£1,700',   buildTime: '1–2 weeks', priceMid: 1300, included: ['Status updates pushed to client portal', 'Triggered on matter milestones', 'Client notification emails automated', 'No manual logging required'] }
+    12: { name: 'Client Portal Updates',           saveRate: 0.65, priceRange: '£900–£1,700',   buildTime: '1–2 weeks', priceMid: 1300, included: ['Status updates pushed to client portal', 'Triggered on matter milestones', 'Client notification emails automated', 'No manual logging required'] },
+    13: { name: 'NPS & Satisfaction Survey',        saveRate: 0.70, priceRange: '£600–£1,100',   buildTime: '1 week',    priceMid: 850,  included: ['Tally survey triggered automatically after matter close', 'Score and comment pushed to client record', 'High score (9–10) triggers referral nudge', 'Low score (0–6) sends Slack alert for personal follow-up', 'Mid score logged only'] }
   };
 
   var PAIN_TO_AUTO = {
@@ -34,7 +35,9 @@
     'Keeping clients updated on progress': 12,
     'Capturing call notes and updating records': 11,
     'Moving data between systems or generating reports': 7,
-    'Staying in touch with past clients': 8
+    'Staying in touch with past clients': 8,
+    'Staying in touch with and re-engaging past clients': 8,
+    'Collecting client feedback and satisfaction scores': 13
   };
 
   var PRACTICE_LABELS = {
@@ -160,14 +163,9 @@
       tag.textContent = state.q2Labels[0];
       painsEl.appendChild(tag);
     }
-
-    /* Cards + table */
+    /* Cards */
     var cardsEl    = document.getElementById('ao-cards');
-    var tbodyEl    = document.getElementById('ao-table-body');
-    var tfootEl    = document.getElementById('ao-table-foot');
     cardsEl.innerHTML = '';
-    tbodyEl.innerHTML = '';
-    tfootEl.innerHTML = '';
 
     var combinedHrsSaved = 0;
     var combinedPriceMid = 0;
@@ -209,15 +207,6 @@
           '<div class="ao-card-stat"><span class="ao-stat-label">Fixed price</span><span class="ao-stat-val ao-stat-val--gold">' + a.priceRange + '</span></div>' +
         '</div>';
       cardsEl.appendChild(card);
-
-      /* Table row */
-      var tr = document.createElement('tr');
-      tr.innerHTML =
-        '<td>' + a.name + '</td>' +
-        '<td>' + hrsDisplay + '</td>' +
-        '<td>' + a.buildTime + '</td>' +
-        '<td class="ao-price">' + a.priceRange + '</td>';
-      tbodyEl.appendChild(tr);
     });
 
 
@@ -317,7 +306,8 @@
       9:  'every incoming client request is classified, prioritised, and routed to the right person immediately.',
       10: 'invoices are generated and sent automatically the moment work is completed or a trigger fires.',
       11: 'call notes are transcribed, summarised, and logged to your CRM automatically after every meeting.',
-      12: 'your clients receive status updates at every milestone without anyone needing to write or send them.'
+      12: 'your clients receive status updates at every milestone without anyone needing to write or send them.',
+      13: 'client satisfaction surveys go out automatically after every matter closes, scores are logged to your CRM, and the right follow-up fires based on the result — without you lifting a finger.'
     };
     return map[n] || 'the manual work is handled automatically end to end.';
   }
@@ -335,7 +325,8 @@
       9:  'triaging every request manually and deciding who should handle it',
       10: 'manually generating, checking, and sending invoices',
       11: 'taking notes during calls and manually updating your CRM afterwards',
-      12: 'writing update emails to clients at every stage of a matter'
+      12: 'writing update emails to clients at every stage of a matter',
+      13: 'manually sending surveys, chasing responses, and deciding what to do with each score'
     };
     return map[n] || 'doing this manually';
   }
