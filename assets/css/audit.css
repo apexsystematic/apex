@@ -40,6 +40,7 @@
 
 .audit-wrap {
   max-width: 620px;
+  width: 100%;
 }
 
 
@@ -64,7 +65,7 @@
 .audit-progress-bar {
   flex: 1;
   height: 3px;
-  background: var(--border-light, rgba(255,255,255,0.12));
+  background: rgba(255,255,255,0.12);
   border-radius: 2px;
   overflow: hidden;
 }
@@ -188,16 +189,13 @@
   margin-top: 28px;
 }
 
-/* Force identical height on both buttons */
+/* Override base .btn padding so height is the only vertical control */
 .audit-nav .btn {
-  height: 48px;
+  height: 52px;
   padding-top: 0;
   padding-bottom: 0;
-  min-width: 120px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
+  min-width: 130px;
+  line-height: 1;
 }
 
 .audit-next:disabled {
