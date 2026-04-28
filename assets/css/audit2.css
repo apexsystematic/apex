@@ -187,12 +187,9 @@
 .audit-nav {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 12px;
-  margin-top: 2.5rem;
-}
-
-.audit-nav .btn {
-  min-width: 140px;
+  margin-top: 2rem;
 }
 
 .audit-back {
