@@ -48,7 +48,7 @@
   /* ── State ── */
   var state = {
     q1: null, q1Rate: null,
-    q2: [],   q2Labels: [],
+    q2: null, q2Labels: [],
     q3: null, q3Label: null,
     q4: null,
     q5: null,
@@ -82,46 +82,10 @@
   }
 
   function initQ1() { initSingleSelect('q1-options', 'q1', 'q1Rate', 2, function () { fireEvent('audit_started'); }); }
+  function initQ2() { initSingleSelect('q2-options', 'q2', null, 3, function (btn) { state.q2Labels = [btn.dataset.label]; }); }
   function initQ3() { initSingleSelect('q3-options', 'q3', null, 4, function (btn) { state.q3Label = btn.dataset.label; }); }
   function initQ4() { initSingleSelect('q4-options', 'q4', null, 5); }
   function initQ5() { initSingleSelect('q5-options', 'q5', null, null, function () { setTimeout(renderOutput, 220); }); }
-
-  /* ── Q2: Multi-select ── */
-  function initQ2() {
-    var container = document.getElementById('q2-options');
-    var nextBtn   = document.getElementById('q2-next');
-    if (!container) return;
-
-    container.querySelectorAll('.audit-opt').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var label = btn.textContent.trim();
-        var idx   = state.q2Labels.indexOf(label);
-
-        if (idx > -1) {
-          // deselect
-          state.q2Labels.splice(idx, 1);
-          state.q2.splice(idx, 1);
-          btn.classList.remove('selected');
-        } else {
-          if (state.q2.length >= 2) return; // cap at 2
-          var autoNum = PAIN_TO_AUTO[label];
-          if (!autoNum) return;
-          state.q2.push(autoNum);
-          state.q2Labels.push(label);
-          btn.classList.add('selected');
-        }
-
-        // disable unselected once 2 chosen
-        container.querySelectorAll('.audit-opt').forEach(function (b) {
-          if (!b.classList.contains('selected')) {
-            b.classList.toggle('disabled', state.q2.length >= 2);
-          }
-        });
-
-        nextBtn.disabled = state.q2.length === 0;
-      });
-    });
-  }
 
   /* ── Navigation ── */
   function goToStep(step) {
@@ -156,7 +120,7 @@
   };
 
   window.auditNext = function (fromStep) {
-    if (fromStep === 2 && state.q2.length === 0) return;
+    if (fromStep === 2 && !state.q2) return;
     goToStep(fromStep + 1);
   };
 
@@ -190,12 +154,12 @@
     /* Pain tags */
     var painsEl = document.getElementById('ao-pains');
     painsEl.innerHTML = '';
-    state.q2Labels.forEach(function (label) {
+    if (state.q2Labels[0]) {
       var tag = document.createElement('span');
       tag.className = 'ao-pain-tag';
-      tag.textContent = label;
+      tag.textContent = state.q2Labels[0];
       painsEl.appendChild(tag);
-    });
+    }
 
     /* Cards + table */
     var cardsEl    = document.getElementById('ao-cards');
@@ -208,7 +172,7 @@
     var combinedHrsSaved = 0;
     var combinedPriceMid = 0;
 
-    state.q2.forEach(function (autoNum) {
+    [parseInt(state.q2, 10)].forEach(function (autoNum) {
       var a = AUTOMATIONS[autoNum];
       if (!a) return;
 
@@ -256,17 +220,7 @@
       tbodyEl.appendChild(tr);
     });
 
-    /* Table footer — combined (only if 2 automations) */
-    if (state.q2.length === 2) {
-      var combinedHrsDisplay = Math.round((combinedHrsSaved - combinedHrsSaved * 0.1) * 10) / 10 + '–' + Math.round(combinedHrsSaved * 10) / 10 + ' hrs/wk';
-      var tf = document.createElement('tr');
-      tf.innerHTML =
-        '<td>Combined</td>' +
-        '<td>' + combinedHrsDisplay + '</td>' +
-        '<td></td>' +
-        '<td class="ao-price">' + getCombinedRange(state.q2) + '</td>';
-      tfootEl.appendChild(tf);
-    }
+
 
     /* Rate + ROI */
     var rateInput = document.getElementById('ao-rate-input');
