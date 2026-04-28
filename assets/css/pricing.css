@@ -243,18 +243,11 @@
 }
 
 .suite-header {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 40px;
-  padding: 40px 48px;
+  padding: 40px 48px 32px;
   border-bottom: 1px solid var(--border);
-  align-items: end;
-}
-
-.suite-header-left {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .suite-tag {
@@ -270,13 +263,6 @@
 .suite-tag--popular {
   background: var(--gold);
   color: var(--bg);
-}
-
-.suite-label {
-  font-size: 0.62rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--text-dim);
 }
 
 .suite-title {
@@ -296,16 +282,20 @@
   margin: 0;
 }
 
-.suite-header-right {
+.suite-footer {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 20px;
-  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 28px 48px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
 }
 
-.suite-price-wrap {
-  text-align: right;
+.suite-footer-prices {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .suite-standalone {
@@ -313,7 +303,6 @@
   color: var(--text-dim);
   text-decoration: line-through;
   text-decoration-color: var(--text-dim);
-  margin-bottom: 4px;
 }
 
 .suite-price {
@@ -321,13 +310,12 @@
   font-size: 1.75rem;
   font-weight: 400;
   color: var(--gold);
-  line-height: 1.1;
+  line-height: 1.2;
 }
 
 .suite-saving {
   font-size: 0.72rem;
   color: var(--text-muted);
-  margin-top: 4px;
 }
 
 .suite-desc {
@@ -368,11 +356,9 @@
   border-bottom: none;
 }
 
-/* Edge case: odd total — last single card spans full width */
-.suite-automations.suite-automations--odd .automation-card:last-child {
+.automation-card--full {
   grid-column: span 2;
   border-right: none;
-  border-bottom: none;
 }
 
 .automation-num {
@@ -609,20 +595,17 @@
 
 @media (max-width: 900px) {
   .suite-header {
-    grid-template-columns: 1fr;
-    gap: 24px;
-    padding: 28px 28px;
-  }
-
-  .suite-header-right {
-    align-items: flex-start;
-  }
-
-  .suite-price-wrap {
-    text-align: left;
+    padding: 28px 28px 24px;
   }
 
   .suite-desc {
+    padding: 24px 28px;
+  }
+
+  .suite-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
     padding: 24px 28px;
   }
 
