@@ -33,7 +33,20 @@
   <div id="site-header"></div>
 
   <main id="main-content">
-    <div class="audit-page">
+
+    <!-- ── HERO ── -->
+    <section class="hero audit-hero" id="home">
+      <div class="container">
+        <span class="section-tag">Free automation audit</span>
+        <h1>Find out what you<br>should automate.</h1>
+        <p class="hero-sub">Answer 5 quick questions about your practice.<br>Get a personalised proposal with pricing, timelines,<br>and ROI — no call required.</p>
+        <div class="hero-actions">
+          <a href="#audit-start" class="btn btn-primary">Start the audit</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="audit-page" id="audit-start">
       <div class="audit-container">
 
         <!-- Progress -->
@@ -284,7 +297,7 @@
       onboarding:      { id: 3,  name: 'Client Onboarding',             saveRate: 0.60, priceMin: 1400, priceMax: 2800, buildTime: '2–3 weeks', priceMid: 2100, whatItDoes: 'From signed agreement to fully set-up client — every step runs automatically with no chasing required.', whatYouStop: 'Sending welcome packs manually, chasing documents, and setting up client records by hand.', includes: ['Automated welcome sequence', 'Document collection with reminders', 'Client record creation across your systems', 'Engagement letter or agreement delivery', 'Status dashboard for onboarding progress'] },
       invoicing:       { id: 10, name: 'Invoice Generation',            saveRate: 0.80, priceMin: 800,  priceMax: 1500, buildTime: '1–2 weeks', priceMid: 1150, whatItDoes: 'Invoices generated, sent and chased automatically — you only step in when payment lands.', whatYouStop: 'Creating invoices manually, copying data between systems, and sending payment reminders by hand.', includes: ['Automated invoice creation from time or project data', 'Branded invoice delivery via email', 'Payment reminder sequence', 'Overdue escalation alerts', 'Payment status sync to your records'] },
       documents:       { id: 4,  name: 'Document & Proposal Generation', saveRate: 0.65, priceMin: 1200, priceMax: 2400, buildTime: '2–3 weeks', priceMid: 1800, whatItDoes: 'Client paperwork generated from your templates in seconds — consistent, accurate, and ready to send.', whatYouStop: 'Drafting proposals, contracts, and reports from scratch every time.', includes: ['Template-based document generation', 'Client data auto-populated from your CRM', 'PDF creation and delivery', 'Version tracking and audit trail', 'Custom branding and formatting'] },
-      chasing:         { id: 5,  name: 'Document & Payment Chasing',    saveRate: 0.75, priceMin: 900,  priceMax: 1600, buildTime: '1–2 weeks', priceMid: 1250, whatItDoes: 'Outstanding documents and payments chased automatically — escalating until resolved.', whatYouStop: 'Sending follow-up emails, checking what's still missing, and logging every chase by hand.', includes: ['Automated chase sequences for missing items', 'Escalation rules with configurable timelines', 'Status tracking dashboard', 'Client-facing portal for uploads', 'Notifications when items are received'] },
+      chasing:         { id: 5,  name: 'Document & Payment Chasing',    saveRate: 0.75, priceMin: 900,  priceMax: 1600, buildTime: '1–2 weeks', priceMid: 1250, whatItDoes: 'Outstanding documents and payments chased automatically — escalating until resolved.', whatYouStop: 'Sending follow-up emails, checking what\u2019s still missing, and logging every chase by hand.', includes: ['Automated chase sequences for missing items', 'Escalation rules with configurable timelines', 'Status tracking dashboard', 'Client-facing portal for uploads', 'Notifications when items are received'] },
       intake_triage:   { id: 9,  name: 'Client Intake Triage',          saveRate: 0.70, priceMin: 850,  priceMax: 1600, buildTime: '1–2 weeks', priceMid: 1225, whatItDoes: 'Every client request is categorised, prioritised, and routed to the right person — before anyone has to read it.', whatYouStop: 'Reading and sorting every incoming request manually, then deciding who should handle it.', includes: ['AI categorisation of incoming requests', 'Priority scoring and SLA assignment', 'Automatic routing to the right team member', 'Client acknowledgement on receipt', 'Dashboard for open requests and status'] },
       deadlines:       { id: 6,  name: 'Deadline & Compliance Tracking', saveRate: 0.70, priceMin: 1100, priceMax: 2200, buildTime: '2–3 weeks', priceMid: 1650, whatItDoes: 'Every deadline tracked, every owner notified, every step logged — nothing gets missed.', whatYouStop: 'Maintaining spreadsheets of deadlines, manually checking dates, and chasing team members.', includes: ['Centralised deadline register', 'Automated reminders with escalation', 'Owner assignment and accountability tracking', 'Compliance audit trail', 'Dashboard with upcoming and overdue items'] },
       client_updates:  { id: 12, name: 'Client Portal Updates',         saveRate: 0.65, priceMin: 900,  priceMax: 1700, buildTime: '1–2 weeks', priceMid: 1300, whatItDoes: 'Clients see their progress in real time — no calls, no emails, no "just checking in."', whatYouStop: 'Writing status update emails, fielding "where are we?" calls, and updating trackers manually.', includes: ['Automated status updates from your workflow', 'Client-facing progress view', 'Milestone notifications', 'Secure document sharing', 'Reduced inbound "status check" volume'] },
