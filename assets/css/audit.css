@@ -49,7 +49,7 @@
 
 
 /* ── Progress ── */
-.audit-progress {
+.audit-progress-wrap {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -59,7 +59,7 @@
   max-width: 620px;
 }
 
-.audit-progress-label {
+.audit-prog-label {
   font-size: 0.72rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -68,7 +68,7 @@
   flex: 0 0 auto;
 }
 
-.audit-progress-bar {
+.audit-prog-bar {
   flex: 1 1 auto;
   height: 3px;
   background: #263040;
@@ -77,7 +77,7 @@
   min-width: 60px;
 }
 
-.audit-progress-fill {
+.audit-prog-fill {
   display: block;
   height: 3px;
   background: #C9A84C;
@@ -312,46 +312,7 @@
 .ao-stat-val--gold { color: #C9A84C; }
 
 
-/* ── Output: table ── */
-.ao-summary { margin-bottom: 48px; overflow-x: auto; }
 
-.ao-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-
-.ao-table th {
-  font-size: 0.66rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: #4F5B6E;
-  font-weight: 400;
-  text-align: left;
-  padding: 0 16px 14px 0;
-  border-bottom: 1px solid #1E2838;
-}
-
-.ao-table td {
-  padding: 16px 16px 16px 0;
-  border-bottom: 1px solid #1E2838;
-  color: #D8DCE4;
-  vertical-align: top;
-}
-
-.ao-table td:first-child { color: #FFFFFF; font-weight: 500; }
-
-.ao-table tfoot td {
-  font-weight: 500;
-  color: #FFFFFF;
-  border-bottom: none;
-  padding-top: 20px;
-}
-
-.ao-table tfoot td:first-child {
-  color: #7A8299;
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.ao-price { color: #C9A84C; font-weight: 500; }
 
 
 /* ── Output: ROI ── */
