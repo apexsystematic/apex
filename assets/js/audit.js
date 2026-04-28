@@ -162,8 +162,9 @@
 
   /* ── Output ── */
   function renderOutput() {
-    hideStep(state.currentStep);
-    document.getElementById('audit-progress').style.display = 'none';
+    // Hide the entire questionnaire section — no empty space
+    var auditBody = document.querySelector('.audit-body');
+    if (auditBody) auditBody.classList.add('hidden');
 
     var outputSection = document.getElementById('audit-output-section');
     if (outputSection) outputSection.classList.remove('hidden');
