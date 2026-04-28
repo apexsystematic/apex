@@ -164,9 +164,7 @@
   /* ── Output ── */
   function renderOutput() {
     hideStep(state.currentStep);
-
-    var splitSection = document.getElementById('audit-split');
-    if (splitSection) splitSection.style.display = 'none';
+    document.getElementById('audit-progress').style.display = 'none';
 
     var outputSection = document.getElementById('audit-output-section');
     if (outputSection) outputSection.classList.remove('hidden');
@@ -175,7 +173,7 @@
     buildProposal();
 
     setTimeout(function () {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      document.getElementById('audit-output-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 50);
   }
 
