@@ -4,6 +4,12 @@
    ═══════════════════════════════════════════ */
 
 /* ── Audit Layout ── */
+.audit-hero {
+  min-height: auto;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
 .audit-page {
   min-height: calc(100dvh - var(--nav-h, 97px));
   display: flex;
