@@ -129,7 +129,6 @@
     state.currentStep = step;
     showStep(step);
     updateProgress(step);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   function hideStep(n) {
