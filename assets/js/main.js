@@ -7,6 +7,8 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     initScrollReveal();
+    initFaqAccordion();
+    initFaqNav();
   });
 
   /* ── Scroll reveal ── */
@@ -31,6 +33,62 @@
     revealEls.forEach(function (el) {
       el.classList.add('reveal');
       observer.observe(el);
+    });
+  }
+
+  /* ── FAQ accordion ── */
+  function initFaqAccordion() {
+    var items = document.querySelectorAll('.faq-item');
+    if (!items.length) return;
+
+    items.forEach(function (item) {
+      var btn    = item.querySelector('.faq-question');
+      var answer = item.querySelector('.faq-answer');
+      btn.addEventListener('click', function () {
+        var isOpen = item.classList.contains('is-open');
+        /* Close all */
+        items.forEach(function (i) {
+          i.classList.remove('is-open');
+          i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+          i.querySelector('.faq-answer').style.maxHeight = null;
+        });
+        /* Open clicked (unless it was already open) */
+        if (!isOpen) {
+          item.classList.add('is-open');
+          btn.setAttribute('aria-expanded', 'true');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
+      });
+    });
+  }
+
+  /* ── FAQ side nav ── */
+  function initFaqNav() {
+    var groups   = document.querySelectorAll('.faq-group');
+    var navItems = document.querySelectorAll('.faq-nav-item');
+    if (!groups.length || !navItems.length) return;
+
+    function onScroll() {
+      var scrollY = window.scrollY + 140;
+      var active  = null;
+      groups.forEach(function (g) {
+        if (g.offsetTop <= scrollY) active = g.id;
+      });
+      navItems.forEach(function (n) {
+        n.classList.toggle('is-active', n.dataset.target === active);
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    navItems.forEach(function (n) {
+      n.addEventListener('click', function () {
+        var target = document.getElementById(n.dataset.target);
+        if (target) {
+          var offset = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 97;
+          window.scrollTo({ top: target.offsetTop - offset - 32, behavior: 'smooth' });
+        }
+      });
     });
   }
 
