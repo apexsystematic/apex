@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/19a036e48e9005dddd5999b15ed936e7/script.js"></script>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-52T88XLZ');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Answers to common questions about how Apex Systematic works, what we build, and whether it's right for your firm.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="FAQ — Apex Systematic">
+  <meta property="og:description" content="Answers to common questions about how Apex Systematic works, what we build, and whether it's right for your firm.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://apexsystematic.com/faq/">
+  <meta property="og:image" content="https://apexsystematic.com/assets/images/og-image-v1.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Apex Systematic">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FAQ — Apex Systematic">
+  <meta name="twitter:description" content="Answers to common questions about how Apex Systematic works, what we build, and whether it's right for your firm.">
+  <meta name="twitter:image" content="https://apexsystematic.com/assets/images/og-image-v1.png">
+  <title>FAQ — Apex Systematic</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+  <style>
+    /* FAQ accordion — inline only because no FAQ styles exist in style.css */
+    .faq-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .faq-nav {
+      position: sticky;
+      top: calc(var(--nav-h, 97px) + 40px);
+    }
+    .faq-nav-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .faq-nav-item {
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 8px 0;
+      border-left: 2px solid transparent;
+      padding-left: 14px;
+      transition: color var(--ease), border-color var(--ease);
+    }
+    .faq-nav-item:hover,
+    .faq-nav-item.is-active {
+      color: var(--gold);
+      border-left-color: var(--gold);
+    }
+    .faq-sections {
+      display: flex;
+      flex-direction: column;
+    }
+    .faq-group {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 64px;
+      margin-bottom: 64px;
+    }
+    .faq-group:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+    .faq-group-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--white);
+      font-weight: 400;
+      margin-bottom: 32px;
+    }
+    .faq-item {
+      border-top: 1px solid var(--border);
+    }
+    .faq-item:last-child {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-question {
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 22px 0;
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 500;
+      line-height: 1.4;
+      transition: color var(--ease);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .faq-question:hover {
+      color: var(--gold);
+    }
+    .faq-icon {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      position: relative;
+      color: var(--text-muted);
+      transition: color var(--ease), transform var(--ease);
+    }
+    .faq-icon::before,
+    .faq-icon::after {
+      content: '';
+      position: absolute;
+      background: currentColor;
+      border-radius: 1px;
+      transition: transform var(--ease), opacity var(--ease);
+    }
+    .faq-icon::before {
+      width: 12px;
+      height: 1px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .faq-icon::after {
+      width: 1px;
+      height: 12px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .faq-item.is-open .faq-icon::after {
+      transform: translate(-50%, -50%) rotate(90deg);
+      opacity: 0;
+    }
+    .faq-item.is-open .faq-question {
+      color: var(--gold);
+    }
+    .faq-item.is-open .faq-icon {
+      color: var(--gold);
+    }
+    .faq-answer {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.35s ease;
+    }
+    .faq-answer-inner {
+      padding-bottom: 24px;
+      max-width: 680px;
+    }
+    .faq-answer-inner p {
+      font-size: 0.93rem;
+      line-height: 1.8;
+      color: var(--text-muted);
+    }
+
+    /* Hero area for this page */
+    .page-hero {
+      padding: var(--section-y) 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-hero .section-tag {
+      margin-bottom: 1.25rem;
+    }
+    .page-hero h1 {
+      max-width: 680px;
+      margin-bottom: 1.25rem;
+    }
+    .page-hero p {
+      max-width: 520px;
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 1024px) {
+      .faq-layout {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+      .faq-nav {
+        position: static;
+        display: none;
+      }
+    }
+    @media (max-width: 768px) {
+      .faq-group {
+        padding-bottom: 48px;
+        margin-bottom: 48px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <main id="main-content">
+
+    <!-- ── PAGE HERO ── -->
+    <section class="page-hero">
+      <div class="container">
+        <span class="section-tag">FAQ</span>
+        <h1>Questions, answered.</h1>
+        <p>Everything you need to know about how we work, what we build, and whether it's the right fit for your firm.</p>
+      </div>
+    </section>
+
+    <!-- ── FAQ BODY ── -->
+    <section id="faq">
+      <div class="container">
+        <div class="faq-layout">
+
+          <!-- Sticky side nav (desktop only) -->
+          <nav class="faq-nav" aria-label="FAQ sections">
+            <ul class="faq-nav-list">
+              <li class="faq-nav-item" data-target="faq-what">What we are</li>
+              <li class="faq-nav-item" data-target="faq-commercial">Commercial model</li>
+              <li class="faq-nav-item" data-target="faq-how">How it works</li>
+              <li class="faq-nav-item" data-target="faq-demos">Seeing it work</li>
+              <li class="faq-nav-item" data-target="faq-fit">Is it right for us</li>
+              <li class="faq-nav-item" data-target="faq-working">Working with us</li>
+            </ul>
+          </nav>
+
+          <!-- Accordion sections -->
+          <div class="faq-sections">
+
+            <!-- ── What Apex Systematic Is ── -->
+            <div class="faq-group" id="faq-what">
+              <h2 class="faq-group-title">What Apex Systematic Is</h2>
+
+              <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                  What does Apex Systematic actually do?
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </button>
+                <div class="faq-answer" role="region">
+                  <div class="faq-answer-inner">
+                    <p>We build AI automation for professional services firms. That means taking the repetitive tasks that pile up around your client work — intake, onboarding, document chasing, routine reporting — and building systems that handle them automatically. You stop doing the task. The automation does it instead.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                  Are you a software company?
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </button>
+                <div class="faq-answer" role="region">
+                  <div class="faq-answer-inner">
+                    <p>No. We do not sell a platform or a licence. We build something specific to your firm and hand it over. There is no app to subscribe to and no software to renew.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                  Are you a consultancy?
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </button>
+                <div class="faq-answer" role="region">
+                  <div class="faq-answer-inner">
+                    <p>No. We do not produce recommendations or reports. We build working automation and deliver it. The output is a system that runs, not a document that describes one.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                  Are you an AI company?
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </button>
+                <div class="faq-answer" role="region">
+                  <div class="faq-answer-inner">
+                    <p>We use AI as part of what we build. But we are not selling AI as a concept — we are solving specific problems in professional services firms. If a task can be automated without AI, we use the simplest approach that works.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                  What kind of tasks do you actually automate?
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </button>
+                <div class="faq-answer" role="region">
+                  <div class="faq-answer-inner">
+                    <p>The tasks that qualified professionals should not be spending time on. Common examples: client intake and onboarding sequences, document collection and chasing, engagement letter dispatch and tracking, routine client reporting, internal status updates, and appointment or deadline reminders. If it follows a repeatable pattern and does not require professional judgement, it is a candidate.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                  What firms do you work with?
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </button>
+                <div class="faq-answer" role="region">
+                  <div class="faq-answer-inner">
+                    <p>Solo practitioners and small firms in professional services — law, accountancy, financial advice, and consultancy. Typically between 1 and 15 people. UK-based, though we also work with firms on the US East Coast and in Europe.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                  Is this only for law firms?
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </button>
+                <div class="faq-answer" role="region">
+                  <div class="faq-answer-inner">
+                    <p>No. Law firms are a primary focus because the admin burden is well-documented and the tasks are highly repeatable. But the same problems — and the same solutions — apply across accountancy, financial advice, and consultancy practices.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                  Can you work with larger firms?
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </button>
+                <div class="faq-answer" role="region">
+                  <div class="faq-answer-inner">
+                    <p>Our model is built around solo and small firm engagements. If you are a larger firm, get in touch and we will tell you honestly whether we are the right fit.</p>
+                  </div>
+                </div>
+              </div>
+
+            </div><!-- /faq-group -->
+
+
+            <!-- ── The Commercial Model ── -->
+            <div class="faq-group" id="faq-commercial">
+              <h2 class="faq-group-title">The Commercial Model</h2>
+
+              <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                  What does fixed price mean in practice?
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </button>
+                <div class="faq-answer" role="region">
+                  <div class="faq-answer-inner">
+                    <p>You receive a price before any work begins. That price does not change based on how long the build takes or how complex it turns out to be. There are no hourly rates, no variation orders, and no end-of-project surprises.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                  What does "no retainer" mean?
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </button>
+                <div class="faq-answer" role="region">
+                  <div class="faq-answer-inner">
+                    <p>Once we have built and handed over your automation, there is no ongoing fee. We do not charge a monthly management fee, a support retainer, or a licence cost. The engagement ends when the build is complete.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                  Who owns what gets built?
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </button>
+                <div class="faq-answer" role="region">
+                  <div class="faq-answer-inner">
+                    <p>You do. Every workflow, integration, and system we build is handed over in full at the end of the project. We retain no rights to it and no ongoing access unless you specifically ask us to.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                  What happens if something goes wrong after handover?
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </button>
+                <div class="faq-answer" role="region">
+                  <div class="faq-answer-inner">
+                    <p>That depends on the nature of the issue. If it is something that arose from the build itself, we will address it. If it is the result of a change in a third-party tool or platform, we will scope what is needed and give you a fixed price to fix it. We do not offer open-ended support retainers, but we do not disappear after handover either.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                  Are there any ongoing costs at all?
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </button>
+                <div class="faq-answer" role="region">
+                  <div class="faq-answer-inner">
+                    <p>Potentially, but not to us. Most automations run on third-party platforms — tools like Make, Zapier, or n8n — which may have their own subscription costs. We will tell you exactly what those are before the build starts. In most cases they are modest, and some workflows run on free tiers.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                  Why no retainer? Most agencies charge one.
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </button>
+                <div class="faq-answer" role="region">
+                  <div class="faq-answer-inner">
+                    <p>Because it is not necessary for what we do. A retainer makes sense when you are buying ongoing strategic input or continuous development. We build something specific, hand it over, and it runs without us. Charging you monthly for something you no longer need us for would not be honest.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                  Can I come back for additional work after the first project?
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </button>
+                <div class="faq-answer" role="region">
+                  <div class="faq-answer-inner">
+                    <p>Yes. If you want to automate something else, we scope and price it as a new fixed-price project. There is no account management relationship, no preferred client programme, and no pressure to keep buying. You come back when you have a problem worth solving.</p>
+                  </div>
+                </div>
+              </div>
+
+            </div><!-- /faq-group -->
+
+
+            <!-- ── How It Works ── -->
+            <div class="faq-group" id="faq-how">
+              <h2 class="faq-group-title">How It Works</h2>
+
+              <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                  How does an engagement typically start?
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </button>
+                <div class="faq-answer" role="region">
+                  <div class="faq-answer-inner">
+                    <p>With a conversation about what is eating your time. We ask about the tasks, the volume, the tools you already use, and what a good outcome looks like. From that we scope the build and give you a fixed price. No commitment required to have that conversation.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                  How long does a build take?
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </button>
+                <div class="faq-answer" role="region">
+                  <div class="faq-answer-inner">
+                    <p>It depends on the complexity. A focused single-workflow build typically takes one to two weeks. A broader engagement covering multiple processes takes longer. We will give you
