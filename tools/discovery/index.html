@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Apex Systematic — Discovery Framework</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/discovery.css">
+</head>
+<body>
+
+  <!-- ── STICKY HEADER ── -->
+  <header id="df-header">
+    <div class="df-header-inner">
+      <div class="df-logo">
+        <span class="df-logo-apex">APEX</span><span class="df-logo-sys">SYSTEMATIC</span>
+        <span class="df-logo-badge">Discovery Framework</span>
+      </div>
+      <div class="df-selectors">
+        <div class="df-selector-group">
+          <label for="sel-region">Region</label>
+          <select id="sel-region">
+            <option value="">— Select —</option>
+            <option value="UK">United Kingdom</option>
+            <option value="US">United States</option>
+            <option value="EU">European Union</option>
+          </select>
+        </div>
+        <div class="df-selector-group">
+          <label for="sel-firmtype">Firm Type</label>
+          <select id="sel-firmtype">
+            <option value="">— Select —</option>
+            <option value="lawFirm">Law Firm</option>
+            <option value="financialAdviser">Financial Advisory</option>
+            <option value="accounting">Accounting / CPA</option>
+            <option value="consulting">Consulting</option>
+          </select>
+        </div>
+      </div>
+      <div class="df-header-actions">
+        <div class="df-progress-wrap" id="progress-wrap" style="display:none">
+          <span id="progress-label">0 / 0 fields</span>
+          <div class="df-progress-bar"><div class="df-progress-fill" id="progress-fill"></div></div>
+        </div>
+        <button class="df-btn df-btn-ghost" id="btn-export" title="Export as JSON">Export JSON</button>
+        <button class="df-btn df-btn-ghost" id="btn-new-call" title="Start a new call">New Call</button>
+        <button class="df-btn df-btn-primary" id="btn-print" title="Print / Save as PDF">Print</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── LAYOUT ── -->
+  <div class="df-layout" id="df-layout">
+
+    <!-- ── SIDEBAR NAV ── -->
+    <nav class="df-sidenav" id="df-sidenav">
+      <ul id="sidenav-list">
+        <li><a href="#sec-intro" class="snav-link" data-sec="intro">Intro</a></li>
+        <li><a href="#sec-precall" class="snav-link" data-sec="precall">Pre-Call</a></li>
+        <li><a href="#sec-s1" class="snav-link" data-sec="s1">S1 — Firm</a></li>
+        <li><a href="#sec-s2" class="snav-link" data-sec="s2">S2 — Process</a></li>
+        <li><a href="#sec-s3" class="snav-link" data-sec="s3">S3 — Tech</a></li>
+        <li><a href="#sec-s4" class="snav-link" data-sec="s4">S4 — Compliance</a></li>
+        <li><a href="#sec-s5" class="snav-link" data-sec="s5">S5 — Priorities</a></li>
+        <li><a href="#sec-s6" class="snav-link" data-sec="s6">S6 — Build</a></li>
+        <li><a href="#sec-s7" class="snav-link" data-sec="s7">S7 — Close</a></li>
+        <li><a href="#sec-appendix" class="snav-link" data-sec="appendix">Appendix</a></li>
+      </ul>
+      <div class="df-autosave-indicator" id="autosave-indicator">Saved</div>
+    </nav>
+
+    <!-- ── MAIN CONTENT ── -->
+    <main class="df-main" id="df-main">
+
+      <!-- ── EMPTY STATE ── -->
+      <div id="empty-state" class="df-empty-state">
+        <div class="df-empty-inner">
+          <div class="df-empty-logo">
+            <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="1" width="58" height="58" rx="4" stroke="#C9A84C" stroke-width="1.5"/>
+              <path d="M15 20h30M15 30h20M15 40h25" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h2>Select region and firm type to begin</h2>
+          <p id="empty-hint">Use the selectors above to load the framework for this call.</p>
+        </div>
+      </div>
+
+      <!-- ── FRAMEWORK CONTENT (rendered by JS) ── -->
+      <div id="framework-content" style="display:none">
+        <div id="sec-intro"></div>
+        <div id="sec-precall"></div>
+        <div id="sec-s1"></div>
+        <div id="sec-s2"></div>
+        <div id="sec-s3"></div>
+        <div id="sec-s4"></div>
+        <div id="sec-s5"></div>
+        <div id="sec-s6"></div>
+        <div id="sec-s7"></div>
+        <div id="sec-appendix"></div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ── CONFIRMATION MODAL ── -->
+  <div id="confirm-modal" class="df-modal-overlay" style="display:none">
+    <div class="df-modal">
+      <h3 id="modal-title">Confirm</h3>
+      <p id="modal-body"></p>
+      <div class="df-modal-actions">
+        <button class="df-btn df-btn-ghost" id="modal-cancel">Cancel</button>
+        <button class="df-btn df-btn-primary" id="modal-confirm">Continue</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/assets/js/lock.js"></script>
+  <script src="/assets/js/content_data.js"></script>
+  <script src="/assets/js/app.js"></script>
+</body>
+</html>
