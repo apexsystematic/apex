@@ -422,50 +422,81 @@ window.showStep = function (step) {
 })();
 
 /* ═══════════════════════════════════════════
-   APEX SYSTEMATIC — Localised pricing
-   ═══════════════════════════════════════════ */
-
-/* ═══════════════════════════════════════════
    APEX SYSTEMATIC — Geo pricing
+   EUR is the source of truth. USD + GBP are
+   calculated at runtime from live FX rates
+   returned by the geo worker (30-day KV cache).
+   Prices rounded to nearest 50.
    ═══════════════════════════════════════════ */
 
 (function () {
 
-  // ── Prices per tier ──
-  const PRICES = {
-    // ── Suite bundle prices ──
-    intake_suite:       { USD: [3300,  6500], GBP: [2600,  5100], EUR: [3000,  5900] },
-    client_suite:       { USD: [3700,  7400], GBP: [2900,  5800], EUR: [3400,  6700] },
-    admin_suite:        { USD: [4300,  8600], GBP: [3400,  6800], EUR: [3900,  7800] },
-    retention_suite:    { USD: [1400,  2700], GBP: [1100,  2100], EUR: [1300,  2400] },
-    complete_firm:      { USD: [10800, 21000], GBP: [8500, 16500], EUR: [9800, 19000] },
+  // ── EUR source of truth ──────────────────
+  const PRICES_EUR = {
+    // Suite bundle prices
+    intake_suite:         [3000,  5900],
+    client_suite:         [3400,  6300],
+    admin_suite:          [3950,  7850],
+    retention_suite:      [1250,  2500],
+    complete_firm:        [10300, 19900],
 
-    // ── Standalone reference prices ──
-    intake_standalone:    { USD: [3900,  7600], GBP: [3050,  6000], EUR: [3500,  6900] },
-    client_standalone:    { USD: [4400,  8700], GBP: [3450,  6800], EUR: [3900,  7800] },
-    admin_standalone:     { USD: [5100, 10200], GBP: [4000,  8000], EUR: [4600,  9200] },
-    retention_standalone: { USD: [1650,  3200], GBP: [1300,  2500], EUR: [1500,  2900] },
-    complete_standalone:  { USD: [15000, 29100], GBP: [11800, 22900], EUR: [13500, 26400] },
+    // Standalone reference prices
+    intake_standalone:    [3500,  6900],
+    client_standalone:    [3900,  7800],
+    admin_standalone:     [4600,  9200],
+    retention_standalone: [1500,  2900],
+    complete_standalone:  [13500, 26400],
   };
 
   const SYMBOLS = { USD: '$', GBP: '£', EUR: '€' };
 
-  // ── Format ──
+  // Cached rates from geo worker (populated on init)
+  let _rates = null;
+  // Active currency
+  let _currency = 'EUR';
+
+  // ── Helpers ──────────────────────────────
+  function roundTo50(n) {
+    return Math.round(n / 50) * 50;
+  }
+
+  function convert(eurAmount, currency) {
+    if (currency === 'EUR') return eurAmount;
+    const rate = _rates && _rates[currency];
+    if (!rate) return null; // no rate available — caller handles fallback
+    return roundTo50(eurAmount * rate);
+  }
+
   function fmt(symbol, amount) {
     return symbol + amount.toLocaleString('en-GB');
   }
 
   function fmtRange(currency, tier) {
+    const [eurLo, eurHi] = PRICES_EUR[tier];
     const sym = SYMBOLS[currency];
-    const [lo, hi] = PRICES[tier][currency];
+
+    if (currency === 'EUR') {
+      return fmt(sym, eurLo) + '–' + fmt(sym, eurHi);
+    }
+
+    const lo = convert(eurLo, currency);
+    const hi = convert(eurHi, currency);
+
+    // If rates unavailable, fall back to EUR display
+    if (lo === null || hi === null) {
+      return fmt('€', eurLo) + '–' + fmt('€', eurHi);
+    }
+
     return fmt(sym, lo) + '–' + fmt(sym, hi);
   }
 
-  // ── Apply to DOM ──
+  // ── Apply to DOM ─────────────────────────
   function applyPricing(currency) {
+    _currency = currency;
+
     document.querySelectorAll('[data-tier]').forEach(function (el) {
       const tier = el.dataset.tier;
-      if (PRICES[tier] && PRICES[tier][currency]) {
+      if (PRICES_EUR[tier]) {
         el.textContent = fmtRange(currency, tier);
       }
     });
@@ -477,30 +508,29 @@ window.showStep = function (step) {
     try { localStorage.setItem('apex_currency', currency); } catch (e) {}
   }
 
-  // ── Toggle handler (called from HTML) ──
+  // ── Toggle handler (called from HTML) ────
   window.apexSetCurrency = function (currency) {
     applyPricing(currency);
   };
 
-  // ── Init ──
+  // ── Init ─────────────────────────────────
   async function init() {
     let currency;
 
     // 1. Honour manual override
     try { currency = localStorage.getItem('apex_currency'); } catch (e) {}
 
-    if (!currency) {
-      // 2. Ask the geo worker
-      try {
-        const res  = await fetch('https://geo.apexsystematic.com');
-        const data = await res.json();
-        currency = data.currency;
-      } catch (e) {
-        currency = 'EUR'; // fallback
-      }
+    // 2. Ask the geo worker (also returns cached FX rates)
+    try {
+      const res  = await fetch('https://geo.apexsystematic.com');
+      const data = await res.json();
+      _rates = data.rates || null;          // { USD: 1.08, GBP: 0.85, fetched: ... }
+      if (!currency) currency = data.currency;
+    } catch (e) {
+      // Worker unreachable — EUR fallback, no rates
     }
 
-    applyPricing(currency);
+    applyPricing(currency || 'EUR');
   }
 
   if (document.readyState === 'loading') {
