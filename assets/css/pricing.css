@@ -243,8 +243,7 @@
 }
 
 .suite-header {
-  padding: 40px 48px 32px;
-  border-bottom: 1px solid var(--border);
+  padding: 40px 48px 0px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -319,12 +318,11 @@
 }
 
 .suite-desc {
-  padding: 32px 48px;
+  padding: 10px 32px 32px 48px;
   font-size: 0.95rem;
   color: var(--text-muted);
   line-height: 1.85;
   border-bottom: 1px solid var(--border);
-  max-width: 780px;
   margin: 0;
 }
 
@@ -351,14 +349,21 @@
   border-right: none;
 }
 
-/* Remove bottom border on last row */
-.automation-card:nth-last-child(-n+2) {
-  border-bottom: none;
-}
-
+/* Full-width card (3-automation suites) — spans both columns, no right border */
 .automation-card--full {
   grid-column: span 2;
   border-right: none;
+}
+
+/* Remove bottom border from the last card in each suite's automation grid */
+.suite-automations > .automation-card:last-child {
+  border-bottom: none;
+}
+
+/* When last card is full-width, the card directly above it is nth-last-child(2).
+   It sits alone in its row so also needs its bottom border removed. */
+.suite-automations > .automation-card:nth-last-child(2):nth-child(odd) {
+  border-bottom: none;
 }
 
 .automation-num {
@@ -595,11 +600,11 @@
 
 @media (max-width: 900px) {
   .suite-header {
-    padding: 28px 28px 24px;
+    padding: 28px 28px 18px;
   }
 
   .suite-desc {
-    padding: 24px 28px;
+    padding: 0px 28px 28px;
   }
 
   .suite-footer {
@@ -618,12 +623,22 @@
     padding: 28px 28px;
   }
 
-  .automation-card:nth-last-child(-n+2) {
+  .automation-card--full {
+    grid-column: span 1;
+  }
+
+  .suite-automations > .automation-card:last-child {
+    border-bottom: none;
+  }
+
+  /* Restore bottom border on all non-last cards (overrides any desktop rules) */
+  .suite-automations > .automation-card:not(:last-child) {
     border-bottom: 1px solid var(--border);
   }
 
-  .automation-card:last-child {
-    border-bottom: none;
+  /* Restore right-column cards that lost their bottom border on desktop */
+  .suite-automations > .automation-card:nth-last-child(2):nth-child(odd) {
+    border-bottom: 1px solid var(--border);
   }
 
   .complete-firm-inner {
