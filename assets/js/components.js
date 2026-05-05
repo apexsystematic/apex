@@ -25,6 +25,8 @@
     + '<text x="88" y="104" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" font-weight="300" letter-spacing="9.5" fill="#C9A84C">SYSTEMATIC</text>'
     + '</svg>';
 
+  var CHEVRON_SVG = '<svg viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
   /* ── Header ── */
   function injectHeader() {
     var el = document.getElementById('site-header');
@@ -34,11 +36,49 @@
       +   '<div class="header container">'
       +     '<a href="/index.html" class="header-logo" aria-label="Apex Systematic">' + LOGO_HEADER + '</a>'
       +     '<nav class="header-nav" aria-label="Main navigation">'
-      +       '<a href="/services/">Services</a>'
-      +       '<a href="/demos/" style="color:var(--gold);">Demos</a>'
-      +       '<a href="/tools/roi-calculator/">ROI Calculator</a>'
-      +       '<a href="/pricing/">Pricing</a>'
-      +       '<a href="/faq/">FAQ</a>'
+
+      /* Services dropdown */
+      +     '<div class="nav-dropdown">'
+      +       '<button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">Services ' + CHEVRON_SVG + '</button>'
+      +       '<div class="nav-dropdown-menu">'
+      +         '<a href="/services/law-firms/">Law Firms</a>'
+      +         '<a href="/services/accountants/">Accountants</a>'
+      +         '<a href="/services/financial-advisers/">Financial Advisers</a>'
+      +         '<a href="/services/insurance-brokers/">Insurance Brokers</a>'
+      +         '<a href="/services/mortgage-brokers/">Mortgage Brokers</a>'
+      +         '<a href="/services/estate-agents/">Estate Agents</a>'
+      +         '<a href="/services/letting-agents/">Letting Agents</a>'
+      +         '<a href="/services/consultants/">Consultants</a>'
+      +         '<a href="/services/hr-recruitment/">HR &amp; Recruitment</a>'
+      +         '<a href="/services/seo-consultants/">SEO Consultants</a>'
+      +         '<a href="/services/" class="nav-dropdown-view-all">All Industries →</a>'
+      +       '</div>'
+      +     '</div>'
+
+      /* Demos — standalone */
+      +     '<a href="/demos/" style="color:var(--gold);">Demos</a>'
+
+      /* Tools dropdown */
+      +     '<div class="nav-dropdown">'
+      +       '<button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">Tools ' + CHEVRON_SVG + '</button>'
+      +       '<div class="nav-dropdown-menu">'
+      +         '<a href="/tools/roi-calculator/">ROI Calculator</a>'
+      +         '<a href="/tools/cost-of-stalling/">Cost of Stalling</a>'
+      +         '<a href="/tools/audit/">Self-Serve Audit</a>'
+      +       '</div>'
+      +     '</div>'
+
+      /* Reports dropdown */
+      +     '<div class="nav-dropdown">'
+      +       '<button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">Reports ' + CHEVRON_SVG + '</button>'
+      +       '<div class="nav-dropdown-menu">'
+      +         '<a href="/reports/automation-report/">State of Automation</a>'
+      +         '<a href="/reports/law-firms-insights/">Law Firms Insights</a>'
+      +         '<a href="/reports/" class="nav-dropdown-view-all">All Reports →</a>'
+      +       '</div>'
+      +     '</div>'
+
+      +     '<a href="/pricing/">Pricing</a>'
       +     '</nav>'
       +     '<div class="header-right">'
       +       '<a href="/index.html#contact" class="btn btn-primary header-cta">Free Audit</a>'
@@ -48,11 +88,51 @@
       +     '</div>'
       +   '</div>'
       + '</div>'
+
+      /* Mobile nav */
       + '<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">'
       +   '<button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close menu">&#10005;</button>'
-      +   '<a href="/services/">Services</a>'
+
+      /* Services accordion */
+      +   '<div class="mobile-nav-group">'
+      +     '<button class="mobile-nav-group-toggle" data-target="mobile-sub-services">Services ' + CHEVRON_SVG + '</button>'
+      +     '<div class="mobile-nav-sub" id="mobile-sub-services">'
+      +       '<a href="/services/law-firms/">Law Firms</a>'
+      +       '<a href="/services/accountants/">Accountants</a>'
+      +       '<a href="/services/financial-advisers/">Financial Advisers</a>'
+      +       '<a href="/services/insurance-brokers/">Insurance Brokers</a>'
+      +       '<a href="/services/mortgage-brokers/">Mortgage Brokers</a>'
+      +       '<a href="/services/estate-agents/">Estate Agents</a>'
+      +       '<a href="/services/letting-agents/">Letting Agents</a>'
+      +       '<a href="/services/consultants/">Consultants</a>'
+      +       '<a href="/services/hr-recruitment/">HR &amp; Recruitment</a>'
+      +       '<a href="/services/seo-consultants/">SEO Consultants</a>'
+      +       '<a href="/services/" class="mobile-nav-view-all">All Industries →</a>'
+      +     '</div>'
+      +   '</div>'
+
       +   '<a href="/demos/" style="color:var(--gold);">Demos</a>'
-      +   '<a href="/tools/roi-calculator/">ROI Calculator</a>'
+
+      /* Tools accordion */
+      +   '<div class="mobile-nav-group">'
+      +     '<button class="mobile-nav-group-toggle" data-target="mobile-sub-tools">Tools ' + CHEVRON_SVG + '</button>'
+      +     '<div class="mobile-nav-sub" id="mobile-sub-tools">'
+      +       '<a href="/tools/roi-calculator/">ROI Calculator</a>'
+      +       '<a href="/tools/cost-of-stalling/">Cost of Stalling</a>'
+      +       '<a href="/tools/audit/">Self-Serve Audit</a>'
+      +     '</div>'
+      +   '</div>'
+
+      /* Reports accordion */
+      +   '<div class="mobile-nav-group">'
+      +     '<button class="mobile-nav-group-toggle" data-target="mobile-sub-reports">Reports ' + CHEVRON_SVG + '</button>'
+      +     '<div class="mobile-nav-sub" id="mobile-sub-reports">'
+      +       '<a href="/reports/automation-report/">State of Automation</a>'
+      +       '<a href="/reports/law-firms-insights/">Law Firms Insights</a>'
+      +       '<a href="/reports/" class="mobile-nav-view-all">All Reports →</a>'
+      +     '</div>'
+      +   '</div>'
+
       +   '<a href="/pricing/">Pricing</a>'
       +   '<a href="/faq/">FAQ</a>'
       +   '<a href="/index.html#contact" class="btn btn-primary">Free Audit</a>'
@@ -67,22 +147,49 @@
       '<footer class="footer-wrap">'
       +   '<div class="footer container">'
       +     '<a href="/index.html" class="footer-logo" aria-label="Apex Systematic">' + LOGO_FOOTER + '</a>'
-      +     '<nav class="footer-nav" aria-label="Footer navigation">'
-      +       '<a href="/services/">Services</a>'
-      +       '<a href="/demos/">Demos</a>'
-      +       '<a href="/tools/roi-calculator/">ROI Calculator</a>'
-      +       '<a href="/pricing/">Pricing</a>'
-      +       '<a href="/faq/">FAQ</a>'
-      +       '<a href="/index.html#contact">Contact</a>'
-      +     '</nav>'
-      +     '<div class="footer-bottom">'
-      +       '<p class="footer-copy">&copy; 2026 Apex Systematic</p>'
-      +       '<nav class="footer-legal" aria-label="Legal">'
+      +     '<nav class="footer-nav-cols" aria-label="Footer navigation">'
+
+      +       '<div class="footer-nav-col">'
+      +         '<h4>Services</h4>'
+      +         '<a href="/services/law-firms/">Law Firms</a>'
+      +         '<a href="/services/accountants/">Accountants</a>'
+      +         '<a href="/services/financial-advisers/">Financial Advisers</a>'
+      +         '<a href="/services/insurance-brokers/">Insurance Brokers</a>'
+      +         '<a href="/services/mortgage-brokers/">Mortgage Brokers</a>'
+      +         '<a href="/services/estate-agents/">Estate Agents</a>'
+      +         '<a href="/services/letting-agents/">Letting Agents</a>'
+      +         '<a href="/services/consultants/">Consultants</a>'
+      +         '<a href="/services/hr-recruitment/">HR &amp; Recruitment</a>'
+      +         '<a href="/services/seo-consultants/">SEO Consultants</a>'
+      +       '</div>'
+
+      +       '<div class="footer-nav-col">'
+      +         '<h4>Tools</h4>'
+      +         '<a href="/tools/roi-calculator/">ROI Calculator</a>'
+      +         '<a href="/tools/cost-of-stalling/">Cost of Stalling</a>'
+      +         '<a href="/tools/audit/">Self-Serve Audit</a>'
+      +         '<h4 style="margin-top:24px;">Reports</h4>'
+      +         '<a href="/reports/automation-report/">State of Automation</a>'
+      +         '<a href="/reports/law-firms-insights/">Law Firms Insights</a>'
+      +         '<a href="/reports/">All Reports \u2192</a>'
+      +       '</div>'
+
+      +       '<div class="footer-nav-col">'
+      +         '<h4>Company</h4>'
+      +         '<a href="/demos/">Demos</a>'
+      +         '<a href="/pricing/">Pricing</a>'
+      +         '<a href="/faq/">FAQ</a>'
+      +         '<a href="/index.html#contact">Contact</a>'
+      +         '<h4 style="margin-top:24px;">Legal</h4>'
       +         '<a href="/legal/terms.html">Terms</a>'
       +         '<a href="/legal/privacy.html">Privacy</a>'
       +         '<a href="/legal/cookies.html">Cookies</a>'
       +         '<a href="#" class="cky-banner-element">Cookie Settings</a>'
-      +       '</nav>'
+      +       '</div>'
+
+      +     '</nav>'
+      +     '<div class="footer-bottom">'
+      +       '<p class="footer-copy">&copy; 2026 Apex Systematic</p>'
       +     '</div>'
       +   '</div>'
       + '</footer>';
@@ -96,6 +203,13 @@
 
     if (!menuToggle || !mobileNav) return;
 
+    function closeMobileNav() {
+      mobileNav.classList.remove('is-open');
+      menuToggle.classList.remove('is-open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      document.documentElement.style.overflow = '';
+    }
+
     menuToggle.addEventListener('click', function () {
       var isOpen = mobileNav.classList.toggle('is-open');
       menuToggle.classList.toggle('is-open', isOpen);
@@ -104,21 +218,53 @@
     });
 
     if (closeBtn) {
-      closeBtn.addEventListener('click', function () {
-        mobileNav.classList.remove('is-open');
-        menuToggle.classList.remove('is-open');
-        menuToggle.setAttribute('aria-expanded', 'false');
-        document.documentElement.style.overflow = '';
-      });
+      closeBtn.addEventListener('click', closeMobileNav);
     }
 
-    mobileNav.querySelectorAll('a').forEach(function (link) {
-      link.addEventListener('click', function () {
-        mobileNav.classList.remove('is-open');
-        menuToggle.classList.remove('is-open');
-        menuToggle.setAttribute('aria-expanded', 'false');
-        document.documentElement.style.overflow = '';
+    /* Mobile accordion toggles */
+    mobileNav.querySelectorAll('.mobile-nav-group-toggle').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var targetId = btn.getAttribute('data-target');
+        var sub = document.getElementById(targetId);
+        if (!sub) return;
+        var isOpen = sub.classList.toggle('is-open');
+        btn.classList.toggle('is-open', isOpen);
       });
+    });
+
+    /* Close on link click (but not accordion toggles) */
+    mobileNav.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', closeMobileNav);
+    });
+  }
+
+  /* ── Desktop dropdown keyboard/click handling ── */
+  function initDesktopDropdowns() {
+    document.querySelectorAll('.nav-dropdown').forEach(function (dropdown) {
+      var toggle = dropdown.querySelector('.nav-dropdown-toggle');
+      var menu   = dropdown.querySelector('.nav-dropdown-menu');
+      if (!toggle || !menu) return;
+
+      /* Click to open/close (for touch/keyboard users) */
+      toggle.addEventListener('click', function () {
+        var isOpen = menu.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', String(isOpen));
+        /* Close siblings */
+        document.querySelectorAll('.nav-dropdown-menu').forEach(function (m) {
+          if (m !== menu) { m.classList.remove('is-open'); }
+        });
+        document.querySelectorAll('.nav-dropdown-toggle').forEach(function (t) {
+          if (t !== toggle) { t.setAttribute('aria-expanded', 'false'); }
+        });
+      });
+    });
+
+    /* Close all dropdowns on outside click */
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('.nav-dropdown')) {
+        document.querySelectorAll('.nav-dropdown-menu').forEach(function (m) { m.classList.remove('is-open'); });
+        document.querySelectorAll('.nav-dropdown-toggle').forEach(function (t) { t.setAttribute('aria-expanded', 'false'); });
+      }
     });
   }
 
@@ -406,6 +552,7 @@
   injectHeader();
   injectFooter();
   initMobileMenu();
+  initDesktopDropdowns();
   injectContactForm();
   injectDemoContactModal();
   injectChatWidget();

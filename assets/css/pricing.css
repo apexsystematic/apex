@@ -69,7 +69,6 @@
 
 .complete-firm-block {
   border: 1px solid var(--gold);
-  border-top: none;
   background: var(--surface);
   margin-top: 0;
 }
