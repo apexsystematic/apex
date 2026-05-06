@@ -7,20 +7,82 @@
 
   /* ── Data ── */
 
+  // Maps question answer values to KV tier keys
+  var AUTO_TIER_KEYS = {
+    1:  'enquiry_lead_capture',
+    2:  'appointment_setting',
+    3:  'client_onboarding',
+    4:  'document_proposal_generation',
+    5:  'document_payment_chasing',
+    6:  'deadline_compliance_tracking',
+    7:  'reporting_data_sync',
+    8:  'client_retention_referrals',
+    9:  'client_intake_triage',
+    10: 'invoice_generation',
+    11: 'call_notes_crm',
+    12: 'client_portal_updates',
+    13: 'nps_satisfaction_survey'
+  };
+
+  // EUR fallback prices — mirrors PRICES_FALLBACK in main.js
+  var PRICES_FALLBACK_EUR = {
+    enquiry_lead_capture:         [1100,  2100],
+    appointment_setting:          [800,   1600],
+    client_onboarding:            [1600,  3250],
+    client_intake_triage:         [1000,  1850],
+    client_portal_updates:        [1050,  1950],
+    invoice_generation:           [950,   1750],
+    document_payment_chasing:     [1050,  1850],
+    document_proposal_generation: [1400,  2800],
+    deadline_compliance_tracking: [1250,  2550],
+    call_notes_crm:               [1050,  1850],
+    reporting_data_sync:          [950,   2100],
+    client_retention_referrals:   [800,   1600],
+    nps_satisfaction_survey:      [700,   1250]
+  };
+
+  var SYMBOLS = { USD: '$', GBP: '£', EUR: '€' };
+
+  // Returns [lo, hi] for a given automation number in the active currency
+  function getPriceRange(autoNum) {
+    var tierKey  = AUTO_TIER_KEYS[autoNum];
+    var currency = (window.apexGetCurrency && window.apexGetCurrency()) || 'EUR';
+    var prices   = window.apexGetPrices && window.apexGetPrices();
+    var table    = (prices && prices[currency]) || PRICES_FALLBACK_EUR;
+    return table[tierKey] || PRICES_FALLBACK_EUR[tierKey] || [0, 0];
+  }
+
+  function fmtRange(autoNum) {
+    var currency = (window.apexGetCurrency && window.apexGetCurrency()) || 'EUR';
+    var sym      = SYMBOLS[currency] || '€';
+    var range    = getPriceRange(autoNum);
+    return sym + range[0].toLocaleString('en-GB') + '–' + sym + range[1].toLocaleString('en-GB');
+  }
+
+  function getPriceMid(autoNum) {
+    var range = getPriceRange(autoNum);
+    return Math.round((range[0] + range[1]) / 2);
+  }
+
+  function getCurrencySymbol() {
+    var currency = (window.apexGetCurrency && window.apexGetCurrency()) || 'EUR';
+    return SYMBOLS[currency] || '€';
+  }
+
   var AUTOMATIONS = {
-    1:  { name: 'Enquiry & Lead Capture',          saveRate: 0.70, priceRange: '£950–£1,800',   buildTime: '1–2 weeks', priceMid: 1375, included: ['AI-powered enquiry triage', 'Automatic lead qualification', 'CRM record creation', 'Instant response to all new enquiries'] },
-    2:  { name: 'Appointment Setting',             saveRate: 0.75, priceRange: '£700–£1,400',   buildTime: '1 week',    priceMid: 1050, included: ['Calendar availability sync', 'Automated booking confirmation and reminders', 'No-show follow-up', 'Rescheduling handled automatically'] },
-    3:  { name: 'Client Onboarding',               saveRate: 0.60, priceRange: '£1,400–£2,800', buildTime: '2–3 weeks', priceMid: 2100, included: ['Welcome sequence triggered on signature', 'Document request and collection', 'Portal or folder setup', 'Internal team notifications'] },
-    4:  { name: 'Document & Proposal Generation',  saveRate: 0.65, priceRange: '£1,200–£2,400', buildTime: '2–3 weeks', priceMid: 1800, included: ['Template-driven document generation', 'Client data pre-populated from your CRM', 'Draft email prepared for review', 'Record saved automatically'] },
-    5:  { name: 'Document & Payment Chasing',      saveRate: 0.75, priceRange: '£900–£1,600',   buildTime: '1–2 weeks', priceMid: 1250, included: ['Automated chase sequence on schedule', 'Escalating reminders with custom copy', 'Stops automatically on receipt', 'Status logged to your CRM'] },
-    6:  { name: 'Deadline & Compliance Tracking',  saveRate: 0.70, priceRange: '£1,100–£2,200', buildTime: '2–3 weeks', priceMid: 1650, included: ['Deadline monitoring across all matters', 'Escalating alerts to the right people', 'Compliance checklist automation', 'Audit trail maintained automatically'] },
-    7:  { name: 'Reporting & Data Sync',           saveRate: 0.70, priceRange: '£800–£1,800',   buildTime: '1–2 weeks', priceMid: 1300, included: ['Scheduled report generation and delivery', 'Bi-directional sync between your systems', 'Data validation and error alerts', 'No manual exports or copy-paste'] },
-    8:  { name: 'Client Retention & Referrals',   saveRate: 0.50, priceRange: '£700–£1,400',   buildTime: '1 week',    priceMid: 1050, included: ['Automated check-in sequences', 'Anniversary and milestone triggers', 'Referral request workflows', 'Re-engagement for lapsed clients'] },
-    9:  { name: 'Client Intake Triage',            saveRate: 0.70, priceRange: '£850–£1,600',   buildTime: '1–2 weeks', priceMid: 1225, included: ['Inbound request classification', 'Routing to the right team member', 'Priority scoring and queue management', 'Acknowledgement sent automatically'] },
-    10: { name: 'Invoice Generation',              saveRate: 0.80, priceRange: '£800–£1,500',   buildTime: '1–2 weeks', priceMid: 1150, included: ['Invoices generated from completed work', 'Sent automatically on trigger', 'Payment status tracked and updated', 'Overdue escalation without manual input'] },
-    11: { name: 'Call Notes to CRM',               saveRate: 0.75, priceRange: '£900–£1,600',   buildTime: '1 week',    priceMid: 1250, included: ['Meeting transcription and summarisation', 'Action items extracted and assigned', 'CRM record updated automatically', 'Follow-up email drafted for review'] },
-    12: { name: 'Client Portal Updates',           saveRate: 0.65, priceRange: '£900–£1,700',   buildTime: '1–2 weeks', priceMid: 1300, included: ['Status updates pushed to client portal', 'Triggered on matter milestones', 'Client notification emails automated', 'No manual logging required'] },
-    13: { name: 'NPS & Satisfaction Survey',        saveRate: 0.70, priceRange: '£600–£1,100',   buildTime: '1 week',    priceMid: 850,  included: ['Tally survey triggered automatically after matter close', 'Score and comment pushed to client record', 'High score (9–10) triggers referral nudge', 'Low score (0–6) sends Slack alert for personal follow-up', 'Mid score logged only'] }
+    1:  { name: 'Enquiry & Lead Capture',          saveRate: 0.70, buildTime: '1–2 weeks', included: ['AI-powered enquiry triage', 'Automatic lead qualification', 'CRM record creation', 'Instant response to all new enquiries'] },
+    2:  { name: 'Appointment Setting',             saveRate: 0.75, buildTime: '1 week',    included: ['Calendar availability sync', 'Automated booking confirmation and reminders', 'No-show follow-up', 'Rescheduling handled automatically'] },
+    3:  { name: 'Client Onboarding',               saveRate: 0.60, buildTime: '2–3 weeks', included: ['Welcome sequence triggered on signature', 'Document request and collection', 'Portal or folder setup', 'Internal team notifications'] },
+    4:  { name: 'Document & Proposal Generation',  saveRate: 0.65, buildTime: '2–3 weeks', included: ['Template-driven document generation', 'Client data pre-populated from your CRM', 'Draft email prepared for review', 'Record saved automatically'] },
+    5:  { name: 'Document & Payment Chasing',      saveRate: 0.75, buildTime: '1–2 weeks', included: ['Automated chase sequence on schedule', 'Escalating reminders with custom copy', 'Stops automatically on receipt', 'Status logged to your CRM'] },
+    6:  { name: 'Deadline & Compliance Tracking',  saveRate: 0.70, buildTime: '2–3 weeks', included: ['Deadline monitoring across all matters', 'Escalating alerts to the right people', 'Compliance checklist automation', 'Audit trail maintained automatically'] },
+    7:  { name: 'Reporting & Data Sync',           saveRate: 0.70, buildTime: '1–2 weeks', included: ['Scheduled report generation and delivery', 'Bi-directional sync between your systems', 'Data validation and error alerts', 'No manual exports or copy-paste'] },
+    8:  { name: 'Client Retention & Referrals',    saveRate: 0.50, buildTime: '1 week',    included: ['Automated check-in sequences', 'Anniversary and milestone triggers', 'Referral request workflows', 'Re-engagement for lapsed clients'] },
+    9:  { name: 'Client Intake Triage',            saveRate: 0.70, buildTime: '1–2 weeks', included: ['Inbound request classification', 'Routing to the right team member', 'Priority scoring and queue management', 'Acknowledgement sent automatically'] },
+    10: { name: 'Invoice Generation',              saveRate: 0.80, buildTime: '1–2 weeks', included: ['Invoices generated from completed work', 'Sent automatically on trigger', 'Payment status tracked and updated', 'Overdue escalation without manual input'] },
+    11: { name: 'Call Notes to CRM',               saveRate: 0.75, buildTime: '1 week',    included: ['Meeting transcription and summarisation', 'Action items extracted and assigned', 'CRM record updated automatically', 'Follow-up email drafted for review'] },
+    12: { name: 'Client Portal Updates',           saveRate: 0.65, buildTime: '1–2 weeks', included: ['Status updates pushed to client portal', 'Triggered on matter milestones', 'Client notification emails automated', 'No manual logging required'] },
+    13: { name: 'NPS & Satisfaction Survey',       saveRate: 0.70, buildTime: '1 week',    included: ['Tally survey triggered automatically after matter close', 'Score and comment pushed to client record', 'High score (9–10) triggers referral nudge', 'Low score (0–6) sends Slack alert for personal follow-up', 'Mid score logged only'] }
   };
 
   var PAIN_TO_AUTO = {
@@ -179,7 +241,7 @@
       var hrsDisplay    = hrsSavedLower + '–' + hrsSavedUpper + ' hrs/wk';
 
       combinedHrsSaved += hrsSavedUpper;
-      combinedPriceMid += a.priceMid;
+      combinedPriceMid += getPriceMid(autoNum);
 
       /* Tone modifier */
       var intro = '';
@@ -204,7 +266,7 @@
         '<div class="ao-card-stats">' +
           '<div class="ao-card-stat"><span class="ao-stat-label">Hours saved</span><span class="ao-stat-val">' + hrsDisplay + '</span></div>' +
           '<div class="ao-card-stat"><span class="ao-stat-label">Build time</span><span class="ao-stat-val">' + a.buildTime + '</span></div>' +
-          '<div class="ao-card-stat"><span class="ao-stat-label">Fixed price</span><span class="ao-stat-val ao-stat-val--gold">' + a.priceRange + '</span></div>' +
+          '<div class="ao-card-stat"><span class="ao-stat-label">Fixed price</span><span class="ao-stat-val ao-stat-val--gold">' + fmtRange(autoNum) + '</span></div>' +
         '</div>';
       cardsEl.appendChild(card);
     });
@@ -212,7 +274,9 @@
 
 
     /* Rate + ROI */
-    var rateInput = document.getElementById('ao-rate-input');
+    var rateInput  = document.getElementById('ao-rate-input');
+    var rateSymbol = document.getElementById('ao-rate-symbol');
+    if (rateSymbol) rateSymbol.textContent = getCurrencySymbol();
     rateInput.value = rate;
     updateROI(rate, combinedHrsSaved, combinedPriceMid);
 
@@ -245,7 +309,7 @@
     }
 
     roiEl.innerHTML =
-      'At £' + Math.round(rate) + '/hr, recovering ' +
+      'At ' + getCurrencySymbol() + Math.round(rate) + '/hr, recovering ' +
       Math.round(hrsSaved * 10) / 10 + ' hrs/week pays back the full cost of this build in ' +
       '<strong>' + display + '</strong>.';
   }
@@ -253,13 +317,12 @@
   function getCombinedRange(autoNums) {
     var lo = 0, hi = 0;
     autoNums.forEach(function (n) {
-      var a = AUTOMATIONS[n];
-      if (!a) return;
-      var parts = a.priceRange.replace(/£/g, '').split('–');
-      lo += parseInt(parts[0].replace(/,/g, ''), 10);
-      hi += parseInt(parts[1].replace(/,/g, ''), 10);
+      var range = getPriceRange(n);
+      lo += range[0];
+      hi += range[1];
     });
-    return '£' + lo.toLocaleString() + '–£' + hi.toLocaleString();
+    var sym = getCurrencySymbol();
+    return sym + lo.toLocaleString('en-GB') + '–' + sym + hi.toLocaleString('en-GB');
   }
 
   /* ── Email capture ── */

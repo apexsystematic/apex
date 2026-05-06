@@ -500,6 +500,10 @@ window.showStep = function (step) {
     applyPricing(currency);
   };
 
+  // ── Accessors for other scripts (e.g. audit.js) ──
+  window.apexGetPrices   = function () { return _prices; };
+  window.apexGetCurrency = function () { return _currency; };
+
   // ── Init ─────────────────────────────────
   async function init() {
     let currency;
