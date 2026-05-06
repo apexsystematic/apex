@@ -125,7 +125,7 @@
               <div class="section-tag">Your number</div>
 
               <div class="calc-headline">
-                <div class="calc-headline-num" id="resultAnnual">£0</div>
+                <div class="calc-headline-num" id="resultAnnual"></div>
                 <div class="calc-headline-label">Annual cost of inaction at conservative billing rates</div>
               </div>
 
@@ -135,8 +135,8 @@
                   <div class="calc-stat-label">hours / week the firm is currently losing</div>
                 </div>
                 <div class="calc-stat">
-                  <div class="calc-stat-num" id="resultMonthly">£0</div>
-                  <div class="calc-stat-label">monthly cost at <span id="resultRate">£150</span>/hr</div>
+                  <div class="calc-stat-num" id="resultMonthly"></div>
+                  <div class="calc-stat-label">monthly cost at <span id="resultRate-sym">€</span><span id="resultRate">150</span>/hr</div>
                 </div>
                 <div class="calc-stat">
                   <div class="calc-stat-num" id="resultDays">0</div>
@@ -353,9 +353,11 @@
     });
 
     // ── Format helpers ──
-    const fmtGBP = (n) => '£' + Math.round(n).toLocaleString('en-GB');
-    const fmtHrs = (n) => (Math.round(n * 10) / 10).toString();
-    const fmtInt = (n) => Math.round(n).toLocaleString('en-GB');
+    const SYMBOLS  = { USD: '$', GBP: '£', EUR: '€' };
+    const getSym   = () => SYMBOLS[(window.apexGetCurrency && window.apexGetCurrency()) || 'EUR'] || '€';
+    const fmtMoney = (n) => getSym() + Math.round(n).toLocaleString('en-GB');
+    const fmtHrs   = (n) => (Math.round(n * 10) / 10).toString();
+    const fmtInt   = (n) => Math.round(n).toLocaleString('en-GB');
 
     // ── Context copy generator ──
     function buildContext(s, hoursWeek, annualGBP) {
@@ -400,10 +402,12 @@
 
       // Render
       hoursEl.textContent   = fmtHrs(firmHrsWeek);
-      monthlyEl.textContent = fmtGBP(monthlyGBP);
-      annualEl.textContent  = fmtGBP(annualGBP);
+      monthlyEl.textContent = fmtMoney(monthlyGBP);
+      annualEl.textContent  = fmtMoney(annualGBP);
       daysEl.textContent    = fmtInt(annualDays);
-      rateEl.textContent    = '£' + rate;
+      rateEl.textContent    = rate;
+      var rateSymEl = document.getElementById('resultRate-sym');
+      if (rateSymEl) rateSymEl.textContent = getSym();
       ctxEl.textContent     = buildContext(state, firmHrsWeek, annualGBP);
 
       emptyEl.style.display = 'none';
