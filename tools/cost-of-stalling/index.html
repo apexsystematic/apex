@@ -197,8 +197,8 @@
 
           <div class="method-card">
             <div class="section-tag">Step 4</div>
-            <h3 class="method-h">Conversion to £</h3>
-            <p>Hours converted at sector-specific blended billing rates. Legal: £180/hr. Accounting: £120/hr. Advisory: £150/hr. Consulting: £140/hr. These are blended firm-level rates, not partner-level — solos at top of band may be losing more.</p>
+            <h3 class="method-h">Conversion to currency</h3>
+            <p>Hours converted at sector-specific blended billing rates. Legal: <span class="method-rate-sym">€</span>180/hr. Accounting: <span class="method-rate-sym">€</span>120/hr. Advisory: <span class="method-rate-sym">€</span>150/hr. Consulting: <span class="method-rate-sym">€</span>140/hr. These are blended firm-level rates, not partner-level — solos at top of band may be losing more.</p>
             <div class="method-src">Cross-referenced against Law Society 2024 fee surveys, ACCA member rate data 2024, and Thomson Reuters Future of Professionals 2024.</div>
           </div>
 
@@ -408,6 +408,7 @@
       rateEl.textContent    = rate;
       var rateSymEl = document.getElementById('resultRate-sym');
       if (rateSymEl) rateSymEl.textContent = getSym();
+      document.querySelectorAll('.method-rate-sym').forEach(function(el) { el.textContent = getSym(); });
       ctxEl.textContent     = buildContext(state, firmHrsWeek, annualGBP);
 
       emptyEl.style.display = 'none';
