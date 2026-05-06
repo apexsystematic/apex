@@ -423,77 +423,59 @@ window.showStep = function (step) {
 
 /* ═══════════════════════════════════════════
    APEX SYSTEMATIC — Geo pricing
-   EUR is the source of truth. USD + GBP are
-   calculated at runtime from live FX rates
-   returned by the geo worker (30-day KV cache).
-   Prices rounded to nearest 50.
+   Prices are stored in Cloudflare KV and
+   returned by the geo worker. EUR fallback
+   is hardcoded here in case the worker is
+   unreachable.
    ═══════════════════════════════════════════ */
 
 (function () {
 
-  // ── EUR source of truth ──────────────────
-  const PRICES_EUR = {
-    // Suite bundle prices
-    intake_suite:         [3000,  5900],
-    client_suite:         [3400,  6300],
-    admin_suite:          [3950,  7850],
-    retention_suite:      [1250,  2500],
-    complete_firm:        [10300, 19900],
-
-    // Standalone reference prices
-    intake_standalone:    [3500,  6900],
-    client_standalone:    [3900,  7800],
-    admin_standalone:     [4600,  9200],
-    retention_standalone: [1500,  2900],
-    complete_standalone:  [13500, 26400],
-
-    // Add-ons reference prices
-    addon_chatbot:        [2100,  4650],
-    addon_voice_setter:   [2550,  4400],
-    addon_rag:            [2100,  5200],
-    addon_crm:            [3250,  6350],
+  // ── EUR fallback (update KV, not here) ──
+  const PRICES_FALLBACK = {
+    EUR: {
+      enquiry_lead_capture:        [1100,  2100],
+      appointment_setting:         [800,   1600],
+      client_onboarding:           [1600,  3250],
+      client_intake_triage:        [1000,  1850],
+      client_portal_updates:       [1050,  1950],
+      invoice_generation:          [950,   1750],
+      document_payment_chasing:    [1050,  1850],
+      document_proposal_generation:[1400,  2800],
+      deadline_compliance_tracking:[1250,  2550],
+      call_notes_crm:              [1050,  1850],
+      reporting_data_sync:         [950,   2100],
+      client_retention_referrals:  [800,   1600],
+      nps_satisfaction_survey:     [700,   1250],
+      intake_suite:                [3000,  5900],
+      client_suite:                [3400,  6300],
+      admin_suite:                 [3950,  7850],
+      retention_suite:             [1250,  2500],
+      complete_firm:               [10250, 19900],
+      addon_chatbot:               [2100,  4650],
+      addon_voice_setter:          [2550,  4400],
+      addon_rag:                   [2100,  5200],
+      addon_crm:                   [3250,  6350],
+    }
   };
 
   const SYMBOLS = { USD: '$', GBP: '£', EUR: '€' };
 
-  // Cached rates from geo worker (populated on init)
-  let _rates = null;
-  // Active currency
+  let _prices   = null;   // populated from KV via worker
   let _currency = 'EUR';
 
   // ── Helpers ──────────────────────────────
-  function roundTo50(n) {
-    return Math.round(n / 50) * 50;
-  }
-
-  function convert(eurAmount, currency) {
-    if (currency === 'EUR') return eurAmount;
-    const rate = _rates && _rates[currency];
-    if (!rate) return null; // no rate available — caller handles fallback
-    return roundTo50(eurAmount * rate);
-  }
-
   function fmt(symbol, amount) {
     return symbol + amount.toLocaleString('en-GB');
   }
 
   function fmtRange(currency, tier) {
-    const [eurLo, eurHi] = PRICES_EUR[tier];
-    const sym = SYMBOLS[currency];
+    const table = (_prices && _prices[currency]) || PRICES_FALLBACK[currency] || PRICES_FALLBACK.EUR;
+    const entry = table[tier] || (PRICES_FALLBACK.EUR[tier]);
+    if (!entry) return '';
 
-    if (currency === 'EUR') {
-      return fmt(sym, eurLo) + '–' + fmt(sym, eurHi);
-    }
-
-    const lo = convert(eurLo, currency);
-    const hi = convert(eurHi, currency);
-
-    // If rates unavailable, fall back to EUR display
-    if (lo === null || hi === null) {
-      return fmt('€', eurLo) + '–' + fmt('€', eurHi);
-    }
-
-    return fmt(sym, lo) + '–' + fmt(sym, hi);
+    const sym = SYMBOLS[currency] || SYMBOLS.EUR;
+    return fmt(sym, entry[0]) + '–' + fmt(sym, entry[1]);
   }
 
   // ── Apply to DOM ─────────────────────────
@@ -502,9 +484,8 @@ window.showStep = function (step) {
 
     document.querySelectorAll('[data-tier]').forEach(function (el) {
       const tier = el.dataset.tier;
-      if (PRICES_EUR[tier]) {
-        el.textContent = fmtRange(currency, tier);
-      }
+      const text = fmtRange(currency, tier);
+      if (text) el.textContent = text;
     });
 
     document.querySelectorAll('.currency-btn').forEach(function (btn) {
@@ -526,14 +507,14 @@ window.showStep = function (step) {
     // 1. Honour manual override
     try { currency = localStorage.getItem('apex_currency'); } catch (e) {}
 
-    // 2. Ask the geo worker (also returns cached FX rates)
+    // 2. Ask the geo worker (returns detected currency + KV prices)
     try {
       const res  = await fetch('https://geo.apexsystematic.com');
       const data = await res.json();
-      _rates = data.rates || null;          // { USD: 1.08, GBP: 0.85, fetched: ... }
+      if (data.prices) _prices = data.prices;
       if (!currency) currency = data.currency;
     } catch (e) {
-      // Worker unreachable — EUR fallback, no rates
+      // Worker unreachable — EUR fallback prices used
     }
 
     applyPricing(currency || 'EUR');
