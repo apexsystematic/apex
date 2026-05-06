@@ -61,7 +61,7 @@
                 <span class="input-label-value" id="val-rate">€150 / hr</span>
               </div>
               <input type="range" id="rate" min="50" max="400" step="10" value="150" oninput="update()">
-              <div class="range-limits"><span>€50</span><span>€400</span></div>
+              <div class="range-limits"><span id="rate-limit-lo">€50</span><span id="rate-limit-hi">€400</span></div>
             </div>
 
             <div class="input-row">
@@ -123,9 +123,9 @@
 
             <div class="metric-primary">
               <div class="metric-label">Based on your billable rate</div>
-              <div class="metric-value-large" id="res-value">€0</div>
+              <div class="metric-value-large" id="res-value"></div>
               <p class="metric-benchmark">
-                Firms like yours typically recover <strong>60–80%</strong> of this through automation — <strong id="res-recoverable">€0</strong> back in billable time.</p>
+                Firms like yours typically recover <strong>60–80%</strong> of this through automation — <strong id="res-recoverable"></strong> back in billable time.</p>
             </div>
 
             <div class="metric-secondary">
@@ -188,8 +188,21 @@
   <script src="/assets/js/main.js"></script>
 
   <script>
+    var SYMBOLS = { USD: '$', GBP: '\u00a3', EUR: '\u20ac' };
+
+    function getSym() {
+      var c = (window.apexGetCurrency && window.apexGetCurrency()) || 'EUR';
+      return SYMBOLS[c] || '\u20ac';
+    }
+
     function fmt(n) {
-      return '€' + Math.round(n).toLocaleString('en-UK');
+      return getSym() + Math.round(n).toLocaleString('en-GB');
+    }
+
+    function updateRangeLimits() {
+      var sym = getSym();
+      document.getElementById('rate-limit-lo').textContent = sym + '50';
+      document.getElementById('rate-limit-hi').textContent = sym + '400';
     }
 
     let roiTracked = false;
@@ -200,6 +213,7 @@
         roiTracked = true;
       }
 
+      var sym     = getSym();
       const rate    = +document.getElementById('rate').value;
       const team    = +document.getElementById('team').value;
       const admin   = +document.getElementById('admin').value;
@@ -208,7 +222,7 @@
       const data    = +document.getElementById('data').value;
 
       // Slider display values
-      document.getElementById('val-rate').textContent    = '€' + rate.toLocaleString() + ' / hr';
+      document.getElementById('val-rate').textContent    = sym + rate.toLocaleString() + ' / hr';
       document.getElementById('val-team').textContent    = team + (team === 1 ? ' person' : ' people');
       document.getElementById('val-admin').textContent   = admin + ' hrs / wk';
       document.getElementById('val-docs').textContent    = docs + ' hrs / wk';
@@ -219,7 +233,7 @@
       const weeklyTotal  = (admin + docs + onboard + data) * team;
       const annualHours  = weeklyTotal * 48;
       const annualValue  = annualHours * rate;
-      const recoverable  = annualValue * 0.70; // midpoint of 60–80%
+      const recoverable  = annualValue * 0.70; // midpoint of 60-80%
 
       // Breakdown (annual, per team)
       const bAdmin   = admin   * team * 48;
@@ -228,10 +242,10 @@
       const bData    = data    * team * 48;
 
       // Outputs
-      document.getElementById('res-value').textContent      = fmt(annualValue);
+      document.getElementById('res-value').textContent       = fmt(annualValue);
       document.getElementById('res-recoverable').textContent = fmt(recoverable);
-      document.getElementById('res-hours').textContent      = Math.round(annualHours).toLocaleString();
-      document.getElementById('res-weekly').textContent     = weeklyTotal;
+      document.getElementById('res-hours').textContent       = Math.round(annualHours).toLocaleString();
+      document.getElementById('res-weekly').textContent      = weeklyTotal;
 
       document.getElementById('br-admin').textContent   = bAdmin.toLocaleString()   + ' hrs / yr';
       document.getElementById('br-docs').textContent    = bDocs.toLocaleString()    + ' hrs / yr';
@@ -239,7 +253,11 @@
       document.getElementById('br-data').textContent    = bData.toLocaleString()    + ' hrs / yr';
     }
 
-    update();
+    // Wait for geo/currency to resolve before first render
+    window.apexOnCurrencyReady(function () {
+      updateRangeLimits();
+      update();
+    });
   </script>
 
 </body>

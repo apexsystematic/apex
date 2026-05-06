@@ -493,6 +493,7 @@ window.showStep = function (step) {
     });
 
     try { localStorage.setItem('apex_currency', currency); } catch (e) {}
+    fireCurrencyReady();
   }
 
   // ── Toggle handler (called from HTML) ────
@@ -500,9 +501,26 @@ window.showStep = function (step) {
     applyPricing(currency);
   };
 
-  // ── Accessors for other scripts (e.g. audit.js) ──
+  // ── Accessors for other scripts (e.g. audit.js, roi-calculator) ──
   window.apexGetPrices   = function () { return _prices; };
   window.apexGetCurrency = function () { return _currency; };
+
+  // ── Currency-ready callback ───────────────
+  // Usage: window.apexOnCurrencyReady(function(currency) { ... });
+  // If currency already resolved, fires immediately.
+  var _readyCallbacks   = [];
+  var _currencyResolved = false;
+
+  window.apexOnCurrencyReady = function (fn) {
+    if (_currencyResolved) { fn(_currency); return; }
+    _readyCallbacks.push(fn);
+  };
+
+  function fireCurrencyReady() {
+    _currencyResolved = true;
+    _readyCallbacks.forEach(function (fn) { fn(_currency); });
+    _readyCallbacks = [];
+  }
 
   // ── Init ─────────────────────────────────
   async function init() {
