@@ -446,6 +446,12 @@ window.showStep = function (step) {
     admin_standalone:     [4600,  9200],
     retention_standalone: [1500,  2900],
     complete_standalone:  [13500, 26400],
+
+    // Add-ons reference prices
+    addon_chatbot:        [2100,  4650],
+    addon_voice_setter:   [2550,  4400],
+    addon_rag:            [2100,  5200],
+    addon_crm:            [3250,  6350],
   };
 
   const SYMBOLS = { USD: '$', GBP: '£', EUR: '€' };
