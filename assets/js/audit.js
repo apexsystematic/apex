@@ -1,527 +1,490 @@
-// apex-proposals — serve personalised proposal pages from KV
-// Requires KV binding: PROPOSALS_KV (id: e48f3cb978ed4a33a7f3742e151f8593)
-// Domain: proposals.apexsystematic.com
+/* ═══════════════════════════════════════════
+   APEX SYSTEMATIC — audit.js
+   Self-serve automation audit tool
+═══════════════════════════════════════════ */
 
-export default {
-  async fetch(request, env) {
-    const url = new URL(request.url);
+(function () {
 
-    // Handle CORS preflight (for Make writing to KV via this worker)
-    if (request.method === 'OPTIONS') {
-      return new Response(null, { headers: corsHeaders() });
-    }
+  /* ── Data ── */
 
-    // POST /save — Make calls this to store a proposal
-    if (request.method === 'POST' && (url.pathname === '/save' || url.pathname === '/proposals/save')) {
-      return handleSave(request, env);
-    }
-
-    // GET /[uuid] — visitor opens their proposal link
-    if (request.method === 'GET') {
-      const match = url.pathname.match(/^\/([a-zA-Z0-9_-]{8,64})$/);
-      if (match) {
-        return handleServe(match[1], env);
-      }
-    }
-
-    // Everything else — styled not-found
-    return new Response(notFoundPage(), {
-      status: 404,
-      headers: { 'Content-Type': 'text/html; charset=utf-8' }
-    });
-  }
-};
-
-/* ── Save (called by Make) ── */
-async function handleSave(request, env) {
-  let data;
-  try {
-    data = await request.json();
-  } catch {
-    return jsonResponse({ error: 'Invalid JSON' }, 400);
-  }
-
-  const { uuid, proposal } = data;
-  if (!uuid || !proposal) {
-    return jsonResponse({ error: 'Missing uuid or proposal' }, 400);
-  }
-
-  // Store with 90-day TTL
-  await env.PROPOSALS_KV.put(uuid, JSON.stringify(proposal), {
-    expirationTtl: 60 * 60 * 24 * 90
-  });
-
-  return jsonResponse({ ok: true, uuid }, 200);
-}
-
-/* ── Serve (visitor opens link) ── */
-async function handleServe(uuid, env) {
-  const raw = await env.PROPOSALS_KV.get(uuid);
-  if (!raw) {
-    return new Response(notFoundPage(), {
-      status: 404,
-      headers: { 'Content-Type': 'text/html; charset=utf-8' }
-    });
-  }
-
-  let proposal;
-  try {
-    proposal = JSON.parse(raw);
-  } catch {
-    return new Response('Proposal data corrupted', { status: 500 });
-  }
-
-  const html = renderProposal(proposal);
-  return new Response(html, {
-    status: 200,
-    headers: {
-      'Content-Type': 'text/html; charset=utf-8',
-      'Cache-Control': 'no-store'
-    }
-  });
-}
-
-/* ── Render ── */
-function renderProposal(p) {
-  // p shape:
-  // {
-  //   practiceType, practiceLabel,
-  //   automationNum, automationName,
-  //   painLabel,
-  //   hoursLabel, hrsSaved,
-  //   currency, currencySymbol,
-  //   rate,
-  //   priceRange,   // e.g. "£1,100–£2,100"
-  //   roiWeeks,     // e.g. "6.2 weeks" | "under 1 week" | "over a year"
-  //   included,     // string[]
-  //   whatItDoes,
-  //   stopDoing,
-  //   buildTime,
-  //   tone,
-  //   generatedAt   // ISO date string
-  // }
-
-  const toneIntro = tonePrefix(p.tone);
-  const dateStr   = formatDate(p.generatedAt);
-
-  return `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex, nofollow">
-  <title>Your Automation Proposal — Apex Systematic</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" sizes="32x32" href="https://apexsystematic.com/assets/images/favicon.png">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg:      #0d1117;
-      --surface: #161c26;
-      --border:  #1e2a38;
-      --gold:    #c9a84c;
-      --gold-lt: #e8c97a;
-      --text:    #e8e4da;
-      --muted:   #8a9bb0;
-      --radius:  6px;
-    }
-
-    html { font-size: 16px; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 400;
-      line-height: 1.6;
-      min-height: 100vh;
-      padding: 0 0 80px;
-    }
-
-    /* ── Header bar ── */
-    .proposal-header {
-      border-bottom: 1px solid var(--border);
-      padding: 24px 0;
-      margin-bottom: 56px;
-    }
-    .proposal-header-inner {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 0 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-    .proposal-logo {
-      display: inline-block;
-      line-height: 0;
-      text-decoration: none;
-    }
-    .proposal-date {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    /* ── Container ── */
-    .container {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* ── Section tag ── */
-    .section-tag {
-      display: inline-block;
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 16px;
-    }
-
-    /* ── Hero ── */
-    .proposal-hero {
-      margin-bottom: 48px;
-    }
-    .proposal-hero h1 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
-      font-weight: 700;
-      line-height: 1.2;
-      color: var(--text);
-      margin-bottom: 16px;
-    }
-    .proposal-hero p {
-      font-size: 1rem;
-      color: var(--muted);
-      max-width: 580px;
-    }
-    .pain-tag {
-      display: inline-block;
-      background: rgba(201,168,76,0.12);
-      border: 1px solid rgba(201,168,76,0.25);
-      color: var(--gold);
-      font-size: 0.78rem;
-      font-weight: 500;
-      padding: 5px 12px;
-      border-radius: 20px;
-      margin-top: 20px;
-    }
-
-    /* ── Card ── */
-    .ao-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 36px;
-      margin-bottom: 24px;
-    }
-    .ao-card-name {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 14px;
-    }
-    .ao-card-what {
-      font-size: 0.95rem;
-      color: var(--muted);
-      margin-bottom: 12px;
-      line-height: 1.65;
-    }
-    .ao-card-stop {
-      font-size: 0.82rem;
-      color: var(--muted);
-      opacity: 0.75;
-      margin-bottom: 24px;
-      font-style: italic;
-    }
-    .ao-card-included {
-      list-style: none;
-      margin-bottom: 28px;
-    }
-    .ao-card-included li {
-      font-size: 0.88rem;
-      color: var(--text);
-      padding: 7px 0;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-    }
-    .ao-card-included li::before {
-      content: '';
-      display: inline-block;
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--gold);
-      margin-top: 7px;
-      flex-shrink: 0;
-    }
-    .ao-card-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      padding-top: 24px;
-      border-top: 1px solid var(--border);
-    }
-    .ao-card-stat {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .ao-stat-label {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-    }
-    .ao-stat-val {
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--text);
-    }
-    .ao-stat-val--gold {
-      color: var(--gold);
-      font-weight: 500;
-    }
-
-    /* ── ROI block ── */
-    .ao-roi {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px 36px;
-      margin-bottom: 24px;
-    }
-    .ao-roi-label {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--muted);
-      margin-bottom: 10px;
-    }
-    .ao-roi-text {
-      font-size: 1rem;
-      color: var(--text);
-      line-height: 1.6;
-    }
-    .ao-roi-text strong {
-      color: var(--gold);
-    }
-
-    /* ── Exclusions ── */
-    .ao-exclusions {
-      font-size: 0.78rem;
-      color: var(--muted);
-      margin-bottom: 40px;
-      line-height: 1.6;
-    }
-
-    /* ── CTA ── */
-    .ao-cta {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 32px;
-    }
-    .ao-cta-text strong {
-      display: block;
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--text);
-      margin-bottom: 6px;
-    }
-    .ao-cta-text p {
-      font-size: 0.88rem;
-      color: var(--muted);
-      max-width: 420px;
-    }
-    .btn-primary {
-      display: inline-block;
-      background: var(--gold);
-      color: #0d1117;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.88rem;
-      font-weight: 500;
-      padding: 13px 26px;
-      border-radius: var(--radius);
-      text-decoration: none;
-      white-space: nowrap;
-      transition: background 0.15s;
-    }
-    .btn-primary:hover { background: var(--gold-lt); }
-
-    /* ── Footer ── */
-    .proposal-footer {
-      margin-top: 64px;
-      padding-top: 32px;
-      border-top: 1px solid var(--border);
-      text-align: center;
-    }
-    .proposal-footer a {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 0.95rem;
-      color: var(--gold);
-      text-decoration: none;
-    }
-    .proposal-footer p {
-      font-size: 0.75rem;
-      color: var(--muted);
-      margin-top: 8px;
-    }
-
-    /* ── Mobile ── */
-    @media (max-width: 600px) {
-      .ao-card { padding: 24px 20px; }
-      .ao-card-stats { grid-template-columns: 1fr 1fr; }
-      .ao-cta { flex-direction: column; align-items: flex-start; }
-      .proposal-header-inner { flex-direction: column; align-items: flex-start; gap: 4px; }
-    }
-  </style>
-</head>
-<body>
-
-  <header class="proposal-header">
-    <div class="proposal-header-inner">
-      <a href="https://apexsystematic.com" class="proposal-logo" aria-label="Apex Systematic">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="30 42 380 70" height="36" role="img"><title>Apex Systematic</title><line x1="54" y1="48" x2="34" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"></line><line x1="54" y1="48" x2="74" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"></line><line x1="34" y1="82" x2="74" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"></line><circle cx="54" cy="48" r="2.5" fill="#C9A84C"></circle><text x="88" y="82" font-family="Georgia, serif" font-size="46" font-weight="400" letter-spacing="10" fill="#FFFFFF">APEX</text><text x="88" y="104" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" font-weight="300" letter-spacing="9.5" fill="#C9A84C">SYSTEMATIC</text></svg>
-      </a>
-      <span class="proposal-date">Prepared ${dateStr}</span>
-    </div>
-  </header>
-
-  <main class="container">
-
-    <div class="proposal-hero">
-      <span class="section-tag">Your Automation Proposal</span>
-      <h1>Here&#8217;s what we&#8217;d build for your ${escHtml(p.practiceLabel)}.</h1>
-      <p>Based on your answers, this is the automation that would have the biggest impact on your practice.</p>
-      ${p.painLabel ? `<span class="pain-tag">${escHtml(p.painLabel)}</span>` : ''}
-    </div>
-
-    <div class="ao-card">
-      <div class="ao-card-name">${escHtml(p.automationName)}</div>
-      <div class="ao-card-what">${escHtml(toneIntro)}${escHtml(p.whatItDoes)}</div>
-      <div class="ao-card-stop">You stop: ${escHtml(p.stopDoing)}</div>
-      <ul class="ao-card-included">
-        ${p.included.map(item => `<li>${escHtml(item)}</li>`).join('\n        ')}
-      </ul>
-      <div class="ao-card-stats">
-        <div class="ao-card-stat">
-          <span class="ao-stat-label">Hours saved</span>
-          <span class="ao-stat-val">${escHtml(p.hrsSaved)} hrs/wk</span>
-        </div>
-        <div class="ao-card-stat">
-          <span class="ao-stat-label">Build time</span>
-          <span class="ao-stat-val">${escHtml(p.buildTime)}</span>
-        </div>
-        <div class="ao-card-stat">
-          <span class="ao-stat-label">Fixed price</span>
-          <span class="ao-stat-val ao-stat-val--gold">${escHtml(p.priceRange)}</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="ao-roi">
-      <div class="ao-roi-label">Return on investment</div>
-      <p class="ao-roi-text">
-        At ${escHtml(p.currencySymbol)}${escHtml(String(p.rate))}/hr, recovering ${escHtml(String(p.hrsSaved))} hrs/week
-        pays back the full cost of this build in <strong>${escHtml(p.roiWeeks)}</strong>.
-      </p>
-    </div>
-
-    <p class="ao-exclusions">Prices exclude Make.com subscription and third-party API costs. Full documentation and 30-day bug fix warranty included on every build. You own everything we deliver.</p>
-
-    <div class="ao-cta">
-      <div class="ao-cta-text">
-        <strong>Got questions about this proposal?</strong>
-        <p>Book a free 30-minute call and we&#8217;ll walk through exactly what your build would involve &#8212; and confirm the price before anything starts.</p>
-      </div>
-      <a href="https://calendly.com/apexsystematic/30min" class="btn-primary">Book a Call</a>
-    </div>
-
-    <footer class="proposal-footer">
-      <a href="https://apexsystematic.com">apexsystematic.com</a>
-      <p>This proposal was generated based on information you provided and is indicative only. Final scope and price confirmed at audit.</p>
-    </footer>
-
-  </main>
-
-</body>
-</html>`;
-}
-
-/* ── Helpers ── */
-function tonePrefix(tone) {
-  if (tone === 'manual')       return 'Right now this is handled entirely manually. Once built, ';
-  if (tone === 'inconsistent') return 'You have something in place, but it\'s inconsistent. This build standardises it completely — ';
-  return 'This automation takes over the manual parts of ';
-}
-
-function formatDate(iso) {
-  if (!iso) return '';
-  try {
-    return new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-  } catch { return ''; }
-}
-
-function escHtml(str) {
-  if (str == null) return '';
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-}
-
-function notFoundPage() {
-  return `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Proposal Not Found — Apex Systematic</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
-  <style>
-    body { background: #0d1117; color: #8a9bb0; font-family: 'DM Sans', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; text-align: center; padding: 24px; }
-    h1 { color: #e8e4da; font-size: 1.4rem; margin-bottom: 12px; }
-    p { font-size: 0.9rem; line-height: 1.6; }
-    a { color: #c9a84c; }
-  </style>
-</head>
-<body>
-  <div>
-    <h1>Proposal not found</h1>
-    <p>This link may have expired or been entered incorrectly.<br>
-    <a href="https://apexsystematic.com/tools/audit/">Generate a new proposal →</a></p>
-  </div>
-</body>
-</html>`;
-}
-
-function corsHeaders() {
-  return {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type',
+  // Maps question answer values to KV tier keys
+  var AUTO_TIER_KEYS = {
+    1:  'enquiry_lead_capture',
+    2:  'appointment_setting',
+    3:  'client_onboarding',
+    4:  'document_proposal_generation',
+    5:  'document_payment_chasing',
+    6:  'deadline_compliance_tracking',
+    7:  'reporting_data_sync',
+    8:  'client_retention_referrals',
+    9:  'client_intake_triage',
+    10: 'invoice_generation',
+    11: 'call_notes_crm',
+    12: 'client_portal_updates',
+    13: 'nps_satisfaction_survey'
   };
-}
 
-function jsonResponse(data, status) {
-  return new Response(JSON.stringify(data), {
-    status,
-    headers: { 'Content-Type': 'application/json', ...corsHeaders() }
+  // EUR fallback prices — mirrors PRICES_FALLBACK in main.js
+  var PRICES_FALLBACK_EUR = {
+    enquiry_lead_capture:         [1100,  2100],
+    appointment_setting:          [800,   1600],
+    client_onboarding:            [1600,  3250],
+    client_intake_triage:         [1000,  1850],
+    client_portal_updates:        [1050,  1950],
+    invoice_generation:           [950,   1750],
+    document_payment_chasing:     [1050,  1850],
+    document_proposal_generation: [1400,  2800],
+    deadline_compliance_tracking: [1250,  2550],
+    call_notes_crm:               [1050,  1850],
+    reporting_data_sync:          [950,   2100],
+    client_retention_referrals:   [800,   1600],
+    nps_satisfaction_survey:      [700,   1250]
+  };
+
+  var SYMBOLS = { USD: '$', GBP: '£', EUR: '€' };
+
+  // Returns [lo, hi] for a given automation number in the active currency
+  function getPriceRange(autoNum) {
+    var tierKey  = AUTO_TIER_KEYS[autoNum];
+    var currency = (window.apexGetCurrency && window.apexGetCurrency()) || 'EUR';
+    var prices   = window.apexGetPrices && window.apexGetPrices();
+    var table    = (prices && prices[currency]) || PRICES_FALLBACK_EUR;
+    return table[tierKey] || PRICES_FALLBACK_EUR[tierKey] || [0, 0];
+  }
+
+  function fmtRange(autoNum) {
+    var currency = (window.apexGetCurrency && window.apexGetCurrency()) || 'EUR';
+    var sym      = SYMBOLS[currency] || '€';
+    var range    = getPriceRange(autoNum);
+    return sym + range[0].toLocaleString('en-GB') + '–' + sym + range[1].toLocaleString('en-GB');
+  }
+
+  function getPriceMid(autoNum) {
+    var range = getPriceRange(autoNum);
+    return Math.round((range[0] + range[1]) / 2);
+  }
+
+  function getCurrencySymbol() {
+    var currency = (window.apexGetCurrency && window.apexGetCurrency()) || 'EUR';
+    return SYMBOLS[currency] || '€';
+  }
+
+  var AUTOMATIONS = {
+    1:  { name: 'Enquiry & Lead Capture',          saveRate: 0.70, buildTime: '1–2 weeks', included: ['AI-powered enquiry triage', 'Automatic lead qualification', 'CRM record creation', 'Instant response to all new enquiries'] },
+    2:  { name: 'Appointment Setting',             saveRate: 0.75, buildTime: '1 week',    included: ['Calendar availability sync', 'Automated booking confirmation and reminders', 'No-show follow-up', 'Rescheduling handled automatically'] },
+    3:  { name: 'Client Onboarding',               saveRate: 0.60, buildTime: '2–3 weeks', included: ['Welcome sequence triggered on signature', 'Document request and collection', 'Portal or folder setup', 'Internal team notifications'] },
+    4:  { name: 'Document & Proposal Generation',  saveRate: 0.65, buildTime: '2–3 weeks', included: ['Template-driven document generation', 'Client data pre-populated from your CRM', 'Draft email prepared for review', 'Record saved automatically'] },
+    5:  { name: 'Document & Payment Chasing',      saveRate: 0.75, buildTime: '1–2 weeks', included: ['Automated chase sequence on schedule', 'Escalating reminders with custom copy', 'Stops automatically on receipt', 'Status logged to your CRM'] },
+    6:  { name: 'Deadline & Compliance Tracking',  saveRate: 0.70, buildTime: '2–3 weeks', included: ['Deadline monitoring across all matters', 'Escalating alerts to the right people', 'Compliance checklist automation', 'Audit trail maintained automatically'] },
+    7:  { name: 'Reporting & Data Sync',           saveRate: 0.70, buildTime: '1–2 weeks', included: ['Scheduled report generation and delivery', 'Bi-directional sync between your systems', 'Data validation and error alerts', 'No manual exports or copy-paste'] },
+    8:  { name: 'Client Retention & Referrals',    saveRate: 0.50, buildTime: '1 week',    included: ['Automated check-in sequences', 'Anniversary and milestone triggers', 'Referral request workflows', 'Re-engagement for lapsed clients'] },
+    9:  { name: 'Client Intake Triage',            saveRate: 0.70, buildTime: '1–2 weeks', included: ['Inbound request classification', 'Routing to the right team member', 'Priority scoring and queue management', 'Acknowledgement sent automatically'] },
+    10: { name: 'Invoice Generation',              saveRate: 0.80, buildTime: '1–2 weeks', included: ['Invoices generated from completed work', 'Sent automatically on trigger', 'Payment status tracked and updated', 'Overdue escalation without manual input'] },
+    11: { name: 'Call Notes to CRM',               saveRate: 0.75, buildTime: '1 week',    included: ['Meeting transcription and summarisation', 'Action items extracted and assigned', 'CRM record updated automatically', 'Follow-up email drafted for review'] },
+    12: { name: 'Client Portal Updates',           saveRate: 0.65, buildTime: '1–2 weeks', included: ['Status updates pushed to client portal', 'Triggered on matter milestones', 'Client notification emails automated', 'No manual logging required'] },
+    13: { name: 'NPS & Satisfaction Survey',       saveRate: 0.70, buildTime: '1 week',    included: ['Tally survey triggered automatically after matter close', 'Score and comment pushed to client record', 'High score (9–10) triggers referral nudge', 'Low score (0–6) sends Slack alert for personal follow-up', 'Mid score logged only'] }
+  };
+
+  var PAIN_TO_AUTO = {
+    'Responding to enquiries and qualifying leads': 1,
+    'Booking and managing appointments': 2,
+    'Getting new clients set up and onboarded': 3,
+    'Generating invoices and chasing payment': 10,
+    'Drafting documents, contracts, or proposals': 4,
+    'Chasing clients for documents or signatures': 5,
+    'Managing requests from existing clients': 9,
+    'Tracking deadlines and compliance steps': 6,
+    'Keeping clients updated on progress': 12,
+    'Capturing call notes and updating records': 11,
+    'Moving data between systems or generating reports': 7,
+    'Staying in touch with past clients': 8,
+    'Staying in touch with and re-engaging past clients': 8,
+    'Collecting client feedback and satisfaction scores': 13
+  };
+
+  var PRACTICE_LABELS = {
+    law: 'law firm',
+    accounting: 'accounting practice',
+    financial: 'financial advisory firm',
+    consulting: 'consulting practice',
+    other: 'professional services firm'
+  };
+
+  /* ── State ── */
+  var state = {
+    q1: null, q1Rate: null,
+    q2: null, q2Labels: [],
+    q3: null, q3Label: null,
+    q4: null,
+    q5: null,
+    currentStep: 1
+  };
+
+  /* ── Init ── */
+  document.addEventListener('DOMContentLoaded', function () {
+    initQ1();
+    initQ2();
+    initQ3();
+    initQ4();
+    initQ5();
+    updateProgress(1);
   });
-}
+
+  /* ── Single-select handler factory ── */
+  function initSingleSelect(containerId, stateKey, rateKey, nextStep, extraFn) {
+    var container = document.getElementById(containerId);
+    if (!container) return;
+    container.querySelectorAll('.audit-opt').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        container.querySelectorAll('.audit-opt').forEach(function (b) { b.classList.remove('selected'); });
+        btn.classList.add('selected');
+        state[stateKey] = btn.dataset.value;
+        if (rateKey) state[rateKey] = parseInt(btn.dataset.rate, 10);
+        if (extraFn) extraFn(btn);
+        if (nextStep) setTimeout(function () { goToStep(nextStep); }, 220);
+      });
+    });
+  }
+
+  function initQ1() { initSingleSelect('q1-options', 'q1', 'q1Rate', 2, function () { fireEvent('audit_started'); }); }
+  function initQ2() { initSingleSelect('q2-options', 'q2', null, 3, function (btn) { state.q2Labels = [btn.dataset.label]; }); }
+  function initQ3() { initSingleSelect('q3-options', 'q3', null, 4, function (btn) { state.q3Label = btn.dataset.label; }); }
+  function initQ4() { initSingleSelect('q4-options', 'q4', null, 5); }
+  function initQ5() { initSingleSelect('q5-options', 'q5', null, null, function () { setTimeout(renderOutput, 220); }); }
+
+  /* ── Navigation ── */
+  function goToStep(step) {
+    hideStep(state.currentStep);
+    state.currentStep = step;
+    showStep(step);
+    updateProgress(step);
+  }
+
+  function hideStep(n) {
+    var el = document.getElementById('step-' + n);
+    if (el) el.classList.add('hidden');
+  }
+
+  function showStep(n) {
+    var el = document.getElementById('step-' + n);
+    if (el) el.classList.remove('hidden');
+  }
+
+  function updateProgress(step) {
+    var pct = Math.round(((step - 1) / 5) * 100);
+    var fill  = document.getElementById('audit-progress-fill');
+    var label = document.getElementById('audit-progress-label');
+    if (fill)  fill.style.width = pct + '%';
+    if (label) label.textContent = 'Question ' + step + ' of 5';
+  }
+
+  /* Exposed for inline onclick attributes */
+  window.auditBack = function (fromStep) {
+    if (fromStep <= 1) return;
+    goToStep(fromStep - 1);
+  };
+
+  window.auditNext = function (fromStep) {
+    if (fromStep === 2 && !state.q2) return;
+    goToStep(fromStep + 1);
+  };
+
+  /* ── Output ── */
+  function renderOutput() {
+    // Hide the entire questionnaire section — no empty space
+    var auditBody = document.querySelector('.audit-body');
+    if (auditBody) auditBody.classList.add('hidden');
+
+    var outputSection = document.getElementById('audit-output-section');
+    if (outputSection) outputSection.classList.remove('hidden');
+
+    fireEvent('audit_completed');
+    buildProposal();
+
+    setTimeout(function () {
+      document.getElementById('audit-output-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 50);
+  }
+
+  function buildProposal() {
+    var practiceLabel = PRACTICE_LABELS[state.q1] || 'professional services firm';
+    var hoursInput    = parseFloat(state.q3);
+    var rate          = state.q1Rate || 100;
+    var tone          = state.q5; // 'manual' | 'partial' | 'inconsistent'
+
+    /* Header */
+    var headline = document.getElementById('ao-headline');
+    headline.textContent = 'Based on your answers, here\'s what we\'d build for your ' + practiceLabel + '.';
+
+    /* Pain tags */
+    var painsEl = document.getElementById('ao-pains');
+    painsEl.innerHTML = '';
+    if (state.q2Labels[0]) {
+      var tag = document.createElement('span');
+      tag.className = 'ao-pain-tag';
+      tag.textContent = state.q2Labels[0];
+      painsEl.appendChild(tag);
+    }
+    /* Cards */
+    var cardsEl    = document.getElementById('ao-cards');
+    cardsEl.innerHTML = '';
+
+    var combinedHrsSaved = 0;
+    var combinedPriceMid = 0;
+
+    [parseInt(state.q2, 10)].forEach(function (autoNum) {
+      var a = AUTOMATIONS[autoNum];
+      if (!a) return;
+
+      var hrsSavedUpper = Math.round(hoursInput * a.saveRate * 10) / 10;
+      var hrsSavedLower = Math.round(hoursInput * (a.saveRate - 0.1) * 10) / 10;
+      var hrsDisplay    = hrsSavedLower + '–' + hrsSavedUpper + ' hrs/wk';
+
+      combinedHrsSaved += hrsSavedUpper;
+      combinedPriceMid += getPriceMid(autoNum);
+
+      /* Tone modifier */
+      var intro = '';
+      if (tone === 'manual') {
+        intro = 'Right now this is handled entirely manually. Once built, ';
+      } else if (tone === 'inconsistent') {
+        intro = 'You have something in place, but it\'s inconsistent. This build standardises it completely — ';
+      } else {
+        intro = 'This automation takes over the manual parts of ';
+      }
+
+      /* Card */
+      var card = document.createElement('div');
+      card.className = 'ao-card';
+      card.innerHTML =
+        '<div class="ao-card-name">' + a.name + '</div>' +
+        '<div class="ao-card-what">' + intro + getWhatItDoes(autoNum) + '</div>' +
+        '<div class="ao-card-stop">You stop: ' + getStopDoing(autoNum) + '</div>' +
+        '<ul class="ao-card-included">' +
+          a.included.map(function (item) { return '<li>' + item + '</li>'; }).join('') +
+        '</ul>' +
+        '<div class="ao-card-stats">' +
+          '<div class="ao-card-stat"><span class="ao-stat-label">Hours saved</span><span class="ao-stat-val">' + hrsDisplay + '</span></div>' +
+          '<div class="ao-card-stat"><span class="ao-stat-label">Build time</span><span class="ao-stat-val">' + a.buildTime + '</span></div>' +
+          '<div class="ao-card-stat"><span class="ao-stat-label">Fixed price</span><span class="ao-stat-val ao-stat-val--gold">' + fmtRange(autoNum) + '</span></div>' +
+        '</div>';
+      cardsEl.appendChild(card);
+    });
+
+
+
+    /* Rate + ROI */
+    var rateInput  = document.getElementById('ao-rate-input');
+    var rateSymbol = document.getElementById('ao-rate-symbol');
+    if (rateSymbol) rateSymbol.textContent = getCurrencySymbol();
+    rateInput.value = rate;
+    updateROI(rate, combinedHrsSaved, combinedPriceMid);
+
+    rateInput.addEventListener('input', function () {
+      var r = parseFloat(rateInput.value) || rate;
+      fireEvent('audit_rate_adjusted');
+      updateROI(r, combinedHrsSaved, combinedPriceMid);
+    });
+
+    /* Book a call */
+    document.getElementById('ao-book-btn').addEventListener('click', function () {
+      fireEvent('audit_call_cta_clicked');
+    });
+  }
+
+  function updateROI(rate, hrsSaved, priceMid) {
+    var roiEl = document.getElementById('ao-roi-calc');
+    if (!roiEl || hrsSaved === 0) return;
+
+    var weeklyValue = hrsSaved * rate;
+    var weeks       = priceMid / weeklyValue;
+    var display;
+
+    if (weeks < 1) {
+      display = 'under 1 week';
+    } else if (weeks > 52) {
+      display = 'over a year';
+    } else {
+      display = Math.round(weeks * 10) / 10 + ' weeks';
+    }
+
+    roiEl.innerHTML =
+      'At ' + getCurrencySymbol() + Math.round(rate) + '/hr, recovering ' +
+      Math.round(hrsSaved * 10) / 10 + ' hrs/week pays back the full cost of this build in ' +
+      '<strong>' + display + '</strong>.';
+  }
+
+  function getCombinedRange(autoNums) {
+    var lo = 0, hi = 0;
+    autoNums.forEach(function (n) {
+      var range = getPriceRange(n);
+      lo += range[0];
+      hi += range[1];
+    });
+    var sym = getCurrencySymbol();
+    return sym + lo.toLocaleString('en-GB') + '–' + sym + hi.toLocaleString('en-GB');
+  }
+
+  /* ── Serialise proposal state for Worker/Make ── */
+  function buildProposalState() {
+    var autoNum       = parseInt(state.q2, 10);
+    var a             = AUTOMATIONS[autoNum];
+    var hoursInput    = parseFloat(state.q3);
+    var rateInput     = document.getElementById('ao-rate-input');
+    var rate          = (rateInput && parseFloat(rateInput.value)) || state.q1Rate || 100;
+    var currency      = (window.apexGetCurrency && window.apexGetCurrency()) || 'EUR';
+    var sym           = SYMBOLS[currency] || '€';
+    var hrsSavedUpper = Math.round(hoursInput * a.saveRate * 10) / 10;
+    var hrsSavedLower = Math.round(hoursInput * (a.saveRate - 0.1) * 10) / 10;
+    var priceMid      = getPriceMid(autoNum);
+    var weeklyValue   = hrsSavedUpper * rate;
+    var weeks         = priceMid / weeklyValue;
+    var roiWeeks;
+    if (weeks < 1)       roiWeeks = 'under 1 week';
+    else if (weeks > 52) roiWeeks = 'over a year';
+    else                 roiWeeks = (Math.round(weeks * 10) / 10) + ' weeks';
+
+    return {
+      practiceType:   state.q1,
+      practiceLabel:  PRACTICE_LABELS[state.q1] || 'professional services firm',
+      automationNum:  autoNum,
+      automationName: a.name,
+      painLabel:      state.q2Labels[0] || '',
+      hoursLabel:     state.q3Label || '',
+      hrsSaved:       hrsSavedLower + '–' + hrsSavedUpper,
+      currency:       currency,
+      currencySymbol: sym,
+      rate:           rate,
+      priceRange:     fmtRange(autoNum),
+      roiWeeks:       roiWeeks,
+      included:       a.included,
+      whatItDoes:     getWhatItDoes(autoNum),
+      stopDoing:      getStopDoing(autoNum),
+      buildTime:      a.buildTime,
+      tone:           state.q5,
+      firmSize:       state.q4,
+      generatedAt:    new Date().toISOString()
+    };
+  }
+
+  /* ── Email capture ── */
+  window.auditEmailSubmit = function (e) {
+    e.preventDefault();
+    var gdpr        = document.getElementById('ao-gdpr-check');
+    var gdprWarning = document.getElementById('ao-gdpr-warning');
+    if (!gdpr.checked) {
+      if (gdprWarning) gdprWarning.classList.remove('hidden');
+      return;
+    }
+    if (gdprWarning) gdprWarning.classList.add('hidden');
+
+    var email      = document.getElementById('ao-email-input').value.trim();
+    var submitBtn  = e.target.querySelector('button[type="submit"]');
+    var confirmEl  = document.getElementById('ao-email-confirm');
+    var formEl     = document.getElementById('ao-email-form');
+
+    // Disable button to prevent double-submit
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
+
+    fireEvent('audit_email_captured');
+
+    var proposal = buildProposalState();
+
+    // Step 1: POST proposal to Worker → get UUID back
+    fetch('https://proposals.apexsystematic.com/save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ uuid: generateUUID(), proposal: proposal })
+    })
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      if (!data.ok || !data.uuid) throw new Error('Save failed');
+
+      var proposalUrl = 'https://proposals.apexsystematic.com/' + data.uuid;
+
+      // Step 2: POST to Make webhook → Make sends Brevo email
+      return fetch('https://hook.eu2.make.com/REPLACE_WITH_YOUR_WEBHOOK_ID', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email:       email,
+          proposalUrl: proposalUrl,
+          uuid:        data.uuid,
+          practice:    proposal.practiceLabel,
+          automation:  proposal.automationName
+        })
+      });
+    })
+    .then(function () {
+      formEl.style.display = 'none';
+      confirmEl.classList.remove('hidden');
+    })
+    .catch(function () {
+      // Silent fail — still show confirm so visitor isn't left hanging
+      formEl.style.display = 'none';
+      confirmEl.classList.remove('hidden');
+    });
+  };
+
+  /* ── UUID generator ── */
+  function generateUUID() {
+    if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+      return crypto.randomUUID();
+    }
+    // Fallback for older browsers
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      var r = Math.random() * 16 | 0;
+      return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    });
+  }
+
+  /* ── Analytics ── */
+  function fireEvent(name) {
+    if (typeof gtag === 'function') {
+      gtag('event', name);
+    }
+    if (window.dataLayer) {
+      window.dataLayer.push({ event: name });
+    }
+  }
+
+  /* ── Copy helpers ── */
+  function getWhatItDoes(n) {
+    var map = {
+      1:  'it handles every inbound enquiry automatically — qualifying the lead, updating your CRM, and triggering the right follow-up without you lifting a finger.',
+      2:  'every appointment request, confirmation, and reminder runs on autopilot.',
+      3:  'the entire onboarding sequence — from signed agreement to fully set-up client — runs without manual intervention.',
+      4:  'your documents and proposals are generated from your templates and data the moment a trigger fires.',
+      5:  'every outstanding document or payment is chased on schedule, escalated if needed, and stopped the moment it\'s resolved.',
+      6:  'every deadline and compliance step across your matters is tracked, flagged, and escalated automatically.',
+      7:  'data moves between your systems on schedule and your reports are built and delivered without manual effort.',
+      8:  'your past clients receive timely check-ins, milestone messages, and referral prompts — all without manual effort.',
+      9:  'every incoming client request is classified, prioritised, and routed to the right person immediately.',
+      10: 'invoices are generated and sent automatically the moment work is completed or a trigger fires.',
+      11: 'call notes are transcribed, summarised, and logged to your CRM automatically after every meeting.',
+      12: 'your clients receive status updates at every milestone without anyone needing to write or send them.',
+      13: 'client satisfaction surveys go out automatically after every matter closes, scores are logged to your CRM, and the right follow-up fires based on the result — without you lifting a finger.'
+    };
+    return map[n] || 'the manual work is handled automatically end to end.';
+  }
+
+  function getStopDoing(n) {
+    var map = {
+      1:  'manually checking, qualifying, and following up on every new enquiry',
+      2:  'back-and-forth booking emails and manual calendar management',
+      3:  'chasing documents, setting up folders, and managing the onboarding process yourself',
+      4:  'drafting documents and proposals from scratch every time',
+      5:  'manually tracking and sending chase emails for overdue items',
+      6:  'manually monitoring deadlines and reminding the team about compliance steps',
+      7:  'manually exporting data, building reports, and copy-pasting between systems',
+      8:  'trying to remember to stay in touch with past clients',
+      9:  'triaging every request manually and deciding who should handle it',
+      10: 'manually generating, checking, and sending invoices',
+      11: 'taking notes during calls and manually updating your CRM afterwards',
+      12: 'writing update emails to clients at every stage of a matter',
+      13: 'manually sending surveys, chasing responses, and deciding what to do with each score'
+    };
+    return map[n] || 'doing this manually';
+  }
+
+})();

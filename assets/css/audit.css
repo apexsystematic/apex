@@ -191,6 +191,12 @@
   pointer-events: none;
 }
 
+.ao-gdpr-warning {
+  font-size: 0.8rem;
+  color: #e06c6c;
+  margin-top: 8px;
+}
+
 
 /* ── Output section ── */
 .audit-output-section {
