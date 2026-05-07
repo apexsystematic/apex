@@ -325,25 +325,113 @@
     return sym + lo.toLocaleString('en-GB') + '–' + sym + hi.toLocaleString('en-GB');
   }
 
+  /* ── Serialise proposal state for Worker/Make ── */
+  function buildProposalState() {
+    var autoNum       = parseInt(state.q2, 10);
+    var a             = AUTOMATIONS[autoNum];
+    var hoursInput    = parseFloat(state.q3);
+    var rateInput     = document.getElementById('ao-rate-input');
+    var rate          = (rateInput && parseFloat(rateInput.value)) || state.q1Rate || 100;
+    var currency      = (window.apexGetCurrency && window.apexGetCurrency()) || 'EUR';
+    var sym           = SYMBOLS[currency] || '€';
+    var hrsSavedUpper = Math.round(hoursInput * a.saveRate * 10) / 10;
+    var hrsSavedLower = Math.round(hoursInput * (a.saveRate - 0.1) * 10) / 10;
+    var priceMid      = getPriceMid(autoNum);
+    var weeklyValue   = hrsSavedUpper * rate;
+    var weeks         = priceMid / weeklyValue;
+    var roiWeeks;
+    if (weeks < 1)       roiWeeks = 'under 1 week';
+    else if (weeks > 52) roiWeeks = 'over a year';
+    else                 roiWeeks = (Math.round(weeks * 10) / 10) + ' weeks';
+
+    return {
+      practiceType:   state.q1,
+      practiceLabel:  PRACTICE_LABELS[state.q1] || 'professional services firm',
+      automationNum:  autoNum,
+      automationName: a.name,
+      painLabel:      state.q2Labels[0] || '',
+      hoursLabel:     state.q3Label || '',
+      hrsSaved:       hrsSavedLower + '–' + hrsSavedUpper,
+      currency:       currency,
+      currencySymbol: sym,
+      rate:           rate,
+      priceRange:     fmtRange(autoNum),
+      roiWeeks:       roiWeeks,
+      included:       a.included,
+      whatItDoes:     getWhatItDoes(autoNum),
+      stopDoing:      getStopDoing(autoNum),
+      buildTime:      a.buildTime,
+      tone:           state.q5,
+      firmSize:       state.q4,
+      generatedAt:    new Date().toISOString()
+    };
+  }
+
   /* ── Email capture ── */
   window.auditEmailSubmit = function (e) {
     e.preventDefault();
     var gdpr = document.getElementById('ao-gdpr-check');
     if (!gdpr.checked) { gdpr.focus(); return; }
 
+    var email      = document.getElementById('ao-email-input').value.trim();
+    var submitBtn  = e.target.querySelector('button[type="submit"]');
+    var confirmEl  = document.getElementById('ao-email-confirm');
+    var formEl     = document.getElementById('ao-email-form');
+
+    // Disable button to prevent double-submit
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
+
     fireEvent('audit_email_captured');
 
-    // Submit to Formspree (update action URL when configured)
-    var email = document.getElementById('ao-email-input').value;
-    fetch('https://formspree.io/f/apexsystematic', {
+    var proposal = buildProposalState();
+
+    // Step 1: POST proposal to Worker → get UUID back
+    fetch('https://proposals.apexsystematic.com/save', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email, source: 'audit_tool' })
-    }).catch(function () {}); // silent fail — show confirm regardless
+      body: JSON.stringify({ uuid: generateUUID(), proposal: proposal })
+    })
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      if (!data.ok || !data.uuid) throw new Error('Save failed');
 
-    document.getElementById('ao-email-form').style.display = 'none';
-    document.getElementById('ao-email-confirm').classList.remove('hidden');
+      var proposalUrl = 'https://proposals.apexsystematic.com/' + data.uuid;
+
+      // Step 2: POST to Make webhook → Make sends Brevo email
+      return fetch('https://hook.eu2.make.com/REPLACE_WITH_YOUR_WEBHOOK_ID', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email:       email,
+          proposalUrl: proposalUrl,
+          uuid:        data.uuid,
+          practice:    proposal.practiceLabel,
+          automation:  proposal.automationName
+        })
+      });
+    })
+    .then(function () {
+      formEl.style.display = 'none';
+      confirmEl.classList.remove('hidden');
+    })
+    .catch(function () {
+      // Silent fail — still show confirm so visitor isn't left hanging
+      formEl.style.display = 'none';
+      confirmEl.classList.remove('hidden');
+    });
   };
+
+  /* ── UUID generator ── */
+  function generateUUID() {
+    if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+      return crypto.randomUUID();
+    }
+    // Fallback for older browsers
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      var r = Math.random() * 16 | 0;
+      return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    });
+  }
 
   /* ── Analytics ── */
   function fireEvent(name) {
