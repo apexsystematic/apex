@@ -34,7 +34,7 @@
     el.innerHTML =
       '<div class="header-wrap" id="header-wrap">'
       +   '<div class="header container">'
-      +     '<a href="/index.html" class="header-logo" aria-label="Apex Systematic">' + LOGO_HEADER + '</a>'
+      +     '<a href="/" class="header-logo" aria-label="Apex Systematic">' + LOGO_HEADER + '</a>'
       +     '<nav class="header-nav" aria-label="Main navigation">'
 
       /* Services dropdown */
@@ -83,7 +83,7 @@
       +     '<a href="/pricing/">Pricing</a>'
       +     '</nav>'
       +     '<div class="header-right">'
-      +       '<a href="/index.html#contact" class="btn btn-primary header-cta">Free Audit</a>'
+      +       '<a href="/contact/" class="btn btn-primary header-cta">Free Audit</a>'
       +       '<button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false">'
       +         '<span></span><span></span><span></span>'
       +       '</button>'
@@ -139,7 +139,7 @@
 
       +   '<a href="/pricing/">Pricing</a>'
       +   '<a href="/faq/">FAQ</a>'
-      +   '<a href="/index.html#contact" class="btn btn-primary">Free Audit</a>'
+      +   '<a href="/contact/" class="btn btn-primary">Free Audit</a>'
       + '</nav>';
   }
 
@@ -150,7 +150,7 @@
     el.innerHTML =
       '<footer class="footer-wrap">'
       +   '<div class="footer container">'
-      +     '<a href="/index.html" class="footer-logo" aria-label="Apex Systematic">' + LOGO_FOOTER + '</a>'
+      +     '<a href="/" class="footer-logo" aria-label="Apex Systematic">' + LOGO_FOOTER + '</a>'
       +     '<nav class="footer-nav-cols" aria-label="Footer navigation">'
 
       +       '<div class="footer-nav-col">'
@@ -185,7 +185,7 @@
       +         '<a href="/demos/">Demos</a>'
       +         '<a href="/pricing/">Pricing</a>'
       +         '<a href="/faq/">FAQ</a>'
-      +         '<a href="/index.html#contact">Contact</a>'
+      +         '<a href="/contact/">Contact</a>'
       +         '<h4 style="margin-top:24px;">Legal</h4>'
       +         '<a href="/legal/terms.html">Terms</a>'
       +         '<a href="/legal/privacy.html">Privacy</a>'
