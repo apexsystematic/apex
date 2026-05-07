@@ -403,7 +403,7 @@
       var proposalUrl = 'https://proposals.apexsystematic.com/' + data.uuid;
 
       // Step 2: POST to Make webhook → Make sends Brevo email
-      return fetch('https://hook.eu2.make.com/REPLACE_WITH_YOUR_WEBHOOK_ID', {
+      return fetch('https://hook.eu1.make.com/uq15gkyeun95811a6ya6ny14fg6c98p2', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
