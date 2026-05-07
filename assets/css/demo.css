@@ -498,6 +498,13 @@ body {
   flex-wrap: wrap;
 }
 
+.cta-pricing-link {
+  display: inline-block;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  text-decoration: none;
+}
+
 /* CTA buttons use .btn .btn-primary / .btn .btn-ghost from style.css — no overrides needed. */
 
 
