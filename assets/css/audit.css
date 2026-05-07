@@ -47,6 +47,8 @@
   max-width: 620px;
 }
 
+.hidden { display: none !important; }
+
 
 /* ── Progress ── */
 .audit-progress-wrap {
