@@ -124,7 +124,7 @@
   padding: 48px 40px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   gap: 16px;
 }
 
