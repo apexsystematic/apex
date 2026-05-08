@@ -138,7 +138,6 @@
       +   '</div>'
 
       +   '<a href="/pricing/">Pricing</a>'
-      +   '<a href="/faq/">FAQ</a>'
       +   '<a href="/contact/" class="btn btn-primary">Free Audit</a>'
       + '</nav>';
   }

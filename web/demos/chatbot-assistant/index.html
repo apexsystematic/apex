@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/19a036e48e9005dddd5999b15ed936e7/script.js"></script>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-52T88XLZ');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="See Apex Systematic's AI chatbot demo — handles client queries, qualifies leads, and books calls automatically.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="AI Chatbot Demo — Apex Systematic">
+  <meta property="og:description" content="See Apex Systematic's AI chatbot demo — handles client queries, qualifies leads, and books calls automatically.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://apexsystematic.com/demos/chatbot">
+  <meta property="og:image" content="https://apexsystematic.com/assets/images/og-image-v1.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Apex Systematic">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI Chatbot Demo — Apex Systematic">
+  <meta name="twitter:description" content="See Apex Systematic's AI chatbot demo — handles client queries, qualifies leads, and books calls automatically.">
+  <meta name="twitter:image" content="https://apexsystematic.com/assets/images/og-image-v1.png">
+  <title>AI Chatbot Demo — Apex Systematic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/demo.css">
+  <link rel="stylesheet" href="/assets/css/chatbot.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <div class="page-wrapper">
+
+  <header>
+    <div class="badge"><span class="badge-dot"></span>Live Interactive Demo</div>
+    <h1>AI Assistant <em>In Action</em></h1>
+    <p class="subtitle">Ask anything about automating your practice. Watch the workflow run in real time on the right.</p>
+  </header>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <span class="divider-icon">◆</span>
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="main-layout">
+
+    <!-- CHAT -->
+    <div class="chat-card">
+      <div class="chat-header">
+        <div class="chat-header-info">
+          <strong>Apex AI Assistant</strong>
+          <span>Powered by Claude · Apex Systematic</span>
+        </div>
+        <div class="online-dot"></div>
+      </div>
+
+      <div class="messages" id="messages">
+        <!-- Intro message -->
+        <div class="msg bot">
+          <div class="msg-bubble">
+            Hi there. I'm the Apex Systematic assistant. Ask me anything about automating your practice — law firms, IFAs, consultants. I can walk you through what's realistic, what it costs, and how long it takes. What's the biggest time drain in your week right now?
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-input-area">
+        <textarea
+          class="chat-msg-input"
+          id="chatInput"
+          placeholder="Type a message..."
+          rows="1"
+          onkeydown="handleKey(event)"
+          oninput="autoResize(this)"
+        ></textarea>
+        <button class="send-btn" id="sendBtn" onclick="sendMessage()">→</button>
+      </div>
+    </div>
+
+    <!-- SIDE PANEL -->
+    <div class="side-panel">
+
+      <!-- Pipeline -->
+      <div class="panel-card">
+        <div class="panel-header">
+          <span class="panel-title">Make.com Workflow</span>
+        </div>
+        <div class="panel-body">
+          <div class="pipeline" id="pipeline">
+            <div class="pipeline-step" id="step-webhook">
+              <div class="step-dot" id="dot-webhook">1</div>
+              <div class="step-info">
+                <div class="step-name" id="name-webhook">Webhook Trigger</div>
+                <div class="step-detail">Receives message + conversation history</div>
+              </div>
+            </div>
+            <div class="pipeline-step" id="step-claude">
+              <div class="step-dot" id="dot-claude">2</div>
+              <div class="step-info">
+                <div class="step-name" id="name-claude">Claude API (Haiku)</div>
+                <div class="step-detail">Processes with system prompt + history</div>
+              </div>
+            </div>
+            <div class="pipeline-step" id="step-router">
+              <div class="step-dot" id="dot-router">3</div>
+              <div class="step-info">
+                <div class="step-name" id="name-router">Router</div>
+                <div class="step-detail">Checks for lead capture signal</div>
+              </div>
+            </div>
+            <div class="pipeline-step" id="step-airtable">
+              <div class="step-dot" id="dot-airtable">4</div>
+              <div class="step-info">
+                <div class="step-name" id="name-airtable">Airtable + Slack</div>
+                <div class="step-detail">Fires if lead detected</div>
+              </div>
+            </div>
+            <div class="pipeline-step" id="step-response">
+              <div class="step-dot" id="dot-response">5</div>
+              <div class="step-info">
+                <div class="step-name" id="name-response">Webhook Response</div>
+                <div class="step-detail">Returns AI reply to frontend</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lead Status -->
+      <div class="panel-card">
+        <div class="panel-header">
+          <span class="panel-title">Lead Capture Status</span>
+        </div>
+        <div class="panel-body">
+          <div class="lead-status">
+            <div class="lead-captured-banner" id="leadBanner">
+              ✓ Lead captured — Airtable & Slack notified
+            </div>
+            <div class="lead-field">
+              <span class="lead-field-label">Name</span>
+              <span class="lead-field-val empty" id="leadName">Not yet captured</span>
+            </div>
+            <div class="lead-field">
+              <span class="lead-field-label">Email</span>
+              <span class="lead-field-val empty" id="leadEmail">Not yet captured</span>
+            </div>
+            <div class="lead-field">
+              <span class="lead-field-label">Messages</span>
+              <span class="lead-field-val" id="msgCount">0</span>
+            </div>
+            <div class="lead-field">
+              <span class="lead-field-label">Intent Signal</span>
+              <span class="lead-field-val empty" id="intentSignal">Monitoring...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Suggested prompts -->
+      <div class="panel-card">
+        <div class="panel-header">
+          <span class="panel-title">Try These</span>
+        </div>
+        <div class="panel-body">
+          <div class="prompts">
+            <button class="prompt-btn" onclick="usePrompt(this)">What do law firms usually automate first?</button>
+            <button class="prompt-btn" onclick="usePrompt(this)">What do IFAs typically automate?</button>
+            <button class="prompt-btn" onclick="usePrompt(this)">How much does it cost?</button>
+            <button class="prompt-btn" onclick="usePrompt(this)">How long from start to live?</button>
+            <button class="prompt-btn" onclick="usePrompt(this)">Is there a monthly fee or retainer?</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <h3>Want this on your website?</h3>
+    <p>An AI assistant that answers questions and captures leads — 24 hours a day, without a member of staff.</p>
+    <div class="cta-btns">
+      <button class="btn btn-primary" onclick="openAuditModal()">Book a Free Call →</button>
+      <a href="/demos/" class="btn btn-ghost">More Demos</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="site-footer"></div>
+
+<script>
+  // ── Config ──
+  const WEBHOOK_URL = 'YOUR_MAKE_WEBHOOK_URL'; // Replace with your Make.com webhook URL
+  const USE_LIVE_WEBHOOK = false; // Set to true once your Make.com scenario is live
+
+  // ── State ──
+  let history = [];
+  let messageCount = 0;
+  let leadCaptured = false;
+  let isTyping = false;
+
+  // ── Pipeline animation ──
+  const steps = ['webhook', 'claude', 'router', 'airtable', 'response'];
+
+  function resetPipeline() {
+    steps.forEach(s => {
+      document.getElementById(`dot-${s}`).className = 'step-dot';
+      document.getElementById(`name-${s}`).className = 'step-name';
+    });
+  }
+
+  async function animatePipeline(hasLead) {
+    resetPipeline();
+    const delays = [0, 600, 1200, 1800, hasLead ? 2400 : 1800];
+    const activeDuration = 500;
+
+    for (let i = 0; i < steps.length; i++) {
+      if (steps[i] === 'airtable' && !hasLead) continue;
+
+      await new Promise(r => setTimeout(r, delays[i]));
+      const dot = document.getElementById(`dot-${steps[i]}`);
+      const name = document.getElementById(`name-${steps[i]}`);
+      dot.className = 'step-dot active';
+      name.className = 'step-name active';
+
+      await new Promise(r => setTimeout(r, activeDuration));
+      dot.className = 'step-dot done';
+      dot.textContent = '✓';
+      name.className = 'step-name done';
+    }
+  }
+
+  // ── Intent detection ──
+  const intentKeywords = ['price', 'cost', 'how much', 'afford', 'budget', 'quote',
+    'book', 'call', 'meeting', 'audit', 'interested', 'start', 'get started',
+    'law firm', 'ifa', 'financial advisor', 'consultant', 'my practice', 'my firm'];
+
+  function detectIntent(text) {
+    const lower = text.toLowerCase();
+    if (intentKeywords.some(k => lower.includes(k))) return 'High — pricing/booking signal';
+    if (lower.includes('automate') || lower.includes('workflow') || lower.includes('manual')) return 'Medium — exploring automation';
+    return 'Low — general enquiry';
+  }
+
+  // ── Mock AI responses (used when webhook not live) ──
+  const mockResponses = [
+    {
+      trigger: ['law firm', 'lawyer', 'solicitor', 'legal'],
+      reply: `Great question. For law firms, the highest-impact automations are typically:\n\n**Client intake & qualification** — a form that captures enquiries, qualifies them by matter type and budget, and either sends a Calendly booking link or a decline email automatically. No manual triage needed.\n\n**Document generation** — engagement letters, client care letters, and standard correspondence generated automatically from intake data.\n\n**Matter status updates** — automated emails to clients at key milestones so you're not answering "where are we at?" calls.\n\nMost firms start with intake because the ROI is immediate and visible. What size is your firm?`
+    },
+    {
+      trigger: ['ifa', 'financial advisor', 'financial adviser', 'wealth'],
+      reply: `For IFAs, the two biggest time drains I see are onboarding and reporting.\n\n**Client onboarding** — from first enquiry to fact-find to signed LOE, the whole sequence can be automated. One link to the client, everything else runs itself.\n\n**Suitability report generation** — pulling client data and drafting a structured report automatically, ready for your review rather than being built from scratch.\n\n**Review scheduling** — automated annual/semi-annual review reminders with booking links, so reviews don't fall through the cracks.\n\nAre you FCA-regulated in the UK or operating under a different framework?`
+    },
+    {
+      trigger: ['cost', 'price', 'how much', 'pricing', 'fee', 'charge'],
+      reply: `Pricing is project-based — you pay once, and the system is yours. No retainers, no monthly fees, no lock-in.\n\nThere are three tiers:\n\n**Quick Win** — one focused automation solving your single biggest time drain. Best starting point. 2-week delivery.\n\n**Full System** — multiple workflows connected into one always-on system. The most popular option. 4–6 week delivery.\n\n**Ongoing Partner** — monthly automation sprints as your practice grows.\n\nEvery engagement starts with a free audit — we map your workflows and give you a clear picture of what's possible before you commit to anything.\n\nTo give you an accurate quote, I'd need to understand your setup. What's your biggest time drain right now, and roughly how many staff are involved?`
+    },
+    {
+      trigger: ['how long', 'timeline', 'time', 'week', 'deliver'],
+      reply: `Quick Win builds take about **2 weeks** from kick-off to handover. Full System builds are **4–6 weeks**.\n\nThe process is: free audit first (usually a 30–45 min call), then a fixed-price proposal within 24 hours, then build.\n\nYou're never dependent on us once it's live — everything is fully documented and you own it outright.\n\nDo you have a particular timeline in mind, or a specific workflow you're looking to automate?`
+    },
+    {
+      trigger: ['retainer', 'monthly', 'subscription', 'recurring', 'ongoing', 'fee'],
+      reply: `No retainers, no monthly fees. That's a core part of how Apex Systematic works.\n\nYou pay for the project once, and you own the system outright. Most automation agencies lock you into monthly fees for "maintenance" — we don't believe in that model.\n\nAfter handover you're fully self-sufficient. If you want to continue building, there's an Ongoing Partner option, but that's entirely your choice — not a requirement.\n\nIs that a concern you've had with other automation providers?`
+    }
+  ];
+
+  function getMockResponse(message) {
+    const lower = message.toLowerCase();
+    for (const r of mockResponses) {
+      if (r.trigger.some(t => lower.includes(t))) return r.reply;
+    }
+    return `That's a good question. AI automation can be applied in a lot of different ways across professional services — the key is identifying where your time is actually going.\n\nThe most common starting points are client intake, document generation, and reporting. But the best place to start depends entirely on your specific workflow.\n\nWhat does a typical day look like for you, and where do you feel you're spending time on things that shouldn't need your attention?`;
+  }
+
+  // ── Message rendering ──
+  function addMessage(role, text, animate = true) {
+    const messages = document.getElementById('messages');
+
+    const msg = document.createElement('div');
+    msg.className = `msg ${role}`;
+    if (!animate) msg.style.opacity = '1';
+
+    const bubble = document.createElement('div');
+    bubble.className = 'msg-bubble';
+    bubble.innerHTML = formatMessage(text);
+
+    msg.appendChild(bubble);
+    messages.appendChild(msg);
+    messages.scrollTop = messages.scrollHeight;
+    return msg;
+  }
+
+  function formatMessage(text) {
+    return text
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\n\n/g, '<br><br>')
+      .replace(/\n/g, '<br>');
+  }
+
+  function showTyping() {
+    const messages = document.getElementById('messages');
+    const typing = document.createElement('div');
+    typing.className = 'typing-indicator';
+    typing.id = 'typingIndicator';
+
+    const dots = document.createElement('div');
+    dots.className = 'typing-dots';
+    dots.innerHTML = '<span></span><span></span><span></span>';
+
+    typing.appendChild(dots);
+    messages.appendChild(typing);
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  function removeTyping() {
+    const t = document.getElementById('typingIndicator');
+    if (t) t.remove();
+  }
+
+  // ── Lead capture ──
+  function extractLead(text) {
+    const match = text.match(/LEAD_CAPTURED:\{"name":"([^"]+)","email":"([^"]+)"\}/);
+    if (match) return { name: match[1], email: match[2] };
+    return null;
+  }
+
+  function updateLeadPanel(name, email) {
+    document.getElementById('leadName').textContent = name;
+    document.getElementById('leadName').classList.remove('empty');
+    document.getElementById('leadEmail').textContent = email;
+    document.getElementById('leadEmail').classList.remove('empty');
+    document.getElementById('leadBanner').style.display = 'flex';
+    leadCaptured = true;
+  }
+
+  // ── Send message ──
+  async function sendMessage() {
+    const input = document.getElementById('chatInput');
+    const message = input.value.trim();
+    if (!message || isTyping) return;
+
+    isTyping = true;
+    input.value = '';
+    autoResize(input);
+    document.getElementById('sendBtn').disabled = true;
+
+    if (messageCount === 0) {
+      gtag('event', 'demo_interaction', { demo_name: 'chatbot' });
+    }
+
+    // Add user message
+    addMessage('user', message);
+    messageCount++;
+    document.getElementById('msgCount').textContent = messageCount;
+
+    // Update intent
+    document.getElementById('intentSignal').textContent = detectIntent(message);
+    document.getElementById('intentSignal').classList.remove('empty');
+
+    // Add to history
+    history.push({ role: 'user', content: message });
+
+    // Show typing
+    showTyping();
+
+    // Animate pipeline immediately
+    animatePipeline(false);
+
+    try {
+      let replyText;
+      let hasLead = false;
+
+      if (USE_LIVE_WEBHOOK && WEBHOOK_URL !== 'YOUR_MAKE_WEBHOOK_URL') {
+        // Live webhook call
+        const response = await fetch(WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message, history })
+        });
+        const data = await response.json();
+        replyText = data.reply;
+        hasLead = data.lead_captured === true || data.lead_captured === 'true';
+      } else {
+        // Mock mode — simulate delay
+        await new Promise(r => setTimeout(r, 2000 + Math.random() * 1000));
+        replyText = getMockResponse(message);
+        // Simulate lead capture on pricing questions after 3+ messages
+        if (messageCount >= 3 && !leadCaptured &&
+          (message.toLowerCase().includes('price') || message.toLowerCase().includes('book') || message.toLowerCase().includes('start'))) {
+          replyText += '\n\nTo get you a tailored quote, could I grab your name and email? I\'ll have someone from the team follow up within 24 hours.';
+        }
+        if (messageCount >= 4 && !leadCaptured && replyText.includes('name and email')) {
+          hasLead = false;
+        }
+      }
+
+      removeTyping();
+
+      // Extract and strip lead signal
+      const lead = extractLead(replyText);
+      if (lead) {
+        replyText = replyText.replace(/LEAD_CAPTURED:\{[^}]+\}/g, '').trim();
+        updateLeadPanel(lead.name, lead.email);
+        hasLead = true;
+        animatePipeline(true);
+      }
+
+      addMessage('bot', replyText);
+      history.push({ role: 'assistant', content: replyText });
+
+    } catch (err) {
+      removeTyping();
+      addMessage('bot', 'Sorry, I ran into a connection issue. Please try again in a moment.');
+    }
+
+    isTyping = false;
+    document.getElementById('sendBtn').disabled = false;
+    input.focus();
+  }
+
+  function handleKey(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  }
+
+  function autoResize(el) {
+    el.style.height = 'auto';
+    el.style.height = Math.min(el.scrollHeight, 100) + 'px';
+  }
+
+  function usePrompt(btn) {
+    const input = document.getElementById('chatInput');
+    input.value = btn.textContent;
+    autoResize(input);
+    input.focus();
+    sendMessage();
+  }
+</script>
+
+  <script src="/assets/js/components.js"></script>
+  <script src="/assets/js/main.js"></script>
+  <script>gtag('event', 'demo_viewed', { demo_name: 'chatbot' });</script>
+</body>
+</html>

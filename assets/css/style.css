@@ -2274,3 +2274,43 @@ main {
     margin-bottom: 48px;
   }
 }
+/* ── WHO WE WORK WITH / VERTICALS NAV ── */
+.verticals-nav {
+  padding: 80px 0;
+  border-top: 1px solid var(--border, rgba(255,255,255,0.08));
+}
+
+.verticals-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+a.vertical-link {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 1px solid var(--border, rgba(255,255,255,0.15));
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text, inherit);
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+a.vertical-link:hover {
+  background: var(--surface-hover, rgba(255,255,255,0.06));
+  border-color: var(--accent, currentColor);
+}
+
+@media (max-width: 640px) {
+  .verticals-grid {
+    gap: 8px;
+  }
+  a.vertical-link {
+    font-size: 0.85rem;
+    padding: 8px 14px;
+  }
+}

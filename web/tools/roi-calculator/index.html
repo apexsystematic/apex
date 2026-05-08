@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/19a036e48e9005dddd5999b15ed936e7/script.js"></script>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-52T88XLZ');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ROI Calculator — See exactly how much manual work is costing your practice. Apex Systematic.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="ROI Calculator — Apex Systematic">
+  <meta property="og:description" content="Move the sliders. See what manual work is costing you in real dollars.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://apexsystematic.com/roi-calculator">
+  <meta property="og:image" content="https://apexsystematic.com/assets/images/og-image-v1.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Apex Systematic">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ROI Calculator — Apex Systematic">
+  <meta name="twitter:description" content="Move the sliders. See what manual work is costing you in real dollars.">
+  <meta name="twitter:image" content="https://apexsystematic.com/assets/images/og-image-v1.png">
+  <title>ROI Calculator — Apex Systematic</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/roi-calculator.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <main id="main-content">
+
+    <!-- ── CALCULATOR ── -->
+    <section class="roi-section">
+      <div class="container">
+        <div class="roi-page-header">
+          <span class="section-tag">ROI Calculator</span>
+          <h2>How much is manual work<br><em>actually</em> costing you?</h2>
+          <p class="section-sub">Set the sliders to your situation. See the annual cost of the work you're still doing manually.</p>
+        </div>
+        <div class="roi-layout">
+
+          <!-- Inputs -->
+          <div class="inputs-group">
+
+            <span class="inputs-block-label">Your Practice</span>
+
+            <div class="input-row">
+              <div class="input-label-row">
+                <span class="input-label-text">Your average billable rate</span>
+                <span class="input-label-value" id="val-rate">€150 / hr</span>
+              </div>
+              <input type="range" id="rate" min="50" max="400" step="10" value="150" oninput="update()">
+              <div class="range-limits"><span>€50</span><span>€400</span></div>
+            </div>
+
+            <div class="input-row">
+              <div class="input-label-row">
+                <span class="input-label-text">People in your team (including you)</span>
+                <span class="input-label-value" id="val-team">1 person</span>
+              </div>
+              <input type="range" id="team" min="1" max="20" step="1" value="1" oninput="update()">
+              <div class="range-limits"><span>1</span><span>20</span></div>
+            </div>
+
+            <span class="inputs-block-label">Hours lost per week on...</span>
+
+            <div class="input-row">
+              <div class="input-label-row">
+                <span class="input-label-text">Admin and email</span>
+                <span class="input-label-value" id="val-admin">5 hrs / wk</span>
+              </div>
+              <input type="range" id="admin" min="0" max="30" step="1" value="5" oninput="update()">
+              <div class="range-limits"><span>0</span><span>30 hrs</span></div>
+            </div>
+
+            <div class="input-row">
+              <div class="input-label-row">
+                <span class="input-label-text">Document drafting and formatting</span>
+                <span class="input-label-value" id="val-docs">4 hrs / wk</span>
+              </div>
+              <input type="range" id="docs" min="0" max="20" step="1" value="4" oninput="update()">
+              <div class="range-limits"><span>0</span><span>20 hrs</span></div>
+            </div>
+
+            <div class="input-row">
+              <div class="input-label-row">
+                <span class="input-label-text">Client onboarding and chasing</span>
+                <span class="input-label-value" id="val-onboard">3 hrs / wk</span>
+              </div>
+              <input type="range" id="onboard" min="0" max="20" step="1" value="3" oninput="update()">
+              <div class="range-limits"><span>0</span><span>20 hrs</span></div>
+            </div>
+
+            <div class="input-row">
+              <div class="input-label-row">
+                <span class="input-label-text">Data entry and reporting</span>
+                <span class="input-label-value" id="val-data">3 hrs / wk</span>
+              </div>
+              <input type="range" id="data" min="0" max="20" step="1" value="3" oninput="update()">
+              <div class="range-limits"><span>0</span><span>20 hrs</span></div>
+            </div>
+
+          </div>
+
+          <!-- Results -->
+          <div class="results-panel">
+
+            <div class="results-header">
+              <span class="section-tag">Your results</span>
+              <h3>Annual cost of manual work</h3>
+            </div>
+
+            <div class="metric-primary">
+              <div class="metric-label">Based on your billable rate</div>
+              <div class="metric-value-large" id="res-value">€0</div>
+              <p class="metric-benchmark">
+                Firms like yours typically recover <strong>60–80%</strong> of this through automation — <strong id="res-recoverable">€0</strong> back in billable time.</p>
+            </div>
+
+            <div class="metric-secondary">
+              <div class="metric-cell">
+                <div class="metric-label">Hours / year</div>
+                <div class="metric-value-mid" id="res-hours">0</div>
+                <div class="metric-sub-label">lost to manual work</div>
+              </div>
+              <div class="metric-cell">
+                <div class="metric-label">Hours / week</div>
+                <div class="metric-value-mid" id="res-weekly">0</div>
+                <div class="metric-sub-label">across your team</div>
+              </div>
+            </div>
+
+            <div class="breakdown">
+              <div class="breakdown-title">Breakdown by area</div>
+              <div class="breakdown-row">
+                <span class="breakdown-category">Admin and email</span>
+                <span class="breakdown-val" id="br-admin">0 hrs / yr</span>
+              </div>
+              <div class="breakdown-row">
+                <span class="breakdown-category">Document drafting</span>
+                <span class="breakdown-val" id="br-docs">0 hrs / yr</span>
+              </div>
+              <div class="breakdown-row">
+                <span class="breakdown-category">Client onboarding</span>
+                <span class="breakdown-val" id="br-onboard">0 hrs / yr</span>
+              </div>
+              <div class="breakdown-row">
+                <span class="breakdown-category">Data and reporting</span>
+                <span class="breakdown-val" id="br-data">0 hrs / yr</span>
+              </div>
+            </div>
+
+            <div class="results-cta">
+              <a href="#contact" class="btn btn-primary">Book a Free Audit</a>
+              <p class="results-cta-note">We map your workflows, show you exactly what's worth building, and give you a fixed-price quote within 24 hours.
+</p>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div id="site-contact"
+      data-variant="full"
+      data-tag="Get started"
+      data-heading="You&#8217;ve done the numbers. Let&#8217;s recover that time."
+      data-sub="Book a free 30-minute audit call and we&#8217;ll show you exactly what can be automated in your practice &#8212; no commitment required.">
+    </div>
+
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="/assets/js/components.js"></script>
+  <script src="/assets/js/main.js"></script>
+
+  <script>
+    function fmt(n) {
+      return '€' + Math.round(n).toLocaleString('en-UK');
+    }
+
+    let roiTracked = false;
+
+    function update() {
+      if (!roiTracked) {
+        gtag('event', 'roi_calculated');
+        roiTracked = true;
+      }
+
+      const rate    = +document.getElementById('rate').value;
+      const team    = +document.getElementById('team').value;
+      const admin   = +document.getElementById('admin').value;
+      const docs    = +document.getElementById('docs').value;
+      const onboard = +document.getElementById('onboard').value;
+      const data    = +document.getElementById('data').value;
+
+      // Slider display values
+      document.getElementById('val-rate').textContent    = '€' + rate.toLocaleString() + ' / hr';
+      document.getElementById('val-team').textContent    = team + (team === 1 ? ' person' : ' people');
+      document.getElementById('val-admin').textContent   = admin + ' hrs / wk';
+      document.getElementById('val-docs').textContent    = docs + ' hrs / wk';
+      document.getElementById('val-onboard').textContent = onboard + ' hrs / wk';
+      document.getElementById('val-data').textContent    = data + ' hrs / wk';
+
+      // Calculations
+      const weeklyTotal  = (admin + docs + onboard + data) * team;
+      const annualHours  = weeklyTotal * 48;
+      const annualValue  = annualHours * rate;
+      const recoverable  = annualValue * 0.70; // midpoint of 60–80%
+
+      // Breakdown (annual, per team)
+      const bAdmin   = admin   * team * 48;
+      const bDocs    = docs    * team * 48;
+      const bOnboard = onboard * team * 48;
+      const bData    = data    * team * 48;
+
+      // Outputs
+      document.getElementById('res-value').textContent      = fmt(annualValue);
+      document.getElementById('res-recoverable').textContent = fmt(recoverable);
+      document.getElementById('res-hours').textContent      = Math.round(annualHours).toLocaleString();
+      document.getElementById('res-weekly').textContent     = weeklyTotal;
+
+      document.getElementById('br-admin').textContent   = bAdmin.toLocaleString()   + ' hrs / yr';
+      document.getElementById('br-docs').textContent    = bDocs.toLocaleString()    + ' hrs / yr';
+      document.getElementById('br-onboard').textContent = bOnboard.toLocaleString() + ' hrs / yr';
+      document.getElementById('br-data').textContent    = bData.toLocaleString()    + ' hrs / yr';
+    }
+
+    update();
+  </script>
+
+</body>
+</html>
