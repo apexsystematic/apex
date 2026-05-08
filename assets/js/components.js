@@ -391,7 +391,7 @@
       /* ── Short variant: name + email + notes only ── */
       formInner = '<div class="audit-form-wrap">'
         + '<div class="audit-step" id="audit-step-3">'
-        +   '<h3 class="audit-step-title">WBook your free audit</h3>'
+        +   '<h3 class="audit-step-title">Book your free audit</h3>'
         +   '<div class="form-row">'
         +     '<div class="form-group">'
         +       '<label for="name">Full name</label>'
