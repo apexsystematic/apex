@@ -1,0 +1,121 @@
+/* ═══════════════════════════════════════════
+   APEX SYSTEMATIC — about.css
+   Supplemental styles for /about/
+   ═══════════════════════════════════════════ */
+
+/* ── Hero ── */
+.about-hero h1 {
+  max-width: 640px;
+  margin-bottom: 1.25rem;
+}
+
+.about-hero p {
+  max-width: 540px;
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+/* ── Two-column layout shared across sections ── */
+.about-two-col {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.about-label-col {
+  padding-top: 6px;
+}
+
+.about-body-col {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ── Lead paragraph ── */
+.about-lead {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+  color: var(--white) !important;
+  line-height: 1.25;
+  font-style: italic;
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+
+/* ── Body paragraphs ── */
+.about-body-col p {
+  font-size: 0.97rem;
+  line-height: 1.85;
+  color: var(--text-muted);
+  max-width: 640px;
+}
+
+/* ── Cert grid override for 3-col ── */
+.about-cert-grid--3 {
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 340px;
+  margin-top: 8px;
+}
+
+/* ── LinkedIn link ── */
+.about-linkedin {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  padding: 11px 18px;
+  transition: border-color var(--ease), color var(--ease), background var(--ease);
+  align-self: flex-start;
+  margin-top: 4px;
+}
+
+.about-linkedin:hover {
+  border-color: var(--gold);
+  background: rgba(201, 168, 76, 0.05);
+  color: var(--gold-light);
+}
+
+.about-linkedin svg {
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+/* ── CTA row ── */
+.about-cta-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .about-two-col {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .about-cert-grid--3 {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-cta-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .about-cta-row .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
