@@ -96,6 +96,45 @@
   margin-top: 8px;
 }
 
+/* ── Founder photo layout ── */
+.about-founder-inner {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.about-founder-photo-wrap {
+  position: sticky;
+  top: calc(var(--nav-h, 97px) + 40px);
+}
+
+.about-founder-photo {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: grayscale(20%);
+  border: 1px solid var(--border);
+}
+
+.about-founder-text {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+@media (max-width: 900px) {
+  .about-founder-inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .about-founder-photo-wrap {
+    position: static;
+    max-width: 280px;
+  }
+}
+
 /* ── Responsive ── */
 @media (max-width: 900px) {
   .about-two-col {

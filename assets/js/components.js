@@ -81,6 +81,7 @@
       +     '</div>'
 
       +     '<a href="/pricing/">Pricing</a>'
+      +     '<a href="/about/">About</a>'
       +     '</nav>'
       +     '<div class="header-right">'
       +       '<a href="/contact/" class="btn btn-primary header-cta">Free Audit</a>'
@@ -138,6 +139,7 @@
       +   '</div>'
 
       +   '<a href="/pricing/">Pricing</a>'
+      +   '<a href="/about/">About</a>'
       +   '<a href="/contact/" class="btn btn-primary">Free Audit</a>'
       + '</nav>';
   }
@@ -185,6 +187,7 @@
       +         '<a href="/pricing/">Pricing</a>'
       +         '<a href="/faq/">FAQ</a>'
       +         '<a href="/contact/">Contact</a>'
+      +         '<a href="/about/">About</a>'
       +         '<h4 style="margin-top:24px;">Legal</h4>'
       +         '<a href="/legal/terms.html">Terms</a>'
       +         '<a href="/legal/privacy.html">Privacy</a>'
