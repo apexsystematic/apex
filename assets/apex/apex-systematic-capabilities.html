@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow" />
+<title>Apex Systematic — Capabilities & Pricing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  /* ─── TOKENS ─── */
+  :root {
+    --bg:         #0E1117;
+    --surface:    #131820;
+    --surface-2:  #182030;
+    --border:     #1E2838;
+    --border-lt:  #263040;
+    --text:       #D8DCE4;
+    --muted:      #7A8299;
+    --dim:        #4F5B6E;
+    --white:      #FFFFFF;
+    --gold:       #C9A84C;
+    --gold-lt:    #DDB95A;
+
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body:    'DM Sans', Helvetica, Arial, sans-serif;
+
+    --page-w: 210mm;
+    --page-h: 297mm;
+    --margin: 14mm;
+  }
+
+  /* ─── RESET ─── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ─── BASE ─── */
+  body {
+    font-family: var(--font-body);
+    font-weight: 400;
+    background: #1a1a2e;
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── PAGE WRAPPER ─── */
+  .doc {
+    width: var(--page-w);
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* ─── PAGE SHELL ─── */
+  .page {
+    width: var(--page-w);
+    min-height: var(--page-h);
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+  }
+
+  .page-inner {
+    padding: var(--margin);
+    height: 100%;
+    min-height: var(--page-h);
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ─── SHARED ELEMENTS ─── */
+  .section-label {
+    font-family: var(--font-body);
+    font-size: 8.5pt;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .rule {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .rule-gold {
+    width: 32px;
+    height: 1.5px;
+    background: var(--gold);
+    margin-bottom: 14px;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 1.2;
+  }
+
+  p {
+    font-size: 9.5pt;
+    line-height: 1.75;
+    color: var(--muted);
+  }
+
+  strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* ─── HEADER (persistent on all pages) ─── */
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 18px;
+    flex-shrink: 0;
+  }
+
+  .logo {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .logo-apex {
+    font-family: var(--font-display);
+    font-size: 14pt;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .logo-systematic {
+    font-family: var(--font-body);
+    font-size: 7pt;
+    font-weight: 300;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .page-label {
+    font-family: var(--font-body);
+    font-size: 7.5pt;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    color: var(--dim);
+    text-transform: uppercase;
+  }
+
+  /* ─── FOOTER ─── */
+  .page-footer {
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .footer-text {
+    font-size: 7.5pt;
+    color: var(--dim);
+    letter-spacing: 0.05em;
+  }
+
+  .footer-url {
+    font-size: 7.5pt;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+  }
+
+  /* ═══════════════════════════════════════
+     PAGE 1 — COVER
+  ═══════════════════════════════════════ */
+  .cover .page-inner {
+    justify-content: space-between;
+  }
+
+  .cover-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20mm 0 16mm;
+  }
+
+  .cover-eyebrow {
+    font-size: 8pt;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 18px;
+  }
+
+  .cover h1 {
+    font-size: 35pt;
+    line-height: 1.12;
+    color: var(--white);
+    max-width: 140mm;
+    margin-bottom: 22px;
+  }
+
+  .cover-sub {
+    font-size: 11pt;
+    line-height: 1.7;
+    color: var(--muted);
+    max-width: 120mm;
+    margin-bottom: 32px;
+  }
+
+  .cover-model {
+    display: flex;
+    gap: 0;
+    border: 1px solid var(--border);
+    width: fit-content;
+  }
+
+  .model-pill {
+    padding: 9px 16px;
+    border-right: 1px solid var(--border);
+    font-size: 8pt;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+
+  .model-pill:last-child { border-right: none; }
+
+  .model-pill span {
+    display: block;
+    font-size: 6.5pt;
+    font-weight: 300;
+    color: var(--dim);
+    letter-spacing: 0.05em;
+    text-transform: none;
+    margin-top: 2px;
+  }
+
+  /* stats row on cover */
+  .cover-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid var(--border);
+    margin-top: 28px;
+  }
+
+  .cover-stat {
+    padding: 16px 18px;
+    border-right: 1px solid var(--border);
+    position: relative;
+  }
+
+  .cover-stat::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: var(--border);
+  }
+
+  .cover-stat:first-child::before { background: var(--gold); }
+  .cover-stat:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 23pt;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 8pt;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .stat-desc {
+    font-size: 7.5pt;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  .stat-src {
+    font-size: 6.5pt;
+    font-style: italic;
+    color: var(--dim);
+    margin-top: 5px;
+  }
+
+  /* ═══════════════════════════════════════
+     PAGE 2 — THE PROBLEM & WHAT WE DO
+  ═══════════════════════════════════════ */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10mm;
+  }
+
+  .section-block {
+    margin-bottom: 18px;
+  }
+
+  .section-block h2 {
+    font-size: 17pt;
+    color: var(--white);
+    margin-bottom: 10px;
+    line-height: 1.25;
+  }
+
+  .section-block h3 {
+    font-size: 10pt;
+    color: var(--white);
+    margin-bottom: 5px;
+    font-weight: 400;
+  }
+
+  /* barrier cards */
+  .barriers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-top: 12px;
+  }
+
+  .barrier-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 10px 12px;
+    position: relative;
+  }
+
+  .barrier-pct {
+    font-family: var(--font-display);
+    font-size: 17pt;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+
+  .barrier-name {
+    font-size: 8pt;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 3px;
+  }
+
+  .barrier-desc {
+    font-size: 7.5pt;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .barrier-src {
+    font-size: 6.5pt;
+    font-style: italic;
+    color: var(--dim);
+    margin-top: 4px;
+  }
+
+  /* insight callout */
+  .insight-callout {
+    border-left: 2px solid var(--gold);
+    background: rgba(201, 168, 76, 0.06);
+    padding: 12px 14px;
+    margin-top: 12px;
+  }
+
+  .insight-callout p {
+    font-size: 9pt;
+    color: var(--text);
+    line-height: 1.65;
+  }
+
+  /* ═══════════════════════════════════════
+     PAGE 3 — THE 13 AUTOMATIONS
+  ═══════════════════════════════════════ */
+  .suite-block {
+    margin-bottom: 20px;
+  }
+
+  .suite-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 6px;
+    margin-bottom: 8px;
+  }
+
+  .suite-name {
+    font-family: var(--font-display);
+    font-size: 11pt;
+    color: var(--white);
+    font-weight: 400;
+  }
+
+  .suite-desc {
+    font-size: 8pt;
+    color: var(--muted);
+  }
+
+  .automation-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+  }
+
+  .auto-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 8px 10px;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .auto-num {
+    font-family: var(--font-display);
+    font-size: 8.5pt;
+    color: var(--gold);
+    flex-shrink: 0;
+    line-height: 1.4;
+  }
+
+  .auto-name {
+    font-size: 8.5pt;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 2px;
+  }
+
+  .auto-desc {
+    font-size: 7.5pt;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* full-width grid for retention suite */
+  .automation-grid-1col {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+  }
+
+  /* ═══════════════════════════════════════
+     PAGE 4 — HOW IT WORKS + MODEL
+  ═══════════════════════════════════════ */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+
+  .step-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 14px 14px;
+    position: relative;
+  }
+
+  .step-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: var(--border);
+    transition: background 0.2s;
+  }
+
+  .step-card:nth-child(1)::before { background: var(--gold); }
+
+  .step-num {
+    font-size: 7pt;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .step-title {
+    font-family: var(--font-display);
+    font-size: 12pt;
+    color: var(--white);
+    margin-bottom: 8px;
+    font-weight: 400;
+  }
+
+  .step-desc {
+    font-size: 8.5pt;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* included / excluded */
+  .incl-excl {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+
+  .incl-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 12px 14px;
+  }
+
+  .incl-card-title {
+    font-size: 8pt;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .incl-list {
+    list-style: none;
+  }
+
+  .incl-list li {
+    font-size: 8.5pt;
+    color: var(--muted);
+    line-height: 1.6;
+    padding-left: 12px;
+    position: relative;
+  }
+
+  .incl-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--dim);
+    font-size: 8pt;
+  }
+
+  /* model differentiator */
+  .model-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 16px 18px;
+    position: relative;
+  }
+
+  .model-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: var(--gold);
+  }
+
+  .model-block h2 {
+    font-size: 14pt;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .model-block p {
+    font-size: 9pt;
+    line-height: 1.7;
+  }
+
+  .model-pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin-top: 12px;
+  }
+
+  .pillar {
+    padding: 10px 12px;
+    border: 1px solid var(--border-lt);
+  }
+
+  .pillar-title {
+    font-size: 8pt;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+
+  .pillar-desc {
+    font-size: 8pt;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  /* ═══════════════════════════════════════
+     PAGE 5 — PRICING
+  ═══════════════════════════════════════ */
+  .pricing-note {
+    font-size: 8.5pt;
+    color: var(--muted);
+    margin-bottom: 14px;
+    line-height: 1.6;
+    padding: 8px 12px;
+    border-left: 2px solid var(--gold);
+    background: rgba(201, 168, 76, 0.05);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+    font-size: 8.5pt;
+  }
+
+  thead tr {
+    background: var(--surface-2);
+  }
+
+  thead th {
+    padding: 7px 10px;
+    text-align: left;
+    font-size: 7.5pt;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dim);
+    border-bottom: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+  }
+
+  thead th:last-child { border-right: none; }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+  }
+
+  tbody tr:last-child {
+    border-bottom: none;
+  }
+
+  tbody tr:hover { background: var(--surface); }
+
+  tbody td {
+    padding: 7px 10px;
+    color: var(--muted);
+    border-right: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  tbody td:last-child { border-right: none; }
+
+  tbody td:first-child { color: var(--text); font-weight: 400; }
+  .table-wrap tbody td:not(:first-child) { text-align: right; }
+  .table-wrap thead th:not(:first-child) { text-align: right; }
+  /* bundle table: keep "includes" col left-aligned */
+  .bundle-table tbody td:nth-child(2), .bundle-table thead th:nth-child(2) { text-align: left; }
+
+  .price-gbp { color: var(--text); font-weight: 400; }
+  .price-eur { color: var(--gold); font-weight: 500; }
+
+  .table-wrap {
+    border: 1px solid var(--border);
+    margin-bottom: 12px;
+  }
+
+  .table-title {
+    font-size: 8pt;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text);
+    padding: 8px 10px;
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .pricing-footer-note {
+    font-size: 7.5pt;
+    color: var(--dim);
+    line-height: 1.6;
+    margin-top: 8px;
+  }
+
+  /* guarantee badge */
+  .guarantee {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid var(--border-lt);
+    padding: 10px 14px;
+    margin-top: 10px;
+  }
+
+  .guarantee-mark {
+    font-family: var(--font-display);
+    font-size: 17pt;
+    color: var(--gold);
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .guarantee-text {
+    font-size: 8.5pt;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .guarantee-text strong { color: var(--text); }
+
+  /* ═══════════════════════════════════════
+     PAGE 6 — ADD-ONS + NEXT STEP
+  ═══════════════════════════════════════ */
+  .addon-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+
+  .addon-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 12px 14px;
+  }
+
+  .addon-name {
+    font-size: 9.5pt;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .addon-price {
+    font-family: var(--font-display);
+    font-size: 11pt;
+    color: var(--gold);
+    margin-bottom: 6px;
+    line-height: 1;
+  }
+
+  .addon-desc {
+    font-size: 8pt;
+    color: var(--muted);
+    line-height: 1.55;
+    margin-bottom: 6px;
+  }
+
+  .addon-paired {
+    font-size: 7.5pt;
+    color: var(--dim);
+    font-style: italic;
+  }
+
+  /* CTA block */
+  .cta-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 20px 22px;
+    position: relative;
+    margin-top: 14px;
+  }
+
+  .cta-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: var(--gold);
+  }
+
+  .cta-block h2 {
+    font-size: 17pt;
+    color: var(--white);
+    margin-bottom: 8px;
+    max-width: 120mm;
+  }
+
+  .cta-block p {
+    font-size: 9.5pt;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 130mm;
+    margin-bottom: 14px;
+  }
+
+  .cta-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .cta-step {
+    border: 1px solid var(--border-lt);
+    padding: 9px 11px;
+  }
+
+  .cta-step-num {
+    font-size: 7pt;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+
+  .cta-step-text {
+    font-size: 8pt;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .cta-contact {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .cta-url {
+    font-family: var(--font-display);
+    font-size: 12pt;
+    color: var(--gold);
+  }
+
+  .cta-detail {
+    font-size: 8pt;
+    color: var(--dim);
+    line-height: 1.6;
+  }
+
+  /* ═══════════════════════════════════════
+     PRINT
+  ═══════════════════════════════════════ */
+  @media print {
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    body {
+      background: var(--bg);
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .doc {
+      margin: 0;
+      gap: 0;
+    }
+
+    .page {
+      page-break-after: always;
+      page-break-inside: avoid;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <!-- ════════════════════════════════════
+       PAGE 1 — COVER
+  ════════════════════════════════════ -->
+  <div class="page cover">
+    <div class="page-inner">
+
+      <header class="page-header">
+        <div class="logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="30 42 380 70" height="28" role="img"><title>Apex Systematic</title><line x1="54" y1="48" x2="34" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"></line><line x1="54" y1="48" x2="74" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"></line><line x1="34" y1="82" x2="74" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"></line><circle cx="54" cy="48" r="2.5" fill="#C9A84C"></circle><text x="88" y="82" font-family="Georgia, serif" font-size="46" font-weight="400" letter-spacing="10" fill="#FFFFFF">APEX</text><text x="88" y="104" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" font-weight="300" letter-spacing="9.5" fill="#C9A84C">SYSTEMATIC</text></svg>
+        </div>
+        <span class="page-label">Capabilities &amp; Pricing — 2026</span>
+      </header>
+
+      <div class="cover-body">
+        <p class="cover-eyebrow">AI Workflow Automation for Professional Services</p>
+        <h1>Stop spending your evenings on work that should not require you.</h1>
+        <p class="cover-sub">Professional services firms lose around 8 hours a week to admin that a qualified person should not have to do. Intake calls that go unanswered. Documents chased manually. Onboarding that happens in email threads. This document explains what we build, what it costs, and how it works.</p>
+
+        <div class="cover-model">
+          <div class="model-pill">Fixed price<span>Agreed before work starts</span></div>
+          <div class="model-pill">No retainer<span>No ongoing fees</span></div>
+          <div class="model-pill">You own everything<span>Full handover at completion</span></div>
+        </div>
+
+        <div class="cover-stats">
+          <div class="cover-stat">
+            <div class="stat-num">4–8</div>
+            <div class="stat-label">Hours reclaimed per week</div>
+            <div class="stat-desc">Per person, year one. Conservative peer-reviewed baseline — not vendor claims.</div>
+            <div class="stat-src">Dell'Acqua et al. (HBS/BCG, 2023) · Noy &amp; Zhang (MIT, 2023)</div>
+          </div>
+          <div class="cover-stat">
+            <div class="stat-num">&lt;3 mo</div>
+            <div class="stat-label">Typical payback period</div>
+            <div class="stat-desc">At professional billing rates of £100–£300/hr and standard tool costs.</div>
+            <div class="stat-src">Thomson Reuters Future of Professionals, 2024</div>
+          </div>
+          <div class="cover-stat">
+            <div class="stat-num">82%</div>
+            <div class="stat-label">Said "it doesn't apply to us"</div>
+            <div class="stat-desc">Of solo practitioners and micro-firms who haven't adopted automation. Every month that's wrong costs 16+ hours.</div>
+            <div class="stat-src">U.S. Chamber / SBA BTOS, 2025</div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="page-footer">
+        <span class="footer-text">Fixed price · No retainer · You own everything we build</span>
+        <span class="footer-url">apexsystematic.com</span>
+      </footer>
+
+    </div>
+  </div><!-- /cover -->
+
+
+  <!-- ════════════════════════════════════
+       PAGE 2 — THE PROBLEM & WHAT WE BUILD
+  ════════════════════════════════════ -->
+  <div class="page">
+    <div class="page-inner">
+
+      <header class="page-header">
+        <div class="logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="30 42 380 70" height="28" role="img"><title>Apex Systematic</title><line x1="54" y1="48" x2="34" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"></line><line x1="54" y1="48" x2="74" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"></line><line x1="34" y1="82" x2="74" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"></line><circle cx="54" cy="48" r="2.5" fill="#C9A84C"></circle><text x="88" y="82" font-family="Georgia, serif" font-size="46" font-weight="400" letter-spacing="10" fill="#FFFFFF">APEX</text><text x="88" y="104" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" font-weight="300" letter-spacing="9.5" fill="#C9A84C">SYSTEMATIC</text></svg>
+        </div>
+        <span class="page-label">The Problem</span>
+      </header>
+
+      <div class="section-block">
+        <p class="section-label">Where the hours go</p>
+        <h2>The admin is not a minor inconvenience.<br>It is a day of billable time, every week.</h2>
+      </div>
+
+      <div class="two-col" style="margin-bottom: 18px;">
+        <div>
+          <p style="margin-bottom: 10px;">Research on professional services firms puts avoidable administrative time at around 8 hours per week per fee-earner. That is a full working day — spent on tasks that do not require a qualified professional to do them.</p>
+          <p style="margin-bottom: 10px;">Intake calls that fall through because no one picked up. New clients chased for documents across three email threads. Invoices raised manually after every matter closes. Onboarding explained from scratch each time. Reports pulled together on a Friday afternoon.</p>
+          <p>None of it is complicated. All of it is time.</p>
+
+          <div class="insight-callout" style="margin-top: 14px;">
+            <p><strong>The most important finding in the research:</strong> the largest gains from automation consistently go to below-average performers. Bottom-quartile workers improved 43% versus 17% for top performers. Automation narrows the capability gap — it does not just help the best-resourced firms.</p>
+            <p style="margin-top: 6px; font-size: 6.5pt; font-style: italic; color: var(--dim);">BCG / Harvard Business School, 2023</p>
+          </div>
+        </div>
+
+        <div>
+          <p class="section-label">Why most firms haven't acted</p>
+          <div class="barriers">
+            <div class="barrier-card">
+              <div class="barrier-pct">69%</div>
+              <div class="barrier-name">No one owns it in-firm</div>
+              <div class="barrier-desc">No one responsible for evaluating tools, sequencing the build, or maintaining it once live.</div>
+              <div class="barrier-src">Karbon State of AI, 2025</div>
+            </div>
+            <div class="barrier-card">
+              <div class="barrier-pct">41%</div>
+              <div class="barrier-name">ROI uncertainty</div>
+              <div class="barrier-desc">Firms that cannot define what success looks like do not invest.</div>
+              <div class="barrier-src">Deloitte State of GenAI, Q3 2024</div>
+            </div>
+            <div class="barrier-card">
+              <div class="barrier-pct">36%</div>
+              <div class="barrier-name">Integration complexity</div>
+              <div class="barrier-desc">Buying tools is easy. Making them work together is where DIY builds quietly die.</div>
+              <div class="barrier-src">Capterra PM Trends, 2025</div>
+            </div>
+            <div class="barrier-card">
+              <div class="barrier-pct">75%</div>
+              <div class="barrier-name">Accuracy concerns</div>
+              <div class="barrier-desc">Legitimate in regulated work — solved by keeping a human reviewing outputs, not by avoiding automation entirely.</div>
+              <div class="barrier-src">ABA Tech Report, 2024</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rule" style="margin-bottom: 16px;"></div>
+
+      <div class="section-block">
+        <p class="section-label">What we build</p>
+        <h2>Specific automations for the tasks that cost the most time.</h2>
+      </div>
+      <p style="max-width: 140mm; margin-bottom: 0;">We do not sell a platform or a licence. We identify the exact tasks eating your time — intake, onboarding, document chasing, reporting — and build automation that handles them. 13 workflows across four suites. Each one built for your process, not a generic template.</p>
+
+      <footer class="page-footer">
+        <span class="footer-text">Fixed price · No retainer · You own everything we build</span>
+        <span class="footer-url">apexsystematic.com</span>
+      </footer>
+
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════
+       PAGE 3 — THE 13 AUTOMATIONS
+  ════════════════════════════════════ -->
+  <div class="page">
+    <div class="page-inner">
+
+      <header class="page-header">
+        <div class="logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="30 42 380 70" height="28" role="img"><title>Apex Systematic</title><line x1="54" y1="48" x2="34" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"></line><line x1="54" y1="48" x2="74" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"></line><line x1="34" y1="82" x2="74" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"></line><circle cx="54" cy="48" r="2.5" fill="#C9A84C"></circle><text x="88" y="82" font-family="Georgia, serif" font-size="46" font-weight="400" letter-spacing="10" fill="#FFFFFF">APEX</text><text x="88" y="104" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" font-weight="300" letter-spacing="9.5" fill="#C9A84C">SYSTEMATIC</text></svg>
+        </div>
+        <span class="page-label">The 13 Automations</span>
+      </header>
+
+      <!-- Intake Suite -->
+      <div class="suite-block">
+        <div class="suite-header">
+          <span class="suite-name">Intake Suite</span>
+          <span class="suite-desc">From first enquiry to onboarded client</span>
+        </div>
+        <div class="automation-grid">
+          <div class="auto-item">
+            <span class="auto-num">#1</span>
+            <div class="auto-content">
+              <div class="auto-name">Enquiry &amp; Lead Capture</div>
+              <div class="auto-desc">Enquiries captured and scored automatically. Hot leads get an immediate personalised reply. Each enquiry becomes a contact record with no manual input. Out-of-hours chatbot option available.</div>
+            </div>
+          </div>
+          <div class="auto-item">
+            <span class="auto-num">#2</span>
+            <div class="auto-content">
+              <div class="auto-name">Appointment Setting</div>
+              <div class="auto-desc">Clients book directly into your calendar — no back-and-forth email. Confirmations, reminders, and preparation materials sent automatically. No-shows flagged, rescheduling handled.</div>
+            </div>
+          </div>
+          <div class="auto-item">
+            <span class="auto-num">#3</span>
+            <div class="auto-content">
+              <div class="auto-name">Client Onboarding</div>
+              <div class="auto-desc">One form from the client — everything else automatic. Folder created, database populated, engagement agreement sent for e-signature. Three-email welcome sequence. Onboarding tracker shows where every new client is.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Client Suite -->
+      <div class="suite-block">
+        <div class="suite-header">
+          <span class="suite-name">Client Suite</span>
+          <span class="suite-desc">Keep active clients moving without the admin</span>
+        </div>
+        <div class="automation-grid">
+          <div class="auto-item">
+            <span class="auto-num">#4</span>
+            <div class="auto-content">
+              <div class="auto-name">Client Intake Triage</div>
+              <div class="auto-desc">Incoming client requests categorised and prioritised automatically. Urgent matters straight to the inbox. Conflict-of-interest check runs before logging. Client gets an acknowledgement with expected response time.</div>
+            </div>
+          </div>
+          <div class="auto-item">
+            <span class="auto-num">#5</span>
+            <div class="auto-content">
+              <div class="auto-name">Client Portal Updates</div>
+              <div class="auto-desc">Every time a matter hits a key milestone, the client gets a plain-English update — drafted and sent without you. Cuts inbound "where are we up to?" calls significantly.</div>
+            </div>
+          </div>
+          <div class="auto-item">
+            <span class="auto-num">#6</span>
+            <div class="auto-content">
+              <div class="auto-name">Invoice Generation</div>
+              <div class="auto-desc">Invoice generated and emailed with a payment link when a matter closes or hits a billing milestone. No manual input. Records update when payment is received.</div>
+            </div>
+          </div>
+          <div class="auto-item">
+            <span class="auto-num">#7</span>
+            <div class="auto-content">
+              <div class="auto-name">Document &amp; Payment Chasing</div>
+              <div class="auto-desc">Outstanding documents, signatures, and payments checked daily. Four-stage escalating chase runs automatically. Stops the moment items are received. Alert fires at day 10 if nothing has moved.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Suite -->
+      <div class="suite-block">
+        <div class="suite-header">
+          <span class="suite-name">Admin Suite</span>
+          <span class="suite-desc">Run active matters without lifting a finger</span>
+        </div>
+        <div class="automation-grid">
+          <div class="auto-item">
+            <span class="auto-num">#8</span>
+            <div class="auto-content">
+              <div class="auto-name">Document &amp; Proposal Generation</div>
+              <div class="auto-desc">First draft generated from client data — gated for your approval before anything is sent. Exported to PDF, saved to client folder, delivered by email.</div>
+            </div>
+          </div>
+          <div class="auto-item">
+            <span class="auto-num">#9</span>
+            <div class="auto-content">
+              <div class="auto-name">Deadline &amp; Compliance Tracking</div>
+              <div class="auto-desc">Every deadline monitored. Reminders at 30, 14, 7, 3, and 1 days out. Missing files trigger an alert 24 hours before. Weekly digest of everything due.</div>
+            </div>
+          </div>
+          <div class="auto-item">
+            <span class="auto-num">#10</span>
+            <div class="auto-content">
+              <div class="auto-name">Call Notes to CRM</div>
+              <div class="auto-desc">As soon as a call ends, the transcript is processed — action items, decisions, and next steps pushed to the client record. Tasks created with owners and due dates.</div>
+            </div>
+          </div>
+          <div class="auto-item">
+            <span class="auto-num">#11</span>
+            <div class="auto-content">
+              <div class="auto-name">Reporting &amp; Data Sync</div>
+              <div class="auto-desc">Data pulled from your CRM on schedule, reformatted, and dropped into a Google Sheet with a plain-English commentary comparing this period against the last. Delivered to your inbox.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Retention Suite -->
+      <div class="suite-block">
+        <div class="suite-header">
+          <span class="suite-name">Retention Suite</span>
+          <span class="suite-desc">Monetise relationships after the matter closes</span>
+        </div>
+        <div class="automation-grid">
+          <div class="auto-item">
+            <span class="auto-num">#12</span>
+            <div class="auto-content">
+              <div class="auto-name">Client Retention &amp; Referrals</div>
+              <div class="auto-desc">Clients who haven't heard from you in 60, 90, or 180 days identified automatically. Personalised re-engagement emails drafted for your review. Review requests triggered 14 days after each matter closes.</div>
+            </div>
+          </div>
+          <div class="auto-item">
+            <span class="auto-num">#13</span>
+            <div class="auto-content">
+              <div class="auto-name">NPS &amp; Satisfaction Survey</div>
+              <div class="auto-desc">Short survey sent after every matter closes. High scorers prompted to refer. Low scorers trigger an alert so you can follow up before the relationship breaks down.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="page-footer">
+        <span class="footer-text">Fixed price · No retainer · You own everything we build</span>
+        <span class="footer-url">apexsystematic.com</span>
+      </footer>
+
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════
+       PAGE 4 — HOW IT WORKS + MODEL
+  ════════════════════════════════════ -->
+  <div class="page">
+    <div class="page-inner">
+
+      <header class="page-header">
+        <div class="logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="30 42 380 70" height="28" role="img"><title>Apex Systematic</title><line x1="54" y1="48" x2="34" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"></line><line x1="54" y1="48" x2="74" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"></line><line x1="34" y1="82" x2="74" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"></line><circle cx="54" cy="48" r="2.5" fill="#C9A84C"></circle><text x="88" y="82" font-family="Georgia, serif" font-size="46" font-weight="400" letter-spacing="10" fill="#FFFFFF">APEX</text><text x="88" y="104" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" font-weight="300" letter-spacing="9.5" fill="#C9A84C">SYSTEMATIC</text></svg>
+        </div>
+        <span class="page-label">How It Works</span>
+      </header>
+
+      <div class="section-block" style="margin-bottom: 14px;">
+        <p class="section-label">The process</p>
+        <h2>Three steps. No open-ended commitment.</h2>
+      </div>
+
+      <div class="steps">
+        <div class="step-card">
+          <div class="step-num">Step 01</div>
+          <div class="step-title">Free Audit</div>
+          <div class="step-desc">A free 30-minute call. We map your current workflows, identify the tasks costing the most time, and give you a clear picture of what can be automated and at what fixed price. No obligation to proceed.</div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">Step 02</div>
+          <div class="step-title">Build</div>
+          <div class="step-desc">The automation is designed and built around your actual process and existing tools. Most standalone builds ship in one to four weeks. You see it working before anything is signed.</div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">Step 03</div>
+          <div class="step-title">Hand Over</div>
+          <div class="step-desc">The system goes live with full documentation and a handover call. The code, the logic, and the credentials transfer to you. No retainer. No monthly fee. You own everything.</div>
+        </div>
+      </div>
+
+      <div class="incl-excl">
+        <div class="incl-card">
+          <div class="incl-card-title">Included on every build</div>
+          <ul class="incl-list">
+            <li>Scoping call</li>
+            <li>Build and full testing</li>
+            <li>Complete documentation</li>
+            <li>30-day bug fix guarantee</li>
+            <li>Handover call with walkthrough</li>
+          </ul>
+        </div>
+        <div class="incl-card">
+          <div class="incl-card-title">Not included (paid to providers directly)</div>
+          <ul class="incl-list">
+            <li>Make.com subscription</li>
+            <li>Third-party API costs (e.g. AI usage)</li>
+            <li>Platform subscriptions</li>
+            <li>Template and copy writing</li>
+            <li>Running costs typically €50–€150/month depending on volume</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="rule" style="margin-bottom: 16px;"></div>
+
+      <div class="model-block">
+        <p class="section-label" style="margin-bottom: 8px;">The commercial model</p>
+        <h2>Most automation agencies build systems you depend on them to run.</h2>
+        <p style="margin-top: 8px;">We work the opposite way. Every project is fixed price, agreed before work starts. At handover, you own the system outright. No monthly fee. No platform tie-in. No automation that stops working when payments stop. If something needs changing later, you can do it yourself, hand it to anyone, or come back to us — your choice.</p>
+
+        <div class="model-pillars">
+          <div class="pillar">
+            <div class="pillar-title">Fixed price</div>
+            <div class="pillar-desc">The price is agreed before work begins. Scope is defined in writing. No surprises at invoice.</div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-title">No retainer</div>
+            <div class="pillar-desc">One-off project fee. No ongoing commitment. No monthly invoice arriving whether or not we've done anything.</div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-title">You own everything</div>
+            <div class="pillar-desc">All code, logic, credentials, and documentation transfer to you at handover. We leave nothing behind that belongs to us.</div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="page-footer">
+        <span class="footer-text">Fixed price · No retainer · You own everything we build</span>
+        <span class="footer-url">apexsystematic.com</span>
+      </footer>
+
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════
+       PAGE 5 — PRICING
+  ════════════════════════════════════ -->
+  <div class="page">
+    <div class="page-inner">
+
+      <header class="page-header">
+        <div class="logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="30 42 380 70" height="28" role="img"><title>Apex Systematic</title><line x1="54" y1="48" x2="34" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"></line><line x1="54" y1="48" x2="74" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"></line><line x1="34" y1="82" x2="74" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"></line><circle cx="54" cy="48" r="2.5" fill="#C9A84C"></circle><text x="88" y="82" font-family="Georgia, serif" font-size="46" font-weight="400" letter-spacing="10" fill="#FFFFFF">APEX</text><text x="88" y="104" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" font-weight="300" letter-spacing="9.5" fill="#C9A84C">SYSTEMATIC</text></svg>
+        </div>
+        <span class="page-label">Pricing</span>
+      </header>
+
+      <p class="pricing-note">All prices are one-time project fees. Ranges are indicative — the final price depends on scope and is agreed in writing before work begins. Book a free audit call for an accurate quote.</p>
+
+      <!-- Standalone -->
+      <div class="table-wrap">
+        <div class="table-title">Standalone Automations</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Automation</th>
+              <th>EUR</th>
+              <th>GBP</th>
+              <th>USD</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Enquiry &amp; Lead Capture</td><td class="price-eur">€1,100–€2,100</td><td>£950–£1,800</td><td>$1,300–$2,450</td></tr>
+            <tr><td>Appointment Setting</td><td class="price-eur">€800–€1,600</td><td>£700–£1,400</td><td>$950–$1,900</td></tr>
+            <tr><td>Client Onboarding</td><td class="price-eur">€1,600–€3,250</td><td>£1,400–£2,800</td><td>$1,900–$3,800</td></tr>
+            <tr><td>Client Intake Triage</td><td class="price-eur">€1,000–€1,850</td><td>£850–£1,600</td><td>$1,150–$2,150</td></tr>
+            <tr><td>Client Portal Updates</td><td class="price-eur">€1,050–€1,950</td><td>£900–£1,700</td><td>$1,200–$2,300</td></tr>
+            <tr><td>Invoice Generation</td><td class="price-eur">€950–€1,750</td><td>£800–£1,500</td><td>$1,100–$2,050</td></tr>
+            <tr><td>Document &amp; Payment Chasing</td><td class="price-eur">€1,050–€1,850</td><td>£900–£1,600</td><td>$1,200–$2,150</td></tr>
+            <tr><td>Document &amp; Proposal Generation</td><td class="price-eur">€1,400–€2,800</td><td>£1,200–£2,400</td><td>$1,600–$3,250</td></tr>
+            <tr><td>Deadline &amp; Compliance Tracking</td><td class="price-eur">€1,250–€2,550</td><td>£1,100–£2,200</td><td>$1,500–$3,000</td></tr>
+            <tr><td>Call Notes to CRM</td><td class="price-eur">€1,050–€1,850</td><td>£900–£1,600</td><td>$1,200–$2,150</td></tr>
+            <tr><td>Reporting &amp; Data Sync</td><td class="price-eur">€950–€2,100</td><td>£800–£1,800</td><td>$1,100–$2,450</td></tr>
+            <tr><td>Client Retention &amp; Referrals</td><td class="price-eur">€800–€1,600</td><td>£700–£1,400</td><td>$950–$1,900</td></tr>
+            <tr><td>NPS &amp; Satisfaction Survey</td><td class="price-eur">€700–€1,250</td><td>£600–£1,100</td><td>$800–$1,500</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Bundles -->
+      <div class="table-wrap">
+        <div class="table-title">Bundled Suites — 15% saving versus standalone</div>
+        <table class="bundle-table">
+          <thead>
+            <tr>
+              <th>Bundle</th>
+              <th>Includes</th>
+              <th>EUR</th>
+              <th>GBP</th>
+              <th>USD</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Intake Suite</td><td style="font-size:7.5pt;">#1 · #2 · #3</td><td class="price-eur">€3,000–€5,900</td><td>£2,600–£5,100</td><td>$3,500–$6,900</td></tr>
+            <tr><td>Client Suite</td><td style="font-size:7.5pt;">#4 · #5 · #6 · #7</td><td class="price-eur">€3,400–€6,300</td><td>£2,950–£5,450</td><td>$4,000–$7,400</td></tr>
+            <tr><td>Admin Suite</td><td style="font-size:7.5pt;">#8 · #9 · #10 · #11</td><td class="price-eur">€3,950–€7,850</td><td>£3,400–£6,800</td><td>$4,600–$9,200</td></tr>
+            <tr><td>Retention Suite</td><td style="font-size:7.5pt;">#12 · #13</td><td class="price-eur">€1,250–€2,500</td><td>£1,100–£2,150</td><td>$1,500–$2,900</td></tr>
+            <tr><td><strong>Complete Firm</strong></td><td style="font-size:7.5pt;">All 13 — ~25% saving</td><td class="price-eur"><strong>€10,250–€19,900</strong></td><td>£8,850–£17,200</td><td>$12,000–$23,300</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="pricing-footer-note">Complete Firm delivery: 6–14 weeks in sequential sprints — Intake Suite first, then Client Suite, Admin Suite, Retention Suite. Fixed price per sprint. Full documentation and handover at each stage.</p>
+
+      <div class="guarantee">
+        <div class="guarantee-mark">30</div>
+        <div class="guarantee-text"><strong>30-day bug fix guarantee on every build.</strong> If something is not working as scoped in the first 30 days after handover, we fix it at no charge. No caveats.</div>
+      </div>
+
+      <footer class="page-footer">
+        <span class="footer-text">Fixed price · No retainer · You own everything we build</span>
+        <span class="footer-url">apexsystematic.com</span>
+      </footer>
+
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════
+       PAGE 6 — ADD-ONS + NEXT STEP
+  ════════════════════════════════════ -->
+  <div class="page">
+    <div class="page-inner">
+
+      <header class="page-header">
+        <div class="logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="30 42 380 70" height="28" role="img"><title>Apex Systematic</title><line x1="54" y1="48" x2="34" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"></line><line x1="54" y1="48" x2="74" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"></line><line x1="34" y1="82" x2="74" y2="82" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="square"></line><circle cx="54" cy="48" r="2.5" fill="#C9A84C"></circle><text x="88" y="82" font-family="Georgia, serif" font-size="46" font-weight="400" letter-spacing="10" fill="#FFFFFF">APEX</text><text x="88" y="104" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" font-weight="300" letter-spacing="9.5" fill="#C9A84C">SYSTEMATIC</text></svg>
+        </div>
+        <span class="page-label">Add-Ons &amp; Next Steps</span>
+      </header>
+
+      <div class="section-block" style="margin-bottom: 12px;">
+        <p class="section-label">Optional add-ons</p>
+        <h2>Extend the core workflows.</h2>
+      </div>
+
+      <div class="addon-grid">
+        <div class="addon-card">
+          <div class="addon-name">Airtable CRM Build</div>
+          <div class="addon-price">€3,250–€6,350</div>
+          <div class="addon-desc">Designs and builds your Airtable CRM from the ground up — schema, views, permissions, and native automations — structured to support the full 13-workflow suite from day one. Recommended as the first build for any firm purchasing three or more workflows.</div>
+          <div class="addon-paired">Best paired with: every core workflow</div>
+        </div>
+        <div class="addon-card">
+          <div class="addon-name">RAG Knowledge Base</div>
+          <div class="addon-price">€2,100–€5,200</div>
+          <div class="addon-desc">Connects your firm's documents — templates, precedents, policy guides, matter histories — to the AI agents in agentic workflows. Instead of relying on general AI knowledge, agents retrieve and reference your actual firm content when drafting.</div>
+          <div class="addon-paired">Best paired with: #4, #8, #9</div>
+        </div>
+        <div class="addon-card">
+          <div class="addon-name">Voice Appointment Setter</div>
+          <div class="addon-price">€2,550–€4,400</div>
+          <div class="addon-desc">An AI voice agent that calls new enquiries within minutes of a form submission, qualifies them, and books the appointment directly into your calendar — without you picking up the phone. Runs continuously, including outside office hours.</div>
+          <div class="addon-paired">Best paired with: #1, #2, #4</div>
+        </div>
+        <div class="addon-card">
+          <div class="addon-name">Client-Facing AI Chatbot</div>
+          <div class="addon-price">€2,100–€4,650</div>
+          <div class="addon-desc">A branded AI chat assistant embedded on your website. Handles inbound visitor questions, qualifies prospective clients, answers FAQs from your firm content, and routes qualified leads into the automation pipeline.</div>
+          <div class="addon-paired">Best paired with: #1, #2</div>
+        </div>
+      </div>
+
+      <div class="rule" style="margin: 14px 0;"></div>
+
+      <div class="cta-block">
+        <p class="section-label" style="margin-bottom: 8px;">Next step</p>
+        <h2>Book a free 30-minute audit call.</h2>
+        <p>We map your current workflows, identify the tasks costing the most time, and give you a clear picture of what can be automated and at what fixed price. No obligation to proceed. You will hear from us within one business day to confirm.</p>
+
+        <div class="cta-steps">
+          <div class="cta-step">
+            <div class="cta-step-num">On the call</div>
+            <div class="cta-step-text">We walk through your current process. You describe what you spend your time on. We identify the three to five highest-value automations for your firm.</div>
+          </div>
+          <div class="cta-step">
+            <div class="cta-step-num">After the call</div>
+            <div class="cta-step-text">You receive a written scope and a fixed price within 48 hours. No vague estimate — a specific number for a specific build.</div>
+          </div>
+          <div class="cta-step">
+            <div class="cta-step-num">If you proceed</div>
+            <div class="cta-step-text">Work starts when the scope is agreed. Most standalone builds are live within one to four weeks. You see it working before we hand it over.</div>
+          </div>
+        </div>
+
+        <div class="cta-contact">
+          <div class="cta-url">apexsystematic.com/contact</div>
+          <div class="cta-detail">Fixed price · No retainer · You own everything we build<br>30-day bug fix guarantee on every build</div>
+        </div>
+      </div>
+
+      <footer class="page-footer">
+        <span class="footer-text">Apex Systematic · AI Workflow Automation for Professional Services</span>
+        <span class="footer-url">apexsystematic.com</span>
+      </footer>
+
+    </div>
+  </div>
+
+</div><!-- /doc -->
+</body>
+</html>
