@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow" />
+<title>Apex Systematic — Enquiry & Lead Capture Carousel</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0E1117;
+    --slate: #131820;
+    --slate-elevated: #182030;
+    --border: #1E2838;
+    --border-light: #263040;
+    --body: #D8DCE4;
+    --muted: #7A8299;
+    --dim: #4F5B6E;
+    --white: #FFFFFF;
+    --gold: #C9A84C;
+    --gold-light: #DDB95A;
+  }
+
+  body {
+    background: #080B10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    padding: 48px 24px;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .slide-label {
+    color: var(--dim);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .slide {
+    width: 1080px;
+    height: 1080px;
+    background: var(--navy);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  /* ─── SHARED ELEMENTS ─── */
+  .gold-line {
+    width: 32px;
+    height: 2px;
+    background: var(--gold);
+  }
+
+  .label-tag {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .slide-number {
+    position: absolute;
+    bottom: 48px;
+    right: 56px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--dim);
+    letter-spacing: 0.08em;
+  }
+
+  .wordmark {
+    position: absolute;
+    top: 44px;
+    left: 56px;
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* ─── SLIDE 1 — HOOK ─── */
+  #s1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 80px 80px 80px;
+  }
+
+  #s1 .bg-accent {
+    position: absolute;
+    top: 0; right: 0;
+    width: 480px; height: 480px;
+    background: radial-gradient(circle at 80% 20%, rgba(201,168,76,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  #s1 .bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(30,40,56,0.4) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30,40,56,0.4) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  #s1 .content {
+    position: relative;
+    z-index: 2;
+    max-width: 820px;
+  }
+
+  #s1 .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 44px;
+  }
+
+  #s1 h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 86px;
+    line-height: 1.0;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 40px;
+    letter-spacing: -0.01em;
+  }
+
+  #s1 h1 em {
+    color: var(--gold);
+    font-style: normal;
+  }
+
+  #s1 .sub {
+    font-size: 19px;
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: 560px;
+    font-weight: 400;
+    margin-bottom: 56px;
+  }
+
+  #s1 .pills {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  #s1 .pill {
+    border: 1px solid var(--border-light);
+    padding: 8px 18px;
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  #s1 .bottom-bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold) 0%, transparent 60%);
+  }
+
+  /* ─── SLIDE 2 — THE PROBLEM ─── */
+  #s2 {
+    display: flex;
+    flex-direction: column;
+    padding: 100px 80px 80px;
+  }
+
+  #s2 .header {
+    margin-bottom: 64px;
+  }
+
+  #s2 h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.1;
+    margin-top: 16px;
+  }
+
+  #s2 .problems {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    flex: 1;
+  }
+
+  #s2 .problem-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 28px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  #s2 .problem-row:first-child {
+    border-top: 1px solid var(--border);
+  }
+
+  #s2 .problem-num {
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    padding-top: 4px;
+    min-width: 24px;
+  }
+
+  #s2 .problem-text {
+    flex: 1;
+  }
+
+  #s2 .problem-title {
+    font-size: 20px;
+    color: var(--white);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  #s2 .problem-desc {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  #s2 .problem-cost {
+    font-size: 13px;
+    color: var(--dim);
+    text-align: right;
+    min-width: 120px;
+    padding-top: 4px;
+    line-height: 1.4;
+  }
+
+  #s2 .problem-cost strong {
+    display: block;
+    font-size: 22px;
+    color: var(--gold);
+    font-weight: 400;
+    font-family: 'Playfair Display', serif;
+  }
+
+  #s2 .stat-strip {
+    margin-top: 40px;
+    padding: 24px 28px;
+    background: var(--slate-elevated);
+    border-left: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  #s2 .stat-strip .big {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    color: var(--gold);
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  #s2 .stat-strip .desc {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ─── SLIDE 3 — OVERVIEW ─── */
+  #s3 {
+    display: flex;
+    flex-direction: column;
+    padding: 100px 80px 80px;
+  }
+
+  #s3 .header { margin-bottom: 56px; }
+
+  #s3 h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.1;
+    margin-top: 16px;
+  }
+
+  #s3 .steps-row {
+    display: flex;
+    gap: 0;
+    margin-bottom: 48px;
+  }
+
+  #s3 .step-box {
+    flex: 1;
+    padding: 32px 28px;
+    border: 1px solid var(--border);
+    position: relative;
+  }
+
+  #s3 .step-box + .step-box {
+    border-left: none;
+  }
+
+  #s3 .step-box.active {
+    background: var(--slate-elevated);
+    border-color: var(--border-light);
+  }
+
+  #s3 .step-n {
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+
+  #s3 .step-title {
+    font-size: 16px;
+    color: var(--white);
+    font-weight: 500;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  #s3 .step-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  #s3 .arrow {
+    position: absolute;
+    right: -14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    background: var(--navy);
+    border: 1px solid var(--border-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    font-size: 10px;
+    color: var(--gold);
+  }
+
+  #s3 .result-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+  }
+
+  #s3 .result-item {
+    padding: 28px 32px;
+    border-right: 1px solid var(--border);
+  }
+
+  #s3 .result-item:last-child { border-right: none; }
+
+  #s3 .result-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  #s3 .result-label {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* ─── SLIDES 4–8 — STEP DETAIL ─── */
+  .step-detail {
+    display: flex;
+    flex-direction: column;
+    padding: 100px 80px 80px;
+  }
+
+  .step-detail .top {
+    display: flex;
+    gap: 64px;
+    flex: 1;
+  }
+
+  .step-detail .left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .step-detail .right {
+    width: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .step-detail .step-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+
+  .step-detail h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 46px;
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 24px;
+  }
+
+  .step-detail .step-desc {
+    font-size: 17px;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-bottom: 36px;
+  }
+
+  .step-detail .bullets {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .step-detail .bullet {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 15px;
+    color: var(--body);
+    line-height: 1.4;
+  }
+
+  .step-detail .bullet::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    background: var(--gold);
+    flex-shrink: 0;
+    margin-top: 7px;
+  }
+
+  .step-detail .bottom-strip {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .step-detail .bottom-note {
+    font-size: 13px;
+    color: var(--dim);
+    font-style: italic;
+  }
+
+  /* ─── MOCK UI — INTAKE FORM ─── */
+  .mock-form {
+    width: 380px;
+    background: #0a0f18;
+    border: 1px solid var(--border-light);
+    padding: 28px;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .mock-form .mf-header {
+    font-size: 13px;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 14px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .mock-form .mf-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+
+  .mock-form .mf-title {
+    font-size: 15px;
+    color: var(--white);
+    font-weight: 500;
+    margin-bottom: 18px;
+  }
+
+  .mock-form .mf-field {
+    margin-bottom: 14px;
+  }
+
+  .mock-form .mf-label {
+    font-size: 11px;
+    color: var(--dim);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+
+  .mock-form .mf-input {
+    background: var(--slate);
+    border: 1px solid var(--border);
+    padding: 10px 12px;
+    font-size: 13px;
+    color: var(--body);
+    width: 100%;
+  }
+
+  .mock-form .mf-input.filled {
+    color: var(--white);
+    border-color: var(--border-light);
+  }
+
+  .mock-form .mf-urgency {
+    background: var(--slate);
+    border: 1px solid var(--gold);
+    padding: 10px 12px;
+    font-size: 13px;
+    color: var(--gold);
+    width: 100%;
+  }
+
+  .mock-form .mf-btn {
+    width: 100%;
+    background: var(--gold);
+    color: var(--navy);
+    padding: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 18px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* ─── MOCK UI — LEAD RECORD ─── */
+  .mock-crm {
+    width: 380px;
+    background: #0a0f18;
+    border: 1px solid var(--border-light);
+    font-family: 'DM Sans', sans-serif;
+    overflow: hidden;
+  }
+
+  .mock-crm .crm-header {
+    background: var(--slate);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .mock-crm .crm-title {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .mock-crm .crm-badge {
+    font-size: 10px;
+    background: rgba(201,168,76,0.15);
+    color: var(--gold);
+    padding: 3px 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .mock-crm .crm-body { padding: 20px; }
+
+  .mock-crm .crm-name {
+    font-size: 18px;
+    color: var(--white);
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .mock-crm .crm-firm {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .mock-crm .crm-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+
+  .mock-crm .crm-row:last-of-type { border-bottom: none; }
+
+  .mock-crm .crm-key { color: var(--dim); }
+  .mock-crm .crm-val { color: var(--body); text-align: right; }
+  .mock-crm .crm-val.hot { color: var(--gold); font-weight: 500; }
+  .mock-crm .crm-val.green { color: #4CAF50; }
+
+  .mock-crm .crm-footer {
+    background: var(--slate-elevated);
+    padding: 14px 20px;
+    font-size: 12px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* ─── MOCK UI — SMS NOTIFICATION ─── */
+  .mock-phone {
+    width: 260px;
+    background: #111;
+    border-radius: 32px;
+    padding: 20px 16px;
+    box-shadow: 0 0 0 8px #1a1a1a, 0 0 0 10px #222;
+    font-family: -apple-system, 'DM Sans', sans-serif;
+  }
+
+  .mock-phone .ph-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8px;
+    margin-bottom: 20px;
+  }
+
+  .mock-phone .ph-time {
+    font-size: 13px;
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .mock-phone .ph-icons {
+    font-size: 11px;
+    color: #aaa;
+    display: flex;
+    gap: 6px;
+  }
+
+  .mock-phone .ph-notif {
+    background: #1c1c1e;
+    border-radius: 12px;
+    padding: 12px 14px;
+  }
+
+  .mock-phone .ph-notif-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .mock-phone .ph-icon {
+    width: 28px;
+    height: 28px;
+    background: var(--gold);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: var(--navy);
+    font-weight: 700;
+  }
+
+  .mock-phone .ph-app {
+    font-size: 11px;
+    color: #8a8a8e;
+    font-weight: 500;
+  }
+
+  .mock-phone .ph-notif-title {
+    font-size: 13px;
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+
+  .mock-phone .ph-notif-body {
+    font-size: 12px;
+    color: #8a8a8e;
+    line-height: 1.4;
+  }
+
+  .mock-phone .ph-notif-body span {
+    color: var(--gold);
+  }
+
+  /* ─── MOCK UI — SCORING ─── */
+  .mock-score {
+    width: 380px;
+    background: #0a0f18;
+    border: 1px solid var(--border-light);
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .mock-score .ms-header {
+    background: var(--slate);
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .mock-score .ms-body { padding: 20px; }
+
+  .mock-score .ms-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+
+  .mock-score .ms-row:last-child { border-bottom: none; }
+  .mock-score .ms-name { color: var(--body); font-weight: 500; }
+  .mock-score .ms-firm { color: var(--dim); font-size: 12px; }
+
+  .score-tag {
+    font-size: 11px;
+    padding: 4px 10px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+
+  .score-hot { background: rgba(201,168,76,0.15); color: var(--gold); }
+  .score-warm { background: rgba(76,175,80,0.12); color: #6fbf73; }
+  .score-cold { background: rgba(79,91,110,0.3); color: var(--muted); }
+
+  /* ─── MOCK UI — AUTO REPLY ─── */
+  .mock-reply {
+    width: 380px;
+    background: #0a0f18;
+    border: 1px solid var(--border-light);
+    font-family: 'DM Sans', sans-serif;
+    overflow: hidden;
+  }
+
+  .mock-reply .mr-header {
+    background: var(--slate);
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mock-reply .mr-title {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .mock-reply .mr-auto {
+    font-size: 10px;
+    background: rgba(76,175,80,0.12);
+    color: #6fbf73;
+    padding: 3px 10px;
+    letter-spacing: 0.04em;
+  }
+
+  .mock-reply .mr-body { padding: 20px; }
+
+  .mock-reply .mr-to {
+    font-size: 11px;
+    color: var(--dim);
+    margin-bottom: 12px;
+  }
+
+  .mock-reply .mr-to span { color: var(--muted); }
+
+  .mock-reply .mr-subject {
+    font-size: 15px;
+    color: var(--white);
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+
+  .mock-reply .mr-text {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .mock-reply .mr-text strong { color: var(--body); font-weight: 500; }
+
+  .mock-reply .mr-sent {
+    background: var(--slate-elevated);
+    padding: 12px 20px;
+    border-top: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--dim);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .sent-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #4CAF50;
+  }
+
+  /* ─── SLIDE 9 — RESULTS ─── */
+  #s9 {
+    display: flex;
+    flex-direction: column;
+    padding: 100px 80px 80px;
+  }
+
+  #s9 .header { margin-bottom: 56px; }
+
+  #s9 h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.1;
+    margin-top: 16px;
+  }
+
+  #s9 .results-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--border);
+    flex: 1;
+  }
+
+  #s9 .result-card {
+    padding: 44px 44px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  #s9 .result-card:nth-child(2n) { border-right: none; }
+  #s9 .result-card:nth-child(3),
+  #s9 .result-card:nth-child(4) { border-bottom: none; }
+
+  #s9 .rc-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 56px;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  #s9 .rc-title {
+    font-size: 18px;
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  #s9 .rc-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  /* ─── SLIDE 10 — CTA ─── */
+  #s10 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 80px;
+  }
+
+  #s10 .bg-accent {
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 560px; height: 560px;
+    background: radial-gradient(circle at 80% 80%, rgba(201,168,76,0.06) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  #s10 .content {
+    position: relative;
+    z-index: 2;
+    max-width: 860px;
+  }
+
+  #s10 h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.0;
+    margin-bottom: 32px;
+    letter-spacing: -0.01em;
+  }
+
+  #s10 h2 em {
+    color: var(--gold);
+    font-style: normal;
+  }
+
+  #s10 .sub {
+    font-size: 18px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 56px;
+    max-width: 560px;
+  }
+
+  #s10 .cta-block {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 64px;
+  }
+
+  #s10 .cta-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 16px;
+    color: var(--body);
+  }
+
+  #s10 .cta-item::before {
+    content: '';
+    width: 5px; height: 5px;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+
+  #s10 .cta-url {
+    display: inline-block;
+    border: 1px solid var(--gold);
+    padding: 18px 40px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  #s10 .model-strip {
+    position: absolute;
+    bottom: 64px;
+    left: 80px;
+    right: 80px;
+    display: flex;
+    gap: 0;
+  }
+
+  #s10 .model-item {
+    flex: 1;
+    padding: 20px 24px;
+    border: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  #s10 .model-item + .model-item { border-left: none; }
+
+  #s10 .model-item strong {
+    display: block;
+    font-size: 15px;
+    color: var(--white);
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ─────────────────────────────── SLIDE 1 ─── -->
+<div class="slide-label">Slide 1 of 10 — Hook</div>
+<div class="slide" id="s1">
+  <div class="bg-grid"></div>
+  <div class="bg-accent"></div>
+  <div class="wordmark">Apex Systematic</div>
+  <div class="content">
+    <div class="eyebrow">
+      <div class="gold-line"></div>
+      <span class="label-tag">Enquiry & Lead Capture</span>
+    </div>
+    <h1>Every missed<br>call is a<br><em>missed client.</em></h1>
+    <p class="sub">Most law firms are still handling new enquiries manually. Phone tag, slow replies, no follow-up. This is what that costs you.</p>
+    <div class="pills">
+      <div class="pill">Fixed price</div>
+      <div class="pill">No retainer</div>
+      <div class="pill">You own everything</div>
+    </div>
+  </div>
+  <div class="slide-number">01 / 10</div>
+  <div class="bottom-bar"></div>
+</div>
+
+<!-- ─────────────────────────────── SLIDE 2 ─── -->
+<div class="slide-label">Slide 2 of 10 — The Problem</div>
+<div class="slide" id="s2">
+  <div class="wordmark">Apex Systematic</div>
+  <div class="header">
+    <div class="label-tag">The Problem</div>
+    <h2>Manual intake is<br>costing you clients.</h2>
+  </div>
+  <div class="problems">
+    <div class="problem-row">
+      <div class="problem-num">01</div>
+      <div class="problem-text">
+        <div class="problem-title">Enquiries fall through</div>
+        <div class="problem-desc">A potential client submits a form or leaves a voicemail. No one picks it up for hours — or at all. They move on.</div>
+      </div>
+      <div class="problem-cost"><strong>Hours</strong>lost chasing</div>
+    </div>
+    <div class="problem-row">
+      <div class="problem-num">02</div>
+      <div class="problem-text">
+        <div class="problem-title">No system, no follow-up</div>
+        <div class="problem-desc">Hot leads sit in an inbox alongside spam. There is no prioritisation. No record. No reminder to respond.</div>
+      </div>
+      <div class="problem-cost"><strong>Cold</strong>by morning</div>
+    </div>
+    <div class="problem-row">
+      <div class="problem-num">03</div>
+      <div class="problem-text">
+        <div class="problem-title">Database stays empty</div>
+        <div class="problem-desc">Every new enquiry that does convert gets entered manually — name, firm, matter type, source — by someone qualified to do something else.</div>
+      </div>
+      <div class="problem-cost"><strong>15 min</strong>per enquiry</div>
+    </div>
+  </div>
+  <div class="stat-strip">
+    <div class="big">8 hrs</div>
+    <div class="desc">Lost to avoidable admin every week per fee-earner.<br><span style="font-size:12px;color:var(--dim)">Dell'Acqua et al., HBS/BCG 2023 · Noy & Zhang, MIT 2023</span></div>
+  </div>
+  <div class="slide-number">02 / 10</div>
+</div>
+
+<!-- ─────────────────────────────── SLIDE 3 ─── -->
+<div class="slide-label">Slide 3 of 10 — How It Works Overview</div>
+<div class="slide" id="s3">
+  <div class="wordmark">Apex Systematic</div>
+  <div class="header">
+    <div class="label-tag">How It Works</div>
+    <h2>From first enquiry to<br>contact record — automatically.</h2>
+  </div>
+  <div class="steps-row">
+    <div class="step-box">
+      <div class="step-n">01</div>
+      <div class="step-title">Enquiry Submitted</div>
+      <div class="step-desc">Prospect fills in your intake form. Any channel — website, chatbot, referral link.</div>
+      <div class="arrow">›</div>
+    </div>
+    <div class="step-box active">
+      <div class="step-n">02</div>
+      <div class="step-title">Scored Instantly</div>
+      <div class="step-desc">Urgency, matter type, and fit assessed automatically against your criteria.</div>
+      <div class="arrow">›</div>
+    </div>
+    <div class="step-box">
+      <div class="step-n">03</div>
+      <div class="step-title">Hot Lead Alert</div>
+      <div class="step-desc">High-priority enquiry? You get an alert — email or SMS — within seconds.</div>
+      <div class="arrow">›</div>
+    </div>
+    <div class="step-box">
+      <div class="step-n">04</div>
+      <div class="step-title">Prospect Replied To</div>
+      <div class="step-desc">A personalised acknowledgement goes back to them immediately. No manual input.</div>
+      <div class="arrow">›</div>
+    </div>
+    <div class="step-box">
+      <div class="step-n">05</div>
+      <div class="step-title">CRM Updated</div>
+      <div class="step-desc">Contact record created, duplicates checked, matter type logged. Database stays clean.</div>
+    </div>
+  </div>
+  <div class="result-bar">
+    <div class="result-item">
+      <div class="result-val">0 min</div>
+      <div class="result-label">Manual data entry per enquiry</div>
+    </div>
+    <div class="result-item">
+      <div class="result-val">&lt; 60s</div>
+      <div class="result-label">From submission to reply</div>
+    </div>
+    <div class="result-item">
+      <div class="result-val">24 / 7</div>
+      <div class="result-label">Enquiries captured out of hours</div>
+    </div>
+  </div>
+  <div class="slide-number">03 / 10</div>
+</div>
+
+<!-- ─────────────────────────────── SLIDE 4 ─── -->
+<div class="slide-label">Slide 4 of 10 — Step 1: Intake Form</div>
+<div class="slide step-detail" id="s4">
+  <div class="wordmark">Apex Systematic</div>
+  <div class="top">
+    <div class="left">
+      <div class="step-badge">
+        <div class="gold-line"></div>
+        <span class="label-tag">Step 01</span>
+      </div>
+      <h2>The enquiry<br>is captured.</h2>
+      <p class="step-desc">Your intake form collects exactly what you need — matter type, urgency, contact details, brief description. Works on your website, embedded in a link, or via chatbot.</p>
+      <div class="bullets">
+        <div class="bullet">Fully branded to your firm</div>
+        <div class="bullet">Works on any device, any time of day</div>
+        <div class="bullet">No data entry required from your team</div>
+        <div class="bullet">Out-of-hours enquiries handled the same way</div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="mock-form">
+        <div class="mf-header">
+          <div class="mf-dot"></div>
+          Your Firm · New Enquiry
+        </div>
+        <div class="mf-title">How can we help you?</div>
+        <div class="mf-field">
+          <div class="mf-label">Full Name</div>
+          <div class="mf-input filled">Sarah Johnson</div>
+        </div>
+        <div class="mf-field">
+          <div class="mf-label">Email Address</div>
+          <div class="mf-input filled">sarah@email.com</div>
+        </div>
+        <div class="mf-field">
+          <div class="mf-label">Matter Type</div>
+          <div class="mf-input filled">Immigration</div>
+        </div>
+        <div class="mf-field">
+          <div class="mf-label">Urgency</div>
+          <div class="mf-urgency">⚡ Urgent — time-sensitive matter</div>
+        </div>
+        <div class="mf-btn">Submit Enquiry →</div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom-strip">
+    <div class="bottom-note">Runs 24/7. No one needs to be at their desk.</div>
+    <span class="label-tag">Enquiry & Lead Capture · #1</span>
+  </div>
+  <div class="slide-number">04 / 10</div>
+</div>
+
+<!-- ─────────────────────────────── SLIDE 5 ─── -->
+<div class="slide-label">Slide 5 of 10 — Step 2: Lead Scoring</div>
+<div class="slide step-detail" id="s5">
+  <div class="wordmark">Apex Systematic</div>
+  <div class="top">
+    <div class="left">
+      <div class="step-badge">
+        <div class="gold-line"></div>
+        <span class="label-tag">Step 02</span>
+      </div>
+      <h2>Every enquiry<br>is scored.</h2>
+      <p class="step-desc">The system reads the form submission and scores it against your criteria — matter type, urgency, geographical fit, existing client status. Hot, warm, or cold. Decided before anyone opens an inbox.</p>
+      <div class="bullets">
+        <div class="bullet">Urgency detected from the submission content</div>
+        <div class="bullet">Scoring criteria set by you at build</div>
+        <div class="bullet">Hot leads jump the queue automatically</div>
+        <div class="bullet">Cold leads queued — not discarded</div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="mock-score">
+        <div class="ms-header">Enquiry Pipeline — Today</div>
+        <div class="ms-body">
+          <div class="ms-row">
+            <div>
+              <div class="ms-name">Sarah Johnson</div>
+              <div class="ms-firm">Immigration · Urgent</div>
+            </div>
+            <div class="score-tag score-hot">Hot</div>
+          </div>
+          <div class="ms-row">
+            <div>
+              <div class="ms-name">Marcus Webb</div>
+              <div class="ms-firm">Commercial Property</div>
+            </div>
+            <div class="score-tag score-warm">Warm</div>
+          </div>
+          <div class="ms-row">
+            <div>
+              <div class="ms-name">Priya Nair</div>
+              <div class="ms-firm">Family · General enquiry</div>
+            </div>
+            <div class="score-tag score-warm">Warm</div>
+          </div>
+          <div class="ms-row">
+            <div>
+              <div class="ms-name">James Howell</div>
+              <div class="ms-firm">Employment</div>
+            </div>
+            <div class="score-tag score-cold">Cold</div>
+          </div>
+          <div class="ms-row">
+            <div>
+              <div class="ms-name">Chen Liu</div>
+              <div class="ms-firm">Wills & Probate</div>
+            </div>
+            <div class="score-tag score-cold">Cold</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom-strip">
+    <div class="bottom-note">No triage required. Open your dashboard to a ranked list.</div>
+    <span class="label-tag">Enquiry & Lead Capture · #1</span>
+  </div>
+  <div class="slide-number">05 / 10</div>
+</div>
+
+<!-- ─────────────────────────────── SLIDE 6 ─── -->
+<div class="slide-label">Slide 6 of 10 — Step 3: Alert</div>
+<div class="slide step-detail" id="s6">
+  <div class="wordmark">Apex Systematic</div>
+  <div class="top">
+    <div class="left">
+      <div class="step-badge">
+        <div class="gold-line"></div>
+        <span class="label-tag">Step 03</span>
+      </div>
+      <h2>You're alerted<br>in seconds.</h2>
+      <p class="step-desc">A hot lead comes in at 7pm on a Tuesday. You get an SMS or email alert with the prospect's name, matter type, and urgency — before you've even seen the form submission.</p>
+      <div class="bullets">
+        <div class="bullet">Alert fires only for hot leads — no noise</div>
+        <div class="bullet">SMS, email, or both — your choice</div>
+        <div class="bullet">Includes matter type and urgency flag</div>
+        <div class="bullet">Works outside office hours</div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="mock-phone">
+        <div class="ph-status">
+          <div class="ph-time">19:47</div>
+          <div class="ph-icons">
+            <span>●●●</span>
+            <span>WiFi</span>
+            <span>🔋</span>
+          </div>
+        </div>
+        <div class="ph-notif">
+          <div class="ph-notif-header">
+            <div class="ph-icon">AS</div>
+            <div>
+              <div class="ph-app">Apex Systematic · now</div>
+            </div>
+          </div>
+          <div class="ph-notif-title">New Enquiry — Urgent</div>
+          <div class="ph-notif-body">
+            Sarah Johnson · Immigration<br>
+            <span>Matter is time-sensitive.</span><br>
+            Contact: +44 7000 000000
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom-strip">
+    <div class="bottom-note">A hot lead after hours is still a hot lead.</div>
+    <span class="label-tag">Enquiry & Lead Capture · #1</span>
+  </div>
+  <div class="slide-number">06 / 10</div>
+</div>
+
+<!-- ─────────────────────────────── SLIDE 7 ─── -->
+<div class="slide-label">Slide 7 of 10 — Step 4: Auto Reply</div>
+<div class="slide step-detail" id="s7">
+  <div class="wordmark">Apex Systematic</div>
+  <div class="top">
+    <div class="left">
+      <div class="step-badge">
+        <div class="gold-line"></div>
+        <span class="label-tag">Step 04</span>
+      </div>
+      <h2>The prospect<br>hears from you<br>immediately.</h2>
+      <p class="step-desc">A personalised reply goes out to the prospect as soon as their form is submitted. It references their matter type and sets an expectation for when they'll hear back. You wrote it once. It runs every time.</p>
+      <div class="bullets">
+        <div class="bullet">Personalised with name and matter type</div>
+        <div class="bullet">Sent within seconds of submission</div>
+        <div class="bullet">Tone and content set by you at build</div>
+        <div class="bullet">Hot leads get a different response to cold</div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="mock-reply">
+        <div class="mr-header">
+          <div class="mr-title">Automated Reply</div>
+          <div class="mr-auto">Sent automatically</div>
+        </div>
+        <div class="mr-body">
+          <div class="mr-to">To: <span>sarah@email.com</span> · 19:47</div>
+          <div class="mr-subject">Thank you for your enquiry, Sarah</div>
+          <div class="mr-text">
+            <strong>Hi Sarah,</strong><br><br>
+            Thank you for reaching out. We've received your enquiry regarding your immigration matter and understand it's time-sensitive.<br><br>
+            A member of our team will be in touch <strong>within 2 hours</strong>. In the meantime, if anything changes, please reply to this email.
+          </div>
+        </div>
+        <div class="mr-sent">
+          <div class="sent-dot"></div>
+          Delivered · No manual input required
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom-strip">
+    <div class="bottom-note">Prospects who hear back quickly convert at a higher rate. This costs you nothing.</div>
+    <span class="label-tag">Enquiry & Lead Capture · #1</span>
+  </div>
+  <div class="slide-number">07 / 10</div>
+</div>
+
+<!-- ─────────────────────────────── SLIDE 8 ─── -->
+<div class="slide-label">Slide 8 of 10 — Step 5: CRM Record</div>
+<div class="slide step-detail" id="s8">
+  <div class="wordmark">Apex Systematic</div>
+  <div class="top">
+    <div class="left">
+      <div class="step-badge">
+        <div class="gold-line"></div>
+        <span class="label-tag">Step 05</span>
+      </div>
+      <h2>The record<br>creates itself.</h2>
+      <p class="step-desc">Every enquiry becomes a contact record automatically — name, firm, matter type, source, score, timestamp. Duplicate detection runs before any record is created. Your database stays clean without anyone maintaining it.</p>
+      <div class="bullets">
+        <div class="bullet">Contact record created on submission</div>
+        <div class="bullet">Duplicate check runs automatically</div>
+        <div class="bullet">Lead score and matter type attached</div>
+        <div class="bullet">Zero manual data entry from your team</div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="mock-crm">
+        <div class="crm-header">
+          <div class="crm-title">Contact Record</div>
+          <div class="crm-badge">Auto-created</div>
+        </div>
+        <div class="crm-body">
+          <div class="crm-name">Sarah Johnson</div>
+          <div class="crm-firm">New Enquiry · Immigration</div>
+          <div class="crm-row">
+            <div class="crm-key">Lead score</div>
+            <div class="crm-val hot">Hot</div>
+          </div>
+          <div class="crm-row">
+            <div class="crm-key">Source</div>
+            <div class="crm-val">Website form</div>
+          </div>
+          <div class="crm-row">
+            <div class="crm-key">Urgency</div>
+            <div class="crm-val hot">Time-sensitive</div>
+          </div>
+          <div class="crm-row">
+            <div class="crm-key">Reply sent</div>
+            <div class="crm-val green">✓ 19:47</div>
+          </div>
+          <div class="crm-row">
+            <div class="crm-key">Duplicate</div>
+            <div class="crm-val green">✓ None found</div>
+          </div>
+        </div>
+        <div class="crm-footer">
+          ✓ Created automatically · No manual input
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom-strip">
+    <div class="bottom-note">Every enquiry captured, scored, and filed before you look at your inbox.</div>
+    <span class="label-tag">Enquiry & Lead Capture · #1</span>
+  </div>
+  <div class="slide-number">08 / 10</div>
+</div>
+
+<!-- ─────────────────────────────── SLIDE 9 ─── -->
+<div class="slide-label">Slide 9 of 10 — The Results</div>
+<div class="slide" id="s9">
+  <div class="wordmark">Apex Systematic</div>
+  <div class="header">
+    <div class="label-tag">The Result</div>
+    <h2>What changes<br>when it runs.</h2>
+  </div>
+  <div class="results-grid">
+    <div class="result-card">
+      <div class="rc-val">0</div>
+      <div class="rc-title">Enquiries fall through</div>
+      <div class="rc-desc">Every submission is captured, scored, and replied to — regardless of when it comes in or whether anyone is at their desk.</div>
+    </div>
+    <div class="result-card">
+      <div class="rc-val">&lt; 60s</div>
+      <div class="rc-title">Response time</div>
+      <div class="rc-desc">Prospects receive a personalised acknowledgement within seconds. You are no longer compared to the firm that replied first.</div>
+    </div>
+    <div class="result-card">
+      <div class="rc-val">0 min</div>
+      <div class="rc-title">Manual data entry</div>
+      <div class="rc-desc">Contact records create themselves. No one on your team is copying names and email addresses into a spreadsheet.</div>
+    </div>
+    <div class="result-card">
+      <div class="rc-val">24/7</div>
+      <div class="rc-title">Intake stays open</div>
+      <div class="rc-desc">Evenings, weekends, bank holidays. Every enquiry handled the same way, every time. No exceptions, no gaps.</div>
+    </div>
+  </div>
+  <div class="slide-number">09 / 10</div>
+</div>
+
+<!-- ─────────────────────────────── SLIDE 10 ─── -->
+<div class="slide-label">Slide 10 of 10 — CTA</div>
+<div class="slide" id="s10">
+  <div class="bg-accent"></div>
+  <div class="wordmark">Apex Systematic</div>
+  <div class="content">
+    <div class="eyebrow" style="display:flex;align-items:center;gap:12px;margin-bottom:40px;">
+      <div class="gold-line"></div>
+      <span class="label-tag">See it working</span>
+    </div>
+    <h2>This is built<br>for your firm.<br><em>See the demo.</em></h2>
+    <p class="sub">A 30-minute audit call. We map your current intake process, show you exactly what gets automated, and give you a fixed price before anything is signed.</p>
+    <div class="cta-block">
+      <div class="cta-item">Free audit call — no obligation to proceed</div>
+      <div class="cta-item">Fixed price agreed in writing before work starts</div>
+      <div class="cta-item">You own everything we build. No retainer, no lock-in.</div>
+    </div>
+    <div class="cta-url">apexsystematic.com/contact</div>
+  </div>
+  <div class="model-strip">
+    <div class="model-item"><strong>Fixed Price</strong>Agreed before work starts. No surprises.</div>
+    <div class="model-item"><strong>No Retainer</strong>One-off fee. No monthly invoice.</div>
+    <div class="model-item"><strong>You Own Everything</strong>Full handover at completion.</div>
+  </div>
+  <div class="slide-number">10 / 10</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apex Systematic — Appointment Setting (Accountancy) Carousel</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0E1117;
+    --slate: #131820;
+    --slate-elevated: #182030;
+    --border: #1E2838;
+    --border-light: #263040;
+    --body: #D8DCE4;
+    --muted: #7A8299;
+    --dim: #4F5B6E;
+    --white: #FFFFFF;
+    --gold: #C9A84C;
+    --gold-light: #DDB95A;
+    --green: #4a9c6d;
+    --green-bg: rgba(74,156,109,0.12);
+  }
+
+  body {
+    background: #080B10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    padding: 48px 24px;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .slide-label {
+    color: var(--dim);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .slide {
+    width: 1080px;
+    height: 1080px;
+    background: var(--navy);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .gold-line { width: 32px; height: 2px; background: var(--gold); }
+
+  .label-tag {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .slide-number {
+    position: absolute;
+    bottom: 48px;
+    right: 56px;
+    font-size: 12px;
+    color: var(--dim);
+    letter-spacing: 0.08em;
+  }
+
+  .wordmark {
+    position: absolute;
+    top: 44px;
+    left: 56px;
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* ── SLIDE 1 — HOOK ── */
+  #s1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px;
+  }
+
+  #s1 .bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(30,40,56,0.4) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30,40,56,0.4) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  #s1 .bg-accent {
+    position: absolute;
+    top: 0; right: 0;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle at 80% 20%, rgba(201,168,76,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  #s1 .content { position: relative; z-index: 2; max-width: 840px; }
+
+  #s1 .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 44px;
+  }
+
+  #s1 h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 82px;
+    line-height: 1.0;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 40px;
+    letter-spacing: -0.01em;
+  }
+
+  #s1 h1 em { color: var(--gold); font-style: normal; }
+
+  #s1 .sub {
+    font-size: 19px;
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: 580px;
+    margin-bottom: 56px;
+  }
+
+  #s1 .pills { display: flex; gap: 12px; }
+
+  #s1 .pill {
+    border: 1px solid var(--border-light);
+    padding: 8px 18px;
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  #s1 .bottom-bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold) 0%, transparent 60%);
+  }
+
+  /* ── SLIDE 2 — PROBLEM ── */
+  #s2 { display: flex; flex-direction: column; padding: 100px 80px 80px; }
+
+  #s2 .header { margin-bottom: 56px; }
+
+  #s2 h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.1;
+    margin-top: 16px;
+  }
+
+  #s2 .problems { display: flex; flex-direction: column; }
+
+  #s2 .problem-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 28px;
+    padding: 30px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  #s2 .problem-row:first-child { border-top: 1px solid var(--border); }
+
+  #s2 .problem-num { font-size: 11px; color: var(--gold); letter-spacing: 0.1em; font-weight: 500; padding-top: 4px; min-width: 24px; }
+
+  #s2 .problem-text { flex: 1; }
+
+  #s2 .problem-title { font-size: 20px; color: var(--white); font-weight: 500; margin-bottom: 6px; }
+
+  #s2 .problem-desc { font-size: 15px; color: var(--muted); line-height: 1.55; }
+
+  #s2 .problem-cost { font-size: 13px; color: var(--dim); text-align: right; min-width: 130px; padding-top: 4px; line-height: 1.4; }
+
+  #s2 .problem-cost strong { display: block; font-size: 22px; color: var(--gold); font-weight: 400; font-family: 'Playfair Display', serif; }
+
+  #s2 .stat-strip {
+    margin-top: 40px;
+    padding: 24px 28px;
+    background: var(--slate-elevated);
+    border-left: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  #s2 .stat-strip .big { font-family: 'Playfair Display', serif; font-size: 48px; color: var(--gold); line-height: 1; white-space: nowrap; }
+
+  #s2 .stat-strip .desc { font-size: 15px; color: var(--muted); line-height: 1.5; }
+
+  /* ── SLIDE 3 — OVERVIEW ── */
+  #s3 { display: flex; flex-direction: column; padding: 100px 80px 80px; }
+
+  #s3 .header { margin-bottom: 56px; }
+
+  #s3 h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.1;
+    margin-top: 16px;
+  }
+
+  #s3 .steps-row { display: flex; gap: 0; margin-bottom: 48px; }
+
+  #s3 .step-box {
+    flex: 1;
+    padding: 30px 24px;
+    border: 1px solid var(--border);
+    position: relative;
+  }
+
+  #s3 .step-box + .step-box { border-left: none; }
+  #s3 .step-box.active { background: var(--slate-elevated); border-color: var(--border-light); }
+
+  #s3 .step-n { font-size: 11px; color: var(--gold); letter-spacing: 0.12em; font-weight: 500; margin-bottom: 10px; }
+
+  #s3 .step-title { font-size: 15px; color: var(--white); font-weight: 500; margin-bottom: 6px; line-height: 1.3; }
+
+  #s3 .step-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  #s3 .arrow {
+    position: absolute;
+    right: -13px; top: 50%;
+    transform: translateY(-50%);
+    width: 22px; height: 22px;
+    background: var(--navy);
+    border: 1px solid var(--border-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    font-size: 10px;
+    color: var(--gold);
+  }
+
+  #s3 .result-bar { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--border); }
+
+  #s3 .result-item { padding: 28px 32px; border-right: 1px solid var(--border); }
+  #s3 .result-item:last-child { border-right: none; }
+  #s3 .result-val { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--gold); margin-bottom: 6px; }
+  #s3 .result-label { font-size: 13px; color: var(--muted); line-height: 1.4; }
+
+  /* ── STEP DETAIL SLIDES ── */
+  .step-detail { display: flex; flex-direction: column; padding: 100px 80px 80px; }
+
+  .step-detail .top { display: flex; gap: 64px; flex: 1; }
+
+  .step-detail .left { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+
+  .step-detail .right { width: 400px; display: flex; align-items: center; justify-content: center; }
+
+  .step-detail .step-badge { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 32px; }
+
+  .step-detail h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 46px;
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 24px;
+  }
+
+  .step-detail .step-desc { font-size: 17px; color: var(--muted); line-height: 1.65; margin-bottom: 36px; }
+
+  .step-detail .bullets { display: flex; flex-direction: column; gap: 12px; }
+
+  .step-detail .bullet { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--body); line-height: 1.4; }
+
+  .step-detail .bullet::before { content: ''; width: 5px; height: 5px; background: var(--gold); flex-shrink: 0; margin-top: 7px; }
+
+  .step-detail .bottom-strip {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .step-detail .bottom-note { font-size: 13px; color: var(--dim); font-style: italic; }
+
+  /* ── MOCK: BOOKING PAGE ── */
+  .mock-booking {
+    width: 370px;
+    background: #0a0f18;
+    border: 1px solid var(--border-light);
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .mock-booking .mb-header {
+    background: var(--slate);
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mock-booking .mb-title { font-size: 12px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+
+  .mock-booking .mb-live { font-size: 10px; background: rgba(74,156,109,0.15); color: var(--green); padding: 3px 10px; letter-spacing: 0.04em; }
+
+  .mock-booking .mb-body { padding: 20px; }
+
+  .mock-booking .mb-name { font-size: 15px; color: var(--white); font-weight: 500; margin-bottom: 4px; }
+  .mock-booking .mb-type { font-size: 12px; color: var(--muted); margin-bottom: 20px; }
+
+  .mock-booking .mb-month {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-bottom: 16px;
+  }
+
+  .mock-booking .mb-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: var(--muted);
+    border: 1px solid transparent;
+  }
+
+  .mock-booking .mb-day.avail { color: var(--body); border-color: var(--border); cursor: pointer; }
+  .mock-booking .mb-day.selected { background: var(--gold); color: var(--navy); font-weight: 600; border-color: var(--gold); }
+  .mock-booking .mb-day.past { color: var(--dim); }
+
+  .mock-booking .mb-times { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+
+  .mock-booking .mb-time {
+    padding: 6px 12px;
+    font-size: 12px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+
+  .mock-booking .mb-time.selected { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.08); }
+
+  .mock-booking .mb-btn {
+    width: 100%;
+    background: var(--gold);
+    color: var(--navy);
+    padding: 11px;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* ── MOCK: CONFIRMATION EMAIL ── */
+  .mock-confirm {
+    width: 380px;
+    background: #0a0f18;
+    border: 1px solid var(--border-light);
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .mock-confirm .mc-header {
+    background: var(--slate);
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mock-confirm .mc-title { font-size: 12px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+  .mock-confirm .mc-auto { font-size: 10px; background: rgba(74,156,109,0.15); color: var(--green); padding: 3px 10px; }
+
+  .mock-confirm .mc-body { padding: 20px; }
+
+  .mock-confirm .mc-to { font-size: 11px; color: var(--dim); margin-bottom: 10px; }
+  .mock-confirm .mc-to span { color: var(--muted); }
+
+  .mock-confirm .mc-subject { font-size: 15px; color: var(--white); font-weight: 500; margin-bottom: 14px; }
+
+  .mock-confirm .mc-detail {
+    background: var(--slate-elevated);
+    border: 1px solid var(--border);
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+
+  .mock-confirm .mc-detail-row { display: flex; justify-content: space-between; font-size: 13px; padding: 5px 0; border-bottom: 1px solid var(--border); }
+  .mock-confirm .mc-detail-row:last-child { border-bottom: none; }
+  .mock-confirm .mc-detail-key { color: var(--dim); }
+  .mock-confirm .mc-detail-val { color: var(--body); }
+
+  .mock-confirm .mc-text { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .mock-confirm .mc-text strong { color: var(--body); font-weight: 500; }
+
+  .mock-confirm .mc-footer {
+    background: var(--slate-elevated);
+    padding: 12px 20px;
+    border-top: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--dim);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .sent-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+
+  /* ── MOCK: REMINDER PHONE ── */
+  .mock-phone {
+    width: 260px;
+    background: #111;
+    border-radius: 32px;
+    padding: 20px 16px;
+    box-shadow: 0 0 0 8px #1a1a1a, 0 0 0 10px #222;
+    font-family: -apple-system, 'DM Sans', sans-serif;
+  }
+
+  .mock-phone .ph-status { display: flex; justify-content: space-between; align-items: center; padding: 0 8px; margin-bottom: 16px; }
+  .mock-phone .ph-time { font-size: 13px; color: #fff; font-weight: 600; }
+  .mock-phone .ph-icons { font-size: 11px; color: #aaa; }
+
+  .mock-phone .ph-notif { background: #1c1c1e; border-radius: 12px; padding: 12px 14px; margin-bottom: 8px; }
+
+  .mock-phone .ph-notif-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+
+  .mock-phone .ph-icon {
+    width: 28px; height: 28px;
+    background: var(--gold);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: var(--navy);
+    font-weight: 700;
+  }
+
+  .mock-phone .ph-app { font-size: 11px; color: #8a8a8e; font-weight: 500; }
+  .mock-phone .ph-notif-title { font-size: 13px; color: #fff; font-weight: 600; margin-bottom: 4px; line-height: 1.3; }
+  .mock-phone .ph-notif-body { font-size: 12px; color: #8a8a8e; line-height: 1.4; }
+  .mock-phone .ph-notif-body span { color: var(--gold); }
+
+  /* ── MOCK: NO-SHOW ALERT ── */
+  .mock-noshow {
+    width: 380px;
+    background: #0a0f18;
+    border: 1px solid var(--border-light);
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .mock-noshow .mn-header {
+    background: var(--slate);
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mock-noshow .mn-title { font-size: 12px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+  .mock-noshow .mn-alert { font-size: 10px; background: rgba(201,100,76,0.15); color: #c9804c; padding: 3px 10px; letter-spacing: 0.04em; }
+
+  .mock-noshow .mn-body { padding: 20px; }
+
+  .mock-noshow .mn-event { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+
+  .mock-noshow .mn-name { font-size: 15px; color: var(--white); font-weight: 500; margin-bottom: 4px; }
+  .mock-noshow .mn-info { font-size: 13px; color: var(--muted); }
+
+  .mock-noshow .mn-tag { font-size: 11px; background: rgba(201,100,76,0.15); color: #c9804c; padding: 4px 10px; white-space: nowrap; }
+
+  .mock-noshow .mn-actions { display: flex; flex-direction: column; gap: 8px; }
+
+  .mock-noshow .mn-action {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    background: var(--slate-elevated);
+    border: 1px solid var(--border);
+    font-size: 13px;
+  }
+
+  .mock-noshow .mn-action-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .mn-action-dot.gold { background: var(--gold); }
+  .mn-action-dot.green { background: var(--green); }
+
+  .mock-noshow .mn-action-text { color: var(--body); flex: 1; }
+  .mock-noshow .mn-action-status { font-size: 11px; color: var(--dim); }
+
+  /* ── MOCK: RESCHEDULE ── */
+  .mock-reschedule {
+    width: 370px;
+    background: #0a0f18;
+    border: 1px solid var(--border-light);
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .mock-reschedule .mr-header {
+    background: var(--slate);
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mock-reschedule .mr-title { font-size: 12px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+  .mock-reschedule .mr-auto { font-size: 10px; background: rgba(74,156,109,0.15); color: var(--green); padding: 3px 10px; }
+
+  .mock-reschedule .mr-body { padding: 20px; }
+
+  .mock-reschedule .mr-from {
+    padding: 12px 14px;
+    background: var(--slate-elevated);
+    border: 1px solid var(--border);
+    margin-bottom: 12px;
+    font-size: 13px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .mock-reschedule .mr-from span { color: var(--dim); font-size: 11px; }
+
+  .mock-reschedule .mr-arrow { text-align: center; color: var(--gold); font-size: 18px; margin-bottom: 12px; }
+
+  .mock-reschedule .mr-to {
+    padding: 12px 14px;
+    background: rgba(201,168,76,0.06);
+    border: 1px solid var(--gold);
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: var(--body);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .mock-reschedule .mr-log { display: flex; flex-direction: column; gap: 6px; }
+
+  .mock-reschedule .mr-log-row { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--muted); }
+  .mock-reschedule .mr-log-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+
+  /* ── SLIDE 9 — RESULTS ── */
+  #s9 { display: flex; flex-direction: column; padding: 100px 80px 80px; }
+
+  #s9 .header { margin-bottom: 56px; }
+
+  #s9 h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.1;
+    margin-top: 16px;
+  }
+
+  #s9 .results-grid { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--border); flex: 1; }
+
+  #s9 .result-card { padding: 40px 44px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 14px; }
+  #s9 .result-card:nth-child(2n) { border-right: none; }
+  #s9 .result-card:nth-child(3), #s9 .result-card:nth-child(4) { border-bottom: none; }
+
+  #s9 .rc-val { font-family: 'Playfair Display', serif; font-size: 56px; color: var(--gold); line-height: 1; }
+  #s9 .rc-title { font-size: 18px; color: var(--white); font-weight: 500; }
+  #s9 .rc-desc { font-size: 14px; color: var(--muted); line-height: 1.55; }
+
+  /* ── SLIDE 10 — CTA ── */
+  #s10 { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 80px; }
+
+  #s10 .bg-accent {
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 560px; height: 560px;
+    background: radial-gradient(circle at 80% 80%, rgba(201,168,76,0.06) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  #s10 .content { position: relative; z-index: 2; max-width: 860px; }
+
+  #s10 h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.0;
+    margin-bottom: 32px;
+    letter-spacing: -0.01em;
+  }
+
+  #s10 h2 em { color: var(--gold); font-style: normal; }
+
+  #s10 .sub { font-size: 18px; color: var(--muted); line-height: 1.6; margin-bottom: 52px; max-width: 560px; }
+
+  #s10 .cta-block { display: flex; flex-direction: column; gap: 14px; margin-bottom: 60px; }
+
+  #s10 .cta-item { display: flex; align-items: center; gap: 14px; font-size: 16px; color: var(--body); }
+  #s10 .cta-item::before { content: ''; width: 5px; height: 5px; background: var(--gold); flex-shrink: 0; }
+
+  #s10 .cta-url { display: inline-block; border: 1px solid var(--gold); padding: 18px 40px; font-size: 15px; font-weight: 500; color: var(--gold); letter-spacing: 0.06em; text-transform: uppercase; }
+
+  #s10 .model-strip { position: absolute; bottom: 64px; left: 80px; right: 80px; display: flex; }
+
+  #s10 .model-item { flex: 1; padding: 20px 24px; border: 1px solid var(--border); font-size: 13px; color: var(--muted); }
+  #s10 .model-item + .model-item { border-left: none; }
+  #s10 .model-item strong { display: block; font-size: 15px; color: var(--white); font-weight: 500; margin-bottom: 4px; }
+
+</style>
+</head>
+<body>
+
+<!-- ───────────────────── SLIDE 1 — HOOK ───── -->
+<div class="slide-label">Slide 1 of 10 — Hook</div>
+<div class="slide" id="s1">
+  <div class="bg-grid"></div>
+  <div class="bg-accent"></div>
+  <div class="wordmark">Apex Systematic</div>
+  <div class="content">
+    <div class="eyebrow">
+      <div class="gold-line"></div>
+      <span class="label-tag">Appointment Setting · Accountancy</span>
+    </div>
+    <h1>Stop scheduling<br>meetings.<br><em>Let clients book.</em></h1>
+    <p class="sub">Accountants lose hours every week to back-and-forth emails that end with a calendar invite. There is a better use of that time.</p>
+    <div class="pills">
+      <div class="pill">Fixed price</div>
+      <div class="pill">No retainer</div>
+      <div class="pill">You own everything</div>
+    </div>
+  </div>
+  <div class="slide-number">01 / 10</div>
+  <div class="bottom-bar"></div>
+</div>
+
+<!-- ───────────────────── SLIDE 2 — PROBLEM ───── -->
+<div class="slide-label">Slide 2 of 10 — The Problem</div>
+<div class="slide" id="s2">
+  <div class="wordmark">Apex Systematic</div>
+  <div class="header">
+    <div class="label-tag">The Problem</div>
+    <h2>Manual scheduling is<br>a qualified person's problem.</h2>
+  </div>
+  <div class="problems">
+    <div class="problem-row">
+      <div class="problem-num">01</div>
+      <div class="problem-text">
+        <div class="problem-title">Three emails to book one meeting</div>
+        <div class="problem-desc">A prospective client replies to an enquiry. What follows is four days of "does Thursday work?" before anything is in the diary.</div>
+      </div>
+      <div class="problem-cost"><strong>4 days</strong>average to confirm</div>
+    </div>
+    <div class="problem-row">
+      <div class="problem-num">02</div>
+      <div class="problem-text">
+        <div class="problem-title">No-shows with no follow-up</div>
+        <div class="problem-desc">A client misses a call. It sits in the diary as a missed appointment. No one chases. No rescheduled slot. The matter stalls.</div>
+      </div>
+      <div class="problem-cost"><strong>Lost</strong>without a trace</div>
+    </div>
+    <div class="problem-row">
+      <div class="problem-num">03</div>
+      <div class="problem-text">
+        <div class="problem-title">Prep materials sent manually</div>
+        <div class="problem-desc">Before every meeting, someone drafts and sends the same documents — ID requirements, agenda, what to bring — by hand, every time.</div>
+      </div>
+      <div class="problem-cost"><strong>20 min</strong>per booking</div>
+    </div>
+  </div>
+  <div class="stat-strip">
+    <div class="big">7 wks</div>
+    <div class="desc">Extra capacity per employee per year unlocked by automation in accounting firms.<br><span style="font-size:12px;color:var(--dim)">Wolters Kluwer Future Ready Accountant, 2025</span></div>
+  </div>
+  <div class="slide-number">02 / 10</div>
+</div>
+
+<!-- ───────────────────── SLIDE 3 — OVERVIEW ───── -->
+<div class="slide-label">Slide 3 of 10 — How It Works</div>
+<div class="slide" id="s3">
+  <div class="wordmark">Apex Systematic</div>
+  <div class="header">
+    <div class="label-tag">How It Works</div>
+    <h2>From booking request to<br>confirmed meeting — automatically.</h2>
+  </div>
+  <div class="steps-row">
+    <div class="step-box active">
+      <div class="step-n">01</div>
+      <div class="step-title">Client Books Directly</div>
+      <div class="step-desc">They pick a slot from your live availability. No emails.</div>
+      <div class="arrow">›</div>
+    </div>
+    <div class="step-box">
+      <div class="step-n">02</div>
+      <div class="step-title">Confirmation Sent</div>
+      <div class="step-desc">Instant confirmation with prep materials attached, automatically.</div>
+      <div class="arrow">›</div>
+    </div>
+    <div class="step-box">
+      <div class="step-n">03</div>
+      <div class="step-title">Reminders Fire</div>
+      <div class="step-desc">24 hours and 2 hours before. To both parties. No manual step.</div>
+      <div class="arrow">›</div>
+    </div>
+    <div class="step-box">
+      <div class="step-n">04</div>
+      <div class="step-title">No-Show Flagged</div>
+      <div class="step-desc">If they don't attend, a follow-up task is created and a reschedule link is sent.</div>
+      <div class="arrow">›</div>
+    </div>
+    <div class="step-box">
+      <div class="step-n">05</div>
+      <div class="step-title">Rescheduled Automatically</div>
+      <div class="step-desc">Client picks a new slot. Diary updates. No human involvement needed.</div>
+    </div>
+  </div>
+  <div class="result-bar">
+    <div class="result-item">
+      <div class="result-val">0</div>
+      <div class="result-label">Scheduling emails sent by your team</div>
+    </div>
+    <div class="result-item">
+      <div class="result-val">100%</div>
+      <div class="result-label">No-shows followed up automatically</div>
+    </div>
+    <div class="result-item">
+      <div class="result-val">24 / 7</div>
+      <div class="result-label">Clients can book at any time</div>
+    </div>
+  </div>
+  <div class="slide-number">03 / 10</div>
+</div>
+
+<!-- ───────────────────── SLIDE 4 — STEP 1: BOOKING ───── -->
+<div class="slide-label">Slide 4 of 10 — Step 1: Direct Booking</div>
+<div class="slide step-detail" id="s4">
+  <div class="wordmark">Apex Systematic</div>
+  <div class="top">
+    <div class="left">
+      <div class="step-badge">
+        <div class="gold-line"></div>
+        <span class="label-tag">Step 01</span>
+      </div>
+      <h2>Clients book<br>into your calendar<br>directly.</h2>
+      <p class="step-desc">They see your real availability and pick a slot. No emails. No phone calls to find a time. No diary conflicts because the system reads your live calendar.</p>
+      <div class="bullets">
+        <div class="bullet">Syncs with your existing calendar in real time</div>
+        <div class="bullet">Client sees only available slots — no double bookings</div>
+        <div class="bullet">Meeting type determines available duration and prep</div>
+        <div class="bullet">Works outside office hours — bookings land in your diary overnight</div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="mock-booking">
+        <div class="mb-header">
+          <div class="mb-title">Book a Meeting</div>
+          <div class="mb-live">Live availability</div>
+        </div>
+        <div class="mb-body">
+          <div class="mb-name">Initial Tax Review</div>
+          <div class="mb-type">60 min · Your firm · May 2026</div>
+          <div class="mb-month">
+            <div class="mb-day past">M</div><div class="mb-day past">T</div><div class="mb-day past">W</div><div class="mb-day past">T</div><div class="mb-day past">F</div><div class="mb-day past">S</div><div class="mb-day past">S</div>
+            <div class="mb-day past">1</div><div class="mb-day past">2</div><div class="mb-day past">3</div><div class="mb-day past">4</div><div class="mb-day past">5</div><div class="mb-day">6</div><div class="mb-day">7</div>
+            <div class="mb-day avail">8</div><div class="mb-day avail">9</div><div class="mb-day selected">14</div><div class="mb-day avail">15</div><div class="mb-day avail">16</div><div class="mb-day">20</div><div class="mb-day">21</div>
+            <div class="mb-day avail">22</div><div class="mb-day avail">23</div><div class="mb-day avail">28</div><div class="mb-day avail">29</div><div class="mb-day avail">30</div><div class="mb-day">—</div><div class="mb-day">—</div>
+          </div>
+          <div class="mb-times">
+            <div class="mb-time">9:00</div>
+            <div class="mb-time selected">10:00</div>
+            <div class="mb-time">11:00</div>
+            <div class="mb-time">14:00</div>
+            <div class="mb-time">15:00</div>
+          </div>
+          <div class="mb-btn">Confirm Booking →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom-strip">
+    <div class="bottom-note">No email chain. No back-and-forth. The slot is booked before you open your inbox.</div>
+    <span class="label-tag">Appointment Setting · #2</span>
+  </div>
+  <div class="slide-number">04 / 10</div>
+</div>
+
+<!-- ───────────────────── SLIDE 5 — STEP 2: CONFIRMATION ───── -->
+<div class="slide-label">Slide 5 of 10 — Step 2: Confirmation + Prep Materials</div>
+<div class="slide step-detail" id="s5">
+  <div class="wordmark">Apex Systematic</div>
+  <div class="top">
+    <div class="left">
+      <div class="step-badge">
+        <div class="gold-line"></div>
+        <span class="label-tag">Step 02</span>
+      </div>
+      <h2>Confirmation and<br>prep materials sent<br>immediately.</h2>
+      <p class="step-desc">The moment a booking is confirmed, the client receives a detailed confirmation email with everything they need to prepare — document checklist, what to bring, what the meeting covers. Written once. Sent every time.</p>
+      <div class="bullets">
+        <div class="bullet">Confirmation fires within seconds of booking</div>
+        <div class="bullet">Prep materials vary by meeting type automatically</div>
+        <div class="bullet">Calendar invite included — one click to add</div>
+        <div class="bullet">Clients arrive prepared. Meetings run shorter.</div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="mock-confirm">
+        <div class="mc-header">
+          <div class="mc-title">Booking Confirmed</div>
+          <div class="mc-auto">Sent automatically</div>
+        </div>
+        <div class="mc-body">
+          <div class="mc-to">To: <span>david.chen@email.com</span></div>
+          <div class="mc-subject">Your tax review is confirmed</div>
+          <div class="mc-detail">
+            <div class="mc-detail-row">
+              <div class="mc-detail-key">Date</div>
+              <div class="mc-detail-val">Wednesday 14 May, 10:00</div>
+            </div>
+            <div class="mc-detail-row">
+              <div class="mc-detail-key">Duration</div>
+              <div class="mc-detail-val">60 minutes</div>
+            </div>
+            <div class="mc-detail-row">
+              <div class="mc-detail-key">Format</div>
+              <div class="mc-detail-val">Video call — link below</div>
+            </div>
+          </div>
+          <div class="mc-text">
+            <strong>What to bring:</strong> Last 2 years' tax returns, P60 or self-assessment records, any HMRC correspondence received since January.
+          </div>
+        </div>
+        <div class="mc-footer">
+          <div class="sent-dot"></div>
+          Delivered · 0 manual input required
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom-strip">
+    <div class="bottom-note">Clients who arrive prepared mean shorter meetings and fewer follow-up calls.</div>
+    <span class="label-tag">Appointment Setting · #2</span>
+  </div>
+  <div class="slide-number">05 / 10</div>
+</div>
+
+<!-- ───────────────────── SLIDE 6 — STEP 3: REMINDERS ───── -->
+<div class="slide-label">Slide 6 of 10 — Step 3: Reminder Sequence</div>
+<div class="slide step-detail" id="s6">
+  <div class="wordmark">Apex Systematic</div>
+  <div class="top">
+    <div class="left">
+      <div class="step-badge">
+        <div class="gold-line"></div>
+        <span class="label-tag">Step 03</span>
+      </div>
+      <h2>Two reminders.<br>No one needs<br>to send them.</h2>
+      <p class="step-desc">A reminder goes to the client 24 hours before the meeting. Another goes 2 hours before. Both are sent automatically — to the client and to you. No-show rates drop. Meetings start on time.</p>
+      <div class="bullets">
+        <div class="bullet">24-hour reminder includes prep checklist again</div>
+        <div class="bullet">2-hour reminder includes the meeting link</div>
+        <div class="bullet">Both reminders also go to the fee-earner</div>
+        <div class="bullet">Content and tone configurable at build</div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="mock-phone">
+        <div class="ph-status">
+          <div class="ph-time">09:00</div>
+          <div class="ph-icons">●●● 🔋</div>
+        </div>
+        <div class="ph-notif">
+          <div class="ph-notif-header">
+            <div class="ph-icon">AS</div>
+            <div><div class="ph-app">Your Firm · 24hr reminder</div></div>
+          </div>
+          <div class="ph-notif-title">Tax review tomorrow at 10:00</div>
+          <div class="ph-notif-body">
+            David Chen · 60 min<br>
+            <span>Documents checklist attached.</span>
+          </div>
+        </div>
+        <div style="height:10px"></div>
+        <div class="ph-notif">
+          <div class="ph-notif-header">
+            <div class="ph-icon">AS</div>
+            <div><div class="ph-app">Your Firm · 2hr reminder</div></div>
+          </div>
+          <div class="ph-notif-title">Meeting in 2 hours</div>
+          <div class="ph-notif-body">
+            David Chen · Starts 10:00<br>
+            <span>Join link ready to use.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom-strip">
+    <div class="bottom-note">Both parties reminded. Neither party had to do anything to make it happen.</div>
+    <span class="label-tag">Appointment Setting · #2</span>
+  </div>
+  <div class="slide-number">06 / 10</div>
+</div>
+
+<!-- ───────────────────── SLIDE 7 — STEP 4: NO-SHOW ───── -->
+<div class="slide-label">Slide 7 of 10 — Step 4: No-Show Handling</div>
+<div class="slide step-detail" id="s7">
+  <div class="wordmark">Apex Systematic</div>
+  <div class="top">
+    <div class="left">
+      <div class="step-badge">
+        <div class="gold-line"></div>
+        <span class="label-tag">Step 04</span>
+      </div>
+      <h2>No-shows flagged.<br>Follow-up created.<br>Automatically.</h2>
+      <p class="step-desc">If a client does not attend, the system flags it, creates a follow-up task in your dashboard, and sends the client a reschedule link — all without you noticing it happened until you choose to.</p>
+      <div class="bullets">
+        <div class="bullet">No-show detected when meeting time passes with no join</div>
+        <div class="bullet">Task created and assigned in your dashboard immediately</div>
+        <div class="bullet">Client receives a reschedule link automatically</div>
+        <div class="bullet">Matter does not stall waiting for a human to chase</div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="mock-noshow">
+        <div class="mn-header">
+          <div class="mn-title">No-Show Detected</div>
+          <div class="mn-alert">Action required</div>
+        </div>
+        <div class="mn-body">
+          <div class="mn-event">
+            <div>
+              <div class="mn-name">David Chen</div>
+              <div class="mn-info">Tax review · 10:00 · Did not attend</div>
+            </div>
+            <div class="mn-tag">No-show</div>
+          </div>
+          <div class="mn-actions">
+            <div class="mn-action">
+              <div class="mn-action-dot gold"></div>
+              <div class="mn-action-text">Follow-up task created</div>
+              <div class="mn-action-status">10:02</div>
+            </div>
+            <div class="mn-action">
+              <div class="mn-action-dot green"></div>
+              <div class="mn-action-text">Reschedule link sent to client</div>
+              <div class="mn-action-status">10:02</div>
+            </div>
+            <div class="mn-action">
+              <div class="mn-action-dot green"></div>
+              <div class="mn-action-text">Matter flagged for review</div>
+              <div class="mn-action-status">10:02</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom-strip">
+    <div class="bottom-note">Missed meetings don't disappear quietly. They get handled before you've noticed.</div>
+    <span class="label-tag">Appointment Setting · #2</span>
+  </div>
+  <div class="slide-number">07 / 10</div>
+</div>
+
+<!-- ───────────────────── SLIDE 8 — STEP 5: RESCHEDULE ───── -->
+<div class="slide-label">Slide 8 of 10 — Step 5: Rescheduling</div>
+<div class="slide step-detail" id="s8">
+  <div class="wordmark">Apex Systematic</div>
+  <div class="top">
+    <div class="left">
+      <div class="step-badge">
+        <div class="gold-line"></div>
+        <span class="label-tag">Step 05</span>
+      </div>
+      <h2>Rescheduling<br>happens without<br>you.</h2>
+      <p class="step-desc">The client receives a reschedule link. They pick a new slot from your live availability. The diary updates. The old slot is freed. A new confirmation goes out. No emails exchanged.</p>
+      <div class="bullets">
+        <div class="bullet">Reschedule link sent automatically after cancellation or no-show</div>
+        <div class="bullet">Client picks from live availability — no double bookings</div>
+        <div class="bullet">New confirmation and prep materials resent automatically</div>
+        <div class="bullet">CRM record updated with new appointment details</div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="mock-reschedule">
+        <div class="mr-header">
+          <div class="mr-title">Appointment Rescheduled</div>
+          <div class="mr-auto">Auto-updated</div>
+        </div>
+        <div class="mr-body">
+          <div class="mr-from">
+            <span style="color:var(--dim);font-size:11px;">WAS</span>
+            Wed 14 May · 10:00 — Tax Review
+          </div>
+          <div class="mr-arrow">↓</div>
+          <div class="mr-to">
+            <span style="color:var(--dim);font-size:11px;">NOW</span>
+            Mon 19 May · 14:00 — Tax Review
+          </div>
+          <div class="mr-log">
+            <div class="mr-log-row"><div class="mr-log-dot"></div>Calendar updated automatically</div>
+            <div class="mr-log-row"><div class="mr-log-dot"></div>New confirmation sent to client</div>
+            <div class="mr-log-row"><div class="mr-log-dot"></div>Prep materials resent</div>
+            <div class="mr-log-row"><div class="mr-log-dot"></div>CRM record updated</div>
+            <div class="mr-log-row"><div class="mr-log-dot"></div>Old slot released to availability</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom-strip">
+    <div class="bottom-note">The meeting is rebooked before you knew it was cancelled.</div>
+    <span class="label-tag">Appointment Setting · #2</span>
+  </div>
+  <div class="slide-number">08 / 10</div>
+</div>
+
+<!-- ───────────────────── SLIDE 9 — RESULTS ───── -->
+<div class="slide-label">Slide 9 of 10 — The Results</div>
+<div class="slide" id="s9">
+  <div class="wordmark">Apex Systematic</div>
+  <div class="header">
+    <div class="label-tag">The Result</div>
+    <h2>What changes<br>when it runs.</h2>
+  </div>
+  <div class="results-grid">
+    <div class="result-card">
+      <div class="rc-val">0</div>
+      <div class="rc-title">Scheduling emails from your team</div>
+      <div class="rc-desc">Clients book directly. Confirmations, reminders, and follow-ups go out without anyone drafting or sending them.</div>
+    </div>
+    <div class="result-card">
+      <div class="rc-val">7 wks</div>
+      <div class="rc-title">Capacity unlocked per employee</div>
+      <div class="rc-desc">Accounting firms using automation unlock an average of seven extra weeks of capacity per employee per year. Scheduling is part of where that comes from.</div>
+    </div>
+    <div class="result-card">
+      <div class="rc-val">100%</div>
+      <div class="rc-title">No-shows followed up</div>
+      <div class="rc-desc">Every missed appointment is flagged and chased. No matter stalls because a client didn't show and no one noticed for three days.</div>
+    </div>
+    <div class="result-card">
+      <div class="rc-val">24 / 7</div>
+      <div class="rc-title">Bookings accepted</div>
+      <div class="rc-desc">A client decides at 9pm they want to book a review. They book it. It is in your diary when you open your laptop in the morning.</div>
+    </div>
+  </div>
+  <div class="slide-number">09 / 10</div>
+</div>
+
+<!-- ───────────────────── SLIDE 10 — CTA ───── -->
+<div class="slide-label">Slide 10 of 10 — CTA</div>
+<div class="slide" id="s10">
+  <div class="bg-accent"></div>
+  <div class="wordmark">Apex Systematic</div>
+  <div class="content">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:40px;">
+      <div class="gold-line"></div>
+      <span class="label-tag">See it working</span>
+    </div>
+    <h2>Built for your firm.<br><em>See the demo.</em></h2>
+    <p class="sub">A free 30-minute audit call. We map your current scheduling process, show you exactly what gets automated, and give you a fixed price before anything is signed.</p>
+    <div class="cta-block">
+      <div class="cta-item">Free audit call — no obligation to proceed</div>
+      <div class="cta-item">Fixed price agreed in writing before work starts</div>
+      <div class="cta-item">You own everything we build. No retainer, no lock-in.</div>
+    </div>
+    <div class="cta-url">apexsystematic.com/contact</div>
+  </div>
+  <div class="model-strip">
+    <div class="model-item"><strong>Fixed Price</strong>Agreed before work starts. No surprises.</div>
+    <div class="model-item"><strong>No Retainer</strong>One-off fee. No monthly invoice.</div>
+    <div class="model-item"><strong>You Own Everything</strong>Full handover at completion.</div>
+  </div>
+  <div class="slide-number">10 / 10</div>
+</div>
+
+</body>
+</html>

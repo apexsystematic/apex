@@ -1,0 +1,537 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow" />
+<title>Apex Systematic — Enquiry &amp; Lead Capture · Financial Advice</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>/* ── SHARED STYLES FOR ALL APEX CAROUSELS ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy: #0E1117; --slate: #131820; --slate-elevated: #182030;
+  --border: #1E2838; --border-light: #263040;
+  --body: #D8DCE4; --muted: #7A8299; --dim: #4F5B6E;
+  --white: #FFFFFF; --gold: #C9A84C; --gold-light: #DDB95A;
+  --green: #4a9c6d; --green-bg: rgba(74,156,109,0.12);
+  --amber: #c9804c; --amber-bg: rgba(201,128,76,0.12);
+}
+body { background:#080B10; display:flex; flex-direction:column; align-items:center; gap:32px; padding:48px 24px; font-family:'DM Sans',sans-serif; }
+.slide-label { color:var(--dim); font-size:11px; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:8px; }
+.slide { width:1080px; height:1080px; background:var(--navy); position:relative; overflow:hidden; flex-shrink:0; }
+.gold-line { width:32px; height:2px; background:var(--gold); }
+.label-tag { font-size:11px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); }
+.slide-number { position:absolute; bottom:48px; right:56px; font-size:12px; color:var(--dim); letter-spacing:0.08em; }
+.wordmark { position:absolute; top:44px; left:56px; font-family:'Playfair Display',serif; font-size:13px; letter-spacing:0.22em; color:var(--muted); text-transform:uppercase; }
+/* hook slide */
+.hook { display:flex; flex-direction:column; justify-content:center; padding:80px; }
+.hook .bg-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(30,40,56,0.4) 1px,transparent 1px),linear-gradient(90deg,rgba(30,40,56,0.4) 1px,transparent 1px); background-size:60px 60px; pointer-events:none; }
+.hook .bg-accent { position:absolute; top:0; right:0; width:500px; height:500px; background:radial-gradient(circle at 80% 20%,rgba(201,168,76,0.07) 0%,transparent 70%); pointer-events:none; }
+.hook .content { position:relative; z-index:2; max-width:840px; }
+.hook .eyebrow { display:flex; align-items:center; gap:12px; margin-bottom:44px; }
+.hook h1 { font-family:'Playfair Display',serif; font-size:82px; line-height:1.0; font-weight:400; color:var(--white); margin-bottom:40px; letter-spacing:-0.01em; }
+.hook h1 em { color:var(--gold); font-style:normal; }
+.hook .sub { font-size:19px; line-height:1.6; color:var(--muted); max-width:580px; margin-bottom:56px; }
+.hook .pills { display:flex; gap:12px; }
+.hook .pill { border:1px solid var(--border-light); padding:8px 18px; font-size:13px; color:var(--muted); letter-spacing:0.04em; }
+.hook .bottom-bar { position:absolute; bottom:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--gold) 0%,transparent 60%); }
+/* problem slide */
+.problem-slide { display:flex; flex-direction:column; padding:100px 80px 80px; }
+.problem-slide .hdr { margin-bottom:56px; }
+.problem-slide h2 { font-family:'Playfair Display',serif; font-size:52px; font-weight:400; color:var(--white); line-height:1.1; margin-top:16px; }
+.problem-slide .probs { display:flex; flex-direction:column; }
+.prob-row { display:flex; align-items:flex-start; gap:28px; padding:30px 0; border-bottom:1px solid var(--border); }
+.prob-row:first-child { border-top:1px solid var(--border); }
+.prob-num { font-size:11px; color:var(--gold); letter-spacing:0.1em; font-weight:500; padding-top:4px; min-width:24px; }
+.prob-body { flex:1; }
+.prob-title { font-size:20px; color:var(--white); font-weight:500; margin-bottom:6px; }
+.prob-desc { font-size:15px; color:var(--muted); line-height:1.55; }
+.prob-cost { font-size:13px; color:var(--dim); text-align:right; min-width:130px; padding-top:4px; line-height:1.4; }
+.prob-cost strong { display:block; font-size:22px; color:var(--gold); font-weight:400; font-family:'Playfair Display',serif; }
+.stat-strip { margin-top:40px; padding:24px 28px; background:var(--slate-elevated); border-left:2px solid var(--gold); display:flex; align-items:center; gap:20px; }
+.stat-strip .big { font-family:'Playfair Display',serif; font-size:48px; color:var(--gold); line-height:1; white-space:nowrap; }
+.stat-strip .desc { font-size:15px; color:var(--muted); line-height:1.5; }
+/* overview slide */
+.overview { display:flex; flex-direction:column; padding:100px 80px 80px; }
+.overview .hdr { margin-bottom:56px; }
+.overview h2 { font-family:'Playfair Display',serif; font-size:52px; font-weight:400; color:var(--white); line-height:1.1; margin-top:16px; }
+.steps-row { display:flex; margin-bottom:48px; }
+.step-box { flex:1; padding:30px 24px; border:1px solid var(--border); position:relative; }
+.step-box+.step-box { border-left:none; }
+.step-box.active { background:var(--slate-elevated); border-color:var(--border-light); }
+.step-n { font-size:11px; color:var(--gold); letter-spacing:0.12em; font-weight:500; margin-bottom:10px; }
+.step-title { font-size:15px; color:var(--white); font-weight:500; margin-bottom:6px; line-height:1.3; }
+.step-desc-sm { font-size:12px; color:var(--muted); line-height:1.5; }
+.step-arrow { position:absolute; right:-13px; top:50%; transform:translateY(-50%); width:22px; height:22px; background:var(--navy); border:1px solid var(--border-light); display:flex; align-items:center; justify-content:center; z-index:2; font-size:10px; color:var(--gold); }
+.result-bar { display:grid; grid-template-columns:repeat(3,1fr); border:1px solid var(--border); }
+.result-item { padding:28px 32px; border-right:1px solid var(--border); }
+.result-item:last-child { border-right:none; }
+.result-val { font-family:'Playfair Display',serif; font-size:36px; color:var(--gold); margin-bottom:6px; }
+.result-lbl { font-size:13px; color:var(--muted); line-height:1.4; }
+/* step detail */
+.step-detail { display:flex; flex-direction:column; padding:100px 80px 80px; }
+.step-detail .top { display:flex; gap:64px; flex:1; }
+.step-detail .left { flex:1; display:flex; flex-direction:column; justify-content:center; }
+.step-detail .right { width:400px; display:flex; align-items:center; justify-content:center; }
+.step-badge { display:inline-flex; align-items:center; gap:10px; margin-bottom:32px; }
+.step-detail h2 { font-family:'Playfair Display',serif; font-size:46px; font-weight:400; color:var(--white); line-height:1.1; margin-bottom:24px; }
+.step-detail .sdesc { font-size:17px; color:var(--muted); line-height:1.65; margin-bottom:36px; }
+.bullets { display:flex; flex-direction:column; gap:12px; }
+.bullet { display:flex; align-items:flex-start; gap:12px; font-size:15px; color:var(--body); line-height:1.4; }
+.bullet::before { content:''; width:5px; height:5px; background:var(--gold); flex-shrink:0; margin-top:7px; }
+.bot-strip { margin-top:48px; padding-top:32px; border-top:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+.bot-note { font-size:13px; color:var(--dim); font-style:italic; }
+/* results */
+.results-slide { display:flex; flex-direction:column; padding:100px 80px 80px; }
+.results-slide .hdr { margin-bottom:56px; }
+.results-slide h2 { font-family:'Playfair Display',serif; font-size:52px; font-weight:400; color:var(--white); line-height:1.1; margin-top:16px; }
+.results-grid { display:grid; grid-template-columns:1fr 1fr; border:1px solid var(--border); flex:1; }
+.rc { padding:40px 44px; border-right:1px solid var(--border); border-bottom:1px solid var(--border); display:flex; flex-direction:column; gap:14px; }
+.rc:nth-child(2n) { border-right:none; }
+.rc:nth-child(3),.rc:nth-child(4) { border-bottom:none; }
+.rc-val { font-family:'Playfair Display',serif; font-size:56px; color:var(--gold); line-height:1; }
+.rc-title { font-size:18px; color:var(--white); font-weight:500; }
+.rc-desc { font-size:14px; color:var(--muted); line-height:1.55; }
+/* cta */
+.cta-slide { display:flex; flex-direction:column; justify-content:center; align-items:flex-start; padding:80px; }
+.cta-slide .bg-accent { position:absolute; bottom:0; right:0; width:560px; height:560px; background:radial-gradient(circle at 80% 80%,rgba(201,168,76,0.06) 0%,transparent 65%); pointer-events:none; }
+.cta-slide .content { position:relative; z-index:2; max-width:860px; }
+.cta-slide h2 { font-family:'Playfair Display',serif; font-size:72px; font-weight:400; color:var(--white); line-height:1.0; margin-bottom:32px; letter-spacing:-0.01em; }
+.cta-slide h2 em { color:var(--gold); font-style:normal; }
+.cta-slide .sub { font-size:18px; color:var(--muted); line-height:1.6; margin-bottom:52px; max-width:560px; }
+.cta-items { display:flex; flex-direction:column; gap:14px; margin-bottom:60px; }
+.cta-item { display:flex; align-items:center; gap:14px; font-size:16px; color:var(--body); }
+.cta-item::before { content:''; width:5px; height:5px; background:var(--gold); flex-shrink:0; }
+.cta-url { display:inline-block; border:1px solid var(--gold); padding:18px 40px; font-size:15px; font-weight:500; color:var(--gold); letter-spacing:0.06em; text-transform:uppercase; }
+.model-strip { position:absolute; bottom:64px; left:80px; right:80px; display:flex; }
+.model-item { flex:1; padding:20px 24px; border:1px solid var(--border); font-size:13px; color:var(--muted); }
+.model-item+.model-item { border-left:none; }
+.model-item strong { display:block; font-size:15px; color:var(--white); font-weight:500; margin-bottom:4px; }
+/* ── MOCK UI COMPONENTS ── */
+/* intake form */
+.mock-form { width:370px; background:#0a0f18; border:1px solid var(--border-light); padding:24px; }
+.mf-hdr { font-size:13px; color:var(--muted); border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+.mf-dot { width:8px; height:8px; border-radius:50%; background:var(--gold); }
+.mf-ttl { font-size:15px; color:var(--white); font-weight:500; margin-bottom:16px; }
+.mf-field { margin-bottom:12px; }
+.mf-lbl { font-size:11px; color:var(--dim); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:4px; }
+.mf-inp { background:var(--slate); border:1px solid var(--border); padding:9px 12px; font-size:13px; color:var(--white); width:100%; }
+.mf-inp.urg { border-color:var(--gold); color:var(--gold); background:rgba(201,168,76,0.05); }
+.mf-btn { width:100%; background:var(--gold); color:var(--navy); padding:11px; font-size:13px; font-weight:600; text-align:center; margin-top:16px; letter-spacing:0.04em; text-transform:uppercase; }
+/* lead pipeline */
+.mock-pipeline { width:380px; background:#0a0f18; border:1px solid var(--border-light); }
+.mp-hdr { background:var(--slate); padding:14px 20px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+.mp-ttl { font-size:12px; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase; }
+.mp-body { padding:16px 20px; }
+.mp-row { display:flex; align-items:center; justify-content:space-between; padding:11px 0; border-bottom:1px solid var(--border); font-size:14px; }
+.mp-row:last-child { border-bottom:none; }
+.mp-name { color:var(--body); font-weight:500; font-size:14px; }
+.mp-firm { color:var(--dim); font-size:12px; }
+.score { font-size:11px; padding:4px 10px; font-weight:500; letter-spacing:0.05em; }
+.score.hot { background:rgba(201,168,76,0.15); color:var(--gold); }
+.score.warm { background:rgba(74,156,109,0.12); color:#6fbf73; }
+.score.cold { background:rgba(79,91,110,0.3); color:var(--muted); }
+/* CRM record */
+.mock-crm { width:380px; background:#0a0f18; border:1px solid var(--border-light); }
+.crm-hdr { background:var(--slate); padding:14px 20px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+.crm-ttl { font-size:12px; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase; }
+.crm-badge { font-size:10px; background:rgba(201,168,76,0.15); color:var(--gold); padding:3px 10px; letter-spacing:0.06em; text-transform:uppercase; }
+.crm-body { padding:20px; }
+.crm-name { font-size:18px; color:var(--white); font-weight:500; margin-bottom:4px; }
+.crm-sub { font-size:13px; color:var(--muted); margin-bottom:18px; }
+.crm-row { display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border); font-size:13px; }
+.crm-row:last-of-type { border-bottom:none; }
+.crm-key { color:var(--dim); }
+.crm-val { color:var(--body); text-align:right; }
+.crm-val.hot { color:var(--gold); font-weight:500; }
+.crm-val.ok { color:var(--green); }
+.crm-ftr { background:var(--slate-elevated); padding:12px 20px; border-top:1px solid var(--border); font-size:12px; color:var(--muted); display:flex; align-items:center; gap:8px; }
+/* phone notification */
+.mock-phone { width:260px; background:#111; border-radius:32px; padding:20px 16px; box-shadow:0 0 0 8px #1a1a1a,0 0 0 10px #222; }
+.ph-status { display:flex; justify-content:space-between; align-items:center; padding:0 8px; margin-bottom:16px; }
+.ph-time { font-size:13px; color:#fff; font-weight:600; }
+.ph-icons { font-size:11px; color:#aaa; }
+.ph-notif { background:#1c1c1e; border-radius:12px; padding:12px 14px; margin-bottom:8px; }
+.ph-notif-hdr { display:flex; align-items:center; gap:8px; margin-bottom:8px; }
+.ph-icon { width:28px; height:28px; background:var(--gold); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:11px; color:var(--navy); font-weight:700; }
+.ph-app { font-size:11px; color:#8a8a8e; font-weight:500; }
+.ph-title { font-size:13px; color:#fff; font-weight:600; margin-bottom:4px; line-height:1.3; }
+.ph-body { font-size:12px; color:#8a8a8e; line-height:1.4; }
+.ph-body span { color:var(--gold); }
+/* booking calendar */
+.mock-booking { width:370px; background:#0a0f18; border:1px solid var(--border-light); }
+.mb-hdr { background:var(--slate); padding:14px 20px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+.mb-ttl { font-size:12px; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase; }
+.mb-live { font-size:10px; background:rgba(74,156,109,0.15); color:var(--green); padding:3px 10px; letter-spacing:0.04em; }
+.mb-body { padding:20px; }
+.mb-name { font-size:15px; color:var(--white); font-weight:500; margin-bottom:4px; }
+.mb-type { font-size:12px; color:var(--muted); margin-bottom:18px; }
+.mb-month { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; margin-bottom:14px; }
+.mb-day { aspect-ratio:1; display:flex; align-items:center; justify-content:center; font-size:12px; color:var(--muted); border:1px solid transparent; }
+.mb-day.av { color:var(--body); border-color:var(--border); }
+.mb-day.sel { background:var(--gold); color:var(--navy); font-weight:600; border-color:var(--gold); }
+.mb-day.past { color:var(--dim); }
+.mb-times { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px; }
+.mb-time { padding:6px 12px; font-size:12px; border:1px solid var(--border); color:var(--muted); }
+.mb-time.sel { border-color:var(--gold); color:var(--gold); background:rgba(201,168,76,0.08); }
+.mb-btn { width:100%; background:var(--gold); color:var(--navy); padding:11px; font-size:13px; font-weight:600; text-align:center; letter-spacing:0.04em; text-transform:uppercase; }
+/* auto-reply email */
+.mock-reply { width:380px; background:#0a0f18; border:1px solid var(--border-light); }
+.mr-hdr { background:var(--slate); padding:14px 20px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+.mr-ttl { font-size:12px; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase; }
+.mr-auto { font-size:10px; background:rgba(74,156,109,0.15); color:var(--green); padding:3px 10px; }
+.mr-body { padding:20px; }
+.mr-to { font-size:11px; color:var(--dim); margin-bottom:10px; }
+.mr-to span { color:var(--muted); }
+.mr-subj { font-size:15px; color:var(--white); font-weight:500; margin-bottom:14px; }
+.mr-text { font-size:13px; color:var(--muted); line-height:1.6; }
+.mr-text strong { color:var(--body); font-weight:500; }
+.mr-ftr { background:var(--slate-elevated); padding:12px 20px; border-top:1px solid var(--border); font-size:11px; color:var(--dim); display:flex; align-items:center; gap:8px; }
+.sent-dot { width:6px; height:6px; border-radius:50%; background:var(--green); }
+/* onboarding tracker */
+.mock-tracker { width:390px; background:#0a0f18; border:1px solid var(--border-light); }
+.mt-hdr { background:var(--slate); padding:14px 20px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+.mt-ttl { font-size:12px; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase; }
+.mt-badge { font-size:10px; background:rgba(74,156,109,0.15); color:var(--green); padding:3px 10px; }
+.mt-body { padding:20px; }
+.mt-client { font-size:16px; color:var(--white); font-weight:500; margin-bottom:4px; }
+.mt-sub { font-size:12px; color:var(--muted); margin-bottom:18px; }
+.mt-step { display:flex; align-items:flex-start; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.mt-step:last-child { border-bottom:none; }
+.mt-icon { width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; flex-shrink:0; margin-top:2px; }
+.mt-icon.done { background:rgba(74,156,109,0.2); color:var(--green); }
+.mt-icon.active { background:rgba(201,168,76,0.15); color:var(--gold); }
+.mt-icon.pending { background:rgba(79,91,110,0.3); color:var(--dim); }
+.mt-step-name { font-size:14px; color:var(--body); font-weight:500; margin-bottom:2px; }
+.mt-step-status { font-size:12px; color:var(--dim); }
+/* welcome email */
+.mock-welcome { width:380px; background:#0a0f18; border:1px solid var(--border-light); }
+.mw-hdr { background:var(--slate); padding:14px 20px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+.mw-ttl { font-size:12px; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase; }
+.mw-seq { font-size:10px; background:rgba(201,168,76,0.15); color:var(--gold); padding:3px 10px; }
+.mw-body { padding:20px; }
+.mw-to { font-size:11px; color:var(--dim); margin-bottom:10px; }
+.mw-subj { font-size:15px; color:var(--white); font-weight:500; margin-bottom:14px; }
+.mw-text { font-size:13px; color:var(--muted); line-height:1.6; margin-bottom:14px; }
+.mw-text strong { color:var(--body); font-weight:500; }
+.mw-steps { display:flex; flex-direction:column; gap:6px; }
+.mw-step { display:flex; align-items:center; gap:10px; font-size:12px; color:var(--muted); }
+.mw-step-dot { width:5px; height:5px; border-radius:50%; background:var(--gold); flex-shrink:0; }
+.mw-ftr { background:var(--slate-elevated); padding:12px 20px; border-top:1px solid var(--border); font-size:11px; color:var(--dim); display:flex; align-items:center; gap:8px; }
+/* folder/doc creation */
+.mock-folder { width:380px; background:#0a0f18; border:1px solid var(--border-light); }
+.mfold-hdr { background:var(--slate); padding:14px 20px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+.mfold-ttl { font-size:12px; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase; }
+.mfold-auto { font-size:10px; background:rgba(74,156,109,0.15); color:var(--green); padding:3px 10px; }
+.mfold-body { padding:20px; }
+.mfold-client { font-size:16px; color:var(--white); font-weight:500; margin-bottom:4px; }
+.mfold-sub { font-size:12px; color:var(--muted); margin-bottom:16px; }
+.mfold-item { display:flex; align-items:center; gap:10px; padding:9px 0; border-bottom:1px solid var(--border); font-size:13px; }
+.mfold-item:last-child { border-bottom:none; }
+.mfold-icon { font-size:14px; width:22px; text-align:center; flex-shrink:0; }
+.mfold-name { color:var(--body); flex:1; }
+.mfold-status { font-size:11px; color:var(--dim); }
+.mfold-status.done { color:var(--green); }
+.mfold-status.sent { color:var(--gold); }
+/* no-show */
+.mock-noshow { width:380px; background:#0a0f18; border:1px solid var(--border-light); }
+.ns-hdr { background:var(--slate); padding:14px 20px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+.ns-ttl { font-size:12px; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase; }
+.ns-alert { font-size:10px; background:rgba(201,100,76,0.15); color:#c9804c; padding:3px 10px; }
+.ns-body { padding:20px; }
+.ns-event { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+.ns-name { font-size:15px; color:var(--white); font-weight:500; margin-bottom:4px; }
+.ns-info { font-size:13px; color:var(--muted); }
+.ns-tag { font-size:11px; background:rgba(201,100,76,0.15); color:#c9804c; padding:4px 10px; white-space:nowrap; }
+.ns-actions { display:flex; flex-direction:column; gap:8px; }
+.ns-action { display:flex; align-items:center; gap:12px; padding:11px 14px; background:var(--slate-elevated); border:1px solid var(--border); font-size:13px; }
+.ns-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
+.ns-dot.gold { background:var(--gold); }
+.ns-dot.green { background:var(--green); }
+.ns-action-txt { color:var(--body); flex:1; }
+.ns-action-time { font-size:11px; color:var(--dim); }
+/* reschedule */
+.mock-reschedule { width:370px; background:#0a0f18; border:1px solid var(--border-light); }
+.rs-hdr { background:var(--slate); padding:14px 20px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+.rs-ttl { font-size:12px; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase; }
+.rs-auto { font-size:10px; background:rgba(74,156,109,0.15); color:var(--green); padding:3px 10px; }
+.rs-body { padding:20px; }
+.rs-from { padding:12px 14px; background:var(--slate-elevated); border:1px solid var(--border); margin-bottom:10px; font-size:13px; color:var(--muted); display:flex; align-items:center; gap:10px; }
+.rs-arrow { text-align:center; color:var(--gold); font-size:18px; margin-bottom:10px; }
+.rs-to { padding:12px 14px; background:rgba(201,168,76,0.06); border:1px solid var(--gold); margin-bottom:14px; font-size:13px; color:var(--body); display:flex; align-items:center; gap:10px; }
+.rs-log { display:flex; flex-direction:column; gap:6px; }
+.rs-log-row { display:flex; align-items:center; gap:10px; font-size:12px; color:var(--muted); }
+.rs-log-dot { width:5px; height:5px; border-radius:50%; background:var(--green); flex-shrink:0; }
+/* confirm email */
+.mock-confirm { width:380px; background:#0a0f18; border:1px solid var(--border-light); }
+.mc-hdr { background:var(--slate); padding:14px 20px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+.mc-ttl { font-size:12px; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase; }
+.mc-auto { font-size:10px; background:rgba(74,156,109,0.15); color:var(--green); padding:3px 10px; }
+.mc-body { padding:20px; }
+.mc-to { font-size:11px; color:var(--dim); margin-bottom:10px; }
+.mc-to span { color:var(--muted); }
+.mc-subj { font-size:15px; color:var(--white); font-weight:500; margin-bottom:14px; }
+.mc-detail { background:var(--slate-elevated); border:1px solid var(--border); padding:14px 16px; margin-bottom:14px; }
+.mc-detail-row { display:flex; justify-content:space-between; font-size:13px; padding:5px 0; border-bottom:1px solid var(--border); }
+.mc-detail-row:last-child { border-bottom:none; }
+.mc-detail-key { color:var(--dim); }
+.mc-detail-val { color:var(--body); }
+.mc-text { font-size:13px; color:var(--muted); line-height:1.6; }
+.mc-text strong { color:var(--body); font-weight:500; }
+.mc-ftr { background:var(--slate-elevated); padding:12px 20px; border-top:1px solid var(--border); font-size:11px; color:var(--dim); display:flex; align-items:center; gap:8px; }
+</style></head><body>
+
+<div class="slide-label">Slide 1 of 10 — Hook</div>
+<div class="slide hook" id="s1">
+  <div class="bg-grid"></div><div class="bg-accent"></div>
+  <div class="wordmark">Apex Systematic</div>
+  <div class="content">
+    <div class="eyebrow"><div class="gold-line"></div><span class="label-tag">Enquiry &amp; Lead Capture · Financial Advice</span></div>
+    <h1>A slow reply<br>to a warm lead<br><em>is a cold lead.</em></h1>
+    <p class="sub">74% of advice practices now use AI — up from 45% last year. The ones moving fastest are the ones capturing and responding to enquiries while others are still checking their inbox.</p>
+    <div class="pills"><div class="pill">Fixed price</div><div class="pill">No retainer</div><div class="pill">You own everything</div></div>
+  </div>
+  <div class="slide-number">01 / 10</div><div class="bottom-bar"></div>
+</div>
+
+<div class="slide-label">Slide 2 of 10 — The Problem</div>
+<div class="slide problem-slide" id="s2">
+  <div class="wordmark">Apex Systematic</div>
+  <div class="hdr"><div class="label-tag">The Problem</div>
+  <h2>Manual intake loses prospects<br>before the relationship starts.</h2></div>
+  <div class="probs">
+    <div class="prob-row">
+      <div class="prob-num">01</div>
+      <div class="prob-body"><div class="prob-title">Enquiries go cold overnight</div><div class="prob-desc">A prospect with a pension review question submits an enquiry at 6pm. Nobody replies until the next morning. By then they have spoken to a competitor.</div></div>
+      <div class="prob-cost"><strong>Hours</strong>before any reply</div>
+    </div>
+    <div class="prob-row">
+      <div class="prob-num">02</div>
+      <div class="prob-body"><div class="prob-title">No system for high-value leads</div><div class="prob-desc">A £500k pension transfer enquiry and a general information request land in the same inbox. Both get the same non-response. One was a client relationship worth years of fees.</div></div>
+      <div class="prob-cost"><strong>Zero</strong>priority scoring</div>
+    </div>
+    <div class="prob-row">
+      <div class="prob-num">03</div>
+      <div class="prob-body"><div class="prob-title">Client data entered by hand</div><div class="prob-desc">Every new enquiry that converts means manually creating a record — name, goals, assets, referral source — before a single conversation has happened.</div></div>
+      <div class="prob-cost"><strong>20 min</strong>per enquiry</div>
+    </div>
+  </div>
+  <div class="stat-strip">
+    <div class="big">74%</div>
+    <div class="desc">of financial advice practices now use AI — up from 45% last year. The gap between practices that have moved and those that haven't is widening fast.<br><span style="font-size:12px;color:var(--dim)">Deloitte State of AI in Financial Services, 2025</span></div>
+  </div>
+  <div class="slide-number">02 / 10</div>
+</div>
+
+<div class="slide-label">Slide 3 of 10 — Overview</div>
+<div class="slide overview" id="s3">
+  <div class="wordmark">Apex Systematic</div>
+  <div class="hdr"><div class="label-tag">How It Works</div>
+  <h2>From first enquiry to prospect record<br>— without manual input.</h2></div>
+  <div class="steps-row">
+    <div class="step-box active"><div class="step-n">01</div><div class="step-title">Enquiry Submitted</div><div class="step-desc-sm">Prospect fills in your intake form — website, referral link, or chatbot.</div><div class="step-arrow">›</div></div>
+    <div class="step-box"><div class="step-n">02</div><div class="step-title">Scored Instantly</div><div class="step-desc-sm">Advice area, asset level, and urgency assessed against your criteria.</div><div class="step-arrow">›</div></div>
+    <div class="step-box"><div class="step-n">03</div><div class="step-title">Hot Lead Alert</div><div class="step-desc-sm">High-value prospect? Alert fires to you within seconds — SMS or email.</div><div class="step-arrow">›</div></div>
+    <div class="step-box"><div class="step-n">04</div><div class="step-title">Prospect Replied To</div><div class="step-desc-sm">Personalised acknowledgement sent immediately. No manual input.</div><div class="step-arrow">›</div></div>
+    <div class="step-box"><div class="step-n">05</div><div class="step-title">CRM Updated</div><div class="step-desc-sm">Prospect record created, duplicates checked, advice area logged.</div></div>
+  </div>
+  <div class="result-bar">
+    <div class="result-item"><div class="result-val">0 min</div><div class="result-lbl">Manual data entry per enquiry</div></div>
+    <div class="result-item"><div class="result-val">&lt;60s</div><div class="result-lbl">From submission to reply</div></div>
+    <div class="result-item"><div class="result-val">24/7</div><div class="result-lbl">Enquiries captured out of hours</div></div>
+  </div>
+  <div class="slide-number">03 / 10</div>
+</div>
+
+<div class="slide-label">Slide 4 of 10 — Step 1: Intake Form</div>
+<div class="slide step-detail" id="s4">
+  <div class="wordmark">Apex Systematic</div>
+  <div class="top">
+    <div class="left">
+      <div class="step-badge"><div class="gold-line"></div><span class="label-tag">Step 01</span></div>
+      <h2>The enquiry is<br>captured — however<br>it arrives.</h2>
+      <p class="sdesc">Your intake form collects what you need — advice area, approximate asset level, urgency, contact details. Works on your website, via a referral link, or through a chatbot. No one needs to be at their desk.</p>
+      <div class="bullets">
+        <div class="bullet">Fully branded to your practice</div>
+        <div class="bullet">Fields adapt by advice area — pensions, investments, protection</div>
+        <div class="bullet">Works on any device, any time of day</div>
+        <div class="bullet">Out-of-hours enquiries handled identically to in-hours ones</div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="mock-form">
+        <div class="mf-hdr"><div class="mf-dot"></div>Your Practice · New Enquiry</div>
+        <div class="mf-ttl">How can we help you?</div>
+        <div class="mf-field"><div class="mf-lbl">Full Name</div><div class="mf-inp">Richard Mbeki</div></div>
+        <div class="mf-field"><div class="mf-lbl">Advice Area</div><div class="mf-inp">Pension consolidation &amp; drawdown</div></div>
+        <div class="mf-field"><div class="mf-lbl">Approximate Pension Value</div><div class="mf-inp">£480,000 – £520,000</div></div>
+        <div class="mf-field"><div class="mf-lbl">Urgency</div><div class="mf-inp urg">⚡ Retiring within 12 months</div></div>
+        <div class="mf-btn">Submit Enquiry →</div>
+      </div>
+    </div>
+  </div>
+  <div class="bot-strip"><div class="bot-note">Runs 24/7. Every enquiry captured, regardless of when it arrives.</div><span class="label-tag">Enquiry &amp; Lead Capture · #1</span></div>
+  <div class="slide-number">04 / 10</div>
+</div>
+
+<div class="slide-label">Slide 5 of 10 — Step 2: Scoring</div>
+<div class="slide step-detail" id="s5">
+  <div class="wordmark">Apex Systematic</div>
+  <div class="top">
+    <div class="left">
+      <div class="step-badge"><div class="gold-line"></div><span class="label-tag">Step 02</span></div>
+      <h2>Every enquiry scored<br>before you open<br>your inbox.</h2>
+      <p class="sdesc">The system reads the submission and scores it against your criteria — advice area, approximate asset value, urgency, existing client status. High-value prospects jump to the top before anyone has seen the form.</p>
+      <div class="bullets">
+        <div class="bullet">Scoring criteria set by you at build — you define what hot means</div>
+        <div class="bullet">High-value pension and investment enquiries prioritised</div>
+        <div class="bullet">Hot leads at the top, cold leads queued — none discarded</div>
+        <div class="bullet">No manual triage required</div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="mock-pipeline">
+        <div class="mp-hdr"><div class="mp-ttl">Enquiry Pipeline — Today</div></div>
+        <div class="mp-body">
+          <div class="mp-row"><div><div class="mp-name">Richard Mbeki</div><div class="mp-firm">Pension Drawdown · £480k+</div></div><div class="score hot">Hot</div></div>
+          <div class="mp-row"><div><div class="mp-name">Helen Tate</div><div class="mp-firm">Investment Review · £120k</div></div><div class="score warm">Warm</div></div>
+          <div class="mp-row"><div><div class="mp-name">Simon Carr</div><div class="mp-firm">Life Insurance · Protection</div></div><div class="score warm">Warm</div></div>
+          <div class="mp-row"><div><div class="mp-name">Joy Adeyemi</div><div class="mp-firm">ISA Advice · General</div></div><div class="score cold">Cold</div></div>
+          <div class="mp-row"><div><div class="mp-name">Paul Hines</div><div class="mp-firm">General enquiry</div></div><div class="score cold">Cold</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bot-strip"><div class="bot-note">Open your dashboard to a ranked list. The high-value prospects are at the top.</div><span class="label-tag">Enquiry &amp; Lead Capture · #1</span></div>
+  <div class="slide-number">05 / 10</div>
+</div>
+
+<div class="slide-label">Slide 6 of 10 — Step 3: Alert</div>
+<div class="slide step-detail" id="s6">
+  <div class="wordmark">Apex Systematic</div>
+  <div class="top">
+    <div class="left">
+      <div class="step-badge"><div class="gold-line"></div><span class="label-tag">Step 03</span></div>
+      <h2>High-value prospect<br>submits. You know<br>within seconds.</h2>
+      <p class="sdesc">A prospect with a £500k pension transfer submits an enquiry at 7:30pm. You get an SMS or email alert with their name, advice area, and asset level — before you've looked at your phone.</p>
+      <div class="bullets">
+        <div class="bullet">Alert fires only for hot leads — no noise for routine enquiries</div>
+        <div class="bullet">SMS, email, or both — configurable at build</div>
+        <div class="bullet">Includes advice area, asset level, and urgency flag</div>
+        <div class="bullet">Works outside office hours as standard</div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="mock-phone">
+        <div class="ph-status"><div class="ph-time">19:34</div><div class="ph-icons">●●● 🔋</div></div>
+        <div class="ph-notif">
+          <div class="ph-notif-hdr"><div class="ph-icon">AS</div><div><div class="ph-app">Apex Systematic · now</div></div></div>
+          <div class="ph-title">New Enquiry — High Value</div>
+          <div class="ph-body">Richard Mbeki · Pension Drawdown<br><span>£480k+ · Retiring within 12 months.</span><br>+44 7000 000000</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bot-strip"><div class="bot-note">A high-value prospect after hours is still a high-value prospect. You know immediately.</div><span class="label-tag">Enquiry &amp; Lead Capture · #1</span></div>
+  <div class="slide-number">06 / 10</div>
+</div>
+
+<div class="slide-label">Slide 7 of 10 — Step 4: Auto Reply</div>
+<div class="slide step-detail" id="s7">
+  <div class="wordmark">Apex Systematic</div>
+  <div class="top">
+    <div class="left">
+      <div class="step-badge"><div class="gold-line"></div><span class="label-tag">Step 04</span></div>
+      <h2>The prospect hears<br>from you before<br>you know they wrote.</h2>
+      <p class="sdesc">A personalised reply goes to the prospect within seconds of submission — references their advice area and asset situation, and sets a clear expectation for next steps. Drafted once. Sent every time.</p>
+      <div class="bullets">
+        <div class="bullet">Personalised with name and advice area</div>
+        <div class="bullet">Sent within seconds of form submission</div>
+        <div class="bullet">High-value prospects receive a different reply to general enquiries</div>
+        <div class="bullet">Tone and response time SLA configurable at build</div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="mock-reply">
+        <div class="mr-hdr"><div class="mr-ttl">Automated Reply</div><div class="mr-auto">Sent automatically</div></div>
+        <div class="mr-body">
+          <div class="mr-to">To: <span>r.mbeki@email.com</span> · 19:34</div>
+          <div class="mr-subj">Thank you for your enquiry, Richard</div>
+          <div class="mr-text"><strong>Hi Richard,</strong><br><br>Thank you for reaching out about pension consolidation and drawdown planning. Given you are approaching retirement, we understand timing matters.<br><br>An adviser will be in touch <strong>within 2 hours</strong> to arrange an initial conversation at your convenience.</div>
+        </div>
+        <div class="mr-ftr"><div class="sent-dot"></div>Delivered · No manual input required</div>
+      </div>
+    </div>
+  </div>
+  <div class="bot-strip"><div class="bot-note">58% of financial institutions attribute revenue growth directly to AI. Fast follow-up is where it starts.</div><span class="label-tag">Enquiry &amp; Lead Capture · #1</span></div>
+  <div class="slide-number">07 / 10</div>
+</div>
+
+<div class="slide-label">Slide 8 of 10 — Step 5: CRM Record</div>
+<div class="slide step-detail" id="s8">
+  <div class="wordmark">Apex Systematic</div>
+  <div class="top">
+    <div class="left">
+      <div class="step-badge"><div class="gold-line"></div><span class="label-tag">Step 05</span></div>
+      <h2>Prospect record<br>created. Database<br>stays clean.</h2>
+      <p class="sdesc">Every enquiry becomes a prospect record automatically — name, advice area, asset level, lead score, source, timestamp. Duplicate detection runs before any record is created. Your pipeline is accurate without anyone maintaining it.</p>
+      <div class="bullets">
+        <div class="bullet">Record created on submission — no manual entry</div>
+        <div class="bullet">Duplicate check prevents double records</div>
+        <div class="bullet">Lead score, advice area, and asset level attached</div>
+        <div class="bullet">Source tracked — website, referral, chatbot</div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="mock-crm">
+        <div class="crm-hdr"><div class="crm-ttl">Prospect Record</div><div class="crm-badge">Auto-created</div></div>
+        <div class="crm-body">
+          <div class="crm-name">Richard Mbeki</div>
+          <div class="crm-sub">New Enquiry · Pension Drawdown</div>
+          <div class="crm-row"><div class="crm-key">Lead score</div><div class="crm-val hot">Hot</div></div>
+          <div class="crm-row"><div class="crm-key">Asset level</div><div class="crm-val">£480k – £520k</div></div>
+          <div class="crm-row"><div class="crm-key">Urgency</div><div class="crm-val hot">Retiring within 12 months</div></div>
+          <div class="crm-row"><div class="crm-key">Reply sent</div><div class="crm-val ok">✓ 19:34</div></div>
+          <div class="crm-row"><div class="crm-key">Duplicate</div><div class="crm-val ok">✓ None found</div></div>
+        </div>
+        <div class="crm-ftr">✓ Created automatically · Zero manual input</div>
+      </div>
+    </div>
+  </div>
+  <div class="bot-strip"><div class="bot-note">Every enquiry captured, scored, and filed before you check your phone.</div><span class="label-tag">Enquiry &amp; Lead Capture · #1</span></div>
+  <div class="slide-number">08 / 10</div>
+</div>
+
+<div class="slide-label">Slide 9 of 10 — Results</div>
+<div class="slide results-slide" id="s9">
+  <div class="wordmark">Apex Systematic</div>
+  <div class="hdr"><div class="label-tag">The Result</div><h2>What changes<br>when it runs.</h2></div>
+  <div class="results-grid">
+    <div class="rc"><div class="rc-val">0</div><div class="rc-title">Enquiries fall through</div><div class="rc-desc">Every submission captured, scored, and replied to — regardless of when it arrives. No high-value prospect disappears into an inbox that replies the next day.</div></div>
+    <div class="rc"><div class="rc-val">&lt;60s</div><div class="rc-title">Response time</div><div class="rc-desc">Prospects hear from you within seconds. In a market where 74% of practices now use AI, speed of response is already a competitive signal.</div></div>
+    <div class="rc"><div class="rc-val">60%</div><div class="rc-title">Efficiency gains with structured implementation</div><div class="rc-desc">Advice practices that implement AI with specialist support report up to 60% efficiency gains. Intake automation is the highest-ROI starting point.</div></div>
+    <div class="rc"><div class="rc-val">24/7</div><div class="rc-title">Intake stays open</div><div class="rc-desc">A prospect decides at 9pm they want pension advice. They submit. They hear back. The record is in your CRM when you open your laptop in the morning.</div></div>
+  </div>
+  <div class="slide-number">09 / 10</div>
+</div>
+
+<div class="slide-label">Slide 10 of 10 — CTA</div>
+<div class="slide cta-slide" id="s10">
+  <div class="bg-accent"></div>
+  <div class="wordmark">Apex Systematic</div>
+  <div class="content">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:40px;"><div class="gold-line"></div><span class="label-tag">See it working</span></div>
+    <h2>Built for your practice.<br><em>See the demo.</em></h2>
+    <p class="sub">A free 30-minute audit call. We map your current intake process, show you exactly what gets automated, and give you a fixed price before anything is signed.</p>
+    <div class="cta-items">
+      <div class="cta-item">Free audit call — no obligation to proceed</div>
+      <div class="cta-item">Fixed price agreed in writing before work starts</div>
+      <div class="cta-item">You own everything we build. No retainer, no lock-in.</div>
+    </div>
+    <div class="cta-url">apexsystematic.com/contact</div>
+  </div>
+  <div class="model-strip">
+    <div class="model-item"><strong>Fixed Price</strong>Agreed before work starts.</div>
+    <div class="model-item"><strong>No Retainer</strong>One-off fee. No monthly invoice.</div>
+    <div class="model-item"><strong>You Own Everything</strong>Full handover at completion.</div>
+  </div>
+  <div class="slide-number">10 / 10</div>
+</div>
+
+</body></html>
