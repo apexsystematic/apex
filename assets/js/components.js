@@ -604,19 +604,51 @@
 
   /* ── CookieYes → Consent Mode v2 update signal ── */
   function initConsentUpdate() {
-    document.addEventListener('cookieyes-consent-update', function (e) {
-      var accepted = (e.detail && e.detail.accepted) ? e.detail.accepted : [];
-      var rejected = (e.detail && e.detail.rejected) ? e.detail.rejected : [];
 
-      function hasCategory(cat) {
-        return accepted.indexOf(cat) > -1;
-      }
+    /* Parse the cookieyes-consent cookie directly */
+    function getConsentFromCookie() {
+      var match = document.cookie.split(';').map(function(c) { return c.trim(); })
+        .find(function(c) { return c.indexOf('cookieyes-consent=') === 0; });
+      if (!match) return null;
+      var pairs = match.replace('cookieyes-consent=', '').split(',');
+      var obj = {};
+      pairs.forEach(function(p) {
+        var kv = p.split(':');
+        if (kv.length === 2) obj[kv[0]] = kv[1];
+      });
+      return obj;
+    }
 
+    function pushConsentUpdate(analytics, advertisement) {
       gtag('consent', 'update', {
-        ad_storage:          hasCategory('advertisement') ? 'granted' : 'denied',
-        analytics_storage:   hasCategory('analytics')     ? 'granted' : 'denied',
-        ad_user_data:        hasCategory('advertisement') ? 'granted' : 'denied',
-        ad_personalization:  hasCategory('advertisement') ? 'granted' : 'denied'
+        ad_storage:          advertisement ? 'granted' : 'denied',
+        analytics_storage:   analytics     ? 'granted' : 'denied',
+        ad_user_data:        advertisement ? 'granted' : 'denied',
+        ad_personalization:  advertisement ? 'granted' : 'denied'
+      });
+    }
+
+    /* 1. On page load — if consent cookie already exists, update immediately */
+    var existing = getConsentFromCookie();
+    if (existing && existing.action === 'yes') {
+      pushConsentUpdate(existing.analytics === 'yes', existing.advertisement === 'yes');
+    }
+
+    /* 2. On CookieYes events — covers accept, reject, and preference changes */
+    var cyEvents = ['cookieyes-consent-update', 'cookieyes-accept-all', 'cookieyes-reject-all', 'cookieyes-accept'];
+    cyEvents.forEach(function(evtName) {
+      document.addEventListener(evtName, function (e) {
+        /* Try event detail first, fall back to reading the cookie */
+        var accepted = (e.detail && e.detail.accepted) ? e.detail.accepted : [];
+        if (accepted.length > 0) {
+          pushConsentUpdate(
+            accepted.indexOf('analytics') > -1,
+            accepted.indexOf('advertisement') > -1
+          );
+        } else {
+          var c = getConsentFromCookie();
+          if (c) pushConsentUpdate(c.analytics === 'yes', c.advertisement === 'yes');
+        }
       });
     });
   }
