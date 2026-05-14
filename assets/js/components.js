@@ -492,22 +492,6 @@
     document.body.style.overflow = '';
   };
 
-  /* ── Google Analytics ── */
-  function injectAnalytics() {
-    var GA_ID = 'G-S0XM9C592L';
-    var s1 = document.createElement('script');
-    s1.async = true;
-    s1.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
-    document.head.appendChild(s1);
-    var s2 = document.createElement('script');
-    s2.textContent =
-      'window.dataLayer = window.dataLayer || [];'
-      + 'function gtag(){dataLayer.push(arguments);}'
-      + 'gtag("js", new Date());'
-      + 'gtag("config", "' + GA_ID + '");';
-    document.head.appendChild(s2);
-  }
-
   /* ── CTA click tracking ── */
   function initCtaTracking() {
     document.addEventListener('click', function (e) {
@@ -575,7 +559,6 @@
 
   /* Run — script is placed at end of <body> so DOM is ready */
   injectGtmNoscript();
-  injectAnalytics();
   initConsentUpdate();
   injectHeader();
   injectFooter();
