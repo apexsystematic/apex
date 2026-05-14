@@ -554,9 +554,29 @@
     document.body.appendChild(div);
   }
 
+  /* ── CookieYes → Consent Mode v2 update signal ── */
+  function initConsentUpdate() {
+    document.addEventListener('cookieyes-consent-update', function (e) {
+      var accepted = (e.detail && e.detail.accepted) ? e.detail.accepted : [];
+      var rejected = (e.detail && e.detail.rejected) ? e.detail.rejected : [];
+
+      function hasCategory(cat) {
+        return accepted.indexOf(cat) > -1;
+      }
+
+      gtag('consent', 'update', {
+        ad_storage:          hasCategory('advertisement') ? 'granted' : 'denied',
+        analytics_storage:   hasCategory('analytics')     ? 'granted' : 'denied',
+        ad_user_data:        hasCategory('advertisement') ? 'granted' : 'denied',
+        ad_personalization:  hasCategory('advertisement') ? 'granted' : 'denied'
+      });
+    });
+  }
+
   /* Run — script is placed at end of <body> so DOM is ready */
   injectGtmNoscript();
   injectAnalytics();
+  initConsentUpdate();
   injectHeader();
   injectFooter();
   initMobileMenu();
