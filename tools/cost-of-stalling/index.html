@@ -433,6 +433,15 @@
 
       emptyEl.style.display = 'none';
       contentEl.style.display = 'block';
+
+      if (typeof gtag === 'function') {
+        gtag('event', 'cos_calculated', {
+          sector:     state.sector,
+          firm_size:  state.size,
+          ai_usage:   state.usage,
+          annual_cost: Math.round(annualGBP)
+        });
+      }
     }
 
   })();

@@ -221,17 +221,27 @@ window.showStep = function (step) {
     gtag('event', 'audit_complete');
     gtag('event', 'calendly_viewed');
     const widget = document.querySelector('.calendly-inline-widget');
-    if (widget && auditData.name && auditData.email) {
-      const name  = encodeURIComponent(auditData.name);
-      const email = encodeURIComponent(auditData.email);
+    if (widget) {
+      const name  = (auditData.name  || '').trim();
+      const email = (auditData.email || '').trim();
+      const url   = 'https://calendly.com/apexsystematic/30min'
+        + (name || email
+          ? '?name=' + encodeURIComponent(name) + '&email=' + encodeURIComponent(email)
+          : '');
+
       widget.innerHTML = '';
-      widget.dataset.url = `https://calendly.com/apexsystematic/30min?name=${name}&email=${email}`;
-      const iframe = document.createElement('iframe');
-      iframe.src         = `https://calendly.com/apexsystematic/30min?name=${name}&email=${email}&embed_type=Inline&embed_domain=apexsystematic.com`;
-      iframe.width       = '100%';
-      iframe.height      = '700';
-      iframe.frameBorder = '0';
-      widget.appendChild(iframe);
+      widget.dataset.url = url;
+
+      /* Use Calendly's official inline embed — handles postMessage natively */
+      if (!document.getElementById('calendly-embed-script')) {
+        const s = document.createElement('script');
+        s.id  = 'calendly-embed-script';
+        s.src = 'https://assets.calendly.com/assets/external/widget.js';
+        s.async = true;
+        document.head.appendChild(s);
+      } else if (window.Calendly) {
+        window.Calendly.initInlineWidgets();
+      }
     }
   }
 };

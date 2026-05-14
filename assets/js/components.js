@@ -492,6 +492,69 @@
     document.body.style.overflow = '';
   };
 
+  /* ── Custom page_view parameters ── */
+  function initPageViewParams() {
+    var path = window.location.pathname;
+
+    var industryMap = {
+      'law-firms':          'Legal',
+      'accountants':        'Accounting',
+      'financial-advisers': 'Financial Advice',
+      'insurance-brokers':  'Insurance',
+      'mortgage-brokers':   'Mortgage',
+      'estate-agents':      'Property',
+      'letting-agents':     'Property',
+      'consultants':        'Consulting',
+      'hr-recruitment':     'HR & Recruitment',
+      'seo-consultants':    'SEO & Marketing'
+    };
+
+    var contentMap = {
+      '/services/':  'Services',
+      '/reports/':   'Reports',
+      '/demos/':     'Demos',
+      '/tools/':     'Tools',
+      '/pricing/':   'Pricing',
+      '/about/':     'About',
+      '/contact/':   'Contact',
+      '/faq/':       'FAQ'
+    };
+
+    var industry_vertical = null;
+    Object.keys(industryMap).forEach(function (slug) {
+      if (path.indexOf('/' + slug + '/') > -1) {
+        industry_vertical = industryMap[slug];
+      }
+    });
+
+    var content_category = industry_vertical ? 'Services' : null;
+    if (!content_category) {
+      Object.keys(contentMap).forEach(function (prefix) {
+        if (path.indexOf(prefix) === 0) {
+          content_category = contentMap[prefix];
+        }
+      });
+    }
+
+    if (content_category || industry_vertical) {
+      var params = {};
+      if (content_category)  params.content_category  = content_category;
+      if (industry_vertical) params.industry_vertical = industry_vertical;
+      gtag('event', 'page_view', params);
+    }
+  }
+
+  /* ── Form start tracking ── */
+  function initFormStartTracking() {
+    var fired = false;
+    document.addEventListener('focus', function (e) {
+      if (fired) return;
+      if (!e.target.closest || !e.target.closest('.audit-form-wrap')) return;
+      fired = true;
+      gtag('event', 'form_start');
+    }, true);
+  }
+
   /* ── CTA click tracking ── */
   function initCtaTracking() {
     document.addEventListener('click', function (e) {
@@ -511,6 +574,7 @@
   /* ── Calendly appointment tracking ── */
   function initCalendlyTracking() {
     window.addEventListener('message', function (e) {
+      if (e.origin !== 'https://calendly.com') return;
       if (e.data && e.data.event === 'calendly.event_scheduled') {
         gtag('event', 'calendly_booked');
       }
@@ -560,6 +624,8 @@
   /* Run — script is placed at end of <body> so DOM is ready */
   injectGtmNoscript();
   initConsentUpdate();
+  initFormStartTracking();
+  initPageViewParams();
   injectHeader();
   injectFooter();
   initMobileMenu();

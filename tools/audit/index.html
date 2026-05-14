@@ -37,6 +37,17 @@
   <meta property="og:image" content="https://www.apexsystematic.com/assets/images/og-image-v1.png">
   <meta property="og:site_name" content="Apex Systematic">
   <title>Free Automation Audit — See What We'd Build for You | Apex Systematic</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home",  "item": "https://www.apexsystematic.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.apexsystematic.com/tools/" },
+      { "@type": "ListItem", "position": 3, "name": "Self-Serve Audit", "item": "https://www.apexsystematic.com/tools/audit/" }
+    ]
+  }
+  </script>
   <link rel="stylesheet" href="/assets/css/style.css">
   <link rel="stylesheet" href="/assets/css/audit.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -202,7 +213,7 @@
               <strong>Got questions about this proposal?</strong>
               <p>Book a free 30-minute call and we&#8217;ll walk through exactly what your build would involve &#8212; and confirm the price before anything starts.</p>
             </div>
-            <button class="btn btn-primary" onclick="openAuditModal()">Book a Call</button>
+            <button class="btn btn-primary" id="ao-book-btn" onclick="openAuditModal()">Book a Call</button>
           </div>
 
           <div class="ao-email-capture">
