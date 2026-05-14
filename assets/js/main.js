@@ -304,7 +304,7 @@ window.showStep = function (step) {
     `;
 
     setTimeout(() => {
-      apexAddMsg('bot', "Hi there 👋 I'm the Apex AI assistant.\n\nAsk me anything about automating your practice — or just tell me what's taking up too much of your time.");
+      apexAddMsg('bot', "Hello, I'm the Apex AI assistant.\n\nAsk me anything about automating your practice — or just tell me what's taking up too much of your time.");
     }, 600);
   }
 
