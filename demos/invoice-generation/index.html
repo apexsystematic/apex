@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      ad_storage:              'denied',
+      ad_user_data:            'denied',
+      ad_personalization:      'denied',
+      analytics_storage:       'denied',
+      functionality_storage:   'denied',
+      personalization_storage: 'denied',
+      security_storage:        'granted',
+      wait_for_update:         2000
+    });
+    gtag('set', 'ads_data_redaction', true);
+    gtag('set', 'url_passthrough', true);
+  </script>
+  <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/19a036e48e9005dddd5999b15ed936e7/script.js"></script>
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-52T88XLZ');</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="See how Apex Systematic generates and sends invoices automatically when a matter completes or hits a billing milestone — with a payment link, no manual input. Interactive demo.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Invoice Generation Automation Demo | Apex Systematic">
+  <meta property="og:description" content="Matter complete? Invoice generated, emailed with a payment link, and logged — automatically. No manual input.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.apexsystematic.com/demos/invoice-generation/">
+  <meta property="og:image" content="https://www.apexsystematic.com/assets/images/og-image-v1.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Apex Systematic">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Invoice Generation Automation Demo | Apex Systematic">
+  <meta name="twitter:description" content="Matter complete? Invoice generated, emailed with a payment link, and logged — automatically. No manual input.">
+  <meta name="twitter:image" content="https://www.apexsystematic.com/assets/images/og-image-v1.png">
+  <title>Invoice Generation Automation Demo — Apex Systematic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap"></noscript>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/demo.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="canonical" href="https://www.apexsystematic.com/demos/invoice-generation/">
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <div class="page-wrapper">
+
+    <header>
+      <div class="badge"><span class="badge-dot"></span>Interactive Demo</div>
+      <h1>Invoice Generation <em>In Action</em></h1>
+      <p class="subtitle">Mark a matter complete. An invoice is generated, emailed with a payment link, and logged — without touching a keyboard.</p>
+    </header>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <span class="divider-icon">◆</span>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="pipeline-bar">
+      <div class="pipe-step"><div class="pipe-icon" id="pipe-0"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="pipe-label" id="label-0">Matter Complete</div></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step"><div class="pipe-icon" id="pipe-1"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="12" y2="17"/></svg></div><div class="pipe-label" id="label-1">Invoice Built</div></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step"><div class="pipe-icon" id="pipe-2"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div><div class="pipe-label" id="label-2">Payment Link Added</div></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step"><div class="pipe-icon" id="pipe-3"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div><div class="pipe-label" id="label-3">Invoice Emailed</div></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step"><div class="pipe-icon" id="pipe-4"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4.03 3-9 3S3 13.66 3 12"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/></svg></div><div class="pipe-label" id="label-4">Records Updated</div></div>
+    </div>
+
+    <div class="demo-layout">
+
+      <div class="trigger-card">
+        <div class="card-header"><span class="card-title">Billing Trigger</span></div>
+        <div class="trigger-body">
+          <div class="form-group">
+            <label for="client">Client Name</label>
+            <input type="text" id="client" value="Thomas & Reid LLP" />
+          </div>
+          <div class="form-group">
+            <label for="matter">Matter</label>
+            <select id="matter">
+              <option value="Residential Conveyancing">Residential Conveyancing</option>
+              <option value="Business Sale Completion">Business Sale Completion</option>
+              <option value="Employment Tribunal">Employment Tribunal</option>
+              <option value="Financial Review">Financial Review</option>
+              <option value="Tax Return Filing">Tax Return Filing</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="fee">Professional Fee (€)</label>
+            <select id="fee">
+              <option value="3500">€3,500</option>
+              <option value="1800">€1,800</option>
+              <option value="6200">€6,200</option>
+              <option value="950">€950</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="disbursements">Disbursements (€)</label>
+            <select id="disbursements">
+              <option value="450">€450 (searches, registration)</option>
+              <option value="0">€0 — none this matter</option>
+              <option value="220">€220 (court fees)</option>
+              <option value="150">€150 (filing fees)</option>
+            </select>
+          </div>
+          <button class="generate-btn" id="runBtn" onclick="runDemo()">
+            <span id="btnText">Mark Complete & Invoice</span>
+            <span id="btnArrow">→</span>
+            <div class="spinner" id="spinner"></div>
+          </button>
+        </div>
+      </div>
+
+      <div class="output-panel">
+        <div class="demo-empty" id="emptyState">
+          <div class="demo-empty-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="12" y2="17"/></svg></div>
+          <h3>Results appear here</h3>
+          <p>Mark a matter complete to watch the invoice generate and send automatically.</p>
+        </div>
+        <div class="output-inner" id="outputInner" style="display:none;">
+          <div class="output-header">
+            <span class="output-label">Automation Running</span>
+            <button class="reset-btn" onclick="resetDemo()">↺ Reset</button>
+          </div>
+          <div class="result-stream" id="resultStream"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="cta-section">
+      <h3>Get paid faster without chasing manually</h3>
+      <p>Invoice goes out the moment the matter closes — with a payment link. Fixed price, no retainer, you own it outright.</p>
+      <div class="cta-btns">
+        <button class="btn btn-primary" onclick="openAuditModal()">Book a Free Call</button>
+        <a href="/demos/" class="btn btn-ghost">More Demos</a>
+      </div>
+      <a href="/pricing/" class="cta-pricing-link">See pricing →</a>
+    </div>
+
+  </div>
+
+  <div id="site-footer"></div>
+
+<script>
+  const pipeIds = ['0','1','2','3','4'];
+  const pipeDelays = [0, 700, 1500, 2400, 3300];
+
+  function resetPipeline() {
+    pipeIds.forEach(id => {
+      document.getElementById(`pipe-${id}`).className = 'pipe-icon';
+      document.getElementById(`label-${id}`).className = 'pipe-label';
+    });
+  }
+
+  async function animatePipeline() {
+    resetPipeline();
+    for (let i = 0; i < pipeIds.length; i++) {
+      await delay(i === 0 ? 0 : pipeDelays[i] - pipeDelays[i-1]);
+      document.getElementById(`pipe-${pipeIds[i]}`).className = 'pipe-icon active';
+      document.getElementById(`label-${pipeIds[i]}`).className = 'pipe-label active';
+      await delay(350);
+      document.getElementById(`pipe-${pipeIds[i]}`).className = 'pipe-icon done';
+      document.getElementById(`label-${pipeIds[i]}`).className = 'pipe-label done';
+    }
+  }
+
+  function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+  async function runDemo() {
+    const client = document.getElementById('client').value || 'Thomas & Reid LLP';
+    const matter = document.getElementById('matter').value;
+    const fee = parseInt(document.getElementById('fee').value);
+    const disb = parseInt(document.getElementById('disbursements').value);
+    const subtotal = fee + disb;
+    const vat = Math.round(fee * 0.2);
+    const total = subtotal + vat;
+    const invNum = `INV-${new Date().getFullYear()}-${Math.floor(Math.random()*9000)+1000}`;
+    const dueDate = new Date(Date.now() + 14*24*60*60*1000).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+
+    const btn = document.getElementById('runBtn');
+    btn.disabled = true;
+    document.getElementById('btnText').textContent = 'Processing...';
+    document.getElementById('btnArrow').style.display = 'none';
+    document.getElementById('spinner').style.display = 'block';
+
+    document.getElementById('emptyState').style.display = 'none';
+    document.getElementById('outputInner').style.display = 'block';
+    document.getElementById('resultStream').innerHTML = '';
+
+    animatePipeline();
+
+    const steps = [
+      {
+        delay: 700, icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>', title: 'Matter Marked Complete', badge: 'done',
+        html: `<p>Matter <strong style="color:var(--white)">${matter}</strong> for <strong style="color:var(--white)">${client}</strong> marked as complete.</p>
+               <p style="margin-top:8px;">Billing trigger fired — invoice generation started automatically.</p>`
+      },
+      {
+        delay: 1600, icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="12" y2="17"/></svg>', title: 'Invoice Built', badge: 'done',
+        html: `<table class="mini-table">
+                 <tr><td>Invoice No.</td><td><span class="mono">${invNum}</span></td></tr>
+                 <tr><td>Client</td><td>${client}</td></tr>
+                 <tr><td>Matter</td><td>${matter}</td></tr>
+                 <tr><td>Professional Fee</td><td>€${fee.toLocaleString()}</td></tr>
+                 ${disb > 0 ? `<tr><td>Disbursements</td><td>€${disb.toLocaleString()}</td></tr>` : ''}
+                 <tr><td>VAT (20%)</td><td>€${vat.toLocaleString()}</td></tr>
+                 <tr><td><strong>Total Due</strong></td><td><strong style="color:var(--white)">€${total.toLocaleString()}</strong></td></tr>
+                 <tr><td>Payment Due</td><td>${dueDate}</td></tr>
+               </table>`
+      },
+      {
+        delay: 2500, icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>', title: 'Payment Link Generated', badge: 'done',
+        html: `<p>Stripe payment link created automatically and embedded in the invoice email.</p>
+               <p style="margin-top:8px;color:var(--gold);font-size:12px">pay.stripe.com/…/${invNum.toLowerCase()}</p>
+               <p style="margin-top:8px;font-size:12px;color:var(--text-dim)">Client pays in one click — funds go directly to your account.</p>`
+      },
+      {
+        delay: 3400, icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>', title: 'Invoice Emailed to Client', badge: 'done',
+        html: `<div class="email-preview">
+                 <div class="email-meta">
+                   <div class="email-row"><span class="email-field">To:</span><span class="email-val">accounts@${client.toLowerCase().replace(/[^a-z]/g,'')}.com</span></div>
+                   <div class="email-row"><span class="email-field">Re:</span><span class="email-val">${invNum} — ${matter} — €${total.toLocaleString()} due ${dueDate}</span></div>
+                   <div class="email-row"><span class="email-field">Att:</span><span class="email-val">${invNum}.pdf</span></div>
+                 </div>
+                 <div class="email-body">Dear Client,
+
+Please find your invoice for ${matter} attached.
+
+Total due: €${total.toLocaleString()}
+Payment due: ${dueDate}
+
+[Pay Now — €${total.toLocaleString()} →]
+
+If you have any questions about this invoice, please get in touch.
+
+The Team</div>
+               </div>`
+      },
+      {
+        delay: 4200, icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4.03 3-9 3S3 13.66 3 12"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/></svg>', title: 'Records Updated', badge: 'done',
+        html: `<table class="mini-table">
+                 <tr><td>Invoice</td><td><span class="mono">${invNum}</span></td></tr>
+                 <tr><td>Amount</td><td>€${total.toLocaleString()}</td></tr>
+                 <tr><td>Status</td><td><span class="tag tag-new">Sent — Awaiting Payment</span></td></tr>
+                 <tr><td>Payment due</td><td>${dueDate}</td></tr>
+                 <tr><td>Chasing</td><td>Auto-chase scheduled if unpaid after 14 days</td></tr>
+               </table>`
+      }
+    ];
+
+    let prevDelay = 0;
+    for (const step of steps) {
+      await delay(step.delay - prevDelay);
+      prevDelay = step.delay;
+      appendCard(step);
+    }
+
+    btn.disabled = false;
+    document.getElementById('btnText').textContent = 'Run Again';
+    document.getElementById('btnArrow').style.display = 'inline';
+    document.getElementById('spinner').style.display = 'none';
+  }
+
+  function appendCard({ icon, title, badge, html }) {
+    const badgeLabel = badge === 'done' ? '✓ Done' : '⚡ Alert';
+    const badgeClass = badge === 'done' ? 'badge-done' : 'badge-alert';
+    const card = document.createElement('div');
+    card.className = 'result-card';
+    card.innerHTML = `
+      <div class="result-card-header">
+        <span class="result-card-icon">${icon}</span>
+        <span class="result-card-title">${title}</span>
+        <span class="result-card-badge ${badgeClass}">${badgeLabel}</span>
+      </div>
+      <div class="result-card-body">${html}</div>`;
+    document.getElementById('resultStream').appendChild(card);
+    requestAnimationFrame(() => requestAnimationFrame(() => card.classList.add('visible')));
+    card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function resetDemo() {
+    document.getElementById('emptyState').style.display = 'flex';
+    document.getElementById('outputInner').style.display = 'none';
+    resetPipeline();
+    const btn = document.getElementById('runBtn');
+    btn.disabled = false;
+    document.getElementById('btnText').textContent = 'Mark Complete & Invoice';
+    document.getElementById('btnArrow').style.display = 'inline';
+  }
+</script>
+
+  <script src="/assets/js/components.js"></script>
+  <script src="/assets/js/main.js"></script>
+  <script>window.addEventListener('load', function() { gtag('event', 'demo_viewed', { demo_name: 'invoice_generation' }); });</script>
+</body>
+</html>

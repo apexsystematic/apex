@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      ad_storage:              'denied',
+      ad_user_data:            'denied',
+      ad_personalization:      'denied',
+      analytics_storage:       'denied',
+      functionality_storage:   'denied',
+      personalization_storage: 'denied',
+      security_storage:        'granted',
+      wait_for_update:         2000
+    });
+    gtag('set', 'ads_data_redaction', true);
+    gtag('set', 'url_passthrough', true);
+  </script>
+  <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/19a036e48e9005dddd5999b15ed936e7/script.js"></script>
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-52T88XLZ');</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="See how Apex Systematic sends NPS surveys automatically after every matter, routes high scorers to referrals, and alerts the team to dissatisfied clients before they churn. Interactive demo.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="NPS & Satisfaction Survey Automation Demo | Apex Systematic">
+  <meta property="og:description" content="Survey sent automatically after every matter. High scorers get a referral prompt. Low scorers trigger a personal follow-up — before the relationship breaks down.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.apexsystematic.com/demos/nps-satisfaction-survey/">
+  <meta property="og:image" content="https://www.apexsystematic.com/assets/images/og-image-v1.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Apex Systematic">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="NPS & Satisfaction Survey Automation Demo | Apex Systematic">
+  <meta name="twitter:description" content="Survey sent automatically after every matter. High scorers get a referral prompt. Low scorers trigger a personal follow-up — before the relationship breaks down.">
+  <meta name="twitter:image" content="https://www.apexsystematic.com/assets/images/og-image-v1.png">
+  <title>NPS & Satisfaction Survey Automation Demo — Apex Systematic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap"></noscript>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/demo.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="canonical" href="https://www.apexsystematic.com/demos/nps-satisfaction-survey/">
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <div class="page-wrapper">
+
+    <header>
+      <div class="badge"><span class="badge-dot"></span>Interactive Demo</div>
+      <h1>NPS & Satisfaction Survey <em>In Action</em></h1>
+      <p class="subtitle">A matter closes. A survey goes out automatically. High scorers are prompted to refer. Low scorers trigger a personal follow-up — before the relationship breaks down.</p>
+    </header>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <span class="divider-icon">◆</span>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="pipeline-bar">
+      <div class="pipe-step"><div class="pipe-icon" id="pipe-0"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg></div><div class="pipe-label" id="label-0">Matter Closed</div></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step"><div class="pipe-icon" id="pipe-1"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div><div class="pipe-label" id="label-1">Survey Sent</div></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step"><div class="pipe-icon" id="pipe-2"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div class="pipe-label" id="label-2">Score Received</div></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step"><div class="pipe-icon" id="pipe-3"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div class="pipe-label" id="label-3">Action Triggered</div></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step"><div class="pipe-icon" id="pipe-4"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4.03 3-9 3S3 13.66 3 12"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/></svg></div><div class="pipe-label" id="label-4">CRM Updated</div></div>
+    </div>
+
+    <div class="demo-layout">
+
+      <div class="trigger-card">
+        <div class="card-header"><span class="card-title">Simulate Survey Response</span></div>
+        <div class="trigger-body">
+          <div class="form-group">
+            <label for="client">Client Name</label>
+            <input type="text" id="client" value="James Whitfield" />
+          </div>
+          <div class="form-group">
+            <label for="matter">Matter Closed</label>
+            <select id="matter">
+              <option value="Business Sale">Business Sale</option>
+              <option value="Conveyancing">Conveyancing</option>
+              <option value="Employment Dispute">Employment Dispute</option>
+              <option value="Financial Planning">Financial Planning</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="score">NPS Score (0–10)</label>
+            <div class="nps-scale" id="npsScale">
+              <div class="nps-num detractor" data-score="0" onclick="selectScore(0)">0</div>
+              <div class="nps-num detractor" data-score="1" onclick="selectScore(1)">1</div>
+              <div class="nps-num detractor" data-score="2" onclick="selectScore(2)">2</div>
+              <div class="nps-num detractor" data-score="3" onclick="selectScore(3)">3</div>
+              <div class="nps-num detractor" data-score="4" onclick="selectScore(4)">4</div>
+              <div class="nps-num detractor" data-score="5" onclick="selectScore(5)">5</div>
+              <div class="nps-num detractor" data-score="6" onclick="selectScore(6)">6</div>
+              <div class="nps-num" data-score="7" onclick="selectScore(7)">7</div>
+              <div class="nps-num" data-score="8" onclick="selectScore(8)">8</div>
+              <div class="nps-num promoter selected" data-score="9" onclick="selectScore(9)">9</div>
+              <div class="nps-num promoter" data-score="10" onclick="selectScore(10)">10</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text-dim);margin-top:4px">
+              <span>Not at all likely</span><span>Extremely likely</span>
+            </div>
+          </div>
+          <button class="generate-btn" id="runBtn" onclick="runDemo()">
+            <span id="btnText">Submit Survey Response</span>
+            <span id="btnArrow">→</span>
+            <div class="spinner" id="spinner"></div>
+          </button>
+        </div>
+      </div>
+
+      <div class="output-panel">
+        <div class="demo-empty" id="emptyState">
+          <div class="demo-empty-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+          <h3>Results appear here</h3>
+          <p>Select an NPS score and submit to see how the automation responds.</p>
+        </div>
+        <div class="output-inner" id="outputInner" style="display:none;">
+          <div class="output-header">
+            <span class="output-label">Response Processing</span>
+            <button class="reset-btn" onclick="resetDemo()">↺ Reset</button>
+          </div>
+          <div class="result-stream" id="resultStream"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="cta-section">
+      <h3>Know how every client feels — before they disappear</h3>
+      <p>Surveys go out automatically. Unhappy clients are caught early. Happy ones become referral sources. Fixed price.</p>
+      <div class="cta-btns">
+        <button class="btn btn-primary" onclick="openAuditModal()">Book a Free Call</button>
+        <a href="/demos/" class="btn btn-ghost">More Demos</a>
+      </div>
+      <a href="/pricing/" class="cta-pricing-link">See pricing →</a>
+    </div>
+
+  </div>
+
+  <div id="site-footer"></div>
+
+<script>
+  let selectedScore = 9;
+
+  function selectScore(score) {
+    selectedScore = score;
+    document.querySelectorAll('.nps-num').forEach(el => el.classList.remove('selected'));
+    document.querySelector(`[data-score="${score}"]`).classList.add('selected');
+  }
+
+  const pipeIds = ['0','1','2','3','4'];
+  const pipeDelays = [0, 600, 1400, 2300, 3300];
+
+  function resetPipeline() {
+    pipeIds.forEach(id => {
+      document.getElementById(`pipe-${id}`).className = 'pipe-icon';
+      document.getElementById(`label-${id}`).className = 'pipe-label';
+    });
+  }
+
+  async function animatePipeline() {
+    resetPipeline();
+    for (let i = 0; i < pipeIds.length; i++) {
+      await delay(i === 0 ? 0 : pipeDelays[i] - pipeDelays[i-1]);
+      document.getElementById(`pipe-${pipeIds[i]}`).className = 'pipe-icon active';
+      document.getElementById(`label-${pipeIds[i]}`).className = 'pipe-label active';
+      await delay(350);
+      document.getElementById(`pipe-${pipeIds[i]}`).className = 'pipe-icon done';
+      document.getElementById(`label-${pipeIds[i]}`).className = 'pipe-label done';
+    }
+  }
+
+  function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+  async function runDemo() {
+    const client = document.getElementById('client').value || 'James Whitfield';
+    const matter = document.getElementById('matter').value;
+    const score = selectedScore;
+    const firstName = client.split(' ')[0];
+    const isPromoter = score >= 9;
+    const isDetractor = score <= 6;
+    const isPassive = score >= 7 && score <= 8;
+    const scoreClass = isPromoter ? 'green' : isDetractor ? 'red' : '';
+    const category = isPromoter ? 'Promoter' : isDetractor ? 'Detractor' : 'Passive';
+    const today = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+
+    const btn = document.getElementById('runBtn');
+    btn.disabled = true;
+    document.getElementById('btnText').textContent = 'Processing...';
+    document.getElementById('btnArrow').style.display = 'none';
+    document.getElementById('spinner').style.display = 'block';
+
+    document.getElementById('emptyState').style.display = 'none';
+    document.getElementById('outputInner').style.display = 'block';
+    document.getElementById('resultStream').innerHTML = '';
+
+    animatePipeline();
+
+    const steps = [
+      {
+        delay: 700, icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>', title: 'Matter Closed — Survey Triggered', badge: 'done',
+        html: `<p><strong style="color:var(--white)">${matter}</strong> matter for <strong style="color:var(--white)">${client}</strong> marked as closed.</p>
+               <p style="margin-top:8px">Survey sent automatically 14 days after close — timed to catch the client while the experience is fresh.</p>`
+      },
+      {
+        delay: 1500, icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>', title: 'Survey Sent to Client', badge: 'done',
+        html: `<div class="email-preview">
+                 <div class="email-meta">
+                   <div class="email-row"><span class="email-field">To:</span><span class="email-val">${firstName.toLowerCase()}@example.com</span></div>
+                   <div class="email-row"><span class="email-field">Re:</span><span class="email-val">Quick question about your recent experience</span></div>
+                 </div>
+                 <div class="email-body">Hi ${firstName},
+
+We'd love to know how we did on your ${matter} matter. One question:
+
+How likely are you to recommend us to a colleague or friend?
+[0 — Not at all] · · · [10 — Extremely likely]
+
+That's it. Takes 10 seconds.
+
+Thank you,
+The Team</div>
+               </div>`
+      },
+      {
+        delay: 2400, icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>', title: 'Score Received', badge: 'done',
+        html: `<div class="metric-row" style="margin-bottom:10px">
+                 <div class="metric-box"><div class="metric-value ${scoreClass}">${score}/10</div><div class="metric-label">NPS Score</div></div>
+                 <div class="metric-box"><div class="metric-value" style="font-size:1rem"><span class="tag ${isPromoter ? 'tag-routine' : isDetractor ? 'tag-urgent' : 'tag-new'}">${category}</span></div><div class="metric-label">Category</div></div>
+               </div>
+               <p>${isPromoter ? `Score of ${score} — this is a promoter. Referral sequence triggered automatically.` : isDetractor ? `Score of ${score} — this client is dissatisfied. Alert fired to team immediately.` : `Score of ${score} — passive response. Logged and monitored.`}</p>`
+      },
+      {
+        delay: 3300, icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>', title: isPromoter ? 'Referral Prompt Sent' : isDetractor ? 'Alert Fired — Follow Up Required' : 'Logged — No Immediate Action', badge: isDetractor ? 'alert' : 'done',
+        html: isPromoter
+          ? `<div class="email-preview">
+               <div class="email-meta">
+                 <div class="email-row"><span class="email-field">To:</span><span class="email-val">${firstName.toLowerCase()}@example.com</span></div>
+                 <div class="email-row"><span class="email-field">Re:</span><span class="email-val">Thank you — and a small favour</span></div>
+               </div>
+               <div class="email-body">Hi ${firstName},
+
+Thank you so much for your kind score — we're genuinely glad we could help with your ${matter} matter.
+
+If you know anyone who might be facing something similar, we'd be honoured if you'd pass our name along.
+
+Thank you,
+The Team</div>
+             </div>`
+          : isDetractor
+          ? `<p><strong style="color:var(--red)">Alert sent to team immediately.</strong> ${firstName}'s score of ${score} indicates dissatisfaction.</p>
+             <p style="margin-top:8px">A task has been created for a team member to call ${firstName} personally within 24 hours — before the relationship breaks down.</p>
+             <p style="margin-top:8px;font-size:12px;color:var(--text-dim)">No automated response is sent to the client at this stage — a personal call is required.</p>`
+          : `<p>Passive score of ${score} — no immediate action required. Logged to the client record and included in the monthly NPS dashboard.</p>`
+      },
+      {
+        delay: 4300, icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4.03 3-9 3S3 13.66 3 12"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/></svg>', title: 'CRM Updated', badge: 'done',
+        html: `<table class="mini-table">
+                 <tr><td>Client</td><td>${client}</td></tr>
+                 <tr><td>Matter</td><td>${matter}</td></tr>
+                 <tr><td>NPS Score</td><td>${score}/10 — <span class="tag ${isPromoter ? 'tag-routine' : isDetractor ? 'tag-urgent' : 'tag-new'}">${category}</span></td></tr>
+                 <tr><td>Survey Date</td><td>${today}</td></tr>
+                 <tr><td>Action Taken</td><td>${isPromoter ? 'Referral prompt sent' : isDetractor ? 'Team alert — personal follow-up required' : 'Logged — no action'}</td></tr>
+               </table>`
+      }
+    ];
+
+    let prevDelay = 0;
+    for (const step of steps) {
+      await delay(step.delay - prevDelay);
+      prevDelay = step.delay;
+      appendCard(step);
+    }
+
+    btn.disabled = false;
+    document.getElementById('btnText').textContent = 'Run Again';
+    document.getElementById('btnArrow').style.display = 'inline';
+    document.getElementById('spinner').style.display = 'none';
+  }
+
+  function appendCard({ icon, title, badge, html }) {
+    const badgeLabel = badge === 'done' ? '✓ Done' : badge === 'alert' ? '⚡ Alert Fired' : '⏳ Awaiting';
+    const badgeClass = badge === 'done' ? 'badge-done' : badge === 'alert' ? 'badge-alert' : 'badge-pending';
+    const card = document.createElement('div');
+    card.className = 'result-card';
+    card.innerHTML = `
+      <div class="result-card-header">
+        <span class="result-card-icon">${icon}</span>
+        <span class="result-card-title">${title}</span>
+        <span class="result-card-badge ${badgeClass}">${badgeLabel}</span>
+      </div>
+      <div class="result-card-body">${html}</div>`;
+    document.getElementById('resultStream').appendChild(card);
+    requestAnimationFrame(() => requestAnimationFrame(() => card.classList.add('visible')));
+    card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function resetDemo() {
+    document.getElementById('emptyState').style.display = 'flex';
+    document.getElementById('outputInner').style.display = 'none';
+    resetPipeline();
+    const btn = document.getElementById('runBtn');
+    btn.disabled = false;
+    document.getElementById('btnText').textContent = 'Submit Survey Response';
+    document.getElementById('btnArrow').style.display = 'inline';
+  }
+</script>
+
+  <script src="/assets/js/components.js"></script>
+  <script src="/assets/js/main.js"></script>
+  <script>window.addEventListener('load', function() { gtag('event', 'demo_viewed', { demo_name: 'nps_satisfaction_survey' }); });</script>
+</body>
+</html>

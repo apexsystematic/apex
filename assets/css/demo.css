@@ -336,12 +336,12 @@ body {
 /* ── 10. Pipeline bar ────────────────────────── */
 .pipeline-bar {
   display: flex;
-  align-items: center;
+  align-items: flex-start;   /* align to top so icons stay on the same row */
   justify-content: center;
   margin-bottom: 32px;
   background: var(--bg-card);
   border: 1px solid var(--border);
-  padding: 16px 24px;
+  padding: 20px 24px;
   overflow-x: auto;
 }
 
@@ -349,9 +349,9 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   flex-shrink: 0;
-  min-width: 90px;
+  width: 88px;              /* fixed width — stops steps from shifting */
 }
 
 .pipe-icon {
@@ -361,32 +361,53 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
-  border: 2px solid var(--border);
+  flex-shrink: 0;           /* never squish the icon */
+  border: 1px solid var(--border);
   background: var(--bg);
-  transition: all 0.35s;
+  transition: border-color 0.35s, background 0.35s, box-shadow 0.35s;
+}
+
+.pipe-icon svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--text-dim);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.35s;
+  flex-shrink: 0;
 }
 
 .pipe-icon.active {
   border-color: var(--gold);
-  background: var(--gold-dim);
-  box-shadow: 0 0 12px rgba(201, 168, 76, 0.3);
+  background: rgba(201, 168, 76, 0.08);
+  box-shadow: 0 0 12px rgba(201, 168, 76, 0.2);
 }
+
+.pipe-icon.active svg { stroke: var(--gold); }
 
 .pipe-icon.done {
-  border-color: var(--green);
-  background: var(--green-dim);
+  border-color: rgba(201, 168, 76, 0.4);
+  background: rgba(201, 168, 76, 0.05);
 }
 
+.pipe-icon.done svg { stroke: var(--gold); opacity: 0.6; }
+
 .pipe-label {
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--text-dim);
   text-align: center;
   transition: color 0.3s;
-  max-width: 80px;
+  line-height: 1.4;
+  /* Fixed label height so icons stay aligned regardless of line count */
+  min-height: 28px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 }
 
 .pipe-label.active { color: var(--gold); }
@@ -394,10 +415,11 @@ body {
 
 .pipe-arrow {
   color: var(--text-dim);
-  font-size: 14px;
-  margin: 0 4px;
+  font-size: 12px;
+  margin: 0 2px;
   flex-shrink: 0;
-  padding-bottom: 20px;
+  /* Vertically centre arrow with the icon row, not the label */
+  margin-top: 12px;
 }
 
 
@@ -534,4 +556,701 @@ body {
 @media (max-width: 768px) {
   .cta-section { padding: 28px 20px; }
   .two-col { grid-template-columns: 1fr; }
+}
+
+
+/* ═══════════════════════════════════════════════════
+   §18 — Automation demo pages (all 13)
+   Merged from alldemos.css. Extends demo.css with
+   layout, components, and colour vars specific to
+   the 13 automation demos.
+   ═══════════════════════════════════════════════════ */
+
+
+/* ── 18. Colour palette for demos ───────────────────
+   Replaces the bright green/red vars with on-brand
+   muted tones that sit with the dark gold theme.
+─────────────────────────────────────────────────── */
+:root {
+  /* Success — muted teal, not neon green */
+  --demo-ok:        #5A8F7B;
+  --demo-ok-dim:    rgba(90, 143, 123, 0.1);
+  --demo-ok-border: rgba(90, 143, 123, 0.28);
+
+  /* Alert — muted terracotta, not bright red */
+  --demo-alert:        #B06048;
+  --demo-alert-dim:    rgba(176, 96, 72, 0.1);
+  --demo-alert-border: rgba(176, 96, 72, 0.28);
+
+  /* Info / new — cool slate blue */
+  --demo-info:        #5B7FA6;
+  --demo-info-dim:    rgba(91, 127, 166, 0.1);
+  --demo-info-border: rgba(91, 127, 166, 0.28);
+}
+
+
+/* ── 19. Main layout ─────────────────────────────── */
+.demo-layout {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .demo-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ── 20. Trigger panel (form or button variant) ─── */
+.trigger-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.trigger-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.trigger-body {
+  padding: 24px;
+}
+
+/* Button-only trigger (simple automations) */
+.trigger-btn-wrap {
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+
+.trigger-example {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.6;
+  max-width: 260px;
+}
+
+.trigger-example strong {
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 6px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+
+/* ── 21. Output panel ────────────────────────────── */
+.output-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  min-height: 480px;
+}
+
+.output-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.output-inner {
+  padding: 24px;
+}
+
+/* Empty state */
+.demo-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 40px;
+  text-align: center;
+  min-height: 480px;
+  gap: 14px;
+}
+
+.demo-empty-icon {
+  width: 52px;
+  height: 52px;
+  background: var(--gold-dim);
+  border: 1px solid var(--border-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.demo-empty-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: var(--gold);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.7;
+}
+
+.demo-empty h3 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.demo-empty p {
+  font-size: 13px;
+  max-width: 240px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Output header row */
+.output-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.output-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.reset-btn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.reset-btn:hover {
+  border-color: var(--border-gold);
+  color: var(--gold);
+}
+
+
+/* ── 22. Result cards (animated step-by-step reveal) */
+.result-stream {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.result-card {
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.02);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.result-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.result-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255,255,255,0.02);
+}
+
+.result-card-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.result-card-icon svg {
+  width: 14px;
+  height: 14px;
+  stroke: var(--text-dim);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.result-card-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  flex: 1;
+}
+
+.result-card-badge {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 100px;
+}
+
+.badge-done {
+  background: var(--demo-ok-dim);
+  border: 1px solid var(--demo-ok-border);
+  color: var(--demo-ok);
+}
+
+.badge-pending {
+  background: var(--gold-dim);
+  border: 1px solid var(--border-gold);
+  color: var(--gold);
+}
+
+.badge-alert {
+  background: var(--demo-alert-dim);
+  border: 1px solid var(--demo-alert-border);
+  color: var(--demo-alert);
+}
+
+.result-card-body {
+  padding: 14px;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.result-card-body p {
+  font-size: 13px;
+  line-height: 1.65;
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.result-card-body p + p {
+  margin-top: 8px;
+}
+
+
+/* ── 23. Mini data table (CRM records, etc.) ─────── */
+.mini-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.mini-table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.mini-table tr:last-child td {
+  border-bottom: none;
+}
+
+.mini-table td:first-child {
+  color: var(--text-dim);
+  white-space: nowrap;
+  padding-right: 16px;
+  width: 40%;
+}
+
+.mini-table td:last-child {
+  color: var(--text-muted);
+}
+
+
+/* ── 24. Email preview block ─────────────────────── */
+.email-preview {
+  font-size: 12px;
+}
+
+.email-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.email-row {
+  display: flex;
+  gap: 8px;
+}
+
+.email-field {
+  color: var(--text-dim);
+  min-width: 28px;
+}
+
+.email-val {
+  color: var(--text-muted);
+}
+
+.email-body {
+  color: var(--text-muted);
+  white-space: pre-line;
+  line-height: 1.65;
+  font-size: 12px;
+}
+
+
+/* ── 25. Chase timeline (Document & Payment Chasing) */
+.chase-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.chase-stage {
+  display: flex;
+  gap: 14px;
+  position: relative;
+}
+
+.chase-stage:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 32px;
+  bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+
+.chase-dot {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+  background: var(--bg);
+  color: var(--text-dim);
+  margin-top: 2px;
+  transition: all 0.3s;
+  font-family: var(--font-body);
+}
+
+.chase-dot.active {
+  border-color: var(--gold);
+  background: rgba(201, 168, 76, 0.08);
+  color: var(--gold);
+}
+
+.chase-dot.stopped {
+  border-color: var(--demo-ok);
+  background: var(--demo-ok-dim);
+  color: var(--demo-ok);
+}
+
+.chase-content {
+  padding: 4px 0 20px;
+}
+
+.chase-day {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 3px;
+}
+
+.chase-text {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+
+/* ── 26. Score / metric highlight ────────────────── */
+.metric-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.metric-box {
+  flex: 1;
+  min-width: 80px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  padding: 12px;
+  text-align: center;
+}
+
+.metric-value {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.metric-value.gold  { color: var(--gold); }
+.metric-value.ok    { color: var(--demo-ok); }
+.metric-value.alert { color: var(--demo-alert); }
+
+/* Legacy aliases */
+.metric-value.green { color: var(--demo-ok); }
+.metric-value.red   { color: var(--demo-alert); }
+
+.metric-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+
+/* ── 27. Tag / pill variants ─────────────────────── */
+.tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 100px;
+}
+
+.tag-hot {
+  background: var(--demo-alert-dim);
+  border: 1px solid var(--demo-alert-border);
+  color: var(--demo-alert);
+}
+
+.tag-warm {
+  background: rgba(201, 168, 76, 0.10);
+  border: 1px solid rgba(201, 168, 76, 0.22);
+  color: var(--gold);
+}
+
+.tag-cold {
+  background: rgba(79, 91, 110, 0.18);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+}
+
+.tag-new {
+  background: var(--demo-info-dim);
+  border: 1px solid var(--demo-info-border);
+  color: var(--demo-info);
+}
+
+.tag-urgent {
+  background: var(--demo-alert-dim);
+  border: 1px solid var(--demo-alert-border);
+  color: var(--demo-alert);
+}
+
+.tag-routine {
+  background: var(--demo-ok-dim);
+  border: 1px solid var(--demo-ok-border);
+  color: var(--demo-ok);
+}
+
+
+/* ── 28. Deadline list ───────────────────────────── */
+.deadline-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.deadline-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  font-size: 12px;
+}
+
+.deadline-days {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--white);
+  min-width: 32px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.deadline-days.urgent  { color: var(--demo-alert); }
+.deadline-days.warning { color: var(--gold); }
+.deadline-days.ok      { color: var(--demo-ok); }
+
+.deadline-info {
+  flex: 1;
+}
+
+.deadline-matter {
+  color: var(--text-muted);
+  font-size: 12px;
+  margin-bottom: 2px;
+}
+
+.deadline-type {
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+
+/* ── 29. Action items list (Call Notes) ──────────── */
+.action-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.action-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.02);
+  font-size: 12px;
+}
+
+.action-check {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid var(--demo-ok);
+  background: var(--demo-ok-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  color: var(--demo-ok);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.action-text {
+  flex: 1;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.action-owner {
+  font-size: 10px;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+
+/* ── 30. NPS score display ───────────────────────── */
+.nps-scale {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 12px;
+}
+
+.nps-num {
+  flex: 1;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.02);
+  color: var(--text-dim);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.nps-num:hover {
+  border-color: var(--border-gold);
+  color: var(--gold);
+}
+
+/* Colour categories — unselected state only */
+.nps-num.promoter  { border-color: var(--demo-ok-border);    color: var(--demo-ok); }
+.nps-num.detractor { border-color: var(--demo-alert-border); color: var(--demo-alert); }
+
+/* Selected state — always gold regardless of category */
+.nps-num.selected {
+  border-color: var(--gold) !important;
+  background: rgba(201, 168, 76, 0.12) !important;
+  color: var(--white) !important;
+  box-shadow: 0 0 0 1px var(--gold);
+}
+
+
+/* ── 31. Referral tracker ────────────────────────── */
+.referral-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.02);
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.referral-name {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.referral-days {
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+
+/* ── 32. Inline text helpers ─────────────────────── */
+.text-ok    { color: var(--demo-ok) !important; }
+.text-alert { color: var(--demo-alert) !important; }
+.text-gold  { color: var(--gold) !important; }
+
+
+/* ── 33. Responsive tweaks ───────────────────────── */
+@media (max-width: 600px) {
+  .trigger-body  { padding: 16px; }
+  .output-inner  { padding: 16px; }
+  .metric-row    { gap: 8px; }
+  .nps-scale     { gap: 2px; }
+  .nps-num       { font-size: 10px; }
 }

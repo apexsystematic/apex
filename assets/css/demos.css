@@ -137,6 +137,37 @@
   line-height: 1.6;
 }
 
+/* Suite section headings */
+.suite-heading {
+  padding: 56px 0 28px;
+}
+
+.suite-heading-label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+
+.suite-heading-sub {
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* Full-width card for odd-count grids (prevents empty ghost cell) */
+.demo-card-full {
+  grid-column: 1 / -1;
+}
+
+/* Suite section wrapper */
+.demos-suite {
+  padding-bottom: 8px;
+}
+
 @media (max-width: 1024px) {
   .demos-grid {
     grid-template-columns: 1fr;

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      ad_storage:              'denied',
+      ad_user_data:            'denied',
+      ad_personalization:      'denied',
+      analytics_storage:       'denied',
+      functionality_storage:   'denied',
+      personalization_storage: 'denied',
+      security_storage:        'granted',
+      wait_for_update:         2000
+    });
+    gtag('set', 'ads_data_redaction', true);
+    gtag('set', 'url_passthrough', true);
+  </script>
+  <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/19a036e48e9005dddd5999b15ed936e7/script.js"></script>
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-52T88XLZ');</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="See how Apex Systematic triages incoming client requests — categorised, prioritised, conflict-checked, and acknowledged automatically. Interactive demo.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Client Intake Triage Automation Demo | Apex Systematic">
+  <meta property="og:description" content="Every client request gets categorised, prioritised, and conflict-checked automatically — urgent matters go straight to your inbox.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.apexsystematic.com/demos/client-intake-triage/">
+  <meta property="og:image" content="https://www.apexsystematic.com/assets/images/og-image-v1.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Apex Systematic">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Client Intake Triage Automation Demo | Apex Systematic">
+  <meta name="twitter:description" content="Every client request gets categorised, prioritised, and conflict-checked automatically — urgent matters go straight to your inbox.">
+  <meta name="twitter:image" content="https://www.apexsystematic.com/assets/images/og-image-v1.png">
+  <title>Client Intake Triage Automation Demo — Apex Systematic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap"></noscript>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/demo.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="canonical" href="https://www.apexsystematic.com/demos/client-intake-triage/">
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <div class="page-wrapper">
+
+    <header>
+      <div class="badge"><span class="badge-dot"></span>Interactive Demo</div>
+      <h1>Client Intake Triage <em>In Action</em></h1>
+      <p class="subtitle">A client submits a request. It's categorised, prioritised, conflict-checked, and acknowledged — before you've even looked at it.</p>
+    </header>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <span class="divider-icon">◆</span>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="pipeline-bar">
+      <div class="pipe-step"><div class="pipe-icon" id="pipe-0"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg></div><div class="pipe-label" id="label-0">Request Received</div></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step"><div class="pipe-icon" id="pipe-1"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></div><div class="pipe-label" id="label-1">Categorised</div></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step"><div class="pipe-icon" id="pipe-2"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div class="pipe-label" id="label-2">Priority Set</div></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step"><div class="pipe-icon" id="pipe-3"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div><div class="pipe-label" id="label-3">Conflict Check</div></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step"><div class="pipe-icon" id="pipe-4"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div><div class="pipe-label" id="label-4">Client Acknowledged</div></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step"><div class="pipe-icon" id="pipe-5"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div class="pipe-label" id="label-5">Dashboard Updated</div></div>
+    </div>
+
+    <div class="demo-layout">
+
+      <div class="trigger-card">
+        <div class="card-header"><span class="card-title">Client Request Form</span></div>
+        <div class="trigger-body">
+          <div class="form-group">
+            <label for="client">Client Name</label>
+            <input type="text" id="client" value="Priya Sharma" />
+          </div>
+          <div class="form-group">
+            <label for="requestType">Request Type</label>
+            <select id="requestType">
+              <option value="New Matter">New matter — need advice urgently</option>
+              <option value="Document Request">Document request</option>
+              <option value="Matter Update">Query on existing matter</option>
+              <option value="Billing Query">Billing query</option>
+              <option value="General Enquiry">General enquiry</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="urgencyLevel">How urgent is this?</label>
+            <select id="urgencyLevel">
+              <option value="Urgent">Urgent — needs same-day response</option>
+              <option value="High">High — within 24 hours</option>
+              <option value="Normal">Normal — within 2–3 days</option>
+              <option value="Low">Low — no rush</option>
+            </select>
+          </div>
+          <button class="generate-btn" id="runBtn" onclick="runDemo()">
+            <span id="btnText">Submit Request</span>
+            <span id="btnArrow">→</span>
+            <div class="spinner" id="spinner"></div>
+          </button>
+        </div>
+      </div>
+
+      <div class="output-panel">
+        <div class="demo-empty" id="emptyState">
+          <div class="demo-empty-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <h3>Results appear here</h3>
+          <p>Submit a client request to see how it gets triaged automatically.</p>
+        </div>
+        <div class="output-inner" id="outputInner" style="display:none;">
+          <div class="output-header">
+            <span class="output-label">Automation Running</span>
+            <button class="reset-btn" onclick="resetDemo()">↺ Reset</button>
+          </div>
+          <div class="result-stream" id="resultStream"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="cta-section">
+      <h3>Every client request handled before you've seen it</h3>
+      <p>Urgent matters routed immediately. Routine ones queued. Nothing falls through. Fixed price, no retainer.</p>
+      <div class="cta-btns">
+        <button class="btn btn-primary" onclick="openAuditModal()">Book a Free Call</button>
+        <a href="/demos/" class="btn btn-ghost">More Demos</a>
+      </div>
+      <a href="/pricing/" class="cta-pricing-link">See pricing →</a>
+    </div>
+
+  </div>
+
+  <div id="site-footer"></div>
+
+<script>
+  const pipeIds = ['0','1','2','3','4','5'];
+  const pipeDelays = [0, 600, 1200, 2000, 2800, 3600];
+
+  function resetPipeline() {
+    pipeIds.forEach(id => {
+      document.getElementById(`pipe-${id}`).className = 'pipe-icon';
+      document.getElementById(`label-${id}`).className = 'pipe-label';
+    });
+  }
+
+  async function animatePipeline() {
+    resetPipeline();
+    for (let i = 0; i < pipeIds.length; i++) {
+      await delay(i === 0 ? 0 : pipeDelays[i] - pipeDelays[i-1]);
+      document.getElementById(`pipe-${pipeIds[i]}`).className = 'pipe-icon active';
+      document.getElementById(`label-${pipeIds[i]}`).className = 'pipe-label active';
+      await delay(350);
+      document.getElementById(`pipe-${pipeIds[i]}`).className = 'pipe-icon done';
+      document.getElementById(`label-${pipeIds[i]}`).className = 'pipe-label done';
+    }
+  }
+
+  function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+  async function runDemo() {
+    const client = document.getElementById('client').value || 'Priya Sharma';
+    const requestType = document.getElementById('requestType').value;
+    const urgencyLevel = document.getElementById('urgencyLevel').value;
+    const firstName = client.split(' ')[0];
+
+    const priorityMap = { 'Urgent': 'tag-urgent', 'High': 'tag-hot', 'Normal': 'tag-warm', 'Low': 'tag-cold' };
+    const priorityClass = priorityMap[urgencyLevel] || 'tag-warm';
+    const slaMap = { 'Urgent': '2 hours', 'High': '24 hours', 'Normal': '2–3 business days', 'Low': '5 business days' };
+    const sla = slaMap[urgencyLevel];
+
+    const btn = document.getElementById('runBtn');
+    btn.disabled = true;
+    document.getElementById('btnText').textContent = 'Processing...';
+    document.getElementById('btnArrow').style.display = 'none';
+    document.getElementById('spinner').style.display = 'block';
+
+    document.getElementById('emptyState').style.display = 'none';
+    document.getElementById('outputInner').style.display = 'block';
+    document.getElementById('resultStream').innerHTML = '';
+
+    animatePipeline();
+
+    const steps = [
+      {
+        delay: 700, icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>', title: 'Request Received', badge: 'done',
+        html: `<p><strong style="color:var(--white)">${client}</strong> submitted a new request via the client portal.</p>
+               <p style="margin-top:8px"><strong>Type:</strong> ${requestType} &nbsp;·&nbsp; <strong>Stated urgency:</strong> ${urgencyLevel}</p>`
+      },
+      {
+        delay: 1400, icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>', title: 'Request Categorised', badge: 'done',
+        html: `<table class="mini-table">
+                 <tr><td>Category</td><td>${requestType}</td></tr>
+                 <tr><td>Client</td><td>${client}</td></tr>
+                 <tr><td>Routing</td><td>${urgencyLevel === 'Urgent' || urgencyLevel === 'High' ? 'Straight to practitioner inbox' : 'Added to team queue'}</td></tr>
+               </table>`
+      },
+      {
+        delay: 2000, icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>', title: 'Priority Assigned', badge: 'done',
+        html: `<div class="metric-row" style="margin-bottom:10px">
+                 <div class="metric-box"><div class="metric-value" style="font-size:1.2rem"><span class="tag ${priorityClass}">${urgencyLevel}</span></div><div class="metric-label">Priority</div></div>
+                 <div class="metric-box"><div class="metric-value gold" style="font-size:1.1rem">${sla}</div><div class="metric-label">SLA</div></div>
+               </div>
+               <p>${urgencyLevel === 'Urgent' ? 'Escalated immediately — practitioner notified now.' : urgencyLevel === 'High' ? 'High priority — added to top of team queue.' : 'Routine priority — queued for next available slot.'}</p>`
+      },
+      {
+        delay: 2800, icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>', title: 'Conflict of Interest Check', badge: 'done',
+        html: `<p>Checked against all active and closed matters in the CRM for conflict of interest.</p>
+               <p style="margin-top:8px; color:var(--green)">✓ No conflict found — request cleared to proceed.</p>`
+      },
+      {
+        delay: 3600, icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>', title: 'Client Acknowledgement Sent', badge: 'done',
+        html: `<div class="email-preview">
+                 <div class="email-meta">
+                   <div class="email-row"><span class="email-field">To:</span><span class="email-val">${firstName.toLowerCase()}@example.com</span></div>
+                   <div class="email-row"><span class="email-field">Re:</span><span class="email-val">We've received your request</span></div>
+                 </div>
+                 <div class="email-body">Hi ${firstName},
+
+We've received your request and it's been logged as ${urgencyLevel.toLowerCase()} priority.
+
+You can expect a response within ${sla}. If anything changes or you need to add information, reply to this email.
+
+The Team</div>
+               </div>`
+      },
+      {
+        delay: 4400, icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>', title: 'Dashboard Updated', badge: 'done',
+        html: `<p>Request added to the team dashboard, ranked by urgency. All open requests visible in one place.</p>
+               <table class="mini-table" style="margin-top:8px">
+                 <tr><td>Request ID</td><td><span class="mono">#REQ-${Math.floor(Math.random()*9000)+1000}</span></td></tr>
+                 <tr><td>Client</td><td>${client}</td></tr>
+                 <tr><td>Type</td><td>${requestType}</td></tr>
+                 <tr><td>Priority</td><td><span class="tag ${priorityClass}">${urgencyLevel}</span></td></tr>
+                 <tr><td>SLA</td><td>${sla}</td></tr>
+               </table>`
+      }
+    ];
+
+    let prevDelay = 0;
+    for (const step of steps) {
+      await delay(step.delay - prevDelay);
+      prevDelay = step.delay;
+      appendCard(step);
+    }
+
+    btn.disabled = false;
+    document.getElementById('btnText').textContent = 'Run Again';
+    document.getElementById('btnArrow').style.display = 'inline';
+    document.getElementById('spinner').style.display = 'none';
+  }
+
+  function appendCard({ icon, title, badge, html }) {
+    const badgeLabel = badge === 'done' ? '✓ Done' : badge === 'alert' ? '⚡ Alert' : '⏳ Awaiting';
+    const badgeClass = badge === 'done' ? 'badge-done' : badge === 'alert' ? 'badge-alert' : 'badge-pending';
+    const card = document.createElement('div');
+    card.className = 'result-card';
+    card.innerHTML = `
+      <div class="result-card-header">
+        <span class="result-card-icon">${icon}</span>
+        <span class="result-card-title">${title}</span>
+        <span class="result-card-badge ${badgeClass}">${badgeLabel}</span>
+      </div>
+      <div class="result-card-body">${html}</div>`;
+    document.getElementById('resultStream').appendChild(card);
+    requestAnimationFrame(() => requestAnimationFrame(() => card.classList.add('visible')));
+    card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function resetDemo() {
+    document.getElementById('emptyState').style.display = 'flex';
+    document.getElementById('outputInner').style.display = 'none';
+    resetPipeline();
+    const btn = document.getElementById('runBtn');
+    btn.disabled = false;
+    document.getElementById('btnText').textContent = 'Submit Request';
+    document.getElementById('btnArrow').style.display = 'inline';
+  }
+</script>
+
+  <script src="/assets/js/components.js"></script>
+  <script src="/assets/js/main.js"></script>
+  <script>window.addEventListener('load', function() { gtag('event', 'demo_viewed', { demo_name: 'client_intake_triage' }); });</script>
+</body>
+</html>

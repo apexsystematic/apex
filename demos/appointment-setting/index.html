@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      ad_storage:              'denied',
+      ad_user_data:            'denied',
+      ad_personalization:      'denied',
+      analytics_storage:       'denied',
+      functionality_storage:   'denied',
+      personalization_storage: 'denied',
+      security_storage:        'granted',
+      wait_for_update:         2000
+    });
+    gtag('set', 'ads_data_redaction', true);
+    gtag('set', 'url_passthrough', true);
+  </script>
+  <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/19a036e48e9005dddd5999b15ed936e7/script.js"></script>
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-52T88XLZ');</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="See how Apex Systematic automates appointment booking — clients self-book, confirmations and reminders go out automatically, no-shows are flagged. Interactive demo.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Appointment Setting Automation Demo | Apex Systematic">
+  <meta property="og:description" content="Clients book directly into your calendar. Confirmations, reminders, and prep materials send themselves.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.apexsystematic.com/demos/appointment-setting/">
+  <meta property="og:image" content="https://www.apexsystematic.com/assets/images/og-image-v1.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Apex Systematic">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Appointment Setting Automation Demo | Apex Systematic">
+  <meta name="twitter:description" content="Clients book directly into your calendar. Confirmations, reminders, and prep materials send themselves.">
+  <meta name="twitter:image" content="https://www.apexsystematic.com/assets/images/og-image-v1.png">
+  <title>Appointment Setting Automation Demo — Apex Systematic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap"></noscript>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/demo.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="canonical" href="https://www.apexsystematic.com/demos/appointment-setting/">
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <div class="page-wrapper">
+
+    <header>
+      <div class="badge"><span class="badge-dot"></span>Interactive Demo</div>
+      <h1>Appointment Setting <em>In Action</em></h1>
+      <p class="subtitle">A client books a meeting. Confirmation, reminders, and prep materials send themselves — zero back-and-forth.</p>
+    </header>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <span class="divider-icon">◆</span>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="pipeline-bar">
+      <div class="pipe-step"><div class="pipe-icon" id="pipe-0"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><div class="pipe-label" id="label-0">Booking Received</div></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step"><div class="pipe-icon" id="pipe-1"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h8"/></svg></div><div class="pipe-label" id="label-1">Calendar Blocked</div></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step"><div class="pipe-icon" id="pipe-2"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div><div class="pipe-label" id="label-2">Confirmation Sent</div></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step"><div class="pipe-icon" id="pipe-3"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg></div><div class="pipe-label" id="label-3">Prep Materials Sent</div></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step"><div class="pipe-icon" id="pipe-4"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div class="pipe-label" id="label-4">Reminders Scheduled</div></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step"><div class="pipe-icon" id="pipe-5"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4.03 3-9 3S3 13.66 3 12"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/></svg></div><div class="pipe-label" id="label-5">CRM Updated</div></div>
+    </div>
+
+    <div class="demo-layout">
+
+      <div class="trigger-card">
+        <div class="card-header"><span class="card-title">Booking Form</span></div>
+        <div class="trigger-body">
+          <div class="form-group">
+            <label for="name">Client Name</label>
+            <input type="text" id="name" value="Rachel Okafor" />
+          </div>
+          <div class="form-group">
+            <label for="meetingType">Meeting Type</label>
+            <select id="meetingType">
+              <option value="Initial Consultation">Initial Consultation</option>
+              <option value="Suitability Review">Suitability Review</option>
+              <option value="Annual Review">Annual Review</option>
+              <option value="Matter Update Call">Matter Update Call</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="date">Preferred Date</label>
+            <select id="date">
+              <option value="Tuesday 27 May, 10:00am">Tuesday 27 May — 10:00am</option>
+              <option value="Wednesday 28 May, 2:00pm">Wednesday 28 May — 2:00pm</option>
+              <option value="Thursday 29 May, 9:30am">Thursday 29 May — 9:30am</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="format">Format</label>
+            <select id="format">
+              <option value="Video call (Google Meet)">Video call (Google Meet)</option>
+              <option value="Phone call">Phone call</option>
+              <option value="In person">In person — office</option>
+            </select>
+          </div>
+          <button class="generate-btn" id="runBtn" onclick="runDemo()">
+            <span id="btnText">Confirm Booking</span>
+            <span id="btnArrow">→</span>
+            <div class="spinner" id="spinner"></div>
+          </button>
+        </div>
+      </div>
+
+      <div class="output-panel" id="outputPanel">
+        <div class="demo-empty" id="emptyState">
+          <div class="demo-empty-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+          <h3>Results appear here</h3>
+          <p>Select a date and confirm to watch the automation run.</p>
+        </div>
+        <div class="output-inner" id="outputInner" style="display:none;">
+          <div class="output-header">
+            <span class="output-label">Automation Running</span>
+            <button class="reset-btn" onclick="resetDemo()">↺ Reset</button>
+          </div>
+          <div class="result-stream" id="resultStream"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="cta-section">
+      <h3>End the scheduling back-and-forth for good</h3>
+      <p>Clients self-book, every communication goes out on time — without you lifting a finger. Fixed price, you own it outright.</p>
+      <div class="cta-btns">
+        <button class="btn btn-primary" onclick="openAuditModal()">Book a Free Call</button>
+        <a href="/demos/" class="btn btn-ghost">More Demos</a>
+      </div>
+      <a href="/pricing/" class="cta-pricing-link">See pricing →</a>
+    </div>
+
+  </div>
+
+  <div id="site-footer"></div>
+
+<script>
+  const pipeIds = ['0','1','2','3','4','5'];
+  const pipeDelays = [0, 500, 1100, 1800, 2600, 3300];
+
+  function resetPipeline() {
+    pipeIds.forEach(id => {
+      document.getElementById(`pipe-${id}`).className = 'pipe-icon';
+      document.getElementById(`label-${id}`).className = 'pipe-label';
+    });
+  }
+
+  async function animatePipeline() {
+    resetPipeline();
+    for (let i = 0; i < pipeIds.length; i++) {
+      await delay(i === 0 ? 0 : pipeDelays[i] - pipeDelays[i-1]);
+      document.getElementById(`pipe-${pipeIds[i]}`).className = 'pipe-icon active';
+      document.getElementById(`label-${pipeIds[i]}`).className = 'pipe-label active';
+      await delay(350);
+      document.getElementById(`pipe-${pipeIds[i]}`).className = 'pipe-icon done';
+      document.getElementById(`label-${pipeIds[i]}`).className = 'pipe-label done';
+    }
+  }
+
+  function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+  async function runDemo() {
+    const name = document.getElementById('name').value || 'Rachel Okafor';
+    const meetingType = document.getElementById('meetingType').value;
+    const date = document.getElementById('date').value;
+    const format = document.getElementById('format').value;
+    const firstName = name.split(' ')[0];
+
+    const prepMap = {
+      'Initial Consultation': 'Services overview, pricing guide, and a short intake questionnaire',
+      'Suitability Review': 'Risk profile form and current portfolio summary template',
+      'Annual Review': 'Annual review checklist and goals update form',
+      'Matter Update Call': 'Matter summary and outstanding action items list'
+    };
+    const prepMaterials = prepMap[meetingType] || 'Relevant preparation materials';
+
+    const btn = document.getElementById('runBtn');
+    btn.disabled = true;
+    document.getElementById('btnText').textContent = 'Processing...';
+    document.getElementById('btnArrow').style.display = 'none';
+    document.getElementById('spinner').style.display = 'block';
+
+    document.getElementById('emptyState').style.display = 'none';
+    document.getElementById('outputInner').style.display = 'block';
+    document.getElementById('resultStream').innerHTML = '';
+
+    animatePipeline();
+
+    const steps = [
+      {
+        delay: 600, icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>', title: 'Booking Received', badge: 'done',
+        html: `<p><strong style="color:var(--white)">${name}</strong> booked a <strong>${meetingType}</strong> for <strong>${date}</strong>.</p>
+               <p style="margin-top:8px">Format: ${format}</p>`
+      },
+      {
+        delay: 1200, icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h8"/></svg>', title: 'Calendar Blocked', badge: 'done',
+        html: `<p>Time slot confirmed and blocked in the calendar. A Google Meet link has been generated automatically.</p>
+               <p style="margin-top:8px; color:var(--green)">✓ No conflicts found — booking confirmed.</p>`
+      },
+      {
+        delay: 1900, icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>', title: 'Confirmation Sent to Client', badge: 'done',
+        html: `<div class="email-preview">
+                 <div class="email-meta">
+                   <div class="email-row"><span class="email-field">To:</span><span class="email-val">${firstName.toLowerCase()}@example.com</span></div>
+                   <div class="email-row"><span class="email-field">Re:</span><span class="email-val">Confirmed: ${meetingType} — ${date}</span></div>
+                 </div>
+                 <div class="email-body">Hi ${firstName},
+
+Your ${meetingType} is confirmed for ${date}.
+
+Format: ${format}
+${format.includes('Video') ? 'Meeting link: meet.google.com/abc-defg-hij\n' : ''}
+Preparation materials are on their way in a separate email.
+
+See you then.
+The Team</div>
+               </div>`
+      },
+      {
+        delay: 2700, icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>', title: 'Prep Materials Sent', badge: 'done',
+        html: `<p>Materials sent automatically based on meeting type: <strong style="color:var(--white)">${prepMaterials}</strong>.</p>
+               <p style="margin-top:8px; color:var(--text-dim); font-size:12px">The right pack goes out for every meeting type — no manual selection needed.</p>`
+      },
+      {
+        delay: 3500, icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>', title: 'Reminders Scheduled', badge: 'done',
+        html: `<table class="mini-table">
+                 <tr><td>24h before</td><td>Reminder email to ${firstName}</td></tr>
+                 <tr><td>2h before</td><td>Final reminder with meeting link</td></tr>
+                 <tr><td>15 min after start</td><td>No-show check — if missed, follow-up task created</td></tr>
+               </table>`
+      },
+      {
+        delay: 4200, icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4.03 3-9 3S3 13.66 3 12"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/></svg>', title: 'CRM Updated', badge: 'done',
+        html: `<table class="mini-table">
+                 <tr><td>Client</td><td>${name}</td></tr>
+                 <tr><td>Meeting Type</td><td>${meetingType}</td></tr>
+                 <tr><td>Date & Time</td><td>${date}</td></tr>
+                 <tr><td>Format</td><td>${format}</td></tr>
+                 <tr><td>Status</td><td><span class="tag tag-new">Confirmed</span></td></tr>
+               </table>`
+      }
+    ];
+
+    let prevDelay = 0;
+    for (const step of steps) {
+      await delay(step.delay - prevDelay);
+      prevDelay = step.delay;
+      appendCard(step);
+    }
+
+    btn.disabled = false;
+    document.getElementById('btnText').textContent = 'Run Again';
+    document.getElementById('btnArrow').style.display = 'inline';
+    document.getElementById('spinner').style.display = 'none';
+  }
+
+  function appendCard({ icon, title, badge, html }) {
+    const badgeLabel = badge === 'done' ? '✓ Done' : badge === 'alert' ? '⚡ Alert' : 'Queued';
+    const badgeClass = badge === 'done' ? 'badge-done' : badge === 'alert' ? 'badge-alert' : 'badge-pending';
+    const card = document.createElement('div');
+    card.className = 'result-card';
+    card.innerHTML = `
+      <div class="result-card-header">
+        <span class="result-card-icon">${icon}</span>
+        <span class="result-card-title">${title}</span>
+        <span class="result-card-badge ${badgeClass}">${badgeLabel}</span>
+      </div>
+      <div class="result-card-body">${html}</div>`;
+    document.getElementById('resultStream').appendChild(card);
+    requestAnimationFrame(() => requestAnimationFrame(() => card.classList.add('visible')));
+    card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function resetDemo() {
+    document.getElementById('emptyState').style.display = 'flex';
+    document.getElementById('outputInner').style.display = 'none';
+    resetPipeline();
+    const btn = document.getElementById('runBtn');
+    btn.disabled = false;
+    document.getElementById('btnText').textContent = 'Confirm Booking';
+    document.getElementById('btnArrow').style.display = 'inline';
+  }
+</script>
+
+  <script src="/assets/js/components.js"></script>
+  <script src="/assets/js/main.js"></script>
+  <script>window.addEventListener('load', function() { gtag('event', 'demo_viewed', { demo_name: 'appointment_setting' }); });</script>
+</body>
+</html>
